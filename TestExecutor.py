@@ -28,12 +28,12 @@ def build_command(program_name:str, csv:bool = True):
 
     cmd = ['node', 'servant', 'run']
     cmd.append('-s')
-    cmd.append(f'{paths['scratch_path']}')
+    cmd.append(f'{paths["scratch_path"]}')
     cmd.append('-t')
-    cmd.append(f'{paths['tests_path']}')
+    cmd.append(f'{paths["tests_path"]}')
     if csv:
         cmd.append('-v')
-        cmd.append(f'{paths['csv_path']}')
+        cmd.append(f'{paths["csv_path"]}')
     cmd.append('-d')
 
     return cmd
