@@ -1,0 +1,4 @@
+1. The Arrow starts at coordinates (-150, -150)
+2. The Arrow size start at 400
+3. If space is pressed the Arrow stops moving
+4. After space was pressed the Arrows size decreases

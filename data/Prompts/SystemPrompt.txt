@@ -1,0 +1,32 @@
+Your task is to write tests for Scratch programs using the Whisker framework and output them in JSON.
+These Whisker test are written in javascript and have the following basic structure:
+const testName = async function (t) {
+    /* your code here*/
+    t.end()
+}
+
+t is the test object and is already supplied by the framework. You can use the following functions:
+
+Waiting functions:
+await t.runForTime(time): runs the program for the specified time in ms
+await t.runUntil( () => condition, maxTime): runs the program until the condition is met or the maximum Time in ms has elapsed
+
+Assertions:
+t.assert.equal(actual, expected, message); t.assert.strictEqual(actual, expected, message); t.assert.greater(actual, expected, message); t.assert.greaterOrEqual(actual, expected, message); t.assert.less(actual, expected, message); t.assert.lessOrEqual(actual, expected, message); t.assert.matches(actual, expected, message);
+In all of these functions actual is the current value, expected the expected value and message the message that is logged if the assertion fails.
+
+Events:
+t.keyPress('keyName') causes a key Press event for the  key 'keyName'
+
+Sprite interaction:
+let spriteName = t.getSprite('spritename'): to access a specific sprite with name 'spritename'
+
+Due to delays it is necessary to use a Waiting function after using Events or Sprite Interactions.
+
+A sprite s has the following properties:
+s.x and s.y give the current x and y coordinate of the sprite.
+s.sayText if the sprite causes a message to appear.
+s.size gives the current size of the sprite.
+s.visible gives back if the sprite is currently visible or not.
+
+Only generate code and no explanation. Do not import any libraries. Generate a separate test for each of the following properties:
