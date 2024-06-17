@@ -45,3 +45,35 @@ const testArrowStaysWithinBounds = async function (t) {
     t.end();
 }
 
+module.exports = [
+    { // 01
+            test: testArrowStartCoordinates,
+            name: 'Arrow Initialization Test',
+            description: '',
+            categories: []
+    },
+    { // 02
+            test: testArrowStartSize,
+            name: 'Arrow size Initialization Test',
+            description: '',
+            categories: []
+    },
+    { // 03
+            test: testArrowStopsOnSpace,
+            name: 'Arrow stops when space is pressed',
+            description: '',
+            categories: []
+    },
+    { // 04
+            test: testArrowSizeDecreasesOnSpace,
+            name: 'Arrow size decreases when space is pressed',
+            description: '',
+            categories: []
+    },
+    { // 05
+            test: testArrowStaysWithinBounds,
+            name: 'Arrow stays inside of [-150, 150] for both x and y coordinates',
+            description: '',
+            categories: []
+    },
+]
