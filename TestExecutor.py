@@ -62,14 +62,15 @@ def run_all_tests():
         output[program_name] = execute_command(cmd, whisker_path)
     return output
 
-def run_test(program_name:str):
+def run_test(program_name:str, generate_csv = False):
     testable_programs = get_tests()
 
     if program_name not in testable_programs:
         raise Error(f"No program with name '{program_name}'!")
 
-    cmd = build_command(program_name)
-    return execute_command(cmd)
+    cmd = build_command(program_name, generate_csv)
+    return execute_command(cmd, whisker_path)
 
 if __name__ == '__main__':
-    run_all_tests()
+    #run_all_tests()
+    print(run_test("Archery"))
