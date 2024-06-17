@@ -1,0 +1,24 @@
+{
+  "tests": [
+    {
+      "name": "Arrow starts at coordinates (-150, -150)",
+      "code": "const testArrowStartCoordinates = async function (t) {\n    let arrow = t.getSprite('Arrow');\n    await t.runForTime(1000);\n    t.assert.equal(arrow.x, -150, 'Arrow x coordinate should be -150');\n    t.assert.equal(arrow.y, -150, 'Arrow y coordinate should be -150');\n    t.end();\n}"
+    },
+    {
+      "name": "Arrow size start at 400",
+      "code": "const testArrowStartSize = async function (t) {\n    let arrow = t.getSprite('Arrow');\n    await t.runForTime(1000);\n    t.assert.equal(arrow.size, 400, 'Arrow size should be 400');\n    t.end();\n}"
+    },
+    {
+      "name": "If space is pressed the Arrow stops moving",
+      "code": "const testArrowStopsOnSpace = async function (t) {\n    let arrow = t.getSprite('Arrow');\n    let initialX = arrow.x;\n    let initialY = arrow.y;\n    await t.keyPress('space');\n    await t.runForTime(1000);\n    t.assert.equal(arrow.x, initialX, 'Arrow x coordinate should not change after space is pressed');\n    t.assert.equal(arrow.y, initialY, 'Arrow y coordinate should not change after space is pressed');\n    t.end();\n}"
+    },
+    {
+      "name": "After space was pressed the Arrows size decreases",
+      "code": "const testArrowSizeDecreasesOnSpace = async function (t) {\n    let arrow = t.getSprite('Arrow');\n    let initialSize = arrow.size;\n    await t.keyPress('space');\n    await t.runForTime(1000);\n    t.assert.less(arrow.size, initialSize, 'Arrow size should decrease after space is pressed');\n    t.end();\n}"
+    },
+    {
+      "name": "Arrow always stays in between the coordinates -150 and 150 for both the x and y coordinates",
+      "code": "const testArrowStaysWithinBounds = async function (t) {\n    let arrow = t.getSprite('Arrow');\n    t.addConstraint(() => {\n        t.assert.greaterOrEqual(arrow.x, -150, 'Arrow x coordinate should be >= -150');\n        t.assert.lessOrEqual(arrow.x, 150, 'Arrow x coordinate should be <= 150');\n        t.assert.greaterOrEqual(arrow.y, -150, 'Arrow y coordinate should be >= -150');\n        t.assert.lessOrEqual(arrow.y, 150, 'Arrow y coordinate should be <= 150');\n    });\n    await t.runForTime(10000);\n    t.end();\n}"
+    }
+  ]
+}

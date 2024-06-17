@@ -2,3 +2,4 @@
 2. The Arrow size start at 400
 3. If space is pressed the Arrow stops moving
 4. After space was pressed the Arrows size decreases
+5. Arrow always stays in between the coordinates -150 and 150 for both the x and y coordinates
