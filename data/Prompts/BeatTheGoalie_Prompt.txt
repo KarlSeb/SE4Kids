@@ -1,0 +1,14 @@
+1. The timer variable of the stage starts at 30
+2. The timer decreases by 1 every second
+3. After the timer reaches 0 the program stops
+4. The score variabe of the Soccer Ball starts at 0
+5. The ball starts at position (-200, -140)
+6. The ball moves along the x axis until space is pressed
+7. If the ball touches the edge of the stage is changes direction
+7. When space is pressed the ball stops moving along the x axis
+8. When space is pressed the ball starts moving along the y axis
+9. When space is pressed and the ball touches the Goalie the Goalie says 'Save!' for 1 second
+10. When space is pressed and the ball does not touch the Goalie the score is increase by 1
+11. When space is pressed and the ball does not touch the Goalie the Goalie says 'Goal!' for 1 second
+12. The Goalie moves left if the left arrow key is pressed
+13. The Goalie moves right if the right arrow key is pressed

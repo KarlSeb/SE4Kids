@@ -1,0 +1,14 @@
+1. The timer variable of the stage starts at 10
+2. The score variable of the Balloon1 sprite starts at 0
+3. The Balloon1 sprite is hidden
+4. At the start there are 30 clones of the Balloon1 sprite
+5. Every clone is visible at the start
+6. Each clone starts with costume 'balloon1-a'
+7. The clones start at a random location in the with x and y coordinates in the interval [-150, 150]
+8. Each clone points in a random direction in the interval [-90, 180]
+9. When a balloon is clicked its costume switches to 'burst'
+10. When a balloon is clicked 1 is added to the score
+11. When a balloon is clicked it is deleted
+12. When a balloon touched the edge of the stage the balloon changes direction
+13. Every second the timer is decreased by 1
+14. After the timer reaches 0 the timer does not decrease any more
