@@ -10,7 +10,7 @@ def write_JSON(program_name: str, generated: str):
         for line in generated:
             f.write(line)
 
-def write_Testfile(program_name: str, generated_json: str):
+def write_testfile(program_name: str, generated_json: str):
     data = json.loads(generated_json)
     export = {}
     with open(f'./data/Tests/{program_name}_Tests.js', 'w') as f:
@@ -35,4 +35,4 @@ if __name__ == '__main__':
     response = ''
     with open('./data/JSON/Archery_Tests.json', 'r') as f:
         response = f.read()
-    write_Testfile('Archery', response)
+    write_testfile('Archery', response)

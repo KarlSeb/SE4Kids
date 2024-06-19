@@ -32,8 +32,9 @@ def get_prompt(program_name: str):
 def main():
     prompt = get_prompt('Archery')
     response = query_gpt(prompt)
+    print('Writing response to files')
     jp.write_JSON('Archery', response)
-    jp.write_Test('Archery', response)
+    jp.write_testfile('Archery', response)
 
 if __name__ == '__main__':
     __init__()
