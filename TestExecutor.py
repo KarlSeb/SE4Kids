@@ -1,6 +1,8 @@
 import subprocess
 import os
 from enum import Enum
+import argparse
+import sys
 
 whisker_path = os.path.abspath('./whisker')
 solution_path = os.path.abspath('./data/SampleSolutions')
@@ -72,5 +74,9 @@ def run_test(program_name:str, generate_csv = False):
     return execute_command(cmd, whisker_path)
 
 if __name__ == '__main__':
-    #run_all_tests()
-    print(run_test("Archery"))
+    parser = argparse.ArgumentParser(description='Executes the whisker test(s) specified')
+    parser.add_argument('-n', '--names', action='extend', type=str, nargs='+', help='names of the programs to test')
+    names = parser.parse_args().names
+    for name in names:
+        print(run_test(name))
+    #print(run_test("Archery"))
