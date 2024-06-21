@@ -1,0 +1,12 @@
+1. At the start Cat1 Flying is at coordinates (0, 0)
+2. At the start Cat1 Flying has direction 90
+3. At the start Cat1 Flying repeats turning right 60 degrees and creating a clone 6 times
+4. When the up arrow key is pressed the sprite and the clones move 10 steps
+5. When the down arrow key is pressed the sprite and the clones move -10 steps
+6. When the left arrow key is pressed the sprite and the clones turn 15 degrees to the left
+7. When the left arrow key is pressed the sprite and the clones switch costumes to 'left'
+8. When the right arrow key is pressed the sprite and the clones turn 15 degrees to the right
+9. When the right arrow key is pressed the sprite and the clones switch costumes to 'right'
+10. When space is pressed the sprite and the clones repeat the following sequence 36 times
+    - turn 10 degrees to the right
+    - move 10 steps

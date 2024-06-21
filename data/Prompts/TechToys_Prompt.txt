@@ -1,0 +1,8 @@
+1. When Sunglasses2 is clicked it changes the color effect by 5 100 times
+2. When Bow Tie is clicked it turns right by 36 degrees  for 30 times
+3. After Laptop was clicked Helicopter changes costumes repeatedly
+4. After Laptop was clicked pressing the left arrow key changes the x coordinate of the Helicopter by -2
+5. After Laptop was clicked pressing the right arrow key changes the x coordinate of the Helicopter by +2
+6. After Laptop was clicked pressing the down arrow key changes the y coordinate of the Helicopter by -2
+7. After Laptop was clicked pressing the up arrow key changes the y coordinate of the Helicopter by +2
+8. When space is pressed the Helicopter repeats moving 4 steps and turning 4 degrees left 90 times

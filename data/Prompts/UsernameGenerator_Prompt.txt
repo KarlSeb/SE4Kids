@@ -1,0 +1,3 @@
+1. When Abby is clicked the global variable username is set to a randomly picked item from the adjective list and an item from the nouns list at a random index between 1 and length of the adjective list
+2. When Abby is clicked the generated username is said
+3. When Button4 is clicked the current value of username is added to the 'names i like' list

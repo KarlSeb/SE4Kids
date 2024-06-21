@@ -71,14 +71,14 @@ s.isOriginal
 s.isStage
 s.name
 s.id
-s.effects
+s.effects: returns a map of possible effects and the current value
 s.x: returns the current x coordinate of the sprite. The field is getter-only
 s.y: returns the current y coordinate of the sprite. The field is getter-only
 s.bounds
-s.direction
-s.visible
+s.direction: returns the direction s is pointing towards. Is represented as a number in the interval [-180, 180]. Increases by turning right.
+s.visible: returns a boolean value whether s is visible or not
 s.size
-s.currentCostume: return the index of the current Costume
+s.currentCostume: return the index the current costume has in the array provided by s.getCostumes()
 s.sayText
 
 A sprite s has the following functions:
@@ -98,7 +98,6 @@ s.getCostumeByName(costumeName)
 s.getCostumeCount()
 s.isPointinBounds(x, y)
 s.isIntersectingBounds(otherBounds)
-s.isTouchingMouse()
 s.isTouchingMouse()
 s.isTouchingSprite(spriteName)
 s.isTouchingColor([r,g,b])
