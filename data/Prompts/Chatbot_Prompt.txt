@@ -1,0 +1,17 @@
+1. At the start Nano has costume 'nano-a'
+2. When Nano is clicked the costume changes to 'nano-b'
+3. When Nano is clicked the stage costume is set to 'space'
+4. After Nano is clicked Nano asks 'What's your name?'
+5. After the question 'What's your name?' is answered the answer is stored in the global variable 'name'
+6. After the question 'What's your name?' is answered Nano says 'Hi [name]' for 2 seconds
+7. Then Nano asks 'Are you OK [name]'
+8. If the answer to 'Are you OK [name]' is 'yes' Nanos costume changes to 'nano-c'
+9. If the answer to 'Are you OK [name]' is 'yes' Nano says 'That's great to hear!' for 2 seconds
+10. If the answer to 'Are you OK [name]' is not 'yes' Nanos costume changes to 'nano-d'
+11. If the answer to 'Are you OK [name]' is not 'yes' Nano says 'Oh no!' for 2 seconds
+12. Then Nanos costume changes to 'nano-b'
+13. Nano then asks 'Do you want to go to the moon?'
+14. If the answer to 'Do you want to go to the moon?' is 'yes' the stage costume changes to 'moon'
+15. If the answer to 'Do you want to go to the moon?' is 'yes' Nano moves up, waits 0.1 seconds, moves down and waitss 0.1 seconds for 4 times
+16. Afterwards the program ends
+17. If the answer to 'Do you want to go to the moon?' is not 'yes' the program ends 

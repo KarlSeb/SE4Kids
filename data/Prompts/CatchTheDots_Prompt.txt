@@ -1,0 +1,24 @@
+1. At start red, yellow and blue are invisible
+2. At start the global variable score is set to 0
+3. At start the global variable lives is set to 3
+4. At start the global variable delay is set to 8
+5. Every 10 seconds delay is decreased by 0.5
+6. delay does not go under 2
+7. If right arrow is pressed red3roller turns right in increments 3 degrees
+8. If left arrow is pressed red3roller turns left in increments of 3 degrees
+9. 2 seconds after program start red creates a clone
+10. Afterwards every delay seconds another clone of red is created
+11. 4 seconds after program start yellow creates a clone
+12. Afterwards every delay seconds another clone of yellow is created
+13. 6 seconds after program start blue creates a clone
+14. Afterwards every delay seconds another clone of blue is created
+15. Each clone picks randomly the first or second item on the start positions list for both the x and y coordinate
+16. Each clone directions points towards the red3roller
+17. Each existing clone starts visible
+18. Each clone moves towards red3roller until it touches red3roller
+19. After a clone touches red3roller it is deleted
+20. Then if red touches the color [255, 0, 0] score is increased by 1, else lives is decreased by 1
+21. Then if yellow touches the color [255, 255, 0] score is increased by 1, else lives is decreased by 1
+22. Then if blue touches the color [0, 63, 255] score is increased by 1, else lives is decreased by 1
+23. When lives reaches 0 the game ends
+24. If score is higher than the global variable highscore, highscore is set to score

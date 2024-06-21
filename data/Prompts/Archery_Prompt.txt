@@ -3,7 +3,7 @@
 3. If space is pressed the Arrow stops moving
 4. After space was pressed the Arrows size decreases
 5. Arrow always stays in between the coordinates -150 and 150 for both the x and y coordinates
-6. If Arrow hits color [255, 242, 0] it says the text '200 points' for 2 seconds
-7. If Arrow hits color [238, 28, 36] it says the text '150 points' for 2 seconds
-7. If Arrow hits color [0, 114, 188] it says the text '100 points' for 2 seconds
-8. If Arrow hits color [0, 0, 0] it says the text '50 points' for 2 seconds
+6. If Arrow hits color [255, 242, 0] after space was pressed it says the text '200 points' for 2 seconds
+7. If Arrow hits color [238, 28, 36] after space was pressed it says the text '150 points' for 2 seconds
+7. If Arrow hits color [0, 114, 188] after space was pressed it says the text '100 points' for 2 seconds
+8. If Arrow hits color [0, 0, 0] after space was pressed it says the text '50 points' for 2 seconds

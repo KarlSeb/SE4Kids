@@ -4,12 +4,12 @@
 4. The boat starts with the costume 'normal'
 5. The boat starts with the direction 0
 6. The boat stats at coordinates (-190, -150)
-7. If the boat touches the color [] the costume changes to 'hit'
-8. If the boat touches the color [] the boat says 'Noooooo!' for 1 second
+7. If the boat touches the color [102, 59, 0] the costume changes to 'hit'
+8. If the boat touches the color [102, 59, 0] the boat says 'Noooooo!' for 1 second
 9. After the boat says 'Noooooo!' for 1 second the boat is reset to starting conditions
-10. If the boat touches the color [] the boat moves by 3 steps
-11. If the boat touches the color [] the boat stops moving
-12. If the boat touches the color [] the boat says 'YEAH!' for 1 second
-13. If the boat touches the color [] the program ends
+10. If the boat touches the color [255, 255, 255] the boat moves by 3 steps
+11. If the boat touches the color [255, 255, 153] the boat stops moving
+12. If the boat touches the color [255, 255, 153] the boat says 'YEAH!' for 1 second
+13. If the boat touches the color [255, 255, 153] the program ends
 14. If the boats distance to the mouse pointer is greater than 5 the boat makes 1 step in the direction of the mouse pointer
 15. If the boats distance to the mouse pointer is less than 5 the boat stops moving
