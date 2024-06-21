@@ -29,12 +29,26 @@ def get_prompt(program_name: str):
         prompt = f.read()
     return prompt
 
+def get_names():
+    names = []
+    with open('program_names.txt', 'r') as f:
+        names = f.readlines()
+    for i in range(len(names)):
+        names[i] = names[i].strip()
+    return names
+
 def main():
-    prompt = get_prompt('Archery')
-    response = query_gpt(prompt)
-    print('Writing response to files')
-    jp.write_JSON('Archery', response)
-    jp.write_testfile('Archery', response)
+    parser = argparse.ArgumentParser(description='Querys the large language model for the programs specified')
+    parser.add_argument('-n', '--names', action='extend', type=str, nargs='+', help='names of the programs')
+    names = parser.parse_args().names
+    if names is None:
+        names = get_names()
+    for program_name in names:
+        prompt = get_prompt(program_name)
+        response = query_gpt(prompt)
+        print('Writing response to files')
+        jp.write_JSON(program_name, response)
+        jp.write_testfile(program_name, response)
 
 if __name__ == '__main__':
     __init__()

@@ -1,8 +1,6 @@
-import subprocess
 import os
-from enum import Enum
+import subprocess
 import argparse
-import sys
 
 whisker_path = os.path.abspath('./whisker')
 solution_path = os.path.abspath('./data/SampleSolutions')
@@ -45,16 +43,12 @@ def execute_command(cmd:str, execution_path:str):
     return str(temp.communicate())
 
 def get_tests():
-    output = process_output(execute_command('ls', tests_path))
-    testable_programs = []
-    for line in output:
-        line = line.split('_Tests.js')[0]
-        testable_programs.append(line)
-
-    if len(testable_programs) == 0:
-        raise Error("No tests found!")
-
-    return testable_programs
+    names = []
+    with open('program_names.txt', 'r') as f:
+        names = f.readlines()
+    for i in range(len(names)):
+        names[i] = names[i].strip()
+    return names
 
 def run_all_tests():
     testable_programs = get_tests()
@@ -77,6 +71,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Executes the whisker test(s) specified')
     parser.add_argument('-n', '--names', action='extend', type=str, nargs='+', help='names of the programs to test')
     names = parser.parse_args().names
-    for name in names:
-        print(run_test(name))
-    #print(run_test("Archery"))
+    if names is None:
+        print(run_all_tests())
+    else:
+        for name in names:
+            print(run_test(name))
