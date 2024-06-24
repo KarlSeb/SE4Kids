@@ -6,11 +6,6 @@ def extract_name(code:str):
     name = name.split(' ')[0]
     return name
 
-def write_JSON(program_name: str, generated: str):
-    with open(f'./data/JSON/{program_name}_Tests.json', 'w') as f:
-        for line in generated:
-            f.write(line)
-
 def write_testfile(program_name: str, generated_json: str):
     data = json.loads(generated_json)
     export = {}
