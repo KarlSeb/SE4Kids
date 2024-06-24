@@ -1,4 +1,5 @@
 import json
+import argparse
 
 def extract_name(code:str):
     name = code.split('const ')[1]
@@ -31,8 +32,29 @@ def write_testfile(program_name: str, generated_json: str):
             f.write('\t},\n')
         f.write(']\n')
 
+def get_names():
+    names = []
+    with open('program_names.txt', 'r') as f:
+        names = f.readlines()
+    for i in range(len(names)):
+        names[i] = names[i].strip()
+    return names
+
+def main():
+    parser = argparse.ArgumentParser(description='Processes the JSON into Javascript files for the programs specified')
+    parser.add_argument('-n', '--names', action='extend', type=str, nargs='+', help='names of the programs')
+    names = parser.parse_args().names
+    if names is None:
+        names = get_names()
+    for program_name in names:
+        json = ''
+        with open(f'./data/JSON/{program_name}_Tests.json', 'r') as f:
+            json = f.read()
+        try:
+            write_testfile(program_name, json)
+        except Exception:
+            print(f'Could not progress JSON for {program_name}!')
+            continue
+
 if __name__ == '__main__':
-    response = ''
-    with open('./data/JSON/Archery_Tests.json', 'r') as f:
-        response = f.read()
-    write_testfile('Archery', response)
+    main()
