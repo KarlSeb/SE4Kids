@@ -1,0 +1,32 @@
+1. At the start Pico walking has coordinates (-210, -120)
+2. At the start Pico walking has direction 90
+3. At the start the global variable gravity is -4
+4. If Pico walking is not touching the color [0, 63, 255] or the color [255, 0, 191] the y coordinate is change by gravity
+5. When space is pressed and Pico walking is touching the color [0, 63, 255] the global variable jump height is set to 10
+6. After jump height was set to 10 it decreases by 0.5 until it reaches 0
+7. After jump height was set to 10 Pico walking y coordinate changes by the current jump height
+8. If Ball or Laser touches Pico walking, Pico walking is reset to starting conditions and jump height is set to 0
+9. If the right arrow key is pressed Pico walking has direction 90
+10. If the left arrow key is pressed Pico walking has direction -90
+11. If an arrow key is pressed Pico walking moves 3 steps
+12. If an arrow key is pressed Pico walking cycles through its costumes
+13. If Pico walking touches the color [255, 0, 191] and the up arrow is pressed the y coordinate of Pico walking increases by 4
+14. If Pico walking touches the color [0, 204, 68] it says ':)' for 2 seconds
+15. At the start Laser has costume 'on'
+16. Laser switches between the 'on' and 'off' costumes in random intervals from 2 to 4 seconds
+17. At the start Trapdoor has costume 'on'
+18. Trapdoor switches between the 'on' and 'off' costumes in random intervals from 3 to 5 seconds
+19. At the start Ball in invisible
+20. Ball creates a new clone in random intervals of 3 to 5 seconds
+21. Each clone starts with a random size between 30 and 50
+22. Each clone start wit a random costume index between 1 and 3
+23. Each clone starts at coordinates (160, 160)
+24. Each clone is visible
+25. Each clone has the following movement sequence:
+    - change y coordinate by -4 22 times
+    - change x coordinate by -2 and change direction by rotating 6 degrees left 180 times
+    - change y coordinate by -4 30 times
+    - change x coordinate by 2 and change direction by rotating 6 degrees right 190 times
+    - change y coordinate by -4 30 times
+    - change x coordinate by -2 and change direction by rotating 6 degrees left 170 times
+26. After the movement sequence is completed the clone is deleted

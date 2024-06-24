@@ -1,0 +1,7 @@
+1. At the start Drum has costume 'drum-a'
+2. When space is pressed Drum switches costume to 'drum-b' and then back to 'drum-a'
+3. When Drum is clicked Drum switches costume to 'drum-b' and then back to 'drum-a'
+4. At the start Singer1 has costume 'not singing'
+5. When Singer1 is clicked the costume changes to 'singing' before switching back to 'not singing'
+6. At the start Drum-cymbal has costume 'drum-cymbal-a'
+7. When Drum-cymbal is clicked it switches to costume 'drum-cymbal-b' before switching back

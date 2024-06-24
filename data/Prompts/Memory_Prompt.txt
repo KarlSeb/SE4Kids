@@ -1,0 +1,16 @@
+1. At the start the global variable score is 3
+2. Until the Game Over routine happens the following routine repeats:
+    - The list sequence is emptied
+    - Until score items are in the sequence list a random number between 1 and 4 is generated and Ballerina changes costume to the index of the generated number
+    - When the list is empty score is increased by 1
+    - When the list is empty the stage changes color effect by 25 40 times before clearing all effects
+3. If red is clicked and the first item in sequence is 1 the item is removed from the list, else the Game Over routine happens
+4. If blue is clicked and the first item in sequence is 2 the item is removed from the list, else the Game Over routine happens
+5. If green is clicked and the first item in sequence is 3 the item is removed from the list, else the Game Over routine happens
+6. If yellow is clicked and the first item in sequence is 4 the item is removed from the list, else the Game Over routine happens
+7. The Game Over routine consist of the following steps:
+    - Ballerina says 'Game over!' for 1 second
+    - If score is bigger than the global variable high score then high score is set to the value of score
+    - If score is bigger than high score Ballerina asks 'High Score! What is your name?'
+    - If score is bigger than high score and the question was answered, global variable name is set to the answer
+    - Afterwards the game ends

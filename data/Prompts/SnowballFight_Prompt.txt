@@ -1,0 +1,16 @@
+1. At the start of a round the global variable power is 0
+2. At the start of a round Snowball has coordinates (-200, -130)
+3. At the start of a round Snowball has direction 90
+4. At the start of a round Snowball has costume 'snowball-aim'
+5. At the start of a round Snowball is visible
+6. Until mouse is down Snowball points towards the mouse pointer
+7. While mouse is down and while power is less than 20 the direction of Snowball points towards the mouse pointer
+8. While mouse is down and while power is less than 20 power increases by 1
+9. After mouse is released Snowball switches to costume 'snowball'
+10. Until Snowball touches the edge of the stage or Rocks the y coordinate is changed by -5
+11. Until Snowball touches the edge of the stage or Rocks Snowball moves power steps
+12. After moving power steps power is decreased by 0.25
+13. After Snowball touches the edge of the stage or Rocks it gets invisible
+14. After Snowball touches the edge of the stage or Rocks a new round starts
+15. At the start of a round Reindeer goes to a random x coordinate between 0 and 200
+16. If Snowball touches Reindeer, Reindeer says 'You got me!' for 2 seconds

@@ -1,0 +1,10 @@
+1. At the start the global variable score is 0
+2. At the start the global variable time is 10
+3. Until time is 0, time is reduced by 1 every second
+4. If Ghost is clicked it becomes invisible
+7. If Ghost is clicked score is increased by 1
+10. Ghost has a random size from 50 to 200
+11. Ghost starts invisible
+12. After 1 second Ghost is visible and at a random location in the stage
+13. Ghost stays visible for a random amount of time between 1 and 2 seconds
+14. Bat and Ghost3 have the same behavior as Ghost

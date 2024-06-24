@@ -1,0 +1,15 @@
+1. When Ada is clicked Ada says 'Hi, I'm Ada!' for 2 seconds
+2. Afterwards Ada asks 'What's your name?'
+3. The answer to that question is stored in the global variable name
+4. Ada then says 'Hi [name]' for 2 seconds
+5. Then Ada says 'Click the computer to generate a poem.' for 2 seconds
+6. When Computer is clicked, Computer says 'Here is your poem [name]' for 2 seconds
+7. Computer then repeats the following sequence 10 times:
+    - turn 5 degrees to the left
+    - wait for 0.1 seconds
+    - turn 5 degrees to the right
+    - wait for 0.1 seconds
+8. Computer then pick a random item from the verbs list and says 'I [items]' for 2 seconds
+9. Then Computer says a random item from the adverbs list for 2 seconds
+10. Afterwards Computer picks a random word from the nouns list and says 'by the [item]' for 2 seconds
+11. Then a random item from the adjectives list is picked and Computer says 'I feel [item]' for 2 seconds

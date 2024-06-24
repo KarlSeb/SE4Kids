@@ -1,0 +1,18 @@
+1. At the start Finish Line has costume 'normal'
+2. At the start the global variable distance is 0
+3. At the start the global variable time is 0
+4. At the start Finish Line has coordinates (0, 30)
+5. At the start Finish Line has size 1
+6. At the start Finish Line says a countdown from 3 to1, with every number showing for 1 second
+7. After the countdown is fished the timer increases by 0.1 every 0.1 seconds
+8. At the start Tree1 is visible
+9. At the start Tree1 has coordinates (-50, 20)
+10. At the start Tree1 has size 1
+11. Until distance is 100 the left arrow key and the right arrow key have to be pressed and released in an alternating manner to increase distance for every button press
+12. Every time distance increases the size of Finish Line increases by 1
+13. Every time distance increases the size of Tree1 increases by 1
+14. Every time distance increases the y coordinate of Finish Line decreases by 1.5
+15. Every time distance increases the y coordinate of Tree1 decreases by 1.5
+16. Every time distance increases the x coordinate of Tree1 decreases by 2
+17. After distance reaches 100 Finish Line changes costume to 'broken'
+18. After distance reaches 100 the game ends

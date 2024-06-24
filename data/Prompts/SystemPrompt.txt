@@ -7,6 +7,8 @@ const testName = async function (t) {
 
 t is the test object and is already supplied by the framework. You can use the following functions:
 
+t.seedScratch(seed): can be used to control the randomness and to be able to replicate results
+
 Waiting functions:
 await t.runForTime(time): runs the program for the specified time in ms
 await t.runUntil( () => condition, maxTime): runs the program until the condition is met or the maximum Time in ms has elapsed.
@@ -75,7 +77,7 @@ s.effects: returns a map of possible effects and the current value
 s.x: returns the current x coordinate of the sprite. The field is getter-only
 s.y: returns the current y coordinate of the sprite. The field is getter-only
 s.bounds
-s.direction: returns the direction s is pointing towards. Is represented as a number in the interval [-180, 180]. Increases by turning right.
+s.direction: returns the direction s is pointing towards. Is represented as a number in the interval [-180, 180]. Increases by turning right. 0 represents straight up, 180 straight down.
 s.visible: returns a boolean value whether s is visible or not
 s.size
 s.currentCostume: return the index the current costume has in the array provided by s.getCostumes()
