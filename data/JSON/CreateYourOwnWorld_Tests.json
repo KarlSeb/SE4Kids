@@ -1,0 +1,24 @@
+{
+  "tests": [
+    {
+      "name": "Test global variable coins is 0 at start",
+      "code": "const testGlobalVariableCoins = async function (t) {\n    t.seedScratch(1234);\n    await t.runUntil(() => t.getGlobalVariable('coins') === 0, 1000);\n    t.assert.equal(t.getGlobalVariable('coins'), 0, 'Global variable coins should be 0 at start');\n    t.end();\n}"
+    },
+    {
+      "name": "Test list inventory is empty at start",
+      "code": "const testListInventoryEmpty = async function (t) {\n    t.seedScratch(1234);\n    await t.runUntil(() => t.getGlobalVariable('inventory').length === 0, 1000);\n    t.assert.equal(t.getGlobalVariable('inventory').length, 0, 'List inventory should be empty at start');\n    t.end();\n}"
+    },
+    {
+      "name": "Test global variable room is 1 at start",
+      "code": "const testGlobalVariableRoom = async function (t) {\n    t.seedScratch(1234);\n    await t.runUntil(() => t.getGlobalVariable('room') === 1, 1000);\n    t.assert.equal(t.getGlobalVariable('room'), 1, 'Global variable room should be 1 at start');\n    t.end();\n}"
+    },
+    {
+      "name": "Test player coordinates at start",
+      "code": "const testPlayerCoordinates = async function (t) {\n    t.seedScratch(1234);\n    await t.runUntil(() => {\n        const player = t.getSprite('player');\n        return player.x === -200 && player.y === 0;\n    }, 1000);\n    const player = t.getSprite('player');\n    t.assert.equal(player.x, -200, 'Player x coordinate should be -200 at start');\n    t.assert.equal(player.y, 0, 'Player y coordinate should be 0 at start');\n    t.end();\n}"
+    },
+    {
+      "name": "Test stage costume at start",
+      "code": "const testStageCostume = async function (t) {\n    t.seedScratch(1234);\n    await t.runUntil(() => t.getStage().currentCostume.name === 'room1', 1000);\n    t.assert.equal(t.getStage().currentCostume.name, 'room1', 'Stage costume should be room1 at start');\n    t.end();\n}"
+    }
+  ]
+}

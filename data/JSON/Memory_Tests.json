@@ -1,0 +1,36 @@
+{
+  "tests": [
+    {
+      "name": "Test initial score",
+      "code": "const testInitialScore = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('score') === 3, 5000);\n    t.assert.equal(t.getGlobalVariable('score'), 3, 'Initial score should be 3');\n    t.end();\n}"
+    },
+    {
+      "name": "Test sequence list emptying and score increment",
+      "code": "const testSequenceListEmptyingAndScoreIncrement = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    const sequence = t.getGlobalVariable('sequence');\n    t.assert.equal(sequence.length, 0, 'Sequence list should be empty');\n    const initialScore = t.getGlobalVariable('score');\n    await t.runForTime(1000);\n    t.assert.equal(t.getGlobalVariable('score'), initialScore + 1, 'Score should be incremented by 1');\n    t.end();\n}"
+    },
+    {
+      "name": "Test stage color effect change",
+      "code": "const testStageColorEffectChange = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    const stage = t.getStage();\n    t.assert.equal(stage.effects.color, 0, 'Stage color effect should be reset to 0');\n    t.end();\n}"
+    },
+    {
+      "name": "Test red click and sequence item 1",
+      "code": "const testRedClickAndSequenceItem1 = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    const sequence = t.getGlobalVariable('sequence');\n    sequence.push(1);\n    t.clickSprite('red');\n    await t.runForTime(500);\n    t.assert.equal(sequence.length, 0, 'Sequence list should be empty after clicking red with first item 1');\n    t.end();\n}"
+    },
+    {
+      "name": "Test blue click and sequence item 2",
+      "code": "const testBlueClickAndSequenceItem2 = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    const sequence = t.getGlobalVariable('sequence');\n    sequence.push(2);\n    t.clickSprite('blue');\n    await t.runForTime(500);\n    t.assert.equal(sequence.length, 0, 'Sequence list should be empty after clicking blue with first item 2');\n    t.end();\n}"
+    },
+    {
+      "name": "Test green click and sequence item 3",
+      "code": "const testGreenClickAndSequenceItem3 = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    const sequence = t.getGlobalVariable('sequence');\n    sequence.push(3);\n    t.clickSprite('green');\n    await t.runForTime(500);\n    t.assert.equal(sequence.length, 0, 'Sequence list should be empty after clicking green with first item 3');\n    t.end();\n}"
+    },
+    {
+      "name": "Test yellow click and sequence item 4",
+      "code": "const testYellowClickAndSequenceItem4 = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    const sequence = t.getGlobalVariable('sequence');\n    sequence.push(4);\n    t.clickSprite('yellow');\n    await t.runForTime(500);\n    t.assert.equal(sequence.length, 0, 'Sequence list should be empty after clicking yellow with first item 4');\n    t.end();\n}"
+    },
+    {
+      "name": "Test Game Over routine",
+      "code": "const testGameOverRoutine = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    const sequence = t.getGlobalVariable('sequence');\n    sequence.push(1);\n    t.clickSprite('blue');\n    await t.runForTime(500);\n    const ballerina = t.getSprite('Ballerina');\n    t.assert.equal(ballerina.sayText, 'Game over!', 'Ballerina should say Game over!');\n    const score = t.getGlobalVariable('score');\n    const highScore = t.getGlobalVariable('high score');\n    if (score > highScore) {\n        t.assert.equal(t.getGlobalVariable('high score'), score, 'High score should be updated');\n        t.assert.equal(ballerina.sayText, 'High Score! What is your name?', 'Ballerina should ask for name');\n    }\n    t.end();\n}"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "tests": [
+    {
+      "name": "Ada says 'Hi, I'm Ada!' when clicked",
+      "code": "const testAdaSaysHi = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Ada');\n    await t.runForTime(2000);\n    const ada = t.getSprite('Ada');\n    t.assert.equal(ada.sayText, \"Hi, I'm Ada!\", \"Ada should say 'Hi, I'm Ada!' when clicked\");\n    t.end();\n}"
+    },
+    {
+      "name": "Ada asks 'What's your name?' after saying 'Hi, I'm Ada!'",
+      "code": "const testAdaAsksName = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Ada');\n    await t.runForTime(2000);\n    await t.runForTime(2000);\n    const ada = t.getSprite('Ada');\n    t.assert.equal(ada.sayText, \"What's your name?\", \"Ada should ask 'What's your name?' after saying 'Hi, I'm Ada!'\");\n    t.end();\n}"
+    },
+    {
+      "name": "Answer to Ada's question is stored in global variable 'name'",
+      "code": "const testStoreName = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Ada');\n    await t.runForTime(4000);\n    t.typeText('John');\n    await t.runForTime(1000);\n    const name = t.getGlobalVariable('name');\n    t.assert.equal(name.value, 'John', \"The answer to Ada's question should be stored in the global variable 'name'\");\n    t.end();\n}"
+    },
+    {
+      "name": "Ada says 'Hi [name]' after storing the name",
+      "code": "const testAdaSaysHiName = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Ada');\n    await t.runForTime(4000);\n    t.typeText('John');\n    await t.runForTime(1000);\n    await t.runForTime(2000);\n    const ada = t.getSprite('Ada');\n    t.assert.equal(ada.sayText, 'Hi John', \"Ada should say 'Hi [name]' after storing the name\");\n    t.end();\n}"
+    },
+    {
+      "name": "Ada says 'Click the computer to generate a poem.'",
+      "code": "const testAdaSaysClickComputer = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Ada');\n    await t.runForTime(4000);\n    t.typeText('John');\n    await t.runForTime(1000);\n    await t.runForTime(4000);\n    const ada = t.getSprite('Ada');\n    t.assert.equal(ada.sayText, 'Click the computer to generate a poem.', \"Ada should say 'Click the computer to generate a poem.'\");\n    t.end();\n}"
+    },
+    {
+      "name": "Computer says 'Here is your poem [name]' when clicked",
+      "code": "const testComputerSaysPoem = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Ada');\n    await t.runForTime(4000);\n    t.typeText('John');\n    await t.runForTime(1000);\n    await t.runForTime(4000);\n    t.clickSprite('Computer');\n    await t.runForTime(2000);\n    const computer = t.getSprite('Computer');\n    t.assert.equal(computer.sayText, 'Here is your poem John', \"Computer should say 'Here is your poem [name]' when clicked\");\n    t.end();\n}"
+    },
+    {
+      "name": "Computer repeats turning sequence 10 times",
+      "code": "const testComputerTurningSequence = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Ada');\n    await t.runForTime(4000);\n    t.typeText('John');\n    await t.runForTime(1000);\n    await t.runForTime(4000);\n    t.clickSprite('Computer');\n    await t.runForTime(2000);\n    const computer = t.getSprite('Computer');\n    let initialDirection = computer.direction;\n    for (let i = 0; i < 10; i++) {\n        await t.runForTime(100);\n        t.assert.equal(computer.direction, initialDirection - 5, \"Computer should turn 5 degrees to the left\");\n        await t.runForTime(100);\n        t.assert.equal(computer.direction, initialDirection, \"Computer should turn 5 degrees to the right\");\n    }\n    t.end();\n}"
+    },
+    {
+      "name": "Computer says a random item from the verbs list",
+      "code": "const testComputerSaysRandomVerb = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Ada');\n    await t.runForTime(4000);\n    t.typeText('John');\n    await t.runForTime(1000);\n    await t.runForTime(4000);\n    t.clickSprite('Computer');\n    await t.runForTime(2000);\n    await t.runForTime(2000);\n    const computer = t.getSprite('Computer');\n    const verbs = ['run', 'jump', 'swim']; // Example verbs list\n    t.assert.ok(verbs.includes(computer.sayText.replace('I ', '')), \"Computer should say a random item from the verbs list\");\n    t.end();\n}"
+    },
+    {
+      "name": "Computer says a random item from the adverbs list",
+      "code": "const testComputerSaysRandomAdverb = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Ada');\n    await t.runForTime(4000);\n    t.typeText('John');\n    await t.runForTime(1000);\n    await t.runForTime(4000);\n    t.clickSprite('Computer');\n    await t.runForTime(2000);\n    await t.runForTime(2000);\n    await t.runForTime(2000);\n    const computer = t.getSprite('Computer');\n    const adverbs = ['quickly', 'slowly', 'happily']; // Example adverbs list\n    t.assert.ok(adverbs.includes(computer.sayText), \"Computer should say a random item from the adverbs list\");\n    t.end();\n}"
+    },
+    {
+      "name": "Computer says 'by the [item]' with a random item from the nouns list",
+      "code": "const testComputerSaysRandomNoun = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Ada');\n    await t.runForTime(4000);\n    t.typeText('John');\n    await t.runForTime(1000);\n    await t.runForTime(4000);\n    t.clickSprite('Computer');\n    await t.runForTime(2000);\n    await t.runForTime(2000);\n    await t.runForTime(2000);\n    await t.runForTime(2000);\n    const computer = t.getSprite('Computer');\n    const nouns = ['tree', 'river', 'mountain']; // Example nouns list\n    t.assert.ok(nouns.includes(computer.sayText.replace('by the ', '')), \"Computer should say 'by the [item]' with a random item from the nouns list\");\n    t.end();\n}"
+    },
+    {
+      "name": "Computer says 'I feel [item]' with a random item from the adjectives list",
+      "code": "const testComputerSaysRandomAdjective = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Ada');\n    await t.runForTime(4000);\n    t.typeText('John');\n    await t.runForTime(1000);\n    await t.runForTime(4000);\n    t.clickSprite('Computer');\n    await t.runForTime(2000);\n    await t.runForTime(2000);\n    await t.runForTime(2000);\n    await t.runForTime(2000);\n    await t.runForTime(2000);\n    const computer = t.getSprite('Computer');\n    const adjectives = ['happy', 'sad', 'excited']; // Example adjectives list\n    t.assert.ok(adjectives.includes(computer.sayText.replace('I feel ', '')), \"Computer should say 'I feel [item]' with a random item from the adjectives list\");\n    t.end();\n}"
+    }
+  ]
+}

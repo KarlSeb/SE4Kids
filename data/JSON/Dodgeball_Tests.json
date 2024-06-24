@@ -1,0 +1,108 @@
+{
+  "tests": [
+    {
+      "name": "Pico walking starts at coordinates (-210, -120)",
+      "code": "const testPicoStartCoordinates = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => {\n        const pico = t.getSprite('Pico walking');\n        return pico.x === -210 && pico.y === -120;\n    }, 5000);\n    t.end();\n}"
+    },
+    {
+      "name": "Pico walking starts with direction 90",
+      "code": "const testPicoStartDirection = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => {\n        const pico = t.getSprite('Pico walking');\n        return pico.direction === 90;\n    }, 5000);\n    t.end();\n}"
+    },
+    {
+      "name": "Global variable gravity starts at -4",
+      "code": "const testGravityStart = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('gravity') === -4, 5000);\n    t.end();\n}"
+    },
+    {
+      "name": "Pico walking y coordinate changes by gravity when not touching specific colors",
+      "code": "const testPicoGravityEffect = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const pico = t.getSprite('Pico walking');\n    const initialY = pico.y;\n    await t.runForTime(1000);\n    t.assert.not(pico.isTouchingColor([0, 63, 255]) || pico.isTouchingColor([255, 0, 191]), 'Pico is not touching specified colors');\n    t.assert.equal(pico.y, initialY + t.getGlobalVariable('gravity'), 'Pico y coordinate changes by gravity');\n    t.end();\n}"
+    },
+    {
+      "name": "Jump height set to 10 when space is pressed and Pico walking is touching color [0, 63, 255]",
+      "code": "const testJumpHeightSet = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Pico walking').isTouchingColor([0, 63, 255]), 5000);\n    t.keyPress('space');\n    await t.runForTime(100);\n    t.assert.equal(t.getGlobalVariable('jump height'), 10, 'Jump height is set to 10');\n    t.end();\n}"
+    },
+    {
+      "name": "Jump height decreases by 0.5 until it reaches 0",
+      "code": "const testJumpHeightDecrease = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('jump height') === 10, 5000);\n    await t.runForTime(100);\n    for (let i = 0; i < 20; i++) {\n        await t.runForTime(100);\n        t.assert.equal(t.getGlobalVariable('jump height'), 10 - (i + 1) * 0.5, 'Jump height decreases by 0.5');\n    }\n    t.assert.equal(t.getGlobalVariable('jump height'), 0, 'Jump height reaches 0');\n    t.end();\n}"
+    },
+    {
+      "name": "Pico walking y coordinate changes by current jump height",
+      "code": "const testPicoYChangeByJumpHeight = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('jump height') === 10, 5000);\n    const pico = t.getSprite('Pico walking');\n    const initialY = pico.y;\n    await t.runForTime(100);\n    t.assert.equal(pico.y, initialY + 10, 'Pico y coordinate changes by jump height');\n    t.end();\n}"
+    },
+    {
+      "name": "Pico walking reset to starting conditions and jump height set to 0 when touched by Ball or Laser",
+      "code": "const testPicoResetOnTouch = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const pico = t.getSprite('Pico walking');\n    const ball = t.getSprite('Ball');\n    const laser = t.getSprite('Laser');\n    ball.x = pico.x;\n    ball.y = pico.y;\n    await t.runForTime(100);\n    t.assert.equal(pico.x, -210, 'Pico x reset');\n    t.assert.equal(pico.y, -120, 'Pico y reset');\n    t.assert.equal(t.getGlobalVariable('jump height'), 0, 'Jump height reset');\n    laser.x = pico.x;\n    laser.y = pico.y;\n    await t.runForTime(100);\n    t.assert.equal(pico.x, -210, 'Pico x reset');\n    t.assert.equal(pico.y, -120, 'Pico y reset');\n    t.assert.equal(t.getGlobalVariable('jump height'), 0, 'Jump height reset');\n    t.end();\n}"
+    },
+    {
+      "name": "Pico walking direction is 90 when right arrow key is pressed",
+      "code": "const testPicoDirectionRight = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('right arrow');\n    await t.runForTime(100);\n    t.assert.equal(t.getSprite('Pico walking').direction, 90, 'Pico direction is 90');\n    t.end();\n}"
+    },
+    {
+      "name": "Pico walking direction is -90 when left arrow key is pressed",
+      "code": "const testPicoDirectionLeft = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('left arrow');\n    await t.runForTime(100);\n    t.assert.equal(t.getSprite('Pico walking').direction, -90, 'Pico direction is -90');\n    t.end();\n}"
+    },
+    {
+      "name": "Pico walking moves 3 steps when an arrow key is pressed",
+      "code": "const testPicoMoveSteps = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const pico = t.getSprite('Pico walking');\n    const initialX = pico.x;\n    t.keyPress('right arrow');\n    await t.runForTime(100);\n    t.assert.equal(pico.x, initialX + 3, 'Pico moves 3 steps');\n    t.end();\n}"
+    },
+    {
+      "name": "Pico walking cycles through costumes when an arrow key is pressed",
+      "code": "const testPicoCostumeCycle = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const pico = t.getSprite('Pico walking');\n    const initialCostume = pico.currentCostume;\n    t.keyPress('right arrow');\n    await t.runForTime(100);\n    t.assert.notEqual(pico.currentCostume, initialCostume, 'Pico cycles through costumes');\n    t.end();\n}"
+    },
+    {
+      "name": "Pico walking y coordinate increases by 4 when touching color [255, 0, 191] and up arrow is pressed",
+      "code": "const testPicoYIncreaseOnUpArrow = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Pico walking').isTouchingColor([255, 0, 191]), 5000);\n    const pico = t.getSprite('Pico walking');\n    const initialY = pico.y;\n    t.keyPress('up arrow');\n    await t.runForTime(100);\n    t.assert.equal(pico.y, initialY + 4, 'Pico y coordinate increases by 4');\n    t.end();\n}"
+    },
+    {
+      "name": "Pico walking says ':)' for 2 seconds when touching color [0, 204, 68]",
+      "code": "const testPicoSayOnTouch = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Pico walking').isTouchingColor([0, 204, 68]), 5000);\n    const pico = t.getSprite('Pico walking');\n    t.assert.equal(pico.sayText, ':)', 'Pico says :)');\n    await t.runForTime(2000);\n    t.assert.equal(pico.sayText, '', 'Pico stops saying :) after 2 seconds');\n    t.end();\n}"
+    },
+    {
+      "name": "Laser starts with costume 'on'",
+      "code": "const testLaserStartCostume = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Laser').getCostumeByName('on'), 5000);\n    t.end();\n}"
+    },
+    {
+      "name": "Laser switches between 'on' and 'off' costumes in random intervals from 2 to 4 seconds",
+      "code": "const testLaserCostumeSwitch = async function (t) {\n    t.greenFlag();\n    const laser = t.getSprite('Laser');\n    let initialCostume = laser.currentCostume;\n    await t.runForTime(4000);\n    t.assert.notEqual(laser.currentCostume, initialCostume, 'Laser switches costume');\n    t.end();\n}"
+    },
+    {
+      "name": "Trapdoor starts with costume 'on'",
+      "code": "const testTrapdoorStartCostume = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Trapdoor').getCostumeByName('on'), 5000);\n    t.end();\n}"
+    },
+    {
+      "name": "Trapdoor switches between 'on' and 'off' costumes in random intervals from 3 to 5 seconds",
+      "code": "const testTrapdoorCostumeSwitch = async function (t) {\n    t.greenFlag();\n    const trapdoor = t.getSprite('Trapdoor');\n    let initialCostume = trapdoor.currentCostume;\n    await t.runForTime(5000);\n    t.assert.notEqual(trapdoor.currentCostume, initialCostume, 'Trapdoor switches costume');\n    t.end();\n}"
+    },
+    {
+      "name": "Ball starts invisible",
+      "code": "const testBallStartInvisible = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => !t.getSprite('Ball').visible, 5000);\n    t.end();\n}"
+    },
+    {
+      "name": "Ball creates a new clone in random intervals of 3 to 5 seconds",
+      "code": "const testBallCloneCreation = async function (t) {\n    t.greenFlag();\n    const ball = t.getSprite('Ball');\n    const initialCloneCount = ball.getCloneCount();\n    await t.runForTime(5000);\n    t.assert.greater(ball.getCloneCount(), initialCloneCount, 'Ball creates new clone');\n    t.end();\n}"
+    },
+    {
+      "name": "Each clone starts with a random size between 30 and 50",
+      "code": "const testCloneRandomSize = async function (t) {\n    t.greenFlag();\n    await t.runForTime(5000);\n    const ball = t.getSprite('Ball');\n    const clones = ball.getClones();\n    clones.forEach(clone => {\n        t.assert.greaterOrEqual(clone.size, 30, 'Clone size is at least 30');\n        t.assert.lessOrEqual(clone.size, 50, 'Clone size is at most 50');\n    });\n    t.end();\n}"
+    },
+    {
+      "name": "Each clone starts with a random costume index between 1 and 3",
+      "code": "const testCloneRandomCostume = async function (t) {\n    t.greenFlag();\n    await t.runForTime(5000);\n    const ball = t.getSprite('Ball');\n    const clones = ball.getClones();\n    clones.forEach(clone => {\n        t.assert.greaterOrEqual(clone.currentCostume, 1, 'Clone costume index is at least 1');\n        t.assert.lessOrEqual(clone.currentCostume, 3, 'Clone costume index is at most 3');\n    });\n    t.end();\n}"
+    },
+    {
+      "name": "Each clone starts at coordinates (160, 160)",
+      "code": "const testCloneStartCoordinates = async function (t) {\n    t.greenFlag();\n    await t.runForTime(5000);\n    const ball = t.getSprite('Ball');\n    const clones = ball.getClones();\n    clones.forEach(clone => {\n        t.assert.equal(clone.x, 160, 'Clone x coordinate is 160');\n        t.assert.equal(clone.y, 160, 'Clone y coordinate is 160');\n    });\n    t.end();\n}"
+    },
+    {
+      "name": "Each clone is visible",
+      "code": "const testCloneVisibility = async function (t) {\n    t.greenFlag();\n    await t.runForTime(5000);\n    const ball = t.getSprite('Ball');\n    const clones = ball.getClones();\n    clones.forEach(clone => {\n        t.assert.ok(clone.visible, 'Clone is visible');\n    });\n    t.end();\n}"
+    },
+    {
+      "name": "Each clone follows the specified movement sequence",
+      "code": "const testCloneMovementSequence = async function (t) {\n    t.greenFlag();\n    await t.runForTime(5000);\n    const ball = t.getSprite('Ball');\n    const clone = ball.getClones()[0];\n    const initialX = clone.x;\n    const initialY = clone.y;\n    await t.runForTime(100);\n    t.assert.equal(clone.y, initialY - 4 * 22, 'Clone y coordinate changes by -4 22 times');\n    await t.runForTime(100);\n    t.assert.equal(clone.x, initialX - 2 * 180, 'Clone x coordinate changes by -2 180 times');\n    t.assert.equal(clone.direction, -6 * 180, 'Clone direction changes by rotating 6 degrees left 180 times');\n    await t.runForTime(100);\n    t.assert.equal(clone.y, initialY - 4 * 30, 'Clone y coordinate changes by -4 30 times');\n    await t.runForTime(100);\n    t.assert.equal(clone.x, initialX + 2 * 190, 'Clone x coordinate changes by 2 190 times');\n    t.assert.equal(clone.direction, 6 * 190, 'Clone direction changes by rotating 6 degrees right 190 times');\n    await t.runForTime(100);\n    t.assert.equal(clone.y, initialY - 4 * 30, 'Clone y coordinate changes by -4 30 times');\n    await t.runForTime(100);\n    t.assert.equal(clone.x, initialX - 2 * 170, 'Clone x coordinate changes by -2 170 times');\n    t.assert.equal(clone.direction, -6 * 170, 'Clone direction changes by rotating 6 degrees left 170 times');\n    t.end();\n}"
+    },
+    {
+      "name": "Clone is deleted after completing movement sequence",
+      "code": "const testCloneDeletion = async function (t) {\n    t.greenFlag();\n    await t.runForTime(5000);\n    const ball = t.getSprite('Ball');\n    const clone = ball.getClones()[0];\n    await t.runForTime(100);\n    t.assert.equal(clone.getCloneCount(), 0, 'Clone is deleted after movement sequence');\n    t.end();\n}"
+    }
+  ]
+}

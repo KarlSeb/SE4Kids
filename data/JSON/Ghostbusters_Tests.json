@@ -1,0 +1,44 @@
+{
+  "tests": [
+    {
+      "name": "Global variable score starts at 0",
+      "code": "const testGlobalVariableScoreStartsAt0 = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('score') === 0, 1000);\n    t.assert.strictEqual(t.getGlobalVariable('score'), 0, 'Score should start at 0');\n    t.end();\n}"
+    },
+    {
+      "name": "Global variable time starts at 10",
+      "code": "const testGlobalVariableTimeStartsAt10 = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('time') === 10, 1000);\n    t.assert.strictEqual(t.getGlobalVariable('time'), 10, 'Time should start at 10');\n    t.end();\n}"
+    },
+    {
+      "name": "Time is reduced by 1 every second until it reaches 0",
+      "code": "const testTimeReduction = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    let initialTime = t.getGlobalVariable('time');\n    for (let i = 0; i < initialTime; i++) {\n        await t.runForTime(1000);\n        t.assert.strictEqual(t.getGlobalVariable('time'), initialTime - i - 1, 'Time should be reduced by 1 every second');\n    }\n    t.assert.strictEqual(t.getGlobalVariable('time'), 0, 'Time should be 0 after countdown');\n    t.end();\n}"
+    },
+    {
+      "name": "Ghost becomes invisible when clicked",
+      "code": "const testGhostBecomesInvisibleWhenClicked = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    let ghost = t.getSprite('Ghost');\n    t.clickSprite('Ghost');\n    await t.runForTime(100);\n    t.assert.strictEqual(ghost.visible, false, 'Ghost should become invisible when clicked');\n    t.end();\n}"
+    },
+    {
+      "name": "Score is increased by 1 when Ghost is clicked",
+      "code": "const testScoreIncreasedWhenGhostClicked = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    let initialScore = t.getGlobalVariable('score');\n    t.clickSprite('Ghost');\n    await t.runForTime(100);\n    t.assert.strictEqual(t.getGlobalVariable('score'), initialScore + 1, 'Score should increase by 1 when Ghost is clicked');\n    t.end();\n}"
+    },
+    {
+      "name": "Ghost has a random size from 50 to 200",
+      "code": "const testGhostRandomSize = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    let ghost = t.getSprite('Ghost');\n    t.assert.greaterOrEqual(ghost.size, 50, 'Ghost size should be at least 50');\n    t.assert.lessOrEqual(ghost.size, 200, 'Ghost size should be at most 200');\n    t.end();\n}"
+    },
+    {
+      "name": "Ghost starts invisible",
+      "code": "const testGhostStartsInvisible = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    let ghost = t.getSprite('Ghost');\n    t.assert.strictEqual(ghost.visible, false, 'Ghost should start invisible');\n    t.end();\n}"
+    },
+    {
+      "name": "Ghost becomes visible after 1 second and is at a random location",
+      "code": "const testGhostVisibleAfter1Second = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    let ghost = t.getSprite('Ghost');\n    t.assert.strictEqual(ghost.visible, true, 'Ghost should be visible after 1 second');\n    t.assert.ok(ghost.x !== 0 || ghost.y !== 0, 'Ghost should be at a random location');\n    t.end();\n}"
+    },
+    {
+      "name": "Ghost stays visible for a random amount of time between 1 and 2 seconds",
+      "code": "const testGhostVisibleForRandomTime = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    let ghost = t.getSprite('Ghost');\n    t.assert.strictEqual(ghost.visible, true, 'Ghost should be visible after 1 second');\n    await t.runForTime(1000);\n    t.assert.ok(ghost.visible === false || ghost.visible === true, 'Ghost should stay visible for a random amount of time between 1 and 2 seconds');\n    t.end();\n}"
+    },
+    {
+      "name": "Bat and Ghost3 have the same behavior as Ghost",
+      "code": "const testBatAndGhost3Behavior = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    let bat = t.getSprite('Bat');\n    let ghost3 = t.getSprite('Ghost3');\n    t.assert.strictEqual(bat.visible, false, 'Bat should start invisible');\n    t.assert.strictEqual(ghost3.visible, false, 'Ghost3 should start invisible');\n    await t.runForTime(1000);\n    t.assert.strictEqual(bat.visible, true, 'Bat should be visible after 1 second');\n    t.assert.strictEqual(ghost3.visible, true, 'Ghost3 should be visible after 1 second');\n    t.assert.ok(bat.x !== 0 || bat.y !== 0, 'Bat should be at a random location');\n    t.assert.ok(ghost3.x !== 0 || ghost3.y !== 0, 'Ghost3 should be at a random location');\n    t.clickSprite('Bat');\n    await t.runForTime(100);\n    t.assert.strictEqual(bat.visible, false, 'Bat should become invisible when clicked');\n    t.clickSprite('Ghost3');\n    await t.runForTime(100);\n    t.assert.strictEqual(ghost3.visible, false, 'Ghost3 should become invisible when clicked');\n    t.end();\n}"
+    }
+  ]
+}
