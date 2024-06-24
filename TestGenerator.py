@@ -1,6 +1,7 @@
 from openai import OpenAI
 from dotenv import load_dotenv
 import JsonProcessing as jp
+import time
 
 def __init__():
     load_dotenv()
@@ -44,11 +45,15 @@ def main():
     if names is None:
         names = get_names()
     for program_name in names:
+        print(f'Generating tests for {program_name}')
         prompt = get_prompt(program_name)
         response = query_gpt(prompt)
         print('Writing response to files')
         jp.write_JSON(program_name, response)
         jp.write_testfile(program_name, response)
+        print('Waiting for 10 seconds...')
+        time.sleep(10)
+
 
 if __name__ == '__main__':
     __init__()
