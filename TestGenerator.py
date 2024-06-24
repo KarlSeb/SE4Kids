@@ -11,7 +11,7 @@ def __init__():
         global SYSTEM_PROMPT
         SYSTEM_PROMPT = f.read()
 
-def query_gpt(prompt: str, gpt_temperature = 0, gpt_model = 'gpt-4o') -> str:
+def query_gpt(prompt: str, gpt_temperature = 0, gpt_model = 'gpt-4o-2024-05-13') -> str:
     print('Querying GPT...')
     completion = client.chat.completions.create(
       model= gpt_model,
