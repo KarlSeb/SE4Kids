@@ -35,11 +35,12 @@ def build_command(program_name:str, csv:bool = True):
         cmd.append('-v')
         cmd.append(f'{paths["csv_path"]}')
     cmd.append('-d')
-
+    cmd.append('-a')
+    cmd.append('10')
     return cmd
 
 def execute_command(cmd:str, execution_path:str):
-    temp = subprocess.Popen(cmd, stdout = subprocess.PIPE, cwd = execution_path)
+    temp = subprocess.Popen(cmd, stdout = subprocess.PIPE, stderr = subprocess.STDOUT, cwd = execution_path)
     return str(temp.communicate())
 
 def get_tests():
@@ -67,12 +68,24 @@ def run_test(program_name:str, generate_csv = False):
     cmd = build_command(program_name, generate_csv)
     return execute_command(cmd, whisker_path)
 
-if __name__ == '__main__':
+def write_output(output):
+    for name in output.keys():
+        lines = output[name].split('\\n')
+        with open(f'{results_path}/{name}.txt', 'w') as f:
+            for line in lines:
+                f.write(f'{line}\n')
+
+def main():
     parser = argparse.ArgumentParser(description='Executes the whisker test(s) specified')
     parser.add_argument('-n', '--names', action='extend', type=str, nargs='+', help='names of the programs to test')
     names = parser.parse_args().names
+    output = {}
     if names is None:
-        print(run_all_tests())
+        output = run_all_tests()
     else:
         for name in names:
-            print(run_test(name))
+            output[name] = run_test(name, True)
+    write_output(output)
+
+if __name__ == '__main__':
+    main()
