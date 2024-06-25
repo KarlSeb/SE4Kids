@@ -7,9 +7,9 @@
 22. If a clone of Hippo1 touches Lightning the score is increased by 10 and the clone is deleted
 23. If Spaceship touches Hippo1 or Orange the costume changes to 'hit' for 1 second and lives is decreased by 1
 24. If space is pressed a new clone of Lightning is created
-25. If left arrow is pressed the spaceships x coordinate is decreased by 4
-25. If right arrow is pressed the spaceships x coordinate is increased by 4
+25. If left arrow is pressed the spaceships x coordinate is decreased in steps of 4
+25. If right arrow is pressed the spaceships x coordinate is increased in steps of 4
 27. When lives reaches 0 Game Over becomes visible and the game ends
 28. A clone of Lightning starts at the current position of Spaceship and is visible
-29. Clones of Lightning continue to increase their y coordinate by 10
+29. Clones of Lightning continue to increase their y coordinate in steps of 10
 30. When a clone of Lightning touches the edge of the stage it get deleted

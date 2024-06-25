@@ -8,7 +8,7 @@
 7. When space is pressed the ball stops moving along the x axis
 8. When space is pressed the ball starts moving along the y axis
 9. When space is pressed and the ball touches the Goalie the Goalie says 'Save!' for 1 second
-10. When space is pressed and the ball does not touch the Goalie the score is increase by 1
+10. When space is pressed and the ball does not touch the Goalie the score is increased by 1
 11. When space is pressed and the ball does not touch the Goalie the Goalie says 'Goal!' for 1 second
 12. The Goalie moves left if the left arrow key is pressed
 13. The Goalie moves right if the right arrow key is pressed

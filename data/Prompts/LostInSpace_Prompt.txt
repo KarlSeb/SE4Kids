@@ -6,8 +6,8 @@
 6. For 200 times Rocketship repeats the following sequence:
     - move 2 steps
     - change the color effect by 25
-    - change the size by -0.3
-7. Monkey rotates right by 1 degree in a continuous loop
+    - change the size in steps of -0.3
+7. Monkey rotates right in steps of 1 degree in a continuous loop
 8. Star first increases size by 2 20 times then deceases it by 2 20 times in a continuous loop
 9. Rock always has a direction pointing to Earth
 10. Rock continuously moves by 2 steps

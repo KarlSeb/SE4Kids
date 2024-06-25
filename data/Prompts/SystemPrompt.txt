@@ -84,8 +84,6 @@ s.sayText
 A sprite s has the following functions:
 s.getVariables(condition)
 s.getVariable(variableName)
-s.getLists(true): Returns all lists of the sprite.
-s.getList(listName, true): returns the list 'listName'
 s.getInstances()
 s.getOriginal()
 s.getClones(): returns an array of clones.
@@ -102,6 +100,11 @@ s.isTouchingMouse()
 s.isTouchingSprite(spriteName)
 s.isTouchingColor([r,g,b])
 s.isColorTouchingColor(targetRgb, maskRgb)
+
+Lists:
+s.getLists(true): Returns all lists of the sprite.
+s.getList(listName, true): returns the list 'listName'
+List can be accessed if s is the stage.
 
 A costume c has the following attributes:
 c.skinId
