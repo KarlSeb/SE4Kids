@@ -1,100 +1,100 @@
 {
   "tests": [
     {
-      "name": "Red, Yellow, and Blue are invisible at start",
-      "code": "const testRedYellowBlueInvisibleAtStart = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('red').visible === false && t.getSprite('yellow').visible === false && t.getSprite('blue').visible === false, 1000);\n    t.assert.not(t.getSprite('red').visible, 'Red should be invisible at start');\n    t.assert.not(t.getSprite('yellow').visible, 'Yellow should be invisible at start');\n    t.assert.not(t.getSprite('blue').visible, 'Blue should be invisible at start');\n    t.end();\n}"
+      "name": "At start red, yellow and blue are invisible",
+      "code": "const testRedYellowBlueInvisible = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const red = t.getSprite('red');\n    const yellow = t.getSprite('yellow');\n    const blue = t.getSprite('blue');\n    t.assert.not(red.visible, 'Red should be invisible at start');\n    t.assert.not(yellow.visible, 'Yellow should be invisible at start');\n    t.assert.not(blue.visible, 'Blue should be invisible at start');\n    t.end();\n}"
     },
     {
-      "name": "Global variable score is set to 0 at start",
-      "code": "const testScoreAtStart = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('score') === 0, 1000);\n    t.assert.equal(t.getGlobalVariable('score'), 0, 'Score should be 0 at start');\n    t.end();\n}"
+      "name": "At start the global variable score is set to 0",
+      "code": "const testScoreStart = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const score = t.getGlobalVariable('score');\n    t.assert.equal(score.value, 0, 'Score should be 0 at start');\n    t.end();\n}"
     },
     {
-      "name": "Global variable lives is set to 3 at start",
-      "code": "const testLivesAtStart = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('lives') === 3, 1000);\n    t.assert.equal(t.getGlobalVariable('lives'), 3, 'Lives should be 3 at start');\n    t.end();\n}"
+      "name": "At start the global variable lives is set to 3",
+      "code": "const testLivesStart = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const lives = t.getGlobalVariable('lives');\n    t.assert.equal(lives.value, 3, 'Lives should be 3 at start');\n    t.end();\n}"
     },
     {
-      "name": "Global variable delay is set to 8 at start",
-      "code": "const testDelayAtStart = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('delay') === 8, 1000);\n    t.assert.equal(t.getGlobalVariable('delay'), 8, 'Delay should be 8 at start');\n    t.end();\n}"
+      "name": "At start the global variable delay is set to 8",
+      "code": "const testDelayStart = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const delay = t.getGlobalVariable('delay');\n    t.assert.equal(delay.value, 8, 'Delay should be 8 at start');\n    t.end();\n}"
     },
     {
-      "name": "Delay decreases by 0.5 every 10 seconds",
-      "code": "const testDelayDecreases = async function (t) {\n    t.greenFlag();\n    await t.runForTime(10000);\n    t.assert.equal(t.getGlobalVariable('delay'), 7.5, 'Delay should decrease by 0.5 every 10 seconds');\n    await t.runForTime(10000);\n    t.assert.equal(t.getGlobalVariable('delay'), 7, 'Delay should decrease by 0.5 every 10 seconds');\n    t.end();\n}"
+      "name": "Every 10 seconds delay is decreased by 0.5",
+      "code": "const testDelayDecrease = async function (t) {\n    t.greenFlag();\n    await t.runForTime(10000);\n    const delay = t.getGlobalVariable('delay');\n    t.assert.equal(delay.value, 7.5, 'Delay should decrease by 0.5 every 10 seconds');\n    t.end();\n}"
     },
     {
-      "name": "Delay does not go under 2",
-      "code": "const testDelayDoesNotGoUnder2 = async function (t) {\n    t.greenFlag();\n    await t.runForTime(120000); // Run for 2 minutes to ensure delay has decreased multiple times\n    t.assert.greaterOrEqual(t.getGlobalVariable('delay'), 2, 'Delay should not go under 2');\n    t.end();\n}"
+      "name": "delay does not go under 2",
+      "code": "const testDelayMinimum = async function (t) {\n    t.greenFlag();\n    await t.runForTime(120000); // Run for 2 minutes\n    const delay = t.getGlobalVariable('delay');\n    t.assert.greaterOrEqual(delay.value, 2, 'Delay should not go under 2');\n    t.end();\n}"
     },
     {
-      "name": "Red3roller turns right in increments of 3 degrees when right arrow is pressed",
-      "code": "const testRed3rollerTurnsRight = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const initialDirection = t.getSprite('red3roller').direction;\n    t.keyPress('right arrow');\n    await t.runForTime(100);\n    t.assert.equal(t.getSprite('red3roller').direction, initialDirection + 3, 'Red3roller should turn right in increments of 3 degrees');\n    t.end();\n}"
+      "name": "If right arrow is pressed red3roller turns right in increments 3 degrees",
+      "code": "const testRed3RollerRightTurn = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const red3roller = t.getSprite('red3roller');\n    const initialDirection = red3roller.direction;\n    t.keyPress('right arrow');\n    await t.runForTime(100);\n    t.keyRelease('right arrow');\n    await t.runForTime(100);\n    t.assert.equal(red3roller.direction, initialDirection + 3, 'Red3roller should turn right by 3 degrees');\n    t.end();\n}"
     },
     {
-      "name": "Red3roller turns left in increments of 3 degrees when left arrow is pressed",
-      "code": "const testRed3rollerTurnsLeft = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const initialDirection = t.getSprite('red3roller').direction;\n    t.keyPress('left arrow');\n    await t.runForTime(100);\n    t.assert.equal(t.getSprite('red3roller').direction, initialDirection - 3, 'Red3roller should turn left in increments of 3 degrees');\n    t.end();\n}"
+      "name": "If left arrow is pressed red3roller turns left in increments of 3 degrees",
+      "code": "const testRed3RollerLeftTurn = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const red3roller = t.getSprite('red3roller');\n    const initialDirection = red3roller.direction;\n    t.keyPress('left arrow');\n    await t.runForTime(100);\n    t.keyRelease('left arrow');\n    await t.runForTime(100);\n    t.assert.equal(red3roller.direction, initialDirection - 3, 'Red3roller should turn left by 3 degrees');\n    t.end();\n}"
     },
     {
-      "name": "Red creates a clone 2 seconds after program start",
-      "code": "const testRedCreatesClone = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const red = t.getSprite('red');\n    t.assert.equal(red.getCloneCount(), 1, 'Red should create a clone 2 seconds after program start');\n    t.end();\n}"
+      "name": "2 seconds after program start red creates a clone",
+      "code": "const testRedCloneCreation = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const red = t.getSprite('red');\n    t.assert.equal(red.getCloneCount(), 1, 'Red should create a clone 2 seconds after start');\n    t.end();\n}"
     },
     {
-      "name": "Red creates a clone every delay seconds",
-      "code": "const testRedCreatesCloneEveryDelay = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const red = t.getSprite('red');\n    const initialCloneCount = red.getCloneCount();\n    await t.runForTime(t.getGlobalVariable('delay') * 1000);\n    t.assert.equal(red.getCloneCount(), initialCloneCount + 1, 'Red should create a clone every delay seconds');\n    t.end();\n}"
+      "name": "Afterwards every delay seconds another clone of red is created",
+      "code": "const testRedCloneCreationInterval = async function (t) {\n    t.greenFlag();\n    await t.runForTime(10000);\n    const red = t.getSprite('red');\n    const delay = t.getGlobalVariable('delay');\n    const expectedClones = Math.floor(10 / delay.value);\n    t.assert.equal(red.getCloneCount(), expectedClones, 'Red should create clones at intervals of delay seconds');\n    t.end();\n}"
     },
     {
-      "name": "Yellow creates a clone 4 seconds after program start",
-      "code": "const testYellowCreatesClone = async function (t) {\n    t.greenFlag();\n    await t.runForTime(4000);\n    const yellow = t.getSprite('yellow');\n    t.assert.equal(yellow.getCloneCount(), 1, 'Yellow should create a clone 4 seconds after program start');\n    t.end();\n}"
+      "name": "4 seconds after program start yellow creates a clone",
+      "code": "const testYellowCloneCreation = async function (t) {\n    t.greenFlag();\n    await t.runForTime(4000);\n    const yellow = t.getSprite('yellow');\n    t.assert.equal(yellow.getCloneCount(), 1, 'Yellow should create a clone 4 seconds after start');\n    t.end();\n}"
     },
     {
-      "name": "Yellow creates a clone every delay seconds",
-      "code": "const testYellowCreatesCloneEveryDelay = async function (t) {\n    t.greenFlag();\n    await t.runForTime(4000);\n    const yellow = t.getSprite('yellow');\n    const initialCloneCount = yellow.getCloneCount();\n    await t.runForTime(t.getGlobalVariable('delay') * 1000);\n    t.assert.equal(yellow.getCloneCount(), initialCloneCount + 1, 'Yellow should create a clone every delay seconds');\n    t.end();\n}"
+      "name": "Afterwards every delay seconds another clone of yellow is created",
+      "code": "const testYellowCloneCreationInterval = async function (t) {\n    t.greenFlag();\n    await t.runForTime(10000);\n    const yellow = t.getSprite('yellow');\n    const delay = t.getGlobalVariable('delay');\n    const expectedClones = Math.floor(6 / delay.value);\n    t.assert.equal(yellow.getCloneCount(), expectedClones, 'Yellow should create clones at intervals of delay seconds');\n    t.end();\n}"
     },
     {
-      "name": "Blue creates a clone 6 seconds after program start",
-      "code": "const testBlueCreatesClone = async function (t) {\n    t.greenFlag();\n    await t.runForTime(6000);\n    const blue = t.getSprite('blue');\n    t.assert.equal(blue.getCloneCount(), 1, 'Blue should create a clone 6 seconds after program start');\n    t.end();\n}"
+      "name": "6 seconds after program start blue creates a clone",
+      "code": "const testBlueCloneCreation = async function (t) {\n    t.greenFlag();\n    await t.runForTime(6000);\n    const blue = t.getSprite('blue');\n    t.assert.equal(blue.getCloneCount(), 1, 'Blue should create a clone 6 seconds after start');\n    t.end();\n}"
     },
     {
-      "name": "Blue creates a clone every delay seconds",
-      "code": "const testBlueCreatesCloneEveryDelay = async function (t) {\n    t.greenFlag();\n    await t.runForTime(6000);\n    const blue = t.getSprite('blue');\n    const initialCloneCount = blue.getCloneCount();\n    await t.runForTime(t.getGlobalVariable('delay') * 1000);\n    t.assert.equal(blue.getCloneCount(), initialCloneCount + 1, 'Blue should create a clone every delay seconds');\n    t.end();\n}"
+      "name": "Afterwards every delay seconds another clone of blue is created",
+      "code": "const testBlueCloneCreationInterval = async function (t) {\n    t.greenFlag();\n    await t.runForTime(10000);\n    const blue = t.getSprite('blue');\n    const delay = t.getGlobalVariable('delay');\n    const expectedClones = Math.floor(4 / delay.value);\n    t.assert.equal(blue.getCloneCount(), expectedClones, 'Blue should create clones at intervals of delay seconds');\n    t.end();\n}"
     },
     {
-      "name": "Each clone picks randomly the first or second item on the start positions list for both the x and y coordinate",
-      "code": "const testCloneStartPositions = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const redClone = t.getSprite('red').getClone(0);\n    const startX = [t.getGlobalVariable('start positions')[0], t.getGlobalVariable('start positions')[1]];\n    const startY = [t.getGlobalVariable('start positions')[0], t.getGlobalVariable('start positions')[1]];\n    t.assert.ok(startX.includes(redClone.x), 'Clone x position should be one of the start positions');\n    t.assert.ok(startY.includes(redClone.y), 'Clone y position should be one of the start positions');\n    t.end();\n}"
+      "name": "Each clone picks randomly the first or second item on the 'start positions' list for both the x and y coordinate",
+      "code": "const testCloneStartPositions = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const red = t.getSprite('red');\n    const clone = red.getClone(0);\n    const startPositions = red.getList('start positions', true);\n    const xPositions = [startPositions[0], startPositions[1]];\n    const yPositions = [startPositions[2], startPositions[3]];\n    t.assert.ok(xPositions.includes(clone.x), 'Clone x position should be one of the start positions');\n    t.assert.ok(yPositions.includes(clone.y), 'Clone y position should be one of the start positions');\n    t.end();\n}"
     },
     {
-      "name": "Each clone direction points towards the red3roller",
-      "code": "const testCloneDirectionTowardsRed3roller = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const redClone = t.getSprite('red').getClone(0);\n    const red3roller = t.getSprite('red3roller');\n    const expectedDirection = Math.atan2(red3roller.y - redClone.y, red3roller.x - redClone.x) * (180 / Math.PI);\n    t.assert.equal(redClone.direction, expectedDirection, 'Clone direction should point towards the red3roller');\n    t.end();\n}"
+      "name": "Each clone directions points towards the red3roller",
+      "code": "const testCloneDirection = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const red = t.getSprite('red');\n    const clone = red.getClone(0);\n    const red3roller = t.getSprite('red3roller');\n    const expectedDirection = Math.atan2(red3roller.y - clone.y, red3roller.x - clone.x) * (180 / Math.PI);\n    t.assert.equal(clone.direction, expectedDirection, 'Clone direction should point towards red3roller');\n    t.end();\n}"
     },
     {
       "name": "Each existing clone starts visible",
-      "code": "const testCloneStartsVisible = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const redClone = t.getSprite('red').getClone(0);\n    t.assert.ok(redClone.visible, 'Clone should start visible');\n    t.end();\n}"
+      "code": "const testCloneVisibility = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const red = t.getSprite('red');\n    const clone = red.getClone(0);\n    t.assert.ok(clone.visible, 'Clone should be visible');\n    t.end();\n}"
     },
     {
       "name": "Each clone moves towards red3roller until it touches red3roller",
-      "code": "const testCloneMovesTowardsRed3roller = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const redClone = t.getSprite('red').getClone(0);\n    const red3roller = t.getSprite('red3roller');\n    await t.runUntil(() => redClone.isTouchingSprite('red3roller'), 10000);\n    t.assert.ok(redClone.isTouchingSprite('red3roller'), 'Clone should move towards red3roller until it touches red3roller');\n    t.end();\n}"
+      "code": "const testCloneMovement = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const red = t.getSprite('red');\n    const clone = red.getClone(0);\n    const red3roller = t.getSprite('red3roller');\n    await t.runUntil(() => clone.isTouchingSprite('red3roller'), 10000);\n    t.assert.ok(clone.isTouchingSprite('red3roller'), 'Clone should move towards red3roller until it touches it');\n    t.end();\n}"
     },
     {
-      "name": "Clone is deleted after touching red3roller",
-      "code": "const testCloneDeletedAfterTouchingRed3roller = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const redClone = t.getSprite('red').getClone(0);\n    await t.runUntil(() => redClone.isTouchingSprite('red3roller'), 10000);\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('red').getCloneCount(), 0, 'Clone should be deleted after touching red3roller');\n    t.end();\n}"
+      "name": "After a clone touches red3roller it is deleted",
+      "code": "const testCloneDeletion = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const red = t.getSprite('red');\n    const clone = red.getClone(0);\n    const red3roller = t.getSprite('red3roller');\n    await t.runUntil(() => clone.isTouchingSprite('red3roller'), 10000);\n    await t.runForTime(1000);\n    t.assert.equal(red.getCloneCount(), 0, 'Clone should be deleted after touching red3roller');\n    t.end();\n}"
     },
     {
-      "name": "Score is increased by 1 if red touches the color [255, 0, 0], else lives is decreased by 1",
-      "code": "const testRedTouchColor = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const red = t.getSprite('red');\n    const initialScore = t.getGlobalVariable('score');\n    const initialLives = t.getGlobalVariable('lives');\n    if (red.isTouchingColor([255, 0, 0])) {\n        t.assert.equal(t.getGlobalVariable('score'), initialScore + 1, 'Score should be increased by 1 if red touches the color [255, 0, 0]');\n    } else {\n        t.assert.equal(t.getGlobalVariable('lives'), initialLives - 1, 'Lives should be decreased by 1 if red does not touch the color [255, 0, 0]');\n    }\n    t.end();\n}"
+      "name": "Then if red touches the color [255, 0, 0] score is increased by 1, else lives is decreased by 1",
+      "code": "const testRedTouchColor = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const red = t.getSprite('red');\n    const initialScore = t.getGlobalVariable('score').value;\n    const initialLives = t.getGlobalVariable('lives').value;\n    if (red.isTouchingColor([255, 0, 0])) {\n        t.assert.equal(t.getGlobalVariable('score').value, initialScore + 1, 'Score should increase by 1 if red touches [255, 0, 0]');\n    } else {\n        t.assert.equal(t.getGlobalVariable('lives').value, initialLives - 1, 'Lives should decrease by 1 if red does not touch [255, 0, 0]');\n    }\n    t.end();\n}"
     },
     {
-      "name": "Score is increased by 1 if yellow touches the color [255, 255, 0], else lives is decreased by 1",
-      "code": "const testYellowTouchColor = async function (t) {\n    t.greenFlag();\n    await t.runForTime(4000);\n    const yellow = t.getSprite('yellow');\n    const initialScore = t.getGlobalVariable('score');\n    const initialLives = t.getGlobalVariable('lives');\n    if (yellow.isTouchingColor([255, 255, 0])) {\n        t.assert.equal(t.getGlobalVariable('score'), initialScore + 1, 'Score should be increased by 1 if yellow touches the color [255, 255, 0]');\n    } else {\n        t.assert.equal(t.getGlobalVariable('lives'), initialLives - 1, 'Lives should be decreased by 1 if yellow does not touch the color [255, 255, 0]');\n    }\n    t.end();\n}"
+      "name": "Then if yellow touches the color [255, 255, 0] score is increased by 1, else lives is decreased by 1",
+      "code": "const testYellowTouchColor = async function (t) {\n    t.greenFlag();\n    await t.runForTime(4000);\n    const yellow = t.getSprite('yellow');\n    const initialScore = t.getGlobalVariable('score').value;\n    const initialLives = t.getGlobalVariable('lives').value;\n    if (yellow.isTouchingColor([255, 255, 0])) {\n        t.assert.equal(t.getGlobalVariable('score').value, initialScore + 1, 'Score should increase by 1 if yellow touches [255, 255, 0]');\n    } else {\n        t.assert.equal(t.getGlobalVariable('lives').value, initialLives - 1, 'Lives should decrease by 1 if yellow does not touch [255, 255, 0]');\n    }\n    t.end();\n}"
     },
     {
-      "name": "Score is increased by 1 if blue touches the color [0, 63, 255], else lives is decreased by 1",
-      "code": "const testBlueTouchColor = async function (t) {\n    t.greenFlag();\n    await t.runForTime(6000);\n    const blue = t.getSprite('blue');\n    const initialScore = t.getGlobalVariable('score');\n    const initialLives = t.getGlobalVariable('lives');\n    if (blue.isTouchingColor([0, 63, 255])) {\n        t.assert.equal(t.getGlobalVariable('score'), initialScore + 1, 'Score should be increased by 1 if blue touches the color [0, 63, 255]');\n    } else {\n        t.assert.equal(t.getGlobalVariable('lives'), initialLives - 1, 'Lives should be decreased by 1 if blue does not touch the color [0, 63, 255]');\n    }\n    t.end();\n}"
+      "name": "Then if blue touches the color [0, 63, 255] score is increased by 1, else lives is decreased by 1",
+      "code": "const testBlueTouchColor = async function (t) {\n    t.greenFlag();\n    await t.runForTime(6000);\n    const blue = t.getSprite('blue');\n    const initialScore = t.getGlobalVariable('score').value;\n    const initialLives = t.getGlobalVariable('lives').value;\n    if (blue.isTouchingColor([0, 63, 255])) {\n        t.assert.equal(t.getGlobalVariable('score').value, initialScore + 1, 'Score should increase by 1 if blue touches [0, 63, 255]');\n    } else {\n        t.assert.equal(t.getGlobalVariable('lives').value, initialLives - 1, 'Lives should decrease by 1 if blue does not touch [0, 63, 255]');\n    }\n    t.end();\n}"
     },
     {
-      "name": "Game ends when lives reaches 0",
-      "code": "const testGameEndsWhenLivesZero = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('lives') === 0, 100000);\n    t.assert.ok(t.getGlobalVariable('gameOver'), 'Game should end when lives reaches 0');\n    t.end();\n}"
+      "name": "When lives reaches 0 the game ends",
+      "code": "const testGameEnd = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const lives = t.getGlobalVariable('lives');\n    lives.value = 0;\n    await t.runForTime(1000);\n    t.assert.ok(t.getStage().isStage, 'Game should end when lives reach 0');\n    t.end();\n}"
     },
     {
-      "name": "Highscore is set to score if score is higher than highscore",
-      "code": "const testHighscoreSetToScore = async function (t) {\n    t.greenFlag();\n    await t.runForTime(2000);\n    const initialHighscore = t.getGlobalVariable('highscore');\n    t.getGlobalVariable('score', initialHighscore + 1);\n    await t.runForTime(1000);\n    t.assert.equal(t.getGlobalVariable('highscore'), initialHighscore + 1, 'Highscore should be set to score if score is higher than highscore');\n    t.end();\n}"
+      "name": "If score is higher than the global variable highscore, highscore is set to score",
+      "code": "const testHighscoreUpdate = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const score = t.getGlobalVariable('score');\n    const highscore = t.getGlobalVariable('highscore');\n    score.value = highscore.value + 1;\n    await t.runForTime(1000);\n    t.assert.equal(highscore.value, score.value, 'Highscore should be updated if score is higher');\n    t.end();\n}"
     }
   ]
 }

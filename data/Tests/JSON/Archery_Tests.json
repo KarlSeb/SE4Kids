@@ -2,39 +2,39 @@
   "tests": [
     {
       "name": "Arrow starts at coordinates (-150, -150)",
-      "code": "const testArrowStartCoordinates = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Arrow').x === -150 && t.getSprite('Arrow').y === -150, 5000);\n    const arrow = t.getSprite('Arrow');\n    t.assert.strictEqual(arrow.x, -150, 'Arrow should start at x = -150');\n    t.assert.strictEqual(arrow.y, -150, 'Arrow should start at y = -150');\n    t.end();\n}"
+      "code": "const testArrowStartCoordinates = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => {\n        const arrow = t.getSprite('Arrow');\n        return arrow.x === -150 && arrow.y === -150;\n    }, 5000);\n    const arrow = t.getSprite('Arrow');\n    t.assert.equal(arrow.x, -150, 'Arrow should start at x = -150');\n    t.assert.equal(arrow.y, -150, 'Arrow should start at y = -150');\n    t.end();\n}"
     },
     {
       "name": "Arrow size starts at 400",
-      "code": "const testArrowStartSize = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Arrow').size === 400, 5000);\n    const arrow = t.getSprite('Arrow');\n    t.assert.strictEqual(arrow.size, 400, 'Arrow should start with size 400');\n    t.end();\n}"
+      "code": "const testArrowStartSize = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => {\n        const arrow = t.getSprite('Arrow');\n        return arrow.size === 400;\n    }, 5000);\n    const arrow = t.getSprite('Arrow');\n    t.assert.equal(arrow.size, 400, 'Arrow should start with size 400');\n    t.end();\n}"
     },
     {
       "name": "If space is pressed the Arrow stops moving",
-      "code": "const testArrowStopsOnSpace = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    const initialX = t.getSprite('Arrow').x;\n    const initialY = t.getSprite('Arrow').y;\n    t.keyPress('space');\n    await t.runForTime(1000);\n    const arrow = t.getSprite('Arrow');\n    t.assert.strictEqual(arrow.x, initialX, 'Arrow should stop moving on x-axis when space is pressed');\n    t.assert.strictEqual(arrow.y, initialY, 'Arrow should stop moving on y-axis when space is pressed');\n    t.end();\n}"
+      "code": "const testArrowStopsOnSpace = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const arrow = t.getSprite('Arrow');\n    const initialX = arrow.x;\n    const initialY = arrow.y;\n    t.keyPress('space');\n    await t.runForTime(1000);\n    t.assert.equal(arrow.x, initialX, 'Arrow should stop moving on space press (x coordinate)');\n    t.assert.equal(arrow.y, initialY, 'Arrow should stop moving on space press (y coordinate)');\n    t.end();\n}"
     },
     {
       "name": "After space was pressed the Arrow's size decreases",
-      "code": "const testArrowSizeDecreasesOnSpace = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('space');\n    await t.runForTime(1000);\n    const arrow = t.getSprite('Arrow');\n    t.assert.less(arrow.size, 400, 'Arrow size should decrease after space is pressed');\n    t.end();\n}"
+      "code": "const testArrowSizeDecreasesOnSpace = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const arrow = t.getSprite('Arrow');\n    const initialSize = arrow.size;\n    t.keyPress('space');\n    await t.runForTime(1000);\n    t.assert.less(arrow.size, initialSize, 'Arrow size should decrease after space is pressed');\n    t.end();\n}"
     },
     {
       "name": "Arrow always stays in between the coordinates -150 and 150 for both the x and y coordinates",
-      "code": "const testArrowStaysWithinBounds = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    t.addConstraint(() => {\n        const arrow = t.getSprite('Arrow');\n        t.assert.greaterOrEqual(arrow.x, -150, 'Arrow x should be >= -150');\n        t.assert.lessOrEqual(arrow.x, 150, 'Arrow x should be <= 150');\n        t.assert.greaterOrEqual(arrow.y, -150, 'Arrow y should be >= -150');\n        t.assert.lessOrEqual(arrow.y, 150, 'Arrow y should be <= 150');\n    });\n    await t.runForTime(10000);\n    t.end();\n}"
+      "code": "const testArrowStaysInBounds = async function (t) {\n    t.greenFlag();\n    t.addConstraint(() => {\n        const arrow = t.getSprite('Arrow');\n        t.assert.greaterOrEqual(arrow.x, -150, 'Arrow x should be >= -150');\n        t.assert.lessOrEqual(arrow.x, 150, 'Arrow x should be <= 150');\n        t.assert.greaterOrEqual(arrow.y, -150, 'Arrow y should be >= -150');\n        t.assert.lessOrEqual(arrow.y, 150, 'Arrow y should be <= 150');\n    });\n    await t.runForTime(10000);\n    t.end();\n}"
     },
     {
       "name": "If Arrow hits color [255, 242, 0] after space was pressed it says the text '200 points' for 2 seconds",
-      "code": "const testArrowHitsYellow = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('space');\n    await t.runForTime(1000);\n    t.addConstraint(() => {\n        const arrow = t.getSprite('Arrow');\n        if (arrow.isColorTouchingColor([255, 242, 0], [255, 242, 0])) {\n            t.assert.strictEqual(arrow.sayText, '200 points', 'Arrow should say \"200 points\" when hitting yellow color');\n        }\n    });\n    await t.runForTime(2000);\n    t.end();\n}"
+      "code": "const testArrowHitsYellow = async function (t) {\n    t.greenFlag();\n    t.keyPress('space');\n    await t.runForTime(1000);\n    const arrow = t.getSprite('Arrow');\n    arrow.x = 0; // Assuming the color is at (0, 0)\n    arrow.y = 0;\n    await t.runForTime(1000);\n    if (arrow.isTouchingColor([255, 242, 0])) {\n        t.assert.equal(arrow.sayText, '200 points', 'Arrow should say \"200 points\" when hitting yellow color');\n    }\n    t.end();\n}"
     },
     {
       "name": "If Arrow hits color [238, 28, 36] after space was pressed it says the text '150 points' for 2 seconds",
-      "code": "const testArrowHitsRed = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('space');\n    await t.runForTime(1000);\n    t.addConstraint(() => {\n        const arrow = t.getSprite('Arrow');\n        if (arrow.isColorTouchingColor([238, 28, 36], [238, 28, 36])) {\n            t.assert.strictEqual(arrow.sayText, '150 points', 'Arrow should say \"150 points\" when hitting red color');\n        }\n    });\n    await t.runForTime(2000);\n    t.end();\n}"
+      "code": "const testArrowHitsRed = async function (t) {\n    t.greenFlag();\n    t.keyPress('space');\n    await t.runForTime(1000);\n    const arrow = t.getSprite('Arrow');\n    arrow.x = 0; // Assuming the color is at (0, 0)\n    arrow.y = 0;\n    await t.runForTime(1000);\n    if (arrow.isTouchingColor([238, 28, 36])) {\n        t.assert.equal(arrow.sayText, '150 points', 'Arrow should say \"150 points\" when hitting red color');\n    }\n    t.end();\n}"
     },
     {
       "name": "If Arrow hits color [0, 114, 188] after space was pressed it says the text '100 points' for 2 seconds",
-      "code": "const testArrowHitsBlue = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('space');\n    await t.runForTime(1000);\n    t.addConstraint(() => {\n        const arrow = t.getSprite('Arrow');\n        if (arrow.isColorTouchingColor([0, 114, 188], [0, 114, 188])) {\n            t.assert.strictEqual(arrow.sayText, '100 points', 'Arrow should say \"100 points\" when hitting blue color');\n        }\n    });\n    await t.runForTime(2000);\n    t.end();\n}"
+      "code": "const testArrowHitsBlue = async function (t) {\n    t.greenFlag();\n    t.keyPress('space');\n    await t.runForTime(1000);\n    const arrow = t.getSprite('Arrow');\n    arrow.x = 0; // Assuming the color is at (0, 0)\n    arrow.y = 0;\n    await t.runForTime(1000);\n    if (arrow.isTouchingColor([0, 114, 188])) {\n        t.assert.equal(arrow.sayText, '100 points', 'Arrow should say \"100 points\" when hitting blue color');\n    }\n    t.end();\n}"
     },
     {
       "name": "If Arrow hits color [0, 0, 0] after space was pressed it says the text '50 points' for 2 seconds",
-      "code": "const testArrowHitsBlack = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('space');\n    await t.runForTime(1000);\n    t.addConstraint(() => {\n        const arrow = t.getSprite('Arrow');\n        if (arrow.isColorTouchingColor([0, 0, 0], [0, 0, 0])) {\n            t.assert.strictEqual(arrow.sayText, '50 points', 'Arrow should say \"50 points\" when hitting black color');\n        }\n    });\n    await t.runForTime(2000);\n    t.end();\n}"
+      "code": "const testArrowHitsBlack = async function (t) {\n    t.greenFlag();\n    t.keyPress('space');\n    await t.runForTime(1000);\n    const arrow = t.getSprite('Arrow');\n    arrow.x = 0; // Assuming the color is at (0, 0)\n    arrow.y = 0;\n    await t.runForTime(1000);\n    if (arrow.isTouchingColor([0, 0, 0])) {\n        t.assert.equal(arrow.sayText, '50 points', 'Arrow should say \"50 points\" when hitting black color');\n    }\n    t.end();\n}"
     }
   ]
 }

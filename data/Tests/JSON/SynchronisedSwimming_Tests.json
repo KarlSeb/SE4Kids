@@ -2,43 +2,43 @@
     "tests": [
         {
             "name": "Cat1 Flying starts at coordinates (0, 0)",
-            "code": "const testStartCoordinates = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Cat1 Flying').x === 0 && t.getSprite('Cat1 Flying').y === 0, 1000);\n    t.assert.equal(t.getSprite('Cat1 Flying').x, 0, 'Cat1 Flying should start at x = 0');\n    t.assert.equal(t.getSprite('Cat1 Flying').y, 0, 'Cat1 Flying should start at y = 0');\n    t.end();\n}"
+            "code": "const testCat1FlyingStartCoordinates = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Cat1 Flying').x === 0 && t.getSprite('Cat1 Flying').y === 0, 5000);\n    const sprite = t.getSprite('Cat1 Flying');\n    t.assert.strictEqual(sprite.x, 0, 'Cat1 Flying should start at x = 0');\n    t.assert.strictEqual(sprite.y, 0, 'Cat1 Flying should start at y = 0');\n    t.end();\n};"
         },
         {
             "name": "Cat1 Flying starts with direction 90",
-            "code": "const testStartDirection = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Cat1 Flying').direction === 90, 1000);\n    t.assert.equal(t.getSprite('Cat1 Flying').direction, 90, 'Cat1 Flying should start with direction 90');\n    t.end();\n}"
+            "code": "const testCat1FlyingStartDirection = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Cat1 Flying').direction === 90, 5000);\n    const sprite = t.getSprite('Cat1 Flying');\n    t.assert.strictEqual(sprite.direction, 90, 'Cat1 Flying should start with direction 90');\n    t.end();\n};"
         },
         {
-            "name": "Cat1 Flying repeats turning right 60 degrees and creating a clone 6 times at start",
-            "code": "const testRepeatTurnAndClone = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const cat1Flying = t.getSprite('Cat1 Flying');\n    t.assert.equal(cat1Flying.getCloneCount(), 6, 'Cat1 Flying should create 6 clones');\n    t.assert.equal(cat1Flying.direction, 90 + 60 * 6, 'Cat1 Flying should turn right 60 degrees 6 times');\n    t.end();\n}"
+            "name": "Cat1 Flying repeats turning right 60 degrees and creating a clone 6 times",
+            "code": "const testCat1FlyingTurnAndClone = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    const sprite = t.getSprite('Cat1 Flying');\n    t.assert.strictEqual(sprite.getCloneCount(), 6, 'Cat1 Flying should create 6 clones');\n    t.assert.strictEqual(sprite.direction, 90 + 60 * 6, 'Cat1 Flying should turn right 60 degrees 6 times');\n    t.end();\n};"
         },
         {
-            "name": "Up arrow key moves sprite and clones 10 steps",
-            "code": "const testUpArrowKey = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const cat1Flying = t.getSprite('Cat1 Flying');\n    const initialX = cat1Flying.x;\n    const initialY = cat1Flying.y;\n    t.keyPress('up arrow');\n    await t.runForTime(100);\n    t.assert.equal(cat1Flying.x, initialX + 10, 'Cat1 Flying should move 10 steps to the right');\n    t.assert.equal(cat1Flying.y, initialY, 'Cat1 Flying should not move vertically');\n    t.end();\n}"
+            "name": "When the up arrow key is pressed the sprite and the clones move 10 steps",
+            "code": "const testUpArrowKeyPress = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('up');\n    await t.runForTime(100);\n    const sprite = t.getSprite('Cat1 Flying');\n    const clones = sprite.getClones();\n    t.assert.strictEqual(sprite.x, 10, 'Cat1 Flying should move 10 steps');\n    clones.forEach((clone, index) => {\n        t.assert.strictEqual(clone.x, 10, `Clone ${index + 1} should move 10 steps`);\n    });\n    t.end();\n};"
         },
         {
-            "name": "Down arrow key moves sprite and clones -10 steps",
-            "code": "const testDownArrowKey = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const cat1Flying = t.getSprite('Cat1 Flying');\n    const initialX = cat1Flying.x;\n    const initialY = cat1Flying.y;\n    t.keyPress('down arrow');\n    await t.runForTime(100);\n    t.assert.equal(cat1Flying.x, initialX - 10, 'Cat1 Flying should move -10 steps to the left');\n    t.assert.equal(cat1Flying.y, initialY, 'Cat1 Flying should not move vertically');\n    t.end();\n}"
+            "name": "When the down arrow key is pressed the sprite and the clones move -10 steps",
+            "code": "const testDownArrowKeyPress = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('down');\n    await t.runForTime(100);\n    const sprite = t.getSprite('Cat1 Flying');\n    const clones = sprite.getClones();\n    t.assert.strictEqual(sprite.x, -10, 'Cat1 Flying should move -10 steps');\n    clones.forEach((clone, index) => {\n        t.assert.strictEqual(clone.x, -10, `Clone ${index + 1} should move -10 steps`);\n    });\n    t.end();\n};"
         },
         {
-            "name": "Left arrow key turns sprite and clones 15 degrees to the left",
-            "code": "const testLeftArrowKeyTurn = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const cat1Flying = t.getSprite('Cat1 Flying');\n    const initialDirection = cat1Flying.direction;\n    t.keyPress('left arrow');\n    await t.runForTime(100);\n    t.assert.equal(cat1Flying.direction, initialDirection - 15, 'Cat1 Flying should turn 15 degrees to the left');\n    t.end();\n}"
+            "name": "When the left arrow key is pressed the sprite and the clones turn 15 degrees to the left",
+            "code": "const testLeftArrowKeyPressTurn = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('left');\n    await t.runForTime(100);\n    const sprite = t.getSprite('Cat1 Flying');\n    const clones = sprite.getClones();\n    t.assert.strictEqual(sprite.direction, 75, 'Cat1 Flying should turn 15 degrees to the left');\n    clones.forEach((clone, index) => {\n        t.assert.strictEqual(clone.direction, 75, `Clone ${index + 1} should turn 15 degrees to the left`);\n    });\n    t.end();\n};"
         },
         {
-            "name": "Left arrow key switches sprite and clones costumes to 'left'",
-            "code": "const testLeftArrowKeyCostume = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('left arrow');\n    await t.runForTime(100);\n    const cat1Flying = t.getSprite('Cat1 Flying');\n    t.assert.equal(cat1Flying.getCostumeByIndex(cat1Flying.currentCostume).name, 'left', 'Cat1 Flying should switch costume to left');\n    t.end();\n}"
+            "name": "When the left arrow key is pressed the sprite and the clones switch costumes to 'left'",
+            "code": "const testLeftArrowKeyPressCostume = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('left');\n    await t.runForTime(100);\n    const sprite = t.getSprite('Cat1 Flying');\n    const clones = sprite.getClones();\n    t.assert.strictEqual(sprite.getCostumeByName('left').name, 'left', 'Cat1 Flying should switch costume to left');\n    clones.forEach((clone, index) => {\n        t.assert.strictEqual(clone.getCostumeByName('left').name, 'left', `Clone ${index + 1} should switch costume to left`);\n    });\n    t.end();\n};"
         },
         {
-            "name": "Right arrow key turns sprite and clones 15 degrees to the right",
-            "code": "const testRightArrowKeyTurn = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const cat1Flying = t.getSprite('Cat1 Flying');\n    const initialDirection = cat1Flying.direction;\n    t.keyPress('right arrow');\n    await t.runForTime(100);\n    t.assert.equal(cat1Flying.direction, initialDirection + 15, 'Cat1 Flying should turn 15 degrees to the right');\n    t.end();\n}"
+            "name": "When the right arrow key is pressed the sprite and the clones turn 15 degrees to the right",
+            "code": "const testRightArrowKeyPressTurn = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('right');\n    await t.runForTime(100);\n    const sprite = t.getSprite('Cat1 Flying');\n    const clones = sprite.getClones();\n    t.assert.strictEqual(sprite.direction, 105, 'Cat1 Flying should turn 15 degrees to the right');\n    clones.forEach((clone, index) => {\n        t.assert.strictEqual(clone.direction, 105, `Clone ${index + 1} should turn 15 degrees to the right`);\n    });\n    t.end();\n};"
         },
         {
-            "name": "Right arrow key switches sprite and clones costumes to 'right'",
-            "code": "const testRightArrowKeyCostume = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('right arrow');\n    await t.runForTime(100);\n    const cat1Flying = t.getSprite('Cat1 Flying');\n    t.assert.equal(cat1Flying.getCostumeByIndex(cat1Flying.currentCostume).name, 'right', 'Cat1 Flying should switch costume to right');\n    t.end();\n}"
+            "name": "When the right arrow key is pressed the sprite and the clones switch costumes to 'right'",
+            "code": "const testRightArrowKeyPressCostume = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('right');\n    await t.runForTime(100);\n    const sprite = t.getSprite('Cat1 Flying');\n    const clones = sprite.getClones();\n    t.assert.strictEqual(sprite.getCostumeByName('right').name, 'right', 'Cat1 Flying should switch costume to right');\n    clones.forEach((clone, index) => {\n        t.assert.strictEqual(clone.getCostumeByName('right').name, 'right', `Clone ${index + 1} should switch costume to right`);\n    });\n    t.end();\n};"
         },
         {
-            "name": "Space key makes sprite and clones repeat sequence 36 times",
-            "code": "const testSpaceKeySequence = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const cat1Flying = t.getSprite('Cat1 Flying');\n    const initialX = cat1Flying.x;\n    const initialY = cat1Flying.y;\n    const initialDirection = cat1Flying.direction;\n    t.keyPress('space');\n    await t.runForTime(3600);\n    t.assert.equal(cat1Flying.direction, initialDirection + 10 * 36, 'Cat1 Flying should turn 360 degrees');\n    t.assert.equal(cat1Flying.x, initialX + 10 * 36, 'Cat1 Flying should move 360 steps');\n    t.assert.equal(cat1Flying.y, initialY, 'Cat1 Flying should not move vertically');\n    t.end();\n}"
+            "name": "When space is pressed the sprite and the clones repeat the following sequence 36 times: turn 10 degrees to the right, move 10 steps",
+            "code": "const testSpaceKeyPressSequence = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.keyPress('space');\n    await t.runForTime(1000);\n    const sprite = t.getSprite('Cat1 Flying');\n    const clones = sprite.getClones();\n    t.assert.strictEqual(sprite.direction, 90 + 10 * 36, 'Cat1 Flying should turn 10 degrees to the right 36 times');\n    t.assert.strictEqual(sprite.x, 10 * 36, 'Cat1 Flying should move 10 steps 36 times');\n    clones.forEach((clone, index) => {\n        t.assert.strictEqual(clone.direction, 90 + 10 * 36, `Clone ${index + 1} should turn 10 degrees to the right 36 times`);\n        t.assert.strictEqual(clone.x, 10 * 36, `Clone ${index + 1} should move 10 steps 36 times`);\n    });\n    t.end();\n};"
         }
     ]
 }

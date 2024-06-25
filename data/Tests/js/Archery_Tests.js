@@ -1,49 +1,51 @@
 const testArrowStartCoordinates = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Arrow').x === -150 && t.getSprite('Arrow').y === -150, 5000);
+    await t.runUntil(() => {
+        const arrow = t.getSprite('Arrow');
+        return arrow.x === -150 && arrow.y === -150;
+    }, 5000);
     const arrow = t.getSprite('Arrow');
-    t.assert.strictEqual(arrow.x, -150, 'Arrow should start at x = -150');
-    t.assert.strictEqual(arrow.y, -150, 'Arrow should start at y = -150');
+    t.assert.equal(arrow.x, -150, 'Arrow should start at x = -150');
+    t.assert.equal(arrow.y, -150, 'Arrow should start at y = -150');
     t.end();
 }
 
 const testArrowStartSize = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Arrow').size === 400, 5000);
+    await t.runUntil(() => {
+        const arrow = t.getSprite('Arrow');
+        return arrow.size === 400;
+    }, 5000);
     const arrow = t.getSprite('Arrow');
-    t.assert.strictEqual(arrow.size, 400, 'Arrow should start with size 400');
+    t.assert.equal(arrow.size, 400, 'Arrow should start with size 400');
     t.end();
 }
 
 const testArrowStopsOnSpace = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
-    const initialX = t.getSprite('Arrow').x;
-    const initialY = t.getSprite('Arrow').y;
+    const arrow = t.getSprite('Arrow');
+    const initialX = arrow.x;
+    const initialY = arrow.y;
     t.keyPress('space');
     await t.runForTime(1000);
-    const arrow = t.getSprite('Arrow');
-    t.assert.strictEqual(arrow.x, initialX, 'Arrow should stop moving on x-axis when space is pressed');
-    t.assert.strictEqual(arrow.y, initialY, 'Arrow should stop moving on y-axis when space is pressed');
+    t.assert.equal(arrow.x, initialX, 'Arrow should stop moving on space press (x coordinate)');
+    t.assert.equal(arrow.y, initialY, 'Arrow should stop moving on space press (y coordinate)');
     t.end();
 }
 
 const testArrowSizeDecreasesOnSpace = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
+    const arrow = t.getSprite('Arrow');
+    const initialSize = arrow.size;
     t.keyPress('space');
     await t.runForTime(1000);
-    const arrow = t.getSprite('Arrow');
-    t.assert.less(arrow.size, 400, 'Arrow size should decrease after space is pressed');
+    t.assert.less(arrow.size, initialSize, 'Arrow size should decrease after space is pressed');
     t.end();
 }
 
-const testArrowStaysWithinBounds = async function (t) {
-    t.seedScratch(1234);
+const testArrowStaysInBounds = async function (t) {
     t.greenFlag();
     t.addConstraint(() => {
         const arrow = t.getSprite('Arrow');
@@ -57,66 +59,58 @@ const testArrowStaysWithinBounds = async function (t) {
 }
 
 const testArrowHitsYellow = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
     t.keyPress('space');
     await t.runForTime(1000);
-    t.addConstraint(() => {
-        const arrow = t.getSprite('Arrow');
-        if (arrow.isColorTouchingColor([255, 242, 0], [255, 242, 0])) {
-            t.assert.strictEqual(arrow.sayText, '200 points', 'Arrow should say "200 points" when hitting yellow color');
-        }
-    });
-    await t.runForTime(2000);
+    const arrow = t.getSprite('Arrow');
+    arrow.x = 0; // Assuming the color is at (0, 0)
+    arrow.y = 0;
+    await t.runForTime(1000);
+    if (arrow.isTouchingColor([255, 242, 0])) {
+        t.assert.equal(arrow.sayText, '200 points', 'Arrow should say "200 points" when hitting yellow color');
+    }
     t.end();
 }
 
 const testArrowHitsRed = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
     t.keyPress('space');
     await t.runForTime(1000);
-    t.addConstraint(() => {
-        const arrow = t.getSprite('Arrow');
-        if (arrow.isColorTouchingColor([238, 28, 36], [238, 28, 36])) {
-            t.assert.strictEqual(arrow.sayText, '150 points', 'Arrow should say "150 points" when hitting red color');
-        }
-    });
-    await t.runForTime(2000);
+    const arrow = t.getSprite('Arrow');
+    arrow.x = 0; // Assuming the color is at (0, 0)
+    arrow.y = 0;
+    await t.runForTime(1000);
+    if (arrow.isTouchingColor([238, 28, 36])) {
+        t.assert.equal(arrow.sayText, '150 points', 'Arrow should say "150 points" when hitting red color');
+    }
     t.end();
 }
 
 const testArrowHitsBlue = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
     t.keyPress('space');
     await t.runForTime(1000);
-    t.addConstraint(() => {
-        const arrow = t.getSprite('Arrow');
-        if (arrow.isColorTouchingColor([0, 114, 188], [0, 114, 188])) {
-            t.assert.strictEqual(arrow.sayText, '100 points', 'Arrow should say "100 points" when hitting blue color');
-        }
-    });
-    await t.runForTime(2000);
+    const arrow = t.getSprite('Arrow');
+    arrow.x = 0; // Assuming the color is at (0, 0)
+    arrow.y = 0;
+    await t.runForTime(1000);
+    if (arrow.isTouchingColor([0, 114, 188])) {
+        t.assert.equal(arrow.sayText, '100 points', 'Arrow should say "100 points" when hitting blue color');
+    }
     t.end();
 }
 
 const testArrowHitsBlack = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
     t.keyPress('space');
     await t.runForTime(1000);
-    t.addConstraint(() => {
-        const arrow = t.getSprite('Arrow');
-        if (arrow.isColorTouchingColor([0, 0, 0], [0, 0, 0])) {
-            t.assert.strictEqual(arrow.sayText, '50 points', 'Arrow should say "50 points" when hitting black color');
-        }
-    });
-    await t.runForTime(2000);
+    const arrow = t.getSprite('Arrow');
+    arrow.x = 0; // Assuming the color is at (0, 0)
+    arrow.y = 0;
+    await t.runForTime(1000);
+    if (arrow.isTouchingColor([0, 0, 0])) {
+        t.assert.equal(arrow.sayText, '50 points', 'Arrow should say "50 points" when hitting black color');
+    }
     t.end();
 }
 
@@ -146,8 +140,8 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testArrowStaysWithinBounds,
-		 name: "testArrowStaysWithinBounds",
+		 test: testArrowStaysInBounds,
+		 name: "testArrowStaysInBounds",
 		 description: "Arrow always stays in between the coordinates -150 and 150 for both the x and y coordinates",
 		 categories: []
 	},

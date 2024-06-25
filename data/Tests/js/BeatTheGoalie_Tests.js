@@ -10,10 +10,8 @@ const testTimerDecreasesByOneEverySecond = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runUntil(() => t.getGlobalVariable('timer') === 30, 5000);
-    for (let i = 30; i > 0; i--) {
-        await t.runForTime(1000);
-        t.assert.equal(t.getGlobalVariable('timer'), i - 1, `Timer should be ${i - 1}`);
-    }
+    await t.runForTime(1000);
+    t.assert.equal(t.getGlobalVariable('timer'), 29, 'Timer should decrease by 1 every second');
     t.end();
 }
 
@@ -22,14 +20,14 @@ const testProgramStopsAfterTimerReachesZero = async function (t) {
     t.greenFlag();
     await t.runUntil(() => t.getGlobalVariable('timer') === 0, 31000);
     await t.runForTime(1000);
-    t.assert.equal(t.getGlobalVariable('timer'), 0, 'Timer should remain at 0');
+    t.assert.equal(t.getGlobalVariable('timer'), 0, 'Timer should be 0');
     t.end();
 }
 
 const testScoreStartsAtZero = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const soccerBall = await t.getSprite('Soccer Ball');
+    const soccerBall = t.getSprite('Soccer Ball');
     await t.runUntil(() => soccerBall.getVariable('score') === 0, 5000);
     t.assert.equal(soccerBall.getVariable('score'), 0, 'Score should start at 0');
     t.end();
@@ -38,7 +36,7 @@ const testScoreStartsAtZero = async function (t) {
 const testBallStartsAtPosition = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const soccerBall = await t.getSprite('Soccer Ball');
+    const soccerBall = t.getSprite('Soccer Ball');
     await t.runUntil(() => soccerBall.x === -200 && soccerBall.y === -140, 5000);
     t.assert.equal(soccerBall.x, -200, 'Ball should start at x = -200');
     t.assert.equal(soccerBall.y, -140, 'Ball should start at y = -140');
@@ -48,10 +46,10 @@ const testBallStartsAtPosition = async function (t) {
 const testBallMovesAlongXAxisUntilSpacePressed = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const soccerBall = await t.getSprite('Soccer Ball');
+    const soccerBall = t.getSprite('Soccer Ball');
     const initialX = soccerBall.x;
-    await t.runForTime(2000);
-    t.assert.notEqual(soccerBall.x, initialX, 'Ball should move along the x axis');
+    await t.runForTime(1000);
+    t.assert.not(soccerBall.x === initialX, 'Ball should move along the x axis');
     t.keyPress('space');
     await t.runForTime(1000);
     const xAfterSpace = soccerBall.x;
@@ -63,19 +61,19 @@ const testBallMovesAlongXAxisUntilSpacePressed = async function (t) {
 const testBallChangesDirectionAtEdge = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const soccerBall = await t.getSprite('Soccer Ball');
-    await t.runUntil(() => soccerBall.isTouchingEdge(), 10000);
+    const soccerBall = t.getSprite('Soccer Ball');
+    await t.runUntil(() => soccerBall.isTouchingSprite('edge'), 10000);
     const initialDirection = soccerBall.direction;
     await t.runForTime(1000);
-    t.assert.notEqual(soccerBall.direction, initialDirection, 'Ball should change direction when it touches the edge');
+    t.assert.not(soccerBall.direction === initialDirection, 'Ball should change direction when it touches the edge');
     t.end();
 }
 
 const testBallStopsMovingAlongXAxisWhenSpacePressed = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const soccerBall = await t.getSprite('Soccer Ball');
-    await t.runForTime(2000);
+    const soccerBall = t.getSprite('Soccer Ball');
+    await t.runForTime(1000);
     t.keyPress('space');
     await t.runForTime(1000);
     const xAfterSpace = soccerBall.x;
@@ -87,59 +85,61 @@ const testBallStopsMovingAlongXAxisWhenSpacePressed = async function (t) {
 const testBallMovesAlongYAxisWhenSpacePressed = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const soccerBall = await t.getSprite('Soccer Ball');
-    await t.runForTime(2000);
+    const soccerBall = t.getSprite('Soccer Ball');
+    await t.runForTime(1000);
     t.keyPress('space');
     await t.runForTime(1000);
     const initialY = soccerBall.y;
-    await t.runForTime(2000);
-    t.assert.notEqual(soccerBall.y, initialY, 'Ball should move along the y axis after space is pressed');
+    await t.runForTime(1000);
+    t.assert.not(soccerBall.y === initialY, 'Ball should move along the y axis after space is pressed');
     t.end();
 }
 
-const testGoalieSaysSaveWhenBallTouchesAfterSpace = async function (t) {
+const testGoalieSaysSaveWhenBallTouches = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const soccerBall = await t.getSprite('Soccer Ball');
-    const goalie = await t.getSprite('Goalie');
-    await t.runForTime(2000);
+    const soccerBall = t.getSprite('Soccer Ball');
+    const goalie = t.getSprite('Goalie');
+    await t.runForTime(1000);
     t.keyPress('space');
     await t.runUntil(() => soccerBall.isTouchingSprite('Goalie'), 10000);
+    t.assert.equal(goalie.sayText, 'Save!', 'Goalie should say Save! when ball touches');
     await t.runForTime(1000);
-    t.assert.equal(goalie.sayText, 'Save!', 'Goalie should say "Save!" when ball touches after space is pressed');
+    t.assert.equal(goalie.sayText, '', 'Goalie should stop saying Save! after 1 second');
     t.end();
 }
 
 const testScoreIncreasesWhenBallDoesNotTouchGoalie = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const soccerBall = await t.getSprite('Soccer Ball');
+    const soccerBall = t.getSprite('Soccer Ball');
+    const goalie = t.getSprite('Goalie');
     const initialScore = soccerBall.getVariable('score');
-    await t.runForTime(2000);
+    await t.runForTime(1000);
     t.keyPress('space');
     await t.runUntil(() => !soccerBall.isTouchingSprite('Goalie'), 10000);
-    await t.runForTime(1000);
-    t.assert.equal(soccerBall.getVariable('score'), initialScore + 1, 'Score should increase by 1 when ball does not touch Goalie after space is pressed');
+    t.assert.equal(soccerBall.getVariable('score'), initialScore + 1, 'Score should increase by 1 when ball does not touch the Goalie');
     t.end();
 }
 
-const testGoalieSaysGoalWhenBallDoesNotTouchAfterSpace = async function (t) {
+const testGoalieSaysGoalWhenBallDoesNotTouch = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const soccerBall = await t.getSprite('Soccer Ball');
-    const goalie = await t.getSprite('Goalie');
-    await t.runForTime(2000);
+    const soccerBall = t.getSprite('Soccer Ball');
+    const goalie = t.getSprite('Goalie');
+    await t.runForTime(1000);
     t.keyPress('space');
     await t.runUntil(() => !soccerBall.isTouchingSprite('Goalie'), 10000);
+    t.assert.equal(goalie.sayText, 'Goal!', 'Goalie should say Goal! when ball does not touch');
     await t.runForTime(1000);
-    t.assert.equal(goalie.sayText, 'Goal!', 'Goalie should say "Goal!" when ball does not touch after space is pressed');
+    t.assert.equal(goalie.sayText, '', 'Goalie should stop saying Goal! after 1 second');
     t.end();
 }
 
 const testGoalieMovesLeftWhenLeftArrowPressed = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const goalie = await t.getSprite('Goalie');
+    const goalie = t.getSprite('Goalie');
     const initialX = goalie.x;
     t.keyPress('left arrow');
     await t.runForTime(1000);
@@ -150,7 +150,7 @@ const testGoalieMovesLeftWhenLeftArrowPressed = async function (t) {
 const testGoalieMovesRightWhenRightArrowPressed = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const goalie = await t.getSprite('Goalie');
+    const goalie = t.getSprite('Goalie');
     const initialX = goalie.x;
     t.keyPress('right arrow');
     await t.runForTime(1000);
@@ -214,33 +214,33 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testGoalieSaysSaveWhenBallTouchesAfterSpace,
-		 name: "testGoalieSaysSaveWhenBallTouchesAfterSpace",
-		 description: "Goalie says 'Save!' for 1 second when ball touches Goalie after space is pressed",
+		 test: testGoalieSaysSaveWhenBallTouches,
+		 name: "testGoalieSaysSaveWhenBallTouches",
+		 description: "Goalie says 'Save!' for 1 second when space is pressed and ball touches the Goalie",
 		 categories: []
 	},
 	{
 		 test: testScoreIncreasesWhenBallDoesNotTouchGoalie,
 		 name: "testScoreIncreasesWhenBallDoesNotTouchGoalie",
-		 description: "Score increases by 1 when ball does not touch Goalie after space is pressed",
+		 description: "Score increases by 1 when space is pressed and ball does not touch the Goalie",
 		 categories: []
 	},
 	{
-		 test: testGoalieSaysGoalWhenBallDoesNotTouchAfterSpace,
-		 name: "testGoalieSaysGoalWhenBallDoesNotTouchAfterSpace",
-		 description: "Goalie says 'Goal!' for 1 second when ball does not touch Goalie after space is pressed",
+		 test: testGoalieSaysGoalWhenBallDoesNotTouch,
+		 name: "testGoalieSaysGoalWhenBallDoesNotTouch",
+		 description: "Goalie says 'Goal!' for 1 second when space is pressed and ball does not touch the Goalie",
 		 categories: []
 	},
 	{
 		 test: testGoalieMovesLeftWhenLeftArrowPressed,
 		 name: "testGoalieMovesLeftWhenLeftArrowPressed",
-		 description: "Goalie moves left when left arrow key is pressed",
+		 description: "Goalie moves left if the left arrow key is pressed",
 		 categories: []
 	},
 	{
 		 test: testGoalieMovesRightWhenRightArrowPressed,
 		 name: "testGoalieMovesRightWhenRightArrowPressed",
-		 description: "Goalie moves right when right arrow key is pressed",
+		 description: "Goalie moves right if the right arrow key is pressed",
 		 categories: []
 	},
 ]

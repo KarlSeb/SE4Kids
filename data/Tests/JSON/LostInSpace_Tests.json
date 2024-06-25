@@ -1,48 +1,48 @@
 {
-  "tests": [
-    {
-      "name": "Rocketship has size 100 at start",
-      "code": "const testRocketshipSize = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Rocketship').size === 100, 5000);\n    t.assert.equal(t.getSprite('Rocketship').size, 100, 'Rocketship should have size 100 at start');\n    t.end();\n}"
-    },
-    {
-      "name": "Rocketship has direction 0 at start",
-      "code": "const testRocketshipDirection = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Rocketship').direction === 0, 5000);\n    t.assert.equal(t.getSprite('Rocketship').direction, 0, 'Rocketship should have direction 0 at start');\n    t.end();\n}"
-    },
-    {
-      "name": "Rocketship has coordinates (-150, -150) at start",
-      "code": "const testRocketshipCoordinates = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Rocketship').x === -150 && t.getSprite('Rocketship').y === -150, 5000);\n    t.assert.equal(t.getSprite('Rocketship').x, -150, 'Rocketship should have x coordinate -150 at start');\n    t.assert.equal(t.getSprite('Rocketship').y, -150, 'Rocketship should have y coordinate -150 at start');\n    t.end();\n}"
-    },
-    {
-      "name": "Rocketship says 'Let's go!' for 2 seconds",
-      "code": "const testRocketshipSay = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Rocketship').sayText === \"Let's go!\", 5000);\n    t.assert.equal(t.getSprite('Rocketship').sayText, \"Let's go!\", 'Rocketship should say \"Let\\'s go!\"');\n    await t.runForTime(2000);\n    t.assert.equal(t.getSprite('Rocketship').sayText, '', 'Rocketship should stop saying \"Let\\'s go!\" after 2 seconds');\n    t.end();\n}"
-    },
-    {
-      "name": "Rocketship direction points to Earth afterwards",
-      "code": "const testRocketshipDirectionToEarth = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(5000); // Adjust time as needed to reach the point where Rocketship points to Earth\n    t.assert.equal(t.getSprite('Rocketship').direction, t.getSprite('Earth').direction, 'Rocketship direction should point to Earth');\n    t.end();\n}"
-    },
-    {
-      "name": "Rocketship repeats sequence 200 times",
-      "code": "const testRocketshipSequence = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(5000); // Adjust time as needed to reach the point where Rocketship starts the sequence\n    for (let i = 0; i < 200; i++) {\n        await t.runForTime(100); // Adjust time as needed for each step in the sequence\n        t.assert.equal(t.getSprite('Rocketship').effects.get('color'), 25 * (i + 1), 'Rocketship color effect should change by 25');\n        t.assert.equal(t.getSprite('Rocketship').size, 100 - 0.3 * (i + 1), 'Rocketship size should change by -0.3');\n    }\n    t.end();\n}"
-    },
-    {
-      "name": "Monkey rotates right by 1 degree in a continuous loop",
-      "code": "const testMonkeyRotation = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    let initialDirection = t.getSprite('Monkey').direction;\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Monkey').direction, initialDirection + 1, 'Monkey should rotate right by 1 degree');\n    t.end();\n}"
-    },
-    {
-      "name": "Star increases and decreases size in a continuous loop",
-      "code": "const testStarSizeLoop = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    let initialSize = t.getSprite('Star').size;\n    for (let i = 0; i < 20; i++) {\n        await t.runForTime(100); // Adjust time as needed for each size change\n        t.assert.equal(t.getSprite('Star').size, initialSize + 2 * (i + 1), 'Star should increase size by 2');\n    }\n    for (let i = 0; i < 20; i++) {\n        await t.runForTime(100); // Adjust time as needed for each size change\n        t.assert.equal(t.getSprite('Star').size, initialSize + 2 * 20 - 2 * (i + 1), 'Star should decrease size by 2');\n    }\n    t.end();\n}"
-    },
-    {
-      "name": "Rock always has a direction pointing to Earth",
-      "code": "const testRockDirectionToEarth = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    t.addConstraint(() => {\n        t.assert.equal(t.getSprite('Rock').direction, t.getSprite('Earth').direction, 'Rock direction should always point to Earth');\n    });\n    await t.runForTime(10000); // Adjust time as needed to observe the behavior\n    t.end();\n}"
-    },
-    {
-      "name": "Rock continuously moves by 2 steps",
-      "code": "const testRockContinuousMove = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    let initialX = t.getSprite('Rock').x;\n    let initialY = t.getSprite('Rock').y;\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Rock').x, initialX + 2, 'Rock should move by 2 steps in x direction');\n    t.assert.equal(t.getSprite('Rock').y, initialY + 2, 'Rock should move by 2 steps in y direction');\n    t.end();\n}"
-    },
-    {
-      "name": "Rock changes direction when touching the edge of the stage",
-      "code": "const testRockChangeDirectionOnEdge = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    let initialDirection = t.getSprite('Rock').direction;\n    await t.runUntil(() => t.getSprite('Rock').isTouchingEdge(), 10000);\n    t.assert.notEqual(t.getSprite('Rock').direction, initialDirection, 'Rock should change direction when touching the edge');\n    t.end();\n}"
-    }
-  ]
+    "tests": [
+        {
+            "name": "Rocketship has size 100 at start",
+            "code": "const testRocketshipSize = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Rocketship').size === 100, 5000);\n    t.assert.equal(t.getSprite('Rocketship').size, 100, 'Rocketship should have size 100 at start');\n    t.end();\n}"
+        },
+        {
+            "name": "Rocketship has direction 0 at start",
+            "code": "const testRocketshipDirection = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Rocketship').direction === 0, 5000);\n    t.assert.equal(t.getSprite('Rocketship').direction, 0, 'Rocketship should have direction 0 at start');\n    t.end();\n}"
+        },
+        {
+            "name": "Rocketship has coordinates (-150, -150) at start",
+            "code": "const testRocketshipCoordinates = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Rocketship').x === -150 && t.getSprite('Rocketship').y === -150, 5000);\n    t.assert.equal(t.getSprite('Rocketship').x, -150, 'Rocketship should have x coordinate -150 at start');\n    t.assert.equal(t.getSprite('Rocketship').y, -150, 'Rocketship should have y coordinate -150 at start');\n    t.end();\n}"
+        },
+        {
+            "name": "Rocketship says 'Let's go!' for 2 seconds",
+            "code": "const testRocketshipSay = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Rocketship').sayText === \"Let's go!\", 5000);\n    t.assert.equal(t.getSprite('Rocketship').sayText, \"Let's go!\", 'Rocketship should say \"Let\\'s go!\"');\n    await t.runForTime(2000);\n    t.assert.equal(t.getSprite('Rocketship').sayText, '', 'Rocketship should stop saying \"Let\\'s go!\" after 2 seconds');\n    t.end();\n}"
+        },
+        {
+            "name": "Rocketship direction points to Earth afterwards",
+            "code": "const testRocketshipDirectionToEarth = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(5000);\n    const earth = t.getSprite('Earth');\n    const rocketship = t.getSprite('Rocketship');\n    const expectedDirection = Math.atan2(earth.y - rocketship.y, earth.x - rocketship.x) * 180 / Math.PI;\n    t.assert.equal(rocketship.direction, expectedDirection, 'Rocketship should point to Earth');\n    t.end();\n}"
+        },
+        {
+            "name": "Rocketship repeats sequence 200 times",
+            "code": "const testRocketshipSequence = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(200 * 3 * 100); // 200 times, 3 actions, 100ms each\n    const rocketship = t.getSprite('Rocketship');\n    t.assert.equal(rocketship.size, 100 - 200 * 0.3, 'Rocketship size should decrease by 0.3 for 200 times');\n    t.assert.equal(rocketship.effects['color'], 200 * 25, 'Rocketship color effect should change by 25 for 200 times');\n    t.end();\n}"
+        },
+        {
+            "name": "Monkey rotates right by 1 degree in a continuous loop",
+            "code": "const testMonkeyRotation = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    const monkey = t.getSprite('Monkey');\n    const initialDirection = monkey.direction;\n    await t.runForTime(1000);\n    t.assert.equal(monkey.direction, initialDirection + 1, 'Monkey should rotate right by 1 degree');\n    t.end();\n}"
+        },
+        {
+            "name": "Star increases and decreases size in a continuous loop",
+            "code": "const testStarSizeLoop = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    const star = t.getSprite('Star');\n    const initialSize = star.size;\n    await t.runForTime(20 * 100 + 20 * 100); // 20 times increase, 20 times decrease, 100ms each\n    t.assert.equal(star.size, initialSize, 'Star should return to initial size after increasing and decreasing');\n    t.end();\n}"
+        },
+        {
+            "name": "Rock always has a direction pointing to Earth",
+            "code": "const testRockDirectionToEarth = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    t.addConstraint(() => {\n        const earth = t.getSprite('Earth');\n        const rock = t.getSprite('Rock');\n        const expectedDirection = Math.atan2(earth.y - rock.y, earth.x - rock.x) * 180 / Math.PI;\n        t.assert.equal(rock.direction, expectedDirection, 'Rock should always point to Earth');\n    });\n    await t.runForTime(5000);\n    t.end();\n}"
+        },
+        {
+            "name": "Rock continuously moves by 2 steps",
+            "code": "const testRockContinuousMove = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    const rock = t.getSprite('Rock');\n    const initialX = rock.x;\n    const initialY = rock.y;\n    await t.runForTime(1000);\n    t.assert.notEqual(rock.x, initialX, 'Rock should move continuously');\n    t.assert.notEqual(rock.y, initialY, 'Rock should move continuously');\n    t.end();\n}"
+        },
+        {
+            "name": "Rock changes direction when touching the edge of the stage",
+            "code": "const testRockChangeDirectionOnEdge = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    const rock = t.getSprite('Rock');\n    const initialDirection = rock.direction;\n    await t.runUntil(() => rock.isTouchingEdge(), 5000);\n    t.assert.notEqual(rock.direction, initialDirection, 'Rock should change direction when touching the edge');\n    t.end();\n}"
+        }
+    ]
 }

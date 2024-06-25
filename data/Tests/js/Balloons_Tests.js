@@ -1,6 +1,5 @@
 const testGlobalTimeStartsAt10 = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
     await t.runUntil(() => t.getGlobalVariable('time') === 10, 1000);
     t.assert.equal(t.getGlobalVariable('time'), 10, 'Global time variable should start at 10');
     t.end();
@@ -8,7 +7,6 @@ const testGlobalTimeStartsAt10 = async function (t) {
 
 const testGlobalScoreStartsAt0 = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
     await t.runUntil(() => t.getGlobalVariable('score') === 0, 1000);
     t.assert.equal(t.getGlobalVariable('score'), 0, 'Global score variable should start at 0');
     t.end();
@@ -16,23 +14,20 @@ const testGlobalScoreStartsAt0 = async function (t) {
 
 const testBalloon1SpriteIsHidden = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
     await t.runUntil(() => t.getSprite('Balloon1').visible === false, 1000);
     t.assert.not(t.getSprite('Balloon1').visible, 'Balloon1 sprite should be hidden');
     t.end();
 }
 
-const test30ClonesOfBalloon1Sprite = async function (t) {
+const test30ClonesOfBalloon1AtStart = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
     await t.runUntil(() => t.getSprite('Balloon1').getCloneCount() === 30, 1000);
-    t.assert.equal(t.getSprite('Balloon1').getCloneCount(), 30, 'There should be 30 clones of the Balloon1 sprite at the start');
+    t.assert.equal(t.getSprite('Balloon1').getCloneCount(), 30, 'There should be 30 clones of Balloon1 at the start');
     t.end();
 }
 
-const testEveryCloneIsVisibleAtStart = async function (t) {
+const testEveryCloneVisibleAtStart = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
     await t.runUntil(() => t.getSprite('Balloon1').getCloneCount() === 30, 1000);
     const clones = t.getSprite('Balloon1').getClones();
     clones.forEach(clone => t.assert.ok(clone.visible, 'Every clone should be visible at the start'));
@@ -41,7 +36,6 @@ const testEveryCloneIsVisibleAtStart = async function (t) {
 
 const testEachCloneStartsWithCostumeBalloon1A = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
     await t.runUntil(() => t.getSprite('Balloon1').getCloneCount() === 30, 1000);
     const clones = t.getSprite('Balloon1').getClones();
     clones.forEach(clone => t.assert.equal(clone.getCostumeByIndex(clone.currentCostume).name, 'balloon1-a', 'Each clone should start with costume balloon1-a'));
@@ -50,7 +44,6 @@ const testEachCloneStartsWithCostumeBalloon1A = async function (t) {
 
 const testClonesStartAtRandomLocation = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
     await t.runUntil(() => t.getSprite('Balloon1').getCloneCount() === 30, 1000);
     const clones = t.getSprite('Balloon1').getClones();
     clones.forEach(clone => {
@@ -64,7 +57,6 @@ const testClonesStartAtRandomLocation = async function (t) {
 
 const testClonesPointInRandomDirection = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
     await t.runUntil(() => t.getSprite('Balloon1').getCloneCount() === 30, 1000);
     const clones = t.getSprite('Balloon1').getClones();
     clones.forEach(clone => {
@@ -76,31 +68,28 @@ const testClonesPointInRandomDirection = async function (t) {
 
 const testClonesApplyRandomColorEffect = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
     await t.runUntil(() => t.getSprite('Balloon1').getCloneCount() === 30, 1000);
     const clones = t.getSprite('Balloon1').getClones();
     clones.forEach(clone => {
-        const colorEffect = clone.effects.get('color');
+        const colorEffect = clone.effects['color'];
         t.assert.greaterOrEqual(colorEffect, 1, 'Clone color effect should be >= 1');
         t.assert.lessOrEqual(colorEffect, 200, 'Clone color effect should be <= 200');
     });
     t.end();
 }
 
-const testBalloonClickSwitchesCostumeToBurst = async function (t) {
+const testBalloonCostumeSwitchesToBurstOnClick = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
     await t.runUntil(() => t.getSprite('Balloon1').getCloneCount() === 30, 1000);
     const clone = t.getSprite('Balloon1').getClone(0);
     t.clickClone(clone);
     await t.runForTime(100);
-    t.assert.equal(clone.getCostumeByIndex(clone.currentCostume).name, 'burst', 'Balloon costume should switch to burst when clicked');
+    t.assert.equal(clone.getCostumeByIndex(clone.currentCostume).name, 'burst', 'Balloon costume should switch to burst on click');
     t.end();
 }
 
-const testBalloonClickAddsToScore = async function (t) {
+const testScoreIncreasesByOneOnBalloonClick = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
     await t.runUntil(() => t.getSprite('Balloon1').getCloneCount() === 30, 1000);
     const initialScore = t.getGlobalVariable('score');
     const clone = t.getSprite('Balloon1').getClone(0);
@@ -110,32 +99,30 @@ const testBalloonClickAddsToScore = async function (t) {
     t.end();
 }
 
-const testBalloonClickDeletesClone = async function (t) {
+const testBalloonIsDeletedOnClick = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
     await t.runUntil(() => t.getSprite('Balloon1').getCloneCount() === 30, 1000);
     const clone = t.getSprite('Balloon1').getClone(0);
     t.clickClone(clone);
     await t.runForTime(100);
-    t.assert.equal(t.getSprite('Balloon1').getCloneCount(), 29, 'Clone should be deleted when clicked');
+    t.assert.equal(t.getSprite('Balloon1').getCloneCount(), 29, 'Balloon should be deleted when clicked');
     t.end();
 }
 
-const testBalloonTouchesEdgeChangesDirection = async function (t) {
+const testBalloonChangesDirectionOnEdgeTouch = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
     await t.runUntil(() => t.getSprite('Balloon1').getCloneCount() === 30, 1000);
     const clone = t.getSprite('Balloon1').getClone(0);
     const initialDirection = clone.direction;
-    t.dragSprite(clone.name, 240, 0); // Drag to the edge
+    t.dragSprite(clone.name, 240, 0); // Drag to the right edge
     await t.runForTime(100);
-    t.assert.notEqual(clone.direction, initialDirection, 'Balloon should change direction when it touches the edge');
+    t.assert.notEqual(clone.direction, initialDirection, 'Balloon should change direction when touching the edge');
     t.end();
 }
 
-const testTimeDecreasesEverySecond = async function (t) {
+const testTimeDecreasesByOneEverySecond = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
+    await t.runUntil(() => t.getGlobalVariable('time') === 10, 1000);
     const initialTime = t.getGlobalVariable('time');
     await t.runForTime(1000);
     t.assert.equal(t.getGlobalVariable('time'), initialTime - 1, 'Time should decrease by 1 every second');
@@ -144,9 +131,10 @@ const testTimeDecreasesEverySecond = async function (t) {
 
 const testTimerStopsAtZero = async function (t) {
     t.seedScratch(1234);
-    t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('time') === 0, 10000);
-    await t.runForTime(2000);
+    await t.runUntil(() => t.getGlobalVariable('time') === 1, 1000);
+    await t.runForTime(1000);
+    t.assert.equal(t.getGlobalVariable('time'), 0, 'Time should be 0');
+    await t.runForTime(1000);
     t.assert.equal(t.getGlobalVariable('time'), 0, 'Timer should not decrease after reaching 0');
     t.end();
 }
@@ -171,14 +159,14 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: test30ClonesOfBalloon1Sprite,
-		 name: "test30ClonesOfBalloon1Sprite",
+		 test: test30ClonesOfBalloon1AtStart,
+		 name: "test30ClonesOfBalloon1AtStart",
 		 description: "At the start there are 30 clones of the Balloon1 sprite",
 		 categories: []
 	},
 	{
-		 test: testEveryCloneIsVisibleAtStart,
-		 name: "testEveryCloneIsVisibleAtStart",
+		 test: testEveryCloneVisibleAtStart,
+		 name: "testEveryCloneVisibleAtStart",
 		 description: "Every clone is visible at the start",
 		 categories: []
 	},
@@ -191,7 +179,7 @@ module.exports = [
 	{
 		 test: testClonesStartAtRandomLocation,
 		 name: "testClonesStartAtRandomLocation",
-		 description: "The clones start at a random location in the interval [-150, 150]",
+		 description: "The clones start at a random location with x and y coordinates in the interval [-150, 150]",
 		 categories: []
 	},
 	{
@@ -207,32 +195,32 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testBalloonClickSwitchesCostumeToBurst,
-		 name: "testBalloonClickSwitchesCostumeToBurst",
+		 test: testBalloonCostumeSwitchesToBurstOnClick,
+		 name: "testBalloonCostumeSwitchesToBurstOnClick",
 		 description: "When a balloon is clicked its costume switches to 'burst'",
 		 categories: []
 	},
 	{
-		 test: testBalloonClickAddsToScore,
-		 name: "testBalloonClickAddsToScore",
+		 test: testScoreIncreasesByOneOnBalloonClick,
+		 name: "testScoreIncreasesByOneOnBalloonClick",
 		 description: "When a balloon is clicked 1 is added to the score",
 		 categories: []
 	},
 	{
-		 test: testBalloonClickDeletesClone,
-		 name: "testBalloonClickDeletesClone",
+		 test: testBalloonIsDeletedOnClick,
+		 name: "testBalloonIsDeletedOnClick",
 		 description: "When a balloon is clicked it is deleted",
 		 categories: []
 	},
 	{
-		 test: testBalloonTouchesEdgeChangesDirection,
-		 name: "testBalloonTouchesEdgeChangesDirection",
+		 test: testBalloonChangesDirectionOnEdgeTouch,
+		 name: "testBalloonChangesDirectionOnEdgeTouch",
 		 description: "When a balloon touches the edge of the stage the balloon changes direction",
 		 categories: []
 	},
 	{
-		 test: testTimeDecreasesEverySecond,
-		 name: "testTimeDecreasesEverySecond",
+		 test: testTimeDecreasesByOneEverySecond,
+		 name: "testTimeDecreasesByOneEverySecond",
 		 description: "Every second the time is decreased by 1",
 		 categories: []
 	},

@@ -1,116 +1,117 @@
 {
   "tests": [
     {
-      "name": "Stage has costume 'sparkling' at start",
-      "code": "const testStageCostume = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getStage().currentCostume === 'sparkling', 1000);\n    t.assert.equal(t.getStage().currentCostume, 'sparkling', 'Stage should have costume sparkling at start');\n    t.end();\n}"
+      "name": "Stage has costume 'sparkling' at the start",
+      "code": "const testStageCostume = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getStage().currentCostume === t.getStage().getCostumeByName('sparkling').index, 5000);\n    t.assert.equal(t.getStage().currentCostume, t.getStage().getCostumeByName('sparkling').index, 'Stage should have costume sparkling at the start');\n    t.end();\n}"
     },
     {
-      "name": "Giga is hidden at start",
-      "code": "const testGigaHidden = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Giga').visible === false, 1000);\n    t.assert.equal(t.getSprite('Giga').visible, false, 'Giga should be hidden at start');\n    t.end();\n}"
+      "name": "Giga is hidden at the start",
+      "code": "const testGigaHidden = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => !t.getSprite('Giga').visible, 5000);\n    t.assert.not(t.getSprite('Giga').visible, 'Giga should be hidden at the start');\n    t.end();\n}"
     },
     {
-      "name": "Play is visible at start",
-      "code": "const testPlayVisible = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Play').visible === true, 1000);\n    t.assert.equal(t.getSprite('Play').visible, true, 'Play should be visible at start');\n    t.end();\n}"
+      "name": "Play is visible at the start",
+      "code": "const testPlayVisible = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Play').visible, 5000);\n    t.assert.ok(t.getSprite('Play').visible, 'Play should be visible at the start');\n    t.end();\n}"
     },
     {
-      "name": "Result is hidden at start",
-      "code": "const testResultHidden = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Result').visible === false, 1000);\n    t.assert.equal(t.getSprite('Result').visible, false, 'Result should be hidden at start');\n    t.end();\n}"
+      "name": "Result is hidden at the start",
+      "code": "const testResultHidden = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => !t.getSprite('Result').visible, 5000);\n    t.assert.not(t.getSprite('Result').visible, 'Result should be hidden at the start');\n    t.end();\n}"
     },
     {
-      "name": "Global variable score is 0 at start",
-      "code": "const testScoreZero = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('score') === 0, 1000);\n    t.assert.equal(t.getGlobalVariable('score'), 0, 'Global variable score should be 0 at start');\n    t.end();\n}"
+      "name": "Global variable score is set to 0 at the start",
+      "code": "const testScoreZero = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('score') === 0, 5000);\n    t.assert.equal(t.getGlobalVariable('score'), 0, 'Global variable score should be 0 at the start');\n    t.end();\n}"
     },
     {
-      "name": "Play sets fisheye effect to 30 when touched by mouse",
-      "code": "const testPlayFisheyeEffectOnTouch = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.mouseMove(t.getSprite('Play').x, t.getSprite('Play').y);\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Play').effects.get('fisheye'), 30, 'Play should set fisheye effect to 30 when touched by mouse');\n    t.end();\n}"
+      "name": "Play sets fisheye effect to 30 when touched by mouse-pointer",
+      "code": "const testPlayFisheyeEffectOnTouch = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.mouseMove(t.getSprite('Play').x, t.getSprite('Play').y, 10);\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Play').effects['fisheye'], 30, 'Play should set fisheye effect to 30 when touched by mouse-pointer');\n    t.end();\n}"
     },
     {
-      "name": "Play sets fisheye effect to 0 when not touched by mouse",
-      "code": "const testPlayFisheyeEffectOffTouch = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.mouseMove(0, 0);\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Play').effects.get('fisheye'), 0, 'Play should set fisheye effect to 0 when not touched by mouse');\n    t.end();\n}"
+      "name": "Play sets fisheye effect to 0 when not touched by mouse-pointer",
+      "code": "const testPlayFisheyeEffectOffTouch = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.mouseMove(t.getSprite('Play').x + 100, t.getSprite('Play').y + 100, 10);\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Play').effects['fisheye'], 0, 'Play should set fisheye effect to 0 when not touched by mouse-pointer');\n    t.end();\n}"
     },
     {
       "name": "Play becomes invisible when clicked",
-      "code": "const testPlayInvisibleOnClick = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Play').visible, false, 'Play should become invisible when clicked');\n    t.end();\n}"
+      "code": "const testPlayInvisibleOnClick = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    t.assert.not(t.getSprite('Play').visible, 'Play should become invisible when clicked');\n    t.end();\n}"
     },
     {
       "name": "Global variable timer is set to 30 after Play is clicked",
-      "code": "const testTimerSetTo30 = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    t.assert.equal(t.getGlobalVariable('timer'), 30, 'Global variable timer should be set to 30 after Play is clicked');\n    t.end();\n}"
+      "code": "const testTimerSetTo30OnClick = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    t.assert.equal(t.getGlobalVariable('timer'), 30, 'Global variable timer should be set to 30 after Play is clicked');\n    t.end();\n}"
     },
     {
       "name": "Stage costume changes to 'room 1' after Play is clicked",
-      "code": "const testStageCostumeChange = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    t.assert.equal(t.getStage().currentCostume, 'room 1', 'Stage costume should change to room 1 after Play is clicked');\n    t.end();\n}"
+      "code": "const testStageCostumeChangeOnClick = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runUntil(() => t.getStage().currentCostume === t.getStage().getCostumeByName('room 1').index, 5000);\n    t.assert.equal(t.getStage().currentCostume, t.getStage().getCostumeByName('room 1').index, 'Stage costume should change to room 1 after Play is clicked');\n    t.end();\n}"
     },
     {
       "name": "Giga becomes visible after Play is clicked",
-      "code": "const testGigaVisible = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Giga').visible, true, 'Giga should become visible after Play is clicked');\n    t.end();\n}"
+      "code": "const testGigaVisibleOnClick = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runUntil(() => t.getSprite('Giga').visible, 5000);\n    t.assert.ok(t.getSprite('Giga').visible, 'Giga should become visible after Play is clicked');\n    t.end();\n}"
     },
     {
       "name": "Giga has costume 'giga-a' after Play is clicked",
-      "code": "const testGigaCostume = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Giga').currentCostume, 'giga-a', 'Giga should have costume giga-a after Play is clicked');\n    t.end();\n}"
+      "code": "const testGigaCostumeOnClick = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runUntil(() => t.getSprite('Giga').currentCostume === t.getSprite('Giga').getCostumeByName('giga-a').index, 5000);\n    t.assert.equal(t.getSprite('Giga').currentCostume, t.getSprite('Giga').getCostumeByName('giga-a').index, 'Giga should have costume giga-a after Play is clicked');\n    t.end();\n}"
     },
     {
       "name": "Timer decreases by 1 every second after Play is clicked",
-      "code": "const testTimerDecreases = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const initialTimer = t.getGlobalVariable('timer');\n    await t.runForTime(1000);\n    t.assert.equal(t.getGlobalVariable('timer'), initialTimer - 1, 'Timer should decrease by 1 every second after Play is clicked');\n    t.end();\n}"
+      "code": "const testTimerDecreases = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const initialTimer = t.getGlobalVariable('timer');\n    await t.runForTime(1000);\n    t.assert.equal(t.getGlobalVariable('timer'), initialTimer - 1, 'Timer should decrease by 1 every second after Play is clicked');\n    t.end();\n}"
     },
     {
       "name": "Global variable number1 is set to a random number between 2 and 12 after Play is clicked",
-      "code": "const testNumber1Random = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    t.assert.ok(number1 >= 2 && number1 <= 12, 'Global variable number1 should be set to a random number between 2 and 12 after Play is clicked');\n    t.end();\n}"
+      "code": "const testNumber1Random = async function (t) {\n    t.seedScratch(1234);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    t.assert.ok(number1 >= 2 && number1 <= 12, 'Global variable number1 should be set to a random number between 2 and 12 after Play is clicked');\n    t.end();\n}"
+    }
+,
+    {
+      "name": "After Play was clicked the global variable number2 is set to a random number between 2 and 12",
+      "code": "const testNumber2Random = async function (t) {\n    t.seedScratch(12345);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number2 = t.getGlobalVariable('number2');\n    t.assert.greaterOrEqual(number2, 2, 'number2 should be at least 2');\n    t.assert.lessOrEqual(number2, 12, 'number2 should be at most 12');\n    t.end();\n}"
     },
     {
-      "name": "Global variable number2 is set to a random number between 2 and 12 after Play is clicked",
-      "code": "const testNumber2Random = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number2 = t.getGlobalVariable('number2');\n    t.assert.ok(number2 >= 2 && number2 <= 12, 'Global variable number2 should be set to a random number between 2 and 12 after Play is clicked');\n    t.end();\n}"
+      "name": "Giga then asks '[number1] x [number2]'",
+      "code": "const testGigaAsks = async function (t) {\n    t.seedScratch(12345);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    const number2 = t.getGlobalVariable('number2');\n    const giga = t.getSprite('Giga');\n    t.assert.equal(giga.sayText, `${number1} x ${number2}`, 'Giga should ask the multiplication question');\n    t.end();\n}"
     },
     {
-      "name": "Giga asks '[number1]x[number2]' after Play is clicked",
-      "code": "const testGigaAsks = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    const number2 = t.getGlobalVariable('number2');\n    t.assert.equal(t.getSprite('Giga').sayText, `${number1}x${number2}`, 'Giga should ask [number1]x[number2] after Play is clicked');\n    t.end();\n}"
+      "name": "If the right answer is given Giga changes the costume to 'giga-c'",
+      "code": "const testGigaRightAnswerCostume = async function (t) {\n    t.seedScratch(12345);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    const number2 = t.getGlobalVariable('number2');\n    const answer = number1 * number2;\n    t.typeText(answer.toString());\n    await t.runForTime(1000);\n    const giga = t.getSprite('Giga');\n    t.assert.equal(giga.getCostumeByIndex(giga.currentCostume).name, 'giga-c', 'Giga should change to costume giga-c');\n    t.end();\n}"
     },
     {
-      "name": "Giga changes costume to 'giga-c' if the right answer is input",
-      "code": "const testGigaCostumeRightAnswer = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    const number2 = t.getGlobalVariable('number2');\n    const correctAnswer = number1 * number2;\n    t.typeText(correctAnswer.toString());\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Giga').currentCostume, 'giga-c', 'Giga should change costume to giga-c if the right answer is input');\n    t.end();\n}"
+      "name": "If the right answer is given the score increases by 1",
+      "code": "const testScoreIncrease = async function (t) {\n    t.seedScratch(12345);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    const number2 = t.getGlobalVariable('number2');\n    const answer = number1 * number2;\n    const initialScore = t.getGlobalVariable('score');\n    t.typeText(answer.toString());\n    await t.runForTime(1000);\n    const newScore = t.getGlobalVariable('score');\n    t.assert.equal(newScore, initialScore + 1, 'Score should increase by 1');\n    t.end();\n}"
     },
     {
-      "name": "Score increases by 1 if the right answer is input",
-      "code": "const testScoreIncreases = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    const number2 = t.getGlobalVariable('number2');\n    const correctAnswer = number1 * number2;\n    t.typeText(correctAnswer.toString());\n    await t.runForTime(1000);\n    t.assert.equal(t.getGlobalVariable('score'), 1, 'Score should increase by 1 if the right answer is input');\n    t.end();\n}"
+      "name": "If the wrong answer is given Giga changes the costume to 'giga-d'",
+      "code": "const testGigaWrongAnswerCostume = async function (t) {\n    t.seedScratch(12345);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    const number2 = t.getGlobalVariable('number2');\n    const wrongAnswer = (number1 * number2) + 1;\n    t.typeText(wrongAnswer.toString());\n    await t.runForTime(1000);\n    const giga = t.getSprite('Giga');\n    t.assert.equal(giga.getCostumeByIndex(giga.currentCostume).name, 'giga-d', 'Giga should change to costume giga-d');\n    t.end();\n}"
     },
     {
-      "name": "Giga changes costume to 'giga-d' if the wrong answer is input",
-      "code": "const testGigaCostumeWrongAnswer = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    const number2 = t.getGlobalVariable('number2');\n    const wrongAnswer = (number1 * number2) + 1;\n    t.typeText(wrongAnswer.toString());\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Giga').currentCostume, 'giga-d', 'Giga should change costume to giga-d if the wrong answer is input');\n    t.end();\n}"
+      "name": "If the right answer is given Result changes the costume to 'tick'",
+      "code": "const testResultRightAnswerCostume = async function (t) {\n    t.seedScratch(12345);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    const number2 = t.getGlobalVariable('number2');\n    const answer = number1 * number2;\n    t.typeText(answer.toString());\n    await t.runForTime(1000);\n    const result = t.getSprite('Result');\n    t.assert.equal(result.getCostumeByIndex(result.currentCostume).name, 'tick', 'Result should change to costume tick');\n    t.end();\n}"
     },
     {
-      "name": "Result changes costume to 'tick' if the right answer is input",
-      "code": "const testResultCostumeRightAnswer = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    const number2 = t.getGlobalVariable('number2');\n    const correctAnswer = number1 * number2;\n    t.typeText(correctAnswer.toString());\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Result').currentCostume, 'tick', 'Result should change costume to tick if the right answer is input');\n    t.end();\n}"
+      "name": "If the wrong answer is given Result changes the costume to 'cross'",
+      "code": "const testResultWrongAnswerCostume = async function (t) {\n    t.seedScratch(12345);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    const number2 = t.getGlobalVariable('number2');\n    const wrongAnswer = (number1 * number2) + 1;\n    t.typeText(wrongAnswer.toString());\n    await t.runForTime(1000);\n    const result = t.getSprite('Result');\n    t.assert.equal(result.getCostumeByIndex(result.currentCostume).name, 'cross', 'Result should change to costume cross');\n    t.end();\n}"
     },
     {
-      "name": "Result changes costume to 'cross' if the wrong answer is input",
-      "code": "const testResultCostumeWrongAnswer = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    const number2 = t.getGlobalVariable('number2');\n    const wrongAnswer = (number1 * number2) + 1;\n    t.typeText(wrongAnswer.toString());\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Result').currentCostume, 'cross', 'Result should change costume to cross if the wrong answer is input');\n    t.end();\n}"
+      "name": "After an answer was given Result plays an animation",
+      "code": "const testResultAnimation = async function (t) {\n    t.seedScratch(12345);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    const number2 = t.getGlobalVariable('number2');\n    const answer = number1 * number2;\n    t.typeText(answer.toString());\n    await t.runForTime(1000);\n    const result = t.getSprite('Result');\n    t.assert.equal(result.effects['ghost'], 100, 'Result ghost effect should be 100');\n    t.assert.equal(result.visible, true, 'Result should be visible');\n    await t.runForTime(100);\n    t.assert.equal(result.effects['ghost'], 0, 'Result ghost effect should be 0');\n    await t.runForTime(500);\n    t.assert.equal(result.effects['ghost'], 100, 'Result ghost effect should be 100');\n    t.assert.equal(result.visible, false, 'Result should be invisible');\n    t.end();\n}"
     },
     {
-      "name": "Result plays animation after an answer is given",
-      "code": "const testResultAnimation = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(1000);\n    const number1 = t.getGlobalVariable('number1');\n    const number2 = t.getGlobalVariable('number2');\n    const correctAnswer = number1 * number2;\n    t.typeText(correctAnswer.toString());\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Result').effects.get('ghost'), 100, 'Result should set ghost effect to 100');\n    t.assert.equal(t.getSprite('Result').visible, true, 'Result should become visible');\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Result').effects.get('ghost'), 0, 'Result should decrease ghost effect by 4 25 times');\n    await t.runForTime(500);\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Result').effects.get('ghost'), 100, 'Result should increase ghost effect by 4 25 times');\n    t.assert.equal(t.getSprite('Result').visible, false, 'Result should become invisible');\n    t.end();\n}"
+      "name": "The timer does not go below 0",
+      "code": "const testTimerNotBelowZero = async function (t) {\n    t.seedScratch(12345);\n    t.greenFlag();\n    await t.runForTime(1000);\n    const timer = t.getGlobalVariable('timer');\n    t.assert.greaterOrEqual(timer, 0, 'Timer should not go below 0');\n    t.end();\n}"
     },
     {
-      "name": "Timer does not go below 0",
-      "code": "const testTimerNotBelowZero = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(31000);\n    t.assert.greaterOrEqual(t.getGlobalVariable('timer'), 0, 'Timer should not go below 0');\n    t.end();\n}"
+      "name": "After the timer reaches 0 Giga becomes hidden",
+      "code": "const testGigaHiddenAfterTimer = async function (t) {\n    t.seedScratch(12345);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.getGlobalVariable('timer').value = 0;\n    await t.runForTime(1000);\n    const giga = t.getSprite('Giga');\n    t.assert.equal(giga.visible, false, 'Giga should be hidden');\n    t.end();\n}"
     },
     {
-      "name": "Giga becomes hidden after timer reaches 0",
-      "code": "const testGigaHiddenAfterTimer = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(31000);\n    t.assert.equal(t.getSprite('Giga').visible, false, 'Giga should become hidden after timer reaches 0');\n    t.end();\n}"
+      "name": "After the timer reaches 0 Result is invisible",
+      "code": "const testResultInvisibleAfterTimer = async function (t) {\n    t.seedScratch(12345);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.getGlobalVariable('timer').value = 0;\n    await t.runForTime(1000);\n    const result = t.getSprite('Result');\n    t.assert.equal(result.visible, false, 'Result should be invisible');\n    t.end();\n}"
     },
     {
-      "name": "Result is invisible after timer reaches 0",
-      "code": "const testResultInvisibleAfterTimer = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(31000);\n    t.assert.equal(t.getSprite('Result').visible, false, 'Result should be invisible after timer reaches 0');\n    t.end();\n}"
+      "name": "After the timer reaches 0 Play becomes visible",
+      "code": "const testPlayVisibleAfterTimer = async function (t) {\n    t.seedScratch(12345);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.getGlobalVariable('timer').value = 0;\n    await t.runForTime(1000);\n    const play = t.getSprite('Play');\n    t.assert.equal(play.visible, true, 'Play should be visible');\n    t.end();\n}"
     },
     {
-      "name": "Play becomes visible after timer reaches 0",
-      "code": "const testPlayVisibleAfterTimer = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(31000);\n    t.assert.equal(t.getSprite('Play').visible, true, 'Play should become visible after timer reaches 0');\n    t.end();\n}"
+      "name": "After the timer reaches 0 the stage changes costume to 'sparkling'",
+      "code": "const testStageCostumeAfterTimer = async function (t) {\n    t.seedScratch(12345);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.getGlobalVariable('timer').value = 0;\n    await t.runForTime(1000);\n    const stage = t.getStage();\n    t.assert.equal(stage.getCostumeByIndex(stage.currentCostume).name, 'sparkling', 'Stage should change to costume sparkling');\n    t.end();\n}"
     },
     {
-      "name": "Stage changes costume to 'sparkling' after timer reaches 0",
-      "code": "const testStageCostumeAfterTimer = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(31000);\n    t.assert.equal(t.getStage().currentCostume, 'sparkling', 'Stage should change costume to sparkling after timer reaches 0');\n    t.end();\n}"
-    },
-    {
-      "name": "Program ends after timer reaches 0",
-      "code": "const testProgramEnds = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.clickSprite('Play');\n    await t.runForTime(31000);\n    t.assert.fail('Program should end after timer reaches 0');\n    t.end();\n}"
+      "name": "After the timer reaches 0 the program ends",
+      "code": "const testProgramEndsAfterTimer = async function (t) {\n    t.seedScratch(12345);\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.getGlobalVariable('timer').value = 0;\n    await t.runForTime(1000);\n    t.assert.fail('Program should end');\n    t.end();\n}"
     }
   ]
 }

@@ -17,82 +17,73 @@ const testGlobalScore = async function (t) {
 const testLightningStart = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(async () => {
-        const lightning = await t.getSprite('Lightning');
-        return lightning.visible === false && lightning.size === 25 && lightning.direction === -90;
+    await t.runUntil(() => {
+        const lightning = t.getSprite('Lightning');
+        return !lightning.visible && lightning.size === 25 && lightning.direction === -90;
     }, 1000);
-    const lightning = await t.getSprite('Lightning');
-    t.assert.equal(lightning.visible, false, 'Lightning should be invisible at the start');
-    t.assert.equal(lightning.size, 25, 'Lightning should have size 25 at the start');
-    t.assert.equal(lightning.direction, -90, 'Lightning should have direction -90 at the start');
+    const lightning = t.getSprite('Lightning');
+    t.assert.not(lightning.visible, 'Lightning should be invisible at the start');
+    t.assert.equal(lightning.size, 25, 'Lightning size should be 25 at the start');
+    t.assert.equal(lightning.direction, -90, 'Lightning direction should be -90 at the start');
     t.end();
 }
 
 const testHippo1Invisible = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(async () => (await t.getSprite('Hippo1')).visible === false, 1000);
-    const hippo1 = await t.getSprite('Hippo1');
-    t.assert.equal(hippo1.visible, false, 'Hippo1 should be invisible at the start');
+    await t.runUntil(() => !t.getSprite('Hippo1').visible, 1000);
+    t.assert.not(t.getSprite('Hippo1').visible, 'Hippo1 should be invisible at the start');
     t.end();
 }
 
 const testBatSize = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(async () => (await t.getSprite('Bat')).size === 50, 1000);
-    const bat = await t.getSprite('Bat');
-    t.assert.equal(bat.size, 50, 'Bat should have a size of 50 at the start');
+    await t.runUntil(() => t.getSprite('Bat').size === 50, 1000);
+    t.assert.equal(t.getSprite('Bat').size, 50, 'Bat should have a size of 50 at the start');
     t.end();
 }
 
 const testOrangeInvisible = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(async () => (await t.getSprite('Orange')).visible === false, 1000);
-    const orange = await t.getSprite('Orange');
-    t.assert.equal(orange.visible, false, 'Orange should be invisible at the start');
+    await t.runUntil(() => !t.getSprite('Orange').visible, 1000);
+    t.assert.not(t.getSprite('Orange').visible, 'Orange should be invisible at the start');
     t.end();
 }
 
 const testGameOverInvisible = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(async () => (await t.getSprite('Game Over')).visible === false, 1000);
-    const gameOver = await t.getSprite('Game Over');
-    t.assert.equal(gameOver.visible, false, 'Game Over should be invisible at the start');
+    await t.runUntil(() => !t.getSprite('Game Over').visible, 1000);
+    t.assert.not(t.getSprite('Game Over').visible, 'Game Over should be invisible at the start');
     t.end();
 }
 
 const testSpaceshipCostume = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(async () => (await t.getSprite('Spaceship')).getCostumeByName('normal') !== undefined, 1000);
-    const spaceship = await t.getSprite('Spaceship');
-    t.assert.equal(spaceship.getCostumeByName('normal').name, 'normal', 'Spaceship should have costume normal at the start');
+    await t.runUntil(() => t.getSprite('Spaceship').getCostumeByName('normal') !== undefined, 1000);
+    t.assert.equal(t.getSprite('Spaceship').currentCostume, t.getSprite('Spaceship').getCostumeByName('normal').index, 'Spaceship should have costume normal at the start');
     t.end();
 }
 
 const testHippo1CloneIntervals = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const hippo1 = await t.getSprite('Hippo1');
-    let initialCloneCount = hippo1.getCloneCount();
+    let initialCloneCount = t.getSprite('Hippo1').getCloneCount();
     await t.runForTime(2000);
-    let newCloneCount = hippo1.getCloneCount();
-    t.assert.greater(newCloneCount, initialCloneCount, 'A new clone of Hippo1 should be created within 2 to 4 seconds');
+    let newCloneCount = t.getSprite('Hippo1').getCloneCount();
+    t.assert.greaterOrEqual(newCloneCount, initialCloneCount + 1, 'A new clone of Hippo1 should be created in random intervals between 2 and 4 seconds');
     t.end();
 }
 
 const testBatMovement = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const bat = await t.getSprite('Bat');
-    let initialX = bat.x;
-    await t.runForTime(1000);
-    t.assert.notEqual(bat.x, initialX, 'Bat should move along the x axis');
+    let bat = t.getSprite('Bat');
     let initialDirection = bat.direction;
-    await t.runUntil(() => bat.x <= -240 || bat.x >= 240, 5000);
+    await t.runForTime(5000);
     t.assert.notEqual(bat.direction, initialDirection, 'Bat should change direction if it hits the edge of the Stage');
     t.end();
 }
@@ -100,7 +91,7 @@ const testBatMovement = async function (t) {
 const testBatCostumeChange = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const bat = await t.getSprite('Bat');
+    let bat = t.getSprite('Bat');
     let initialCostume = bat.currentCostume;
     await t.runForTime(1000);
     t.assert.notEqual(bat.currentCostume, initialCostume, 'Bat should change costumes every time it moves');
@@ -110,170 +101,156 @@ const testBatCostumeChange = async function (t) {
 const testOrangeCloneIntervals = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const orange = await t.getSprite('Orange');
-    let initialCloneCount = orange.getCloneCount();
+    let initialCloneCount = t.getSprite('Orange').getCloneCount();
     await t.runForTime(5000);
-    let newCloneCount = orange.getCloneCount();
-    t.assert.greater(newCloneCount, initialCloneCount, 'A new clone of Orange should be created within 5 to 10 seconds');
+    let newCloneCount = t.getSprite('Orange').getCloneCount();
+    t.assert.greaterOrEqual(newCloneCount, initialCloneCount + 1, 'A new clone of Orange should be created in random intervals between 5 and 10 seconds');
     t.end();
 }
 
 const testOrangeClonePosition = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const bat = await t.getSprite('Bat');
-    const orange = await t.getSprite('Orange');
+    let bat = t.getSprite('Bat');
     await t.runForTime(5000);
-    const newClone = orange.getNewClones()[0];
-    t.assert.equal(newClone.x, bat.x, 'A clone of Orange should start at the current position of Bat');
-    t.assert.equal(newClone.y, bat.y, 'A clone of Orange should start at the current position of Bat');
+    let orangeClones = t.getSprite('Orange').getClones();
+    let lastClone = orangeClones[orangeClones.length - 1];
+    t.assert.equal(lastClone.x, bat.x, 'A clone of Orange should start at the current position of Bat');
+    t.assert.equal(lastClone.y, bat.y, 'A clone of Orange should start at the current position of Bat');
     t.end();
 }
 
 const testOrangeClonesVisible = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const orange = await t.getSprite('Orange');
     await t.runForTime(5000);
-    const newClone = orange.getNewClones()[0];
-    t.assert.equal(newClone.visible, true, 'The clones of Orange should be visible');
+    let orangeClones = t.getSprite('Orange').getClones();
+    for (let clone of orangeClones) {
+        t.assert.ok(clone.visible, 'The clones of Orange should be visible');
+    }
     t.end();
 }
 
 const testOrangeClonesYDecreases = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const orange = await t.getSprite('Orange');
     await t.runForTime(5000);
-    const newClone = orange.getNewClones()[0];
-    let initialY = newClone.y;
-    await t.runForTime(1000);
-    t.assert.less(newClone.y, initialY, 'The clones of Orange y coordinate should decrease');
-    t.end();
-}
-
-const testCloneDeletionOnEdge = async function (t) {
-    t.seedScratch(1234);
-    t.greenFlag();
-    await t.runForTime(1000);
     let orangeClones = t.getSprite('Orange').getClones();
-    t.assert.ok(orangeClones.length > 0, 'There should be clones of Orange');
-    await t.runUntil(() => t.getSprite('Orange').getClones().length === 0, 5000);
-    t.assert.equal(t.getSprite('Orange').getClones().length, 0, 'All Orange clones should be deleted when touching the edge');
+    for (let clone of orangeClones) {
+        let initialY = clone.y;
+        await t.runForTime(1000);
+        t.assert.less(clone.y, initialY, 'The clones of Orange y coordinate should decrease');
+    }
     t.end();
 }
 
-const testHippo1SpeedVariable = async function (t) {
+const testCloneDeleteOnEdge = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
-    let hippo1Clones = t.getSprite('Hippo1').getClones();
-    t.assert.ok(hippo1Clones.length > 0, 'There should be clones of Hippo1');
-    hippo1Clones.forEach(clone => {
-        let speed = clone.getVariable('speed').value;
-        t.assert.ok(speed >= 2 && speed <= 4, 'Speed should be between 2 and 4');
-    });
+    await t.runUntil(() => t.getSprite('Orange').getCloneCount() > 0, 5000);
+    let clone = t.getSprite('Orange').getClones()[0];
+    await t.runUntil(() => clone.x <= -240 || clone.x >= 240 || clone.y <= -180 || clone.y >= 180, 10000);
+    await t.runForTime(100);
+    t.assert.equal(t.getSprite('Orange').getCloneCount(), 0, 'Clone should be deleted when touching the edge');
     t.end();
 }
 
-const testHippo1StartPosition = async function (t) {
+const testCloneSpeedRandom = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
-    let hippo1Clones = t.getSprite('Hippo1').getClones();
-    t.assert.ok(hippo1Clones.length > 0, 'There should be clones of Hippo1');
-    hippo1Clones.forEach(clone => {
-        t.assert.ok(clone.x >= -220 && clone.x <= 220, 'X coordinate should be between -220 and 220');
-        t.assert.equal(clone.y, 150, 'Y coordinate should be 150');
-    });
+    await t.runUntil(() => t.getSprite('Hippo1').getCloneCount() > 0, 5000);
+    let clone = t.getSprite('Hippo1').getClones()[0];
+    let speed = clone.getVariable('speed');
+    t.assert.greaterOrEqual(speed, 2, 'Speed should be at least 2');
+    t.assert.lessOrEqual(speed, 4, 'Speed should be at most 4');
     t.end();
 }
 
-const testHippo1Visibility = async function (t) {
+const testCloneStartPosition = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
-    let hippo1Clones = t.getSprite('Hippo1').getClones();
-    t.assert.ok(hippo1Clones.length > 0, 'There should be clones of Hippo1');
-    hippo1Clones.forEach(clone => {
-        t.assert.ok(clone.visible, 'Hippo1 clones should be visible');
-    });
+    await t.runUntil(() => t.getSprite('Hippo1').getCloneCount() > 0, 5000);
+    let clone = t.getSprite('Hippo1').getClones()[0];
+    t.assert.greaterOrEqual(clone.x, -220, 'X coordinate should be at least -220');
+    t.assert.lessOrEqual(clone.x, 220, 'X coordinate should be at most 220');
+    t.assert.equal(clone.y, 150, 'Y coordinate should be 150');
     t.end();
 }
 
-const testHippo1Movement = async function (t) {
+const testCloneVisibility = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
-    let hippo1Clones = t.getSprite('Hippo1').getClones();
-    t.assert.ok(hippo1Clones.length > 0, 'There should be clones of Hippo1');
-    let initialPositions = hippo1Clones.map(clone => ({ x: clone.x, y: clone.y }));
-    await t.runForTime(1000);
-    hippo1Clones.forEach((clone, index) => {
-        let speed = clone.getVariable('speed').value;
-        let initialPosition = initialPositions[index];
-        let distanceMoved = Math.sqrt(Math.pow(clone.x - initialPosition.x, 2) + Math.pow(clone.y - initialPosition.y, 2));
-        t.assert.ok(distanceMoved >= speed - 1 && distanceMoved <= speed + 1, 'Hippo1 clones should move [speed] steps');
-        let directionChange = Math.abs(clone.direction - initialPosition.direction);
-        t.assert.ok(directionChange >= -10 && directionChange <= 10, 'Hippo1 clones should turn between -10 and 10 degrees');
-    });
+    await t.runUntil(() => t.getSprite('Hippo1').getCloneCount() > 0, 5000);
+    let clone = t.getSprite('Hippo1').getClones()[0];
+    t.assert.ok(clone.visible, 'Clone should be visible');
     t.end();
 }
 
-const testHippo1ChangeDirectionOnEdge = async function (t) {
+const testCloneMovement = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
+    await t.runUntil(() => t.getSprite('Hippo1').getCloneCount() > 0, 5000);
+    let clone = t.getSprite('Hippo1').getClones()[0];
+    let initialX = clone.x;
+    let initialY = clone.y;
+    let initialDirection = clone.direction;
     await t.runForTime(1000);
-    let hippo1Clones = t.getSprite('Hippo1').getClones();
-    t.assert.ok(hippo1Clones.length > 0, 'There should be clones of Hippo1');
-    let initialDirections = hippo1Clones.map(clone => clone.direction);
-    await t.runUntil(() => hippo1Clones.some(clone => clone.x <= -240 || clone.x >= 240 || clone.y <= -180 || clone.y >= 180), 5000);
-    hippo1Clones.forEach((clone, index) => {
-        if (clone.x <= -240 || clone.x >= 240 || clone.y <= -180 || clone.y >= 180) {
-            t.assert.notEqual(clone.direction, initialDirections[index], 'Hippo1 clones should change direction when touching the edge');
-        }
-    });
+    let speed = clone.getVariable('speed');
+    let movedDistance = Math.sqrt(Math.pow(clone.x - initialX, 2) + Math.pow(clone.y - initialY, 2));
+    t.assert.greaterOrEqual(movedDistance, speed - 1, 'Clone should move approximately [speed] steps');
+    t.assert.lessOrEqual(movedDistance, speed + 1, 'Clone should move approximately [speed] steps');
+    let directionChange = Math.abs(clone.direction - initialDirection);
+    t.assert.greaterOrEqual(directionChange, 0, 'Direction change should be at least 0 degrees');
+    t.assert.lessOrEqual(directionChange, 10, 'Direction change should be at most 10 degrees');
     t.end();
 }
 
-const testHippo1TouchLightning = async function (t) {
+const testCloneChangeDirectionOnEdge = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
-    let initialScore = t.getGlobalVariable('score').value;
-    let hippo1Clones = t.getSprite('Hippo1').getClones();
-    t.assert.ok(hippo1Clones.length > 0, 'There should be clones of Hippo1');
-    let lightning = t.getSprite('Lightning');
-    await t.runUntil(() => hippo1Clones.some(clone => clone.isTouchingSprite('Lightning')), 5000);
-    let newScore = t.getGlobalVariable('score').value;
-    t.assert.equal(newScore, initialScore + 10, 'Score should increase by 10 when Hippo1 touches Lightning');
-    t.assert.equal(t.getSprite('Hippo1').getClones().length, hippo1Clones.length - 1, 'Hippo1 clone should be deleted when touching Lightning');
+    await t.runUntil(() => t.getSprite('Hippo1').getCloneCount() > 0, 5000);
+    let clone = t.getSprite('Hippo1').getClones()[0];
+    await t.runUntil(() => clone.x <= -240 || clone.x >= 240 || clone.y <= -180 || clone.y >= 180, 10000);
+    let initialDirection = clone.direction;
+    await t.runForTime(100);
+    t.assert.notEqual(clone.direction, initialDirection, 'Clone should change direction when touching the edge');
+    t.end();
+}
+
+const testCloneTouchLightning = async function (t) {
+    t.seedScratch(1234);
+    t.greenFlag();
+    await t.runUntil(() => t.getSprite('Hippo1').getCloneCount() > 0 && t.getSprite('Lightning').getCloneCount() > 0, 5000);
+    let hippoClone = t.getSprite('Hippo1').getClones()[0];
+    let lightningClone = t.getSprite('Lightning').getClones()[0];
+    let initialScore = t.getGlobalVariable('score');
+    await t.runUntil(() => hippoClone.isTouchingSprite('Lightning'), 10000);
+    await t.runForTime(100);
+    t.assert.equal(t.getGlobalVariable('score'), initialScore + 10, 'Score should increase by 10');
+    t.assert.equal(t.getSprite('Hippo1').getCloneCount(), 0, 'Hippo1 clone should be deleted');
     t.end();
 }
 
 const testSpaceshipTouch = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
+    await t.runUntil(() => t.getSprite('Spaceship').isTouchingSprite('Hippo1') || t.getSprite('Spaceship').isTouchingSprite('Orange'), 10000);
+    let initialLives = t.getGlobalVariable('lives');
+    await t.runForTime(100);
+    t.assert.equal(t.getSprite('Spaceship').currentCostume, t.getSprite('Spaceship').getCostumeByName('hit').index, 'Costume should change to hit');
     await t.runForTime(1000);
-    let spaceship = t.getSprite('Spaceship');
-    let initialLives = t.getGlobalVariable('lives').value;
-    let hippo1 = t.getSprite('Hippo1');
-    let orange = t.getSprite('Orange');
-    await t.runUntil(() => spaceship.isTouchingSprite('Hippo1') || spaceship.isTouchingSprite('Orange'), 5000);
-    t.assert.equal(spaceship.currentCostume, spaceship.getCostumeByName('hit').index, 'Spaceship costume should change to hit');
-    await t.runForTime(1000);
-    t.assert.equal(t.getGlobalVariable('lives').value, initialLives - 1, 'Lives should decrease by 1 when Spaceship touches Hippo1 or Orange');
+    t.assert.equal(t.getGlobalVariable('lives'), initialLives - 1, 'Lives should decrease by 1');
     t.end();
 }
 
-const testSpacePressCreatesLightningClone = async function (t) {
+const testSpacePressCreatesClone = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
     let initialCloneCount = t.getSprite('Lightning').getCloneCount();
     t.keyPress('space');
-    await t.runForTime(1000);
-    t.assert.equal(t.getSprite('Lightning').getCloneCount(), initialCloneCount + 1, 'A new clone of Lightning should be created when space is pressed');
+    await t.runForTime(100);
+    t.assert.equal(t.getSprite('Lightning').getCloneCount(), initialCloneCount + 1, 'A new clone of Lightning should be created');
     t.end();
 }
 
@@ -284,8 +261,8 @@ const testLeftArrowPress = async function (t) {
     let spaceship = t.getSprite('Spaceship');
     let initialX = spaceship.x;
     t.keyPress('left arrow');
-    await t.runForTime(1000);
-    t.assert.equal(spaceship.x, initialX - 4, 'Spaceship x coordinate should decrease by 4 when left arrow is pressed');
+    await t.runForTime(100);
+    t.assert.equal(spaceship.x, initialX - 4, 'Spaceship x coordinate should decrease by 4');
     t.end();
 }
 
@@ -296,20 +273,18 @@ const testRightArrowPress = async function (t) {
     let spaceship = t.getSprite('Spaceship');
     let initialX = spaceship.x;
     t.keyPress('right arrow');
-    await t.runForTime(1000);
-    t.assert.equal(spaceship.x, initialX + 4, 'Spaceship x coordinate should increase by 4 when right arrow is pressed');
+    await t.runForTime(100);
+    t.assert.equal(spaceship.x, initialX + 4, 'Spaceship x coordinate should increase by 4');
     t.end();
 }
 
 const testGameOver = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
-    t.getGlobalVariable('lives').value = 0;
-    await t.runForTime(1000);
-    let gameOver = t.getSprite('Game Over');
-    t.assert.ok(gameOver.visible, 'Game Over should be visible when lives reach 0');
-    t.assert.ok(t.getGlobalVariable('gameEnded').value, 'Game should end when lives reach 0');
+    await t.runUntil(() => t.getGlobalVariable('lives') === 0, 10000);
+    await t.runForTime(100);
+    t.assert.ok(t.getSprite('Game Over').visible, 'Game Over should be visible');
+    t.assert.ok(t.getGlobalVariable('gameEnded'), 'Game should end');
     t.end();
 }
 
@@ -319,43 +294,33 @@ const testLightningCloneStartPosition = async function (t) {
     await t.runForTime(1000);
     let spaceship = t.getSprite('Spaceship');
     t.keyPress('space');
-    await t.runForTime(1000);
-    let lightningClones = t.getSprite('Lightning').getClones();
-    t.assert.ok(lightningClones.length > 0, 'There should be clones of Lightning');
-    lightningClones.forEach(clone => {
-        t.assert.equal(clone.x, spaceship.x, 'Lightning clone should start at the x coordinate of Spaceship');
-        t.assert.equal(clone.y, spaceship.y, 'Lightning clone should start at the y coordinate of Spaceship');
-        t.assert.ok(clone.visible, 'Lightning clone should be visible');
-    });
+    await t.runForTime(100);
+    let lightningClone = t.getSprite('Lightning').getClones()[0];
+    t.assert.equal(lightningClone.x, spaceship.x, 'Lightning clone should start at the spaceship x position');
+    t.assert.equal(lightningClone.y, spaceship.y, 'Lightning clone should start at the spaceship y position');
+    t.assert.ok(lightningClone.visible, 'Lightning clone should be visible');
     t.end();
 }
 
 const testLightningCloneMovement = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
+    await t.runUntil(() => t.getSprite('Lightning').getCloneCount() > 0, 5000);
+    let lightningClone = t.getSprite('Lightning').getClones()[0];
+    let initialY = lightningClone.y;
     await t.runForTime(1000);
-    t.keyPress('space');
-    await t.runForTime(1000);
-    let lightningClones = t.getSprite('Lightning').getClones();
-    t.assert.ok(lightningClones.length > 0, 'There should be clones of Lightning');
-    let initialPositions = lightningClones.map(clone => clone.y);
-    await t.runForTime(1000);
-    lightningClones.forEach((clone, index) => {
-        t.assert.equal(clone.y, initialPositions[index] + 10, 'Lightning clones should increase their y coordinate by 10');
-    });
+    t.assert.equal(lightningClone.y, initialY + 10, 'Lightning clone y coordinate should increase by 10');
     t.end();
 }
 
-const testLightningCloneDeletionOnEdge = async function (t) {
+const testLightningCloneDeleteOnEdge = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
-    t.keyPress('space');
-    await t.runForTime(1000);
-    let lightningClones = t.getSprite('Lightning').getClones();
-    t.assert.ok(lightningClones.length > 0, 'There should be clones of Lightning');
-    await t.runUntil(() => t.getSprite('Lightning').getClones().length === 0, 5000);
-    t.assert.equal(t.getSprite('Lightning').getClones().length, 0, 'All Lightning clones should be deleted when touching the edge');
+    await t.runUntil(() => t.getSprite('Lightning').getCloneCount() > 0, 5000);
+    let lightningClone = t.getSprite('Lightning').getClones()[0];
+    await t.runUntil(() => lightningClone.y >= 180, 10000);
+    await t.runForTime(100);
+    t.assert.equal(t.getSprite('Lightning').getCloneCount(), 0, 'Lightning clone should be deleted when touching the edge');
     t.end();
 }
 
@@ -375,7 +340,7 @@ module.exports = [
 	{
 		 test: testLightningStart,
 		 name: "testLightningStart",
-		 description: "Lightning is invisible, size is 25, and direction is -90 at the start",
+		 description: "Lightning is invisible, size 25, direction -90 at the start",
 		 categories: []
 	},
 	{
@@ -417,7 +382,7 @@ module.exports = [
 	{
 		 test: testBatMovement,
 		 name: "testBatMovement",
-		 description: "Bat moves along the x axis and changes direction if it hits the edge of the Stage",
+		 description: "Bat moves along x axis and changes direction if it hits the edge of the Stage",
 		 categories: []
 	},
 	{
@@ -451,44 +416,44 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testCloneDeletionOnEdge,
-		 name: "testCloneDeletionOnEdge",
+		 test: testCloneDeleteOnEdge,
+		 name: "testCloneDeleteOnEdge",
 		 description: "When the clone of Orange touches the edge of the stage the clone is deleted",
 		 categories: []
 	},
 	{
-		 test: testHippo1SpeedVariable,
-		 name: "testHippo1SpeedVariable",
+		 test: testCloneSpeedRandom,
+		 name: "testCloneSpeedRandom",
 		 description: "A clone of Hippo1 sets its variable speed to a random value between 2 and 4",
 		 categories: []
 	},
 	{
-		 test: testHippo1StartPosition,
-		 name: "testHippo1StartPosition",
+		 test: testCloneStartPosition,
+		 name: "testCloneStartPosition",
 		 description: "A clone of Hippo1 starts at a randomly picked x coordinate between -220 and 220 and at y coordinate 150",
 		 categories: []
 	},
 	{
-		 test: testHippo1Visibility,
-		 name: "testHippo1Visibility",
+		 test: testCloneVisibility,
+		 name: "testCloneVisibility",
 		 description: "Clones of Hippo1 are visible",
 		 categories: []
 	},
 	{
-		 test: testHippo1Movement,
-		 name: "testHippo1Movement",
+		 test: testCloneMovement,
+		 name: "testCloneMovement",
 		 description: "Clones of Hippo1 move [speed] steps and turn pick a random amount of degrees to turn between -10 and 10",
 		 categories: []
 	},
 	{
-		 test: testHippo1ChangeDirectionOnEdge,
-		 name: "testHippo1ChangeDirectionOnEdge",
+		 test: testCloneChangeDirectionOnEdge,
+		 name: "testCloneChangeDirectionOnEdge",
 		 description: "If a clone of Hippo1 touches the edges it changes direction",
 		 categories: []
 	},
 	{
-		 test: testHippo1TouchLightning,
-		 name: "testHippo1TouchLightning",
+		 test: testCloneTouchLightning,
+		 name: "testCloneTouchLightning",
 		 description: "If a clone of Hippo1 touches Lightning the score is increased by 10 and the clone is deleted",
 		 categories: []
 	},
@@ -499,8 +464,8 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testSpacePressCreatesLightningClone,
-		 name: "testSpacePressCreatesLightningClone",
+		 test: testSpacePressCreatesClone,
+		 name: "testSpacePressCreatesClone",
 		 description: "If space is pressed a new clone of Lightning is created",
 		 categories: []
 	},
@@ -535,8 +500,8 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testLightningCloneDeletionOnEdge,
-		 name: "testLightningCloneDeletionOnEdge",
+		 test: testLightningCloneDeleteOnEdge,
+		 name: "testLightningCloneDeleteOnEdge",
 		 description: "When a clone of Lightning touches the edge of the stage it gets deleted",
 		 categories: []
 	},

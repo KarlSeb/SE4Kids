@@ -12,7 +12,7 @@
 12. Afterwards every delay seconds another clone of yellow is created
 13. 6 seconds after program start blue creates a clone
 14. Afterwards every delay seconds another clone of blue is created
-15. Each clone picks randomly the first or second item on the global 'start positions' list for both the x and y coordinate
+15. Each clone picks randomly the first or second item on the 'start positions' list for both the x and y coordinate
 16. Each clone directions points towards the red3roller
 17. Each existing clone starts visible
 18. Each clone moves towards red3roller until it touches red3roller

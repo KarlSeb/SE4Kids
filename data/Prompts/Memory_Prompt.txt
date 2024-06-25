@@ -1,6 +1,6 @@
 1. At the start the global variable score is 3
 2. Until the Game Over routine happens the following routine repeats:
-    - The global list 'sequence is emptied
+    - The list 'sequence is emptied
     - Until score items are in the 'sequence' list a random number between 1 and 4 is generated and Ballerina changes costume to the index of the generated number
     - When the list is empty score is increased by 1
     - When the list is empty the stage changes color effect by 25 40 times before clearing all effects

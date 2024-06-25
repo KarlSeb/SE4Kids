@@ -1,12 +1,12 @@
-const testPowerAtStart = async function (t) {
+const testPowerStart = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runUntil(() => t.getGlobalVariable('power') === 0, 5000);
-    t.assert.strictEqual(t.getGlobalVariable('power'), 0, 'Power should be 0 at the start of a round');
+    t.assert.equal(t.getGlobalVariable('power'), 0, 'Power should be 0 at the start of a round');
     t.end();
 }
 
-const testSnowballCoordinatesAtStart = async function (t) {
+const testSnowballCoordinatesStart = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runUntil(() => {
@@ -14,28 +14,28 @@ const testSnowballCoordinatesAtStart = async function (t) {
         return snowball.x === -200 && snowball.y === -130;
     }, 5000);
     const snowball = t.getSprite('Snowball');
-    t.assert.strictEqual(snowball.x, -200, 'Snowball x should be -200 at the start of a round');
-    t.assert.strictEqual(snowball.y, -130, 'Snowball y should be -130 at the start of a round');
+    t.assert.equal(snowball.x, -200, 'Snowball x should be -200 at the start of a round');
+    t.assert.equal(snowball.y, -130, 'Snowball y should be -130 at the start of a round');
     t.end();
 }
 
-const testSnowballDirectionAtStart = async function (t) {
+const testSnowballDirectionStart = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runUntil(() => t.getSprite('Snowball').direction === 90, 5000);
-    t.assert.strictEqual(t.getSprite('Snowball').direction, 90, 'Snowball direction should be 90 at the start of a round');
+    t.assert.equal(t.getSprite('Snowball').direction, 90, 'Snowball direction should be 90 at the start of a round');
     t.end();
 }
 
-const testSnowballCostumeAtStart = async function (t) {
+const testSnowballCostumeStart = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runUntil(() => t.getSprite('Snowball').getCostumeByName('snowball-aim') !== undefined, 5000);
-    t.assert.strictEqual(t.getSprite('Snowball').getCostumeByName('snowball-aim').name, 'snowball-aim', 'Snowball should have costume snowball-aim at the start of a round');
+    t.assert.equal(t.getSprite('Snowball').getCostumeByName('snowball-aim').name, 'snowball-aim', 'Snowball should have costume "snowball-aim" at the start of a round');
     t.end();
 }
 
-const testSnowballVisibilityAtStart = async function (t) {
+const testSnowballVisibleStart = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runUntil(() => t.getSprite('Snowball').visible, 5000);
@@ -43,15 +43,13 @@ const testSnowballVisibilityAtStart = async function (t) {
     t.end();
 }
 
-const testSnowballPointsTowardsMouse = async function (t) {
+const testSnowballPointsToMouse = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
     t.addConstraint(() => {
         const snowball = t.getSprite('Snowball');
-        const mousePos = t.getMousePos();
-        const angle = Math.atan2(mousePos.y - snowball.y, mousePos.x - snowball.x) * 180 / Math.PI;
-        t.assert.strictEqual(snowball.direction, angle, 'Snowball should point towards the mouse pointer');
+        return snowball.direction === Math.atan2(t.getMousePos().y - snowball.y, t.getMousePos().x - snowball.x) * 180 / Math.PI;
     });
     t.end();
 }
@@ -64,9 +62,7 @@ const testSnowballDirectionWhileMouseDown = async function (t) {
     await t.runUntil(() => t.getGlobalVariable('power') >= 20, 10000);
     t.addConstraint(() => {
         const snowball = t.getSprite('Snowball');
-        const mousePos = t.getMousePos();
-        const angle = Math.atan2(mousePos.y - snowball.y, mousePos.x - snowball.x) * 180 / Math.PI;
-        t.assert.strictEqual(snowball.direction, angle, 'Snowball should point towards the mouse pointer while mouse is down and power is less than 20');
+        return snowball.direction === Math.atan2(t.getMousePos().y - snowball.y, t.getMousePos().x - snowball.x) * 180 / Math.PI;
     });
     t.end();
 }
@@ -76,9 +72,9 @@ const testPowerIncreaseWhileMouseDown = async function (t) {
     t.greenFlag();
     await t.runForTime(1000);
     t.mouseDown(true);
-    let initialPower = t.getGlobalVariable('power');
+    const initialPower = t.getGlobalVariable('power');
     await t.runUntil(() => t.getGlobalVariable('power') >= 20, 10000);
-    t.assert.strictEqual(t.getGlobalVariable('power'), initialPower + 20, 'Power should increase by 1 while mouse is down and power is less than 20');
+    t.assert.equal(t.getGlobalVariable('power'), initialPower + 20, 'Power should increase by 1 while mouse is down and less than 20');
     t.end();
 }
 
@@ -90,20 +86,21 @@ const testSnowballCostumeAfterMouseRelease = async function (t) {
     await t.runUntil(() => t.getGlobalVariable('power') >= 20, 10000);
     t.mouseDown(false);
     await t.runForTime(1000);
-    t.assert.strictEqual(t.getSprite('Snowball').getCostumeByName('snowball').name, 'snowball', 'Snowball should switch to costume snowball after mouse is released');
+    t.assert.equal(t.getSprite('Snowball').getCostumeByName('snowball').name, 'snowball', 'Snowball should switch to costume "snowball" after mouse is released');
     t.end();
 }
 
-const testSnowballYChangeUntilTouch = async function (t) {
+const testSnowballYChangeUntilEdgeOrRocks = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
     t.mouseDown(true);
     await t.runUntil(() => t.getGlobalVariable('power') >= 20, 10000);
     t.mouseDown(false);
-    let initialY = t.getSprite('Snowball').y;
-    await t.runUntil(() => t.getSprite('Snowball').isTouchingSprite('Rocks') || t.getSprite('Snowball').isTouchingEdge(), 10000);
-    t.assert.strictEqual(t.getSprite('Snowball').y, initialY - 5, 'Snowball y coordinate should change by -5 until it touches the edge of the stage or Rocks');
+    const snowball = t.getSprite('Snowball');
+    const initialY = snowball.y;
+    await t.runUntil(() => snowball.isTouchingSprite('Rocks') || snowball.isTouchingEdge(), 10000);
+    t.assert.equal(snowball.y, initialY - 5, 'Snowball y coordinate should change by -5 until it touches the edge or Rocks');
     t.end();
 }
 
@@ -114,52 +111,57 @@ const testSnowballMovesPowerSteps = async function (t) {
     t.mouseDown(true);
     await t.runUntil(() => t.getGlobalVariable('power') >= 20, 10000);
     t.mouseDown(false);
-    let initialX = t.getSprite('Snowball').x;
-    await t.runUntil(() => t.getSprite('Snowball').isTouchingSprite('Rocks') || t.getSprite('Snowball').isTouchingEdge(), 10000);
-    t.assert.strictEqual(t.getSprite('Snowball').x, initialX + t.getGlobalVariable('power'), 'Snowball should move power steps until it touches the edge of the stage or Rocks');
+    const snowball = t.getSprite('Snowball');
+    const initialX = snowball.x;
+    const initialY = snowball.y;
+    const power = t.getGlobalVariable('power');
+    await t.runUntil(() => snowball.isTouchingSprite('Rocks') || snowball.isTouchingEdge(), 10000);
+    t.assert.equal(Math.sqrt(Math.pow(snowball.x - initialX, 2) + Math.pow(snowball.y - initialY, 2)), power, 'Snowball should move power steps until it touches the edge or Rocks');
     t.end();
 }
 
-const testPowerDecreaseAfterMove = async function (t) {
+const testPowerDecreaseAfterMoving = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
     t.mouseDown(true);
     await t.runUntil(() => t.getGlobalVariable('power') >= 20, 10000);
     t.mouseDown(false);
-    let initialPower = t.getGlobalVariable('power');
-    await t.runUntil(() => t.getSprite('Snowball').isTouchingSprite('Rocks') || t.getSprite('Snowball').isTouchingEdge(), 10000);
-    t.assert.strictEqual(t.getGlobalVariable('power'), initialPower - 0.25, 'Power should decrease by 0.25 after moving power steps');
+    const initialPower = t.getGlobalVariable('power');
+    await t.runForTime(1000);
+    t.assert.equal(t.getGlobalVariable('power'), initialPower - 0.25, 'Power should decrease by 0.25 after moving power steps');
     t.end();
 }
 
-const testSnowballInvisibilityAfterTouch = async function (t) {
+const testSnowballInvisibleAfterTouchingEdgeOrRocks = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
     t.mouseDown(true);
     await t.runUntil(() => t.getGlobalVariable('power') >= 20, 10000);
     t.mouseDown(false);
-    await t.runUntil(() => t.getSprite('Snowball').isTouchingSprite('Rocks') || t.getSprite('Snowball').isTouchingEdge(), 10000);
+    const snowball = t.getSprite('Snowball');
+    await t.runUntil(() => snowball.isTouchingSprite('Rocks') || snowball.isTouchingEdge(), 10000);
     await t.runForTime(1000);
-    t.assert.not(t.getSprite('Snowball').visible, 'Snowball should get invisible after touching the edge of the stage or Rocks');
+    t.assert.not(snowball.visible, 'Snowball should get invisible after touching the edge or Rocks');
     t.end();
 }
 
-const testNewRoundAfterTouch = async function (t) {
+const testNewRoundAfterTouchingEdgeOrRocks = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
     t.mouseDown(true);
     await t.runUntil(() => t.getGlobalVariable('power') >= 20, 10000);
     t.mouseDown(false);
-    await t.runUntil(() => t.getSprite('Snowball').isTouchingSprite('Rocks') || t.getSprite('Snowball').isTouchingEdge(), 10000);
+    const snowball = t.getSprite('Snowball');
+    await t.runUntil(() => snowball.isTouchingSprite('Rocks') || snowball.isTouchingEdge(), 10000);
     await t.runForTime(1000);
-    t.assert.strictEqual(t.getGlobalVariable('power'), 0, 'A new round should start after Snowball touches the edge of the stage or Rocks');
+    t.assert.equal(t.getGlobalVariable('power'), 0, 'A new round should start after Snowball touches the edge or Rocks');
     t.end();
 }
 
-const testReindeerRandomXAtStart = async function (t) {
+const testReindeerRandomXStart = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runUntil(() => {
@@ -179,46 +181,48 @@ const testReindeerSaysYouGotMe = async function (t) {
     t.mouseDown(true);
     await t.runUntil(() => t.getGlobalVariable('power') >= 20, 10000);
     t.mouseDown(false);
-    await t.runUntil(() => t.getSprite('Snowball').isTouchingSprite('Reindeer'), 10000);
+    const snowball = t.getSprite('Snowball');
+    const reindeer = t.getSprite('Reindeer');
+    await t.runUntil(() => snowball.isTouchingSprite('Reindeer'), 10000);
     await t.runForTime(2000);
-    t.assert.strictEqual(t.getSprite('Reindeer').sayText, 'You got me!', 'Reindeer should say You got me! for 2 seconds if Snowball touches it');
+    t.assert.equal(reindeer.sayText, 'You got me!', 'Reindeer should say "You got me!" for 2 seconds if Snowball touches it');
     t.end();
 }
 
 module.exports = [
 	{
-		 test: testPowerAtStart,
-		 name: "testPowerAtStart",
+		 test: testPowerStart,
+		 name: "testPowerStart",
 		 description: "At the start of a round the global variable power is 0",
 		 categories: []
 	},
 	{
-		 test: testSnowballCoordinatesAtStart,
-		 name: "testSnowballCoordinatesAtStart",
+		 test: testSnowballCoordinatesStart,
+		 name: "testSnowballCoordinatesStart",
 		 description: "At the start of a round Snowball has coordinates (-200, -130)",
 		 categories: []
 	},
 	{
-		 test: testSnowballDirectionAtStart,
-		 name: "testSnowballDirectionAtStart",
+		 test: testSnowballDirectionStart,
+		 name: "testSnowballDirectionStart",
 		 description: "At the start of a round Snowball has direction 90",
 		 categories: []
 	},
 	{
-		 test: testSnowballCostumeAtStart,
-		 name: "testSnowballCostumeAtStart",
+		 test: testSnowballCostumeStart,
+		 name: "testSnowballCostumeStart",
 		 description: "At the start of a round Snowball has costume 'snowball-aim'",
 		 categories: []
 	},
 	{
-		 test: testSnowballVisibilityAtStart,
-		 name: "testSnowballVisibilityAtStart",
+		 test: testSnowballVisibleStart,
+		 name: "testSnowballVisibleStart",
 		 description: "At the start of a round Snowball is visible",
 		 categories: []
 	},
 	{
-		 test: testSnowballPointsTowardsMouse,
-		 name: "testSnowballPointsTowardsMouse",
+		 test: testSnowballPointsToMouse,
+		 name: "testSnowballPointsToMouse",
 		 description: "Until mouse is down Snowball points towards the mouse pointer",
 		 categories: []
 	},
@@ -241,8 +245,8 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testSnowballYChangeUntilTouch,
-		 name: "testSnowballYChangeUntilTouch",
+		 test: testSnowballYChangeUntilEdgeOrRocks,
+		 name: "testSnowballYChangeUntilEdgeOrRocks",
 		 description: "Until Snowball touches the edge of the stage or Rocks the y coordinate is changed by -5",
 		 categories: []
 	},
@@ -253,26 +257,26 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testPowerDecreaseAfterMove,
-		 name: "testPowerDecreaseAfterMove",
+		 test: testPowerDecreaseAfterMoving,
+		 name: "testPowerDecreaseAfterMoving",
 		 description: "After moving power steps power is decreased by 0.25",
 		 categories: []
 	},
 	{
-		 test: testSnowballInvisibilityAfterTouch,
-		 name: "testSnowballInvisibilityAfterTouch",
+		 test: testSnowballInvisibleAfterTouchingEdgeOrRocks,
+		 name: "testSnowballInvisibleAfterTouchingEdgeOrRocks",
 		 description: "After Snowball touches the edge of the stage or Rocks it gets invisible",
 		 categories: []
 	},
 	{
-		 test: testNewRoundAfterTouch,
-		 name: "testNewRoundAfterTouch",
+		 test: testNewRoundAfterTouchingEdgeOrRocks,
+		 name: "testNewRoundAfterTouchingEdgeOrRocks",
 		 description: "After Snowball touches the edge of the stage or Rocks a new round starts",
 		 categories: []
 	},
 	{
-		 test: testReindeerRandomXAtStart,
-		 name: "testReindeerRandomXAtStart",
+		 test: testReindeerRandomXStart,
+		 name: "testReindeerRandomXStart",
 		 description: "At the start of a round Reindeer goes to a random x coordinate between 0 and 200",
 		 categories: []
 	},

@@ -86,8 +86,8 @@ s.sayText
 A sprite s has the following functions:
 s.getVariables(condition)
 s.getVariable(variableName)
-s.getLists(skipStage): Returns all lists of the sprite. If skipStage is false also returns global lists
-s.getList(listName, skipStage): If skipStage is false global lists can be accessed.
+s.getLists(true): Returns all lists of the sprite.
+s.getList(listName, true): returns the list 'listName'
 s.getInstances()
 s.getOriginal()
 s.getClones(): returns an array of clones.

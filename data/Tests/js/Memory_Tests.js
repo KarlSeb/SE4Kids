@@ -1,146 +1,158 @@
-const testInitialScore = async function (t) {
+const testGlobalVariableScoreAtStart = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runUntil(() => t.getGlobalVariable('score') === 3, 5000);
-    t.assert.equal(t.getGlobalVariable('score'), 3, 'Initial score should be 3');
+    t.assert.equal(t.getGlobalVariable('score'), 3, 'The global variable score should be 3 at the start');
     t.end();
 }
 
-const testSequenceListEmptyingAndScoreIncrement = async function (t) {
+const testRoutineUntilGameOver = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
-    const sequence = t.getGlobalVariable('sequence');
-    t.assert.equal(sequence.length, 0, 'Sequence list should be empty');
-    const initialScore = t.getGlobalVariable('score');
-    await t.runForTime(1000);
-    t.assert.equal(t.getGlobalVariable('score'), initialScore + 1, 'Score should be incremented by 1');
-    t.end();
-}
-
-const testStageColorEffectChange = async function (t) {
-    t.seedScratch(1234);
-    t.greenFlag();
-    await t.runForTime(1000);
+    const ballerina = t.getSprite('Ballerina');
     const stage = t.getStage();
-    t.assert.equal(stage.effects.color, 0, 'Stage color effect should be reset to 0');
+    let score = t.getGlobalVariable('score');
+    while (true) {
+        await t.runUntil(() => ballerina.getList('sequence').length === 0, 5000);
+        t.assert.equal(ballerina.getList('sequence').length, 0, 'The list sequence should be empty');
+        score++;
+        t.assert.equal(t.getGlobalVariable('score'), score, 'Score should be increased by 1');
+        for (let i = 0; i < 40; i++) {
+            await t.runForTime(25);
+            t.assert.equal(stage.effects['color'], 25 * (i + 1), 'Stage color effect should change by 25');
+        }
+        t.assert.equal(stage.effects['color'], 0, 'Stage color effect should be cleared');
+    }
     t.end();
 }
 
-const testRedClickAndSequenceItem1 = async function (t) {
+const testRedClickSequence1 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
-    const sequence = t.getGlobalVariable('sequence');
-    sequence.push(1);
-    t.clickSprite('red');
-    await t.runForTime(500);
-    t.assert.equal(sequence.length, 0, 'Sequence list should be empty after clicking red with first item 1');
+    const ballerina = t.getSprite('Ballerina');
+    await t.runUntil(() => ballerina.getList('sequence').length > 0, 5000);
+    if (ballerina.getList('sequence')[0] === 1) {
+        t.clickSprite('red');
+        await t.runForTime(1000);
+        t.assert.not(ballerina.getList('sequence').includes(1), 'The first item in sequence should be removed if it is 1 and red is clicked');
+    } else {
+        t.clickSprite('red');
+        await t.runForTime(1000);
+        t.assert.ok(ballerina.sayText.includes('Game over!'), 'Game Over routine should happen if red is clicked and the first item in sequence is not 1');
+    }
     t.end();
 }
 
-const testBlueClickAndSequenceItem2 = async function (t) {
+const testBlueClickSequence2 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
-    const sequence = t.getGlobalVariable('sequence');
-    sequence.push(2);
-    t.clickSprite('blue');
-    await t.runForTime(500);
-    t.assert.equal(sequence.length, 0, 'Sequence list should be empty after clicking blue with first item 2');
+    const ballerina = t.getSprite('Ballerina');
+    await t.runUntil(() => ballerina.getList('sequence').length > 0, 5000);
+    if (ballerina.getList('sequence')[0] === 2) {
+        t.clickSprite('blue');
+        await t.runForTime(1000);
+        t.assert.not(ballerina.getList('sequence').includes(2), 'The first item in sequence should be removed if it is 2 and blue is clicked');
+    } else {
+        t.clickSprite('blue');
+        await t.runForTime(1000);
+        t.assert.ok(ballerina.sayText.includes('Game over!'), 'Game Over routine should happen if blue is clicked and the first item in sequence is not 2');
+    }
     t.end();
 }
 
-const testGreenClickAndSequenceItem3 = async function (t) {
+const testGreenClickSequence3 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
-    const sequence = t.getGlobalVariable('sequence');
-    sequence.push(3);
-    t.clickSprite('green');
-    await t.runForTime(500);
-    t.assert.equal(sequence.length, 0, 'Sequence list should be empty after clicking green with first item 3');
+    const ballerina = t.getSprite('Ballerina');
+    await t.runUntil(() => ballerina.getList('sequence').length > 0, 5000);
+    if (ballerina.getList('sequence')[0] === 3) {
+        t.clickSprite('green');
+        await t.runForTime(1000);
+        t.assert.not(ballerina.getList('sequence').includes(3), 'The first item in sequence should be removed if it is 3 and green is clicked');
+    } else {
+        t.clickSprite('green');
+        await t.runForTime(1000);
+        t.assert.ok(ballerina.sayText.includes('Game over!'), 'Game Over routine should happen if green is clicked and the first item in sequence is not 3');
+    }
     t.end();
 }
 
-const testYellowClickAndSequenceItem4 = async function (t) {
+const testYellowClickSequence4 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
-    const sequence = t.getGlobalVariable('sequence');
-    sequence.push(4);
-    t.clickSprite('yellow');
-    await t.runForTime(500);
-    t.assert.equal(sequence.length, 0, 'Sequence list should be empty after clicking yellow with first item 4');
+    const ballerina = t.getSprite('Ballerina');
+    await t.runUntil(() => ballerina.getList('sequence').length > 0, 5000);
+    if (ballerina.getList('sequence')[0] === 4) {
+        t.clickSprite('yellow');
+        await t.runForTime(1000);
+        t.assert.not(ballerina.getList('sequence').includes(4), 'The first item in sequence should be removed if it is 4 and yellow is clicked');
+    } else {
+        t.clickSprite('yellow');
+        await t.runForTime(1000);
+        t.assert.ok(ballerina.sayText.includes('Game over!'), 'Game Over routine should happen if yellow is clicked and the first item in sequence is not 4');
+    }
     t.end();
 }
 
 const testGameOverRoutine = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runForTime(1000);
-    const sequence = t.getGlobalVariable('sequence');
-    sequence.push(1);
-    t.clickSprite('blue');
-    await t.runForTime(500);
     const ballerina = t.getSprite('Ballerina');
-    t.assert.equal(ballerina.sayText, 'Game over!', 'Ballerina should say Game over!');
-    const score = t.getGlobalVariable('score');
-    const highScore = t.getGlobalVariable('high score');
-    if (score > highScore) {
-        t.assert.equal(t.getGlobalVariable('high score'), score, 'High score should be updated');
-        t.assert.equal(ballerina.sayText, 'High Score! What is your name?', 'Ballerina should ask for name');
+    const initialHighScore = t.getGlobalVariable('high score');
+    const initialScore = t.getGlobalVariable('score');
+    await t.runUntil(() => ballerina.sayText.includes('Game over!'), 5000);
+    t.assert.ok(ballerina.sayText.includes('Game over!'), 'Ballerina should say Game over!');
+    if (initialScore > initialHighScore) {
+        t.assert.equal(t.getGlobalVariable('high score'), initialScore, 'High score should be updated if score is higher');
+        t.assert.ok(ballerina.sayText.includes('High Score! What is your name?'), 'Ballerina should ask for name if score is higher than high score');
+        t.typeText('TestName');
+        await t.runForTime(1000);
+        t.assert.equal(t.getGlobalVariable('name'), 'TestName', 'Global variable name should be set to the answer');
     }
     t.end();
 }
 
 module.exports = [
 	{
-		 test: testInitialScore,
-		 name: "testInitialScore",
-		 description: "Test initial score",
+		 test: testGlobalVariableScoreAtStart,
+		 name: "testGlobalVariableScoreAtStart",
+		 description: "Test if the global variable score is 3 at the start",
 		 categories: []
 	},
 	{
-		 test: testSequenceListEmptyingAndScoreIncrement,
-		 name: "testSequenceListEmptyingAndScoreIncrement",
-		 description: "Test sequence list emptying and score increment",
+		 test: testRoutineUntilGameOver,
+		 name: "testRoutineUntilGameOver",
+		 description: "Test the routine until Game Over",
 		 categories: []
 	},
 	{
-		 test: testStageColorEffectChange,
-		 name: "testStageColorEffectChange",
-		 description: "Test stage color effect change",
+		 test: testRedClickSequence1,
+		 name: "testRedClickSequence1",
+		 description: "Test if red is clicked and the first item in sequence is 1",
 		 categories: []
 	},
 	{
-		 test: testRedClickAndSequenceItem1,
-		 name: "testRedClickAndSequenceItem1",
-		 description: "Test red click and sequence item 1",
+		 test: testBlueClickSequence2,
+		 name: "testBlueClickSequence2",
+		 description: "Test if blue is clicked and the first item in sequence is 2",
 		 categories: []
 	},
 	{
-		 test: testBlueClickAndSequenceItem2,
-		 name: "testBlueClickAndSequenceItem2",
-		 description: "Test blue click and sequence item 2",
+		 test: testGreenClickSequence3,
+		 name: "testGreenClickSequence3",
+		 description: "Test if green is clicked and the first item in sequence is 3",
 		 categories: []
 	},
 	{
-		 test: testGreenClickAndSequenceItem3,
-		 name: "testGreenClickAndSequenceItem3",
-		 description: "Test green click and sequence item 3",
-		 categories: []
-	},
-	{
-		 test: testYellowClickAndSequenceItem4,
-		 name: "testYellowClickAndSequenceItem4",
-		 description: "Test yellow click and sequence item 4",
+		 test: testYellowClickSequence4,
+		 name: "testYellowClickSequence4",
+		 description: "Test if yellow is clicked and the first item in sequence is 4",
 		 categories: []
 	},
 	{
 		 test: testGameOverRoutine,
 		 name: "testGameOverRoutine",
-		 description: "Test Game Over routine",
+		 description: "Test the Game Over routine",
 		 categories: []
 	},
 ]

@@ -1,5 +1,5 @@
 1. At the start the global variable coins is 0
-2. At the start the global list 'inventory' is empty
+2. At the start the list 'inventory' is empty
 3. At the start the global variable room is '1'
 4. At the start the player is at coordinates (-200, 0)
 5. At the start the stage has costume 'room1'

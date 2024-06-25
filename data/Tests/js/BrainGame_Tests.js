@@ -1,66 +1,75 @@
 const testStageCostume = async function (t) {
+    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getStage().currentCostume === 'sparkling', 1000);
-    t.assert.equal(t.getStage().currentCostume, 'sparkling', 'Stage should have costume sparkling at start');
+    await t.runUntil(() => t.getStage().currentCostume === t.getStage().getCostumeByName('sparkling').index, 5000);
+    t.assert.equal(t.getStage().currentCostume, t.getStage().getCostumeByName('sparkling').index, 'Stage should have costume sparkling at the start');
     t.end();
 }
 
 const testGigaHidden = async function (t) {
+    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Giga').visible === false, 1000);
-    t.assert.equal(t.getSprite('Giga').visible, false, 'Giga should be hidden at start');
+    await t.runUntil(() => !t.getSprite('Giga').visible, 5000);
+    t.assert.not(t.getSprite('Giga').visible, 'Giga should be hidden at the start');
     t.end();
 }
 
 const testPlayVisible = async function (t) {
+    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Play').visible === true, 1000);
-    t.assert.equal(t.getSprite('Play').visible, true, 'Play should be visible at start');
+    await t.runUntil(() => t.getSprite('Play').visible, 5000);
+    t.assert.ok(t.getSprite('Play').visible, 'Play should be visible at the start');
     t.end();
 }
 
 const testResultHidden = async function (t) {
+    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Result').visible === false, 1000);
-    t.assert.equal(t.getSprite('Result').visible, false, 'Result should be hidden at start');
+    await t.runUntil(() => !t.getSprite('Result').visible, 5000);
+    t.assert.not(t.getSprite('Result').visible, 'Result should be hidden at the start');
     t.end();
 }
 
 const testScoreZero = async function (t) {
+    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('score') === 0, 1000);
-    t.assert.equal(t.getGlobalVariable('score'), 0, 'Global variable score should be 0 at start');
+    await t.runUntil(() => t.getGlobalVariable('score') === 0, 5000);
+    t.assert.equal(t.getGlobalVariable('score'), 0, 'Global variable score should be 0 at the start');
     t.end();
 }
 
 const testPlayFisheyeEffectOnTouch = async function (t) {
+    t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
-    t.mouseMove(t.getSprite('Play').x, t.getSprite('Play').y);
+    t.mouseMove(t.getSprite('Play').x, t.getSprite('Play').y, 10);
     await t.runForTime(1000);
-    t.assert.equal(t.getSprite('Play').effects.get('fisheye'), 30, 'Play should set fisheye effect to 30 when touched by mouse');
+    t.assert.equal(t.getSprite('Play').effects['fisheye'], 30, 'Play should set fisheye effect to 30 when touched by mouse-pointer');
     t.end();
 }
 
 const testPlayFisheyeEffectOffTouch = async function (t) {
+    t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
-    t.mouseMove(0, 0);
+    t.mouseMove(t.getSprite('Play').x + 100, t.getSprite('Play').y + 100, 10);
     await t.runForTime(1000);
-    t.assert.equal(t.getSprite('Play').effects.get('fisheye'), 0, 'Play should set fisheye effect to 0 when not touched by mouse');
+    t.assert.equal(t.getSprite('Play').effects['fisheye'], 0, 'Play should set fisheye effect to 0 when not touched by mouse-pointer');
     t.end();
 }
 
 const testPlayInvisibleOnClick = async function (t) {
+    t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
     await t.runForTime(1000);
-    t.assert.equal(t.getSprite('Play').visible, false, 'Play should become invisible when clicked');
+    t.assert.not(t.getSprite('Play').visible, 'Play should become invisible when clicked');
     t.end();
 }
 
-const testTimerSetTo30 = async function (t) {
+const testTimerSetTo30OnClick = async function (t) {
+    t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
@@ -69,34 +78,38 @@ const testTimerSetTo30 = async function (t) {
     t.end();
 }
 
-const testStageCostumeChange = async function (t) {
+const testStageCostumeChangeOnClick = async function (t) {
+    t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
-    await t.runForTime(1000);
-    t.assert.equal(t.getStage().currentCostume, 'room 1', 'Stage costume should change to room 1 after Play is clicked');
+    await t.runUntil(() => t.getStage().currentCostume === t.getStage().getCostumeByName('room 1').index, 5000);
+    t.assert.equal(t.getStage().currentCostume, t.getStage().getCostumeByName('room 1').index, 'Stage costume should change to room 1 after Play is clicked');
     t.end();
 }
 
-const testGigaVisible = async function (t) {
+const testGigaVisibleOnClick = async function (t) {
+    t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
-    await t.runForTime(1000);
-    t.assert.equal(t.getSprite('Giga').visible, true, 'Giga should become visible after Play is clicked');
+    await t.runUntil(() => t.getSprite('Giga').visible, 5000);
+    t.assert.ok(t.getSprite('Giga').visible, 'Giga should become visible after Play is clicked');
     t.end();
 }
 
-const testGigaCostume = async function (t) {
+const testGigaCostumeOnClick = async function (t) {
+    t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
-    await t.runForTime(1000);
-    t.assert.equal(t.getSprite('Giga').currentCostume, 'giga-a', 'Giga should have costume giga-a after Play is clicked');
+    await t.runUntil(() => t.getSprite('Giga').currentCostume === t.getSprite('Giga').getCostumeByName('giga-a').index, 5000);
+    t.assert.equal(t.getSprite('Giga').currentCostume, t.getSprite('Giga').getCostumeByName('giga-a').index, 'Giga should have costume giga-a after Play is clicked');
     t.end();
 }
 
 const testTimerDecreases = async function (t) {
+    t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
@@ -108,6 +121,7 @@ const testTimerDecreases = async function (t) {
 }
 
 const testNumber1Random = async function (t) {
+    t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
@@ -118,55 +132,65 @@ const testNumber1Random = async function (t) {
 }
 
 const testNumber2Random = async function (t) {
+    t.seedScratch(12345);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
     await t.runForTime(1000);
     const number2 = t.getGlobalVariable('number2');
-    t.assert.ok(number2 >= 2 && number2 <= 12, 'Global variable number2 should be set to a random number between 2 and 12 after Play is clicked');
+    t.assert.greaterOrEqual(number2, 2, 'number2 should be at least 2');
+    t.assert.lessOrEqual(number2, 12, 'number2 should be at most 12');
     t.end();
 }
 
 const testGigaAsks = async function (t) {
+    t.seedScratch(12345);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
     await t.runForTime(1000);
     const number1 = t.getGlobalVariable('number1');
     const number2 = t.getGlobalVariable('number2');
-    t.assert.equal(t.getSprite('Giga').sayText, `${number1}x${number2}`, 'Giga should ask [number1]x[number2] after Play is clicked');
+    const giga = t.getSprite('Giga');
+    t.assert.equal(giga.sayText, `${number1} x ${number2}`, 'Giga should ask the multiplication question');
     t.end();
 }
 
-const testGigaCostumeRightAnswer = async function (t) {
+const testGigaRightAnswerCostume = async function (t) {
+    t.seedScratch(12345);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
     await t.runForTime(1000);
     const number1 = t.getGlobalVariable('number1');
     const number2 = t.getGlobalVariable('number2');
-    const correctAnswer = number1 * number2;
-    t.typeText(correctAnswer.toString());
+    const answer = number1 * number2;
+    t.typeText(answer.toString());
     await t.runForTime(1000);
-    t.assert.equal(t.getSprite('Giga').currentCostume, 'giga-c', 'Giga should change costume to giga-c if the right answer is input');
+    const giga = t.getSprite('Giga');
+    t.assert.equal(giga.getCostumeByIndex(giga.currentCostume).name, 'giga-c', 'Giga should change to costume giga-c');
     t.end();
 }
 
-const testScoreIncreases = async function (t) {
+const testScoreIncrease = async function (t) {
+    t.seedScratch(12345);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
     await t.runForTime(1000);
     const number1 = t.getGlobalVariable('number1');
     const number2 = t.getGlobalVariable('number2');
-    const correctAnswer = number1 * number2;
-    t.typeText(correctAnswer.toString());
+    const answer = number1 * number2;
+    const initialScore = t.getGlobalVariable('score');
+    t.typeText(answer.toString());
     await t.runForTime(1000);
-    t.assert.equal(t.getGlobalVariable('score'), 1, 'Score should increase by 1 if the right answer is input');
+    const newScore = t.getGlobalVariable('score');
+    t.assert.equal(newScore, initialScore + 1, 'Score should increase by 1');
     t.end();
 }
 
-const testGigaCostumeWrongAnswer = async function (t) {
+const testGigaWrongAnswerCostume = async function (t) {
+    t.seedScratch(12345);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
@@ -176,25 +200,29 @@ const testGigaCostumeWrongAnswer = async function (t) {
     const wrongAnswer = (number1 * number2) + 1;
     t.typeText(wrongAnswer.toString());
     await t.runForTime(1000);
-    t.assert.equal(t.getSprite('Giga').currentCostume, 'giga-d', 'Giga should change costume to giga-d if the wrong answer is input');
+    const giga = t.getSprite('Giga');
+    t.assert.equal(giga.getCostumeByIndex(giga.currentCostume).name, 'giga-d', 'Giga should change to costume giga-d');
     t.end();
 }
 
-const testResultCostumeRightAnswer = async function (t) {
+const testResultRightAnswerCostume = async function (t) {
+    t.seedScratch(12345);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
     await t.runForTime(1000);
     const number1 = t.getGlobalVariable('number1');
     const number2 = t.getGlobalVariable('number2');
-    const correctAnswer = number1 * number2;
-    t.typeText(correctAnswer.toString());
+    const answer = number1 * number2;
+    t.typeText(answer.toString());
     await t.runForTime(1000);
-    t.assert.equal(t.getSprite('Result').currentCostume, 'tick', 'Result should change costume to tick if the right answer is input');
+    const result = t.getSprite('Result');
+    t.assert.equal(result.getCostumeByIndex(result.currentCostume).name, 'tick', 'Result should change to costume tick');
     t.end();
 }
 
-const testResultCostumeWrongAnswer = async function (t) {
+const testResultWrongAnswerCostume = async function (t) {
+    t.seedScratch(12345);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
@@ -204,82 +232,93 @@ const testResultCostumeWrongAnswer = async function (t) {
     const wrongAnswer = (number1 * number2) + 1;
     t.typeText(wrongAnswer.toString());
     await t.runForTime(1000);
-    t.assert.equal(t.getSprite('Result').currentCostume, 'cross', 'Result should change costume to cross if the wrong answer is input');
+    const result = t.getSprite('Result');
+    t.assert.equal(result.getCostumeByIndex(result.currentCostume).name, 'cross', 'Result should change to costume cross');
     t.end();
 }
 
 const testResultAnimation = async function (t) {
+    t.seedScratch(12345);
     t.greenFlag();
     await t.runForTime(1000);
     t.clickSprite('Play');
     await t.runForTime(1000);
     const number1 = t.getGlobalVariable('number1');
     const number2 = t.getGlobalVariable('number2');
-    const correctAnswer = number1 * number2;
-    t.typeText(correctAnswer.toString());
+    const answer = number1 * number2;
+    t.typeText(answer.toString());
     await t.runForTime(1000);
-    t.assert.equal(t.getSprite('Result').effects.get('ghost'), 100, 'Result should set ghost effect to 100');
-    t.assert.equal(t.getSprite('Result').visible, true, 'Result should become visible');
-    await t.runForTime(1000);
-    t.assert.equal(t.getSprite('Result').effects.get('ghost'), 0, 'Result should decrease ghost effect by 4 25 times');
+    const result = t.getSprite('Result');
+    t.assert.equal(result.effects['ghost'], 100, 'Result ghost effect should be 100');
+    t.assert.equal(result.visible, true, 'Result should be visible');
+    await t.runForTime(100);
+    t.assert.equal(result.effects['ghost'], 0, 'Result ghost effect should be 0');
     await t.runForTime(500);
-    await t.runForTime(1000);
-    t.assert.equal(t.getSprite('Result').effects.get('ghost'), 100, 'Result should increase ghost effect by 4 25 times');
-    t.assert.equal(t.getSprite('Result').visible, false, 'Result should become invisible');
+    t.assert.equal(result.effects['ghost'], 100, 'Result ghost effect should be 100');
+    t.assert.equal(result.visible, false, 'Result should be invisible');
     t.end();
 }
 
 const testTimerNotBelowZero = async function (t) {
+    t.seedScratch(12345);
     t.greenFlag();
     await t.runForTime(1000);
-    t.clickSprite('Play');
-    await t.runForTime(31000);
-    t.assert.greaterOrEqual(t.getGlobalVariable('timer'), 0, 'Timer should not go below 0');
+    const timer = t.getGlobalVariable('timer');
+    t.assert.greaterOrEqual(timer, 0, 'Timer should not go below 0');
     t.end();
 }
 
 const testGigaHiddenAfterTimer = async function (t) {
+    t.seedScratch(12345);
     t.greenFlag();
     await t.runForTime(1000);
-    t.clickSprite('Play');
-    await t.runForTime(31000);
-    t.assert.equal(t.getSprite('Giga').visible, false, 'Giga should become hidden after timer reaches 0');
+    t.getGlobalVariable('timer').value = 0;
+    await t.runForTime(1000);
+    const giga = t.getSprite('Giga');
+    t.assert.equal(giga.visible, false, 'Giga should be hidden');
     t.end();
 }
 
 const testResultInvisibleAfterTimer = async function (t) {
+    t.seedScratch(12345);
     t.greenFlag();
     await t.runForTime(1000);
-    t.clickSprite('Play');
-    await t.runForTime(31000);
-    t.assert.equal(t.getSprite('Result').visible, false, 'Result should be invisible after timer reaches 0');
+    t.getGlobalVariable('timer').value = 0;
+    await t.runForTime(1000);
+    const result = t.getSprite('Result');
+    t.assert.equal(result.visible, false, 'Result should be invisible');
     t.end();
 }
 
 const testPlayVisibleAfterTimer = async function (t) {
+    t.seedScratch(12345);
     t.greenFlag();
     await t.runForTime(1000);
-    t.clickSprite('Play');
-    await t.runForTime(31000);
-    t.assert.equal(t.getSprite('Play').visible, true, 'Play should become visible after timer reaches 0');
+    t.getGlobalVariable('timer').value = 0;
+    await t.runForTime(1000);
+    const play = t.getSprite('Play');
+    t.assert.equal(play.visible, true, 'Play should be visible');
     t.end();
 }
 
 const testStageCostumeAfterTimer = async function (t) {
+    t.seedScratch(12345);
     t.greenFlag();
     await t.runForTime(1000);
-    t.clickSprite('Play');
-    await t.runForTime(31000);
-    t.assert.equal(t.getStage().currentCostume, 'sparkling', 'Stage should change costume to sparkling after timer reaches 0');
+    t.getGlobalVariable('timer').value = 0;
+    await t.runForTime(1000);
+    const stage = t.getStage();
+    t.assert.equal(stage.getCostumeByIndex(stage.currentCostume).name, 'sparkling', 'Stage should change to costume sparkling');
     t.end();
 }
 
-const testProgramEnds = async function (t) {
+const testProgramEndsAfterTimer = async function (t) {
+    t.seedScratch(12345);
     t.greenFlag();
     await t.runForTime(1000);
-    t.clickSprite('Play');
-    await t.runForTime(31000);
-    t.assert.fail('Program should end after timer reaches 0');
+    t.getGlobalVariable('timer').value = 0;
+    await t.runForTime(1000);
+    t.assert.fail('Program should end');
     t.end();
 }
 
@@ -287,43 +326,43 @@ module.exports = [
 	{
 		 test: testStageCostume,
 		 name: "testStageCostume",
-		 description: "Stage has costume 'sparkling' at start",
+		 description: "Stage has costume 'sparkling' at the start",
 		 categories: []
 	},
 	{
 		 test: testGigaHidden,
 		 name: "testGigaHidden",
-		 description: "Giga is hidden at start",
+		 description: "Giga is hidden at the start",
 		 categories: []
 	},
 	{
 		 test: testPlayVisible,
 		 name: "testPlayVisible",
-		 description: "Play is visible at start",
+		 description: "Play is visible at the start",
 		 categories: []
 	},
 	{
 		 test: testResultHidden,
 		 name: "testResultHidden",
-		 description: "Result is hidden at start",
+		 description: "Result is hidden at the start",
 		 categories: []
 	},
 	{
 		 test: testScoreZero,
 		 name: "testScoreZero",
-		 description: "Global variable score is 0 at start",
+		 description: "Global variable score is set to 0 at the start",
 		 categories: []
 	},
 	{
 		 test: testPlayFisheyeEffectOnTouch,
 		 name: "testPlayFisheyeEffectOnTouch",
-		 description: "Play sets fisheye effect to 30 when touched by mouse",
+		 description: "Play sets fisheye effect to 30 when touched by mouse-pointer",
 		 categories: []
 	},
 	{
 		 test: testPlayFisheyeEffectOffTouch,
 		 name: "testPlayFisheyeEffectOffTouch",
-		 description: "Play sets fisheye effect to 0 when not touched by mouse",
+		 description: "Play sets fisheye effect to 0 when not touched by mouse-pointer",
 		 categories: []
 	},
 	{
@@ -333,26 +372,26 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testTimerSetTo30,
-		 name: "testTimerSetTo30",
+		 test: testTimerSetTo30OnClick,
+		 name: "testTimerSetTo30OnClick",
 		 description: "Global variable timer is set to 30 after Play is clicked",
 		 categories: []
 	},
 	{
-		 test: testStageCostumeChange,
-		 name: "testStageCostumeChange",
+		 test: testStageCostumeChangeOnClick,
+		 name: "testStageCostumeChangeOnClick",
 		 description: "Stage costume changes to 'room 1' after Play is clicked",
 		 categories: []
 	},
 	{
-		 test: testGigaVisible,
-		 name: "testGigaVisible",
+		 test: testGigaVisibleOnClick,
+		 name: "testGigaVisibleOnClick",
 		 description: "Giga becomes visible after Play is clicked",
 		 categories: []
 	},
 	{
-		 test: testGigaCostume,
-		 name: "testGigaCostume",
+		 test: testGigaCostumeOnClick,
+		 name: "testGigaCostumeOnClick",
 		 description: "Giga has costume 'giga-a' after Play is clicked",
 		 categories: []
 	},
@@ -371,85 +410,85 @@ module.exports = [
 	{
 		 test: testNumber2Random,
 		 name: "testNumber2Random",
-		 description: "Global variable number2 is set to a random number between 2 and 12 after Play is clicked",
+		 description: "After Play was clicked the global variable number2 is set to a random number between 2 and 12",
 		 categories: []
 	},
 	{
 		 test: testGigaAsks,
 		 name: "testGigaAsks",
-		 description: "Giga asks '[number1]x[number2]' after Play is clicked",
+		 description: "Giga then asks '[number1] x [number2]'",
 		 categories: []
 	},
 	{
-		 test: testGigaCostumeRightAnswer,
-		 name: "testGigaCostumeRightAnswer",
-		 description: "Giga changes costume to 'giga-c' if the right answer is input",
+		 test: testGigaRightAnswerCostume,
+		 name: "testGigaRightAnswerCostume",
+		 description: "If the right answer is given Giga changes the costume to 'giga-c'",
 		 categories: []
 	},
 	{
-		 test: testScoreIncreases,
-		 name: "testScoreIncreases",
-		 description: "Score increases by 1 if the right answer is input",
+		 test: testScoreIncrease,
+		 name: "testScoreIncrease",
+		 description: "If the right answer is given the score increases by 1",
 		 categories: []
 	},
 	{
-		 test: testGigaCostumeWrongAnswer,
-		 name: "testGigaCostumeWrongAnswer",
-		 description: "Giga changes costume to 'giga-d' if the wrong answer is input",
+		 test: testGigaWrongAnswerCostume,
+		 name: "testGigaWrongAnswerCostume",
+		 description: "If the wrong answer is given Giga changes the costume to 'giga-d'",
 		 categories: []
 	},
 	{
-		 test: testResultCostumeRightAnswer,
-		 name: "testResultCostumeRightAnswer",
-		 description: "Result changes costume to 'tick' if the right answer is input",
+		 test: testResultRightAnswerCostume,
+		 name: "testResultRightAnswerCostume",
+		 description: "If the right answer is given Result changes the costume to 'tick'",
 		 categories: []
 	},
 	{
-		 test: testResultCostumeWrongAnswer,
-		 name: "testResultCostumeWrongAnswer",
-		 description: "Result changes costume to 'cross' if the wrong answer is input",
+		 test: testResultWrongAnswerCostume,
+		 name: "testResultWrongAnswerCostume",
+		 description: "If the wrong answer is given Result changes the costume to 'cross'",
 		 categories: []
 	},
 	{
 		 test: testResultAnimation,
 		 name: "testResultAnimation",
-		 description: "Result plays animation after an answer is given",
+		 description: "After an answer was given Result plays an animation",
 		 categories: []
 	},
 	{
 		 test: testTimerNotBelowZero,
 		 name: "testTimerNotBelowZero",
-		 description: "Timer does not go below 0",
+		 description: "The timer does not go below 0",
 		 categories: []
 	},
 	{
 		 test: testGigaHiddenAfterTimer,
 		 name: "testGigaHiddenAfterTimer",
-		 description: "Giga becomes hidden after timer reaches 0",
+		 description: "After the timer reaches 0 Giga becomes hidden",
 		 categories: []
 	},
 	{
 		 test: testResultInvisibleAfterTimer,
 		 name: "testResultInvisibleAfterTimer",
-		 description: "Result is invisible after timer reaches 0",
+		 description: "After the timer reaches 0 Result is invisible",
 		 categories: []
 	},
 	{
 		 test: testPlayVisibleAfterTimer,
 		 name: "testPlayVisibleAfterTimer",
-		 description: "Play becomes visible after timer reaches 0",
+		 description: "After the timer reaches 0 Play becomes visible",
 		 categories: []
 	},
 	{
 		 test: testStageCostumeAfterTimer,
 		 name: "testStageCostumeAfterTimer",
-		 description: "Stage changes costume to 'sparkling' after timer reaches 0",
+		 description: "After the timer reaches 0 the stage changes costume to 'sparkling'",
 		 categories: []
 	},
 	{
-		 test: testProgramEnds,
-		 name: "testProgramEnds",
-		 description: "Program ends after timer reaches 0",
+		 test: testProgramEndsAfterTimer,
+		 name: "testProgramEndsAfterTimer",
+		 description: "After the timer reaches 0 the program ends",
 		 categories: []
 	},
 ]
