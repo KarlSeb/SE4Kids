@@ -9,7 +9,7 @@ def extract_name(code:str):
 def write_testfile(program_name: str, generated_json: str):
     data = json.loads(generated_json)
     export = {}
-    with open(f'./data/Tests/{program_name}_Tests.js', 'w') as f:
+    with open(f'./data/Tests/js/{program_name}_Tests.js', 'w') as f:
         for item in data['tests']:
             test = item['code']
             name = extract_name(test)
@@ -43,7 +43,7 @@ def main():
         names = get_names()
     for program_name in names:
         json = ''
-        with open(f'./data/JSON/{program_name}_Tests.json', 'r') as f:
+        with open(f'./data/Tests/JSON/{program_name}_Tests.json', 'r') as f:
             json = f.read()
         try:
             write_testfile(program_name, json)

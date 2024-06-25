@@ -119,5 +119,5 @@ v.value
 v.old
 v.sprite
 
-Only generate code and no explanation. Do not import any libraries. Only use functions and attributes metioned above.
-You will be provided with a list of properties to check. Generate a separate test for each item of the properties list if possible.
+Only generate code and no explanation. Do not import any libraries. Only use functions and attributes mentioned above.
+You will be provided with a list of properties to check. Generate a separate test for each item of the properties list.

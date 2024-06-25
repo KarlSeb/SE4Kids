@@ -4,7 +4,7 @@ import argparse
 
 whisker_path = os.path.abspath('./whisker')
 solution_path = os.path.abspath('./data/SampleSolutions')
-tests_path = os.path.abspath('./data/Tests')
+tests_path = os.path.abspath('./data/Tests/js')
 results_path = os.path.abspath('./data/Results')
 
 def generate_paths(program_name:str):
@@ -13,7 +13,7 @@ def generate_paths(program_name:str):
     paths = {}
     paths['scratch_path'] = solution_path + '/' + program_name + '.sb3'
     paths['tests_path'] = tests_path + '/' + program_name + '_Tests.js'
-    paths['csv_path'] = results_path + '/' + program_name + '_Results.csv'
+    paths['csv_path'] = results_path + '/' + program_name + '/csv/_Results.csv'
     return paths
 
 def process_output(output:str):
@@ -71,7 +71,7 @@ def run_test(program_name:str, generate_csv = False):
 def write_output(output):
     for name in output.keys():
         lines = output[name].split('\\n')
-        with open(f'{results_path}/{name}.txt', 'w') as f:
+        with open(f'{results_path}/txt/{name}.txt', 'w') as f:
             for line in lines:
                 f.write(f'{line}\n')
 

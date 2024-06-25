@@ -1,38 +1,15 @@
 1. At the start the global variable lives is set to 3
 2. At the start the global variable score is set to 0
-3. At the start Lightning is invisible
-4. At the start the size of Lightning is 25
-5. At the start Lightning has direction -90
-6. At the start Hippo1 is invisible
-7. At the start Bat has a size of 50
-8. At the start Orange is invisible
-9. At the start Game Over is invisible
-10. At the start Spaceship has costume 'normal'
-11. In random intervals between 2 and 4 seconds a new clone of Hippo1 is created
-12. Bat continues to move along the x axis
-13. Bat changes direction if it hits the edge of the Stage
-14. Bat changes costumes every time it moves
-15. In random intervals between 5 and 10 seconds a new clone of Orange is created
-16. A clone of Orange starts at the current position of Bat
-17. The clones of Orange are visible
-18. The clones of Orange y coordinate decreases
-19. When the clone of Orange touches the edge of the stage the clone is deleted
-20. A clone of Hippo1 sets its variable speed to a random value between 2 and 4
-21. A clone of Hippo1 starts at a randomly picked x coordinate between -220 and 220
-22. A clone of Hippo1 starts at y coordinate 150
-23. Clones of Hippo1 are visible
-24. Clones of Hippo1 move [speed] steps and turn pick a random amount of degrees to turn between -10 and 10
-25. If a clone of Hippo1 touches the edges it changes direction
-26. If a clone of Hippo1 touches Lightning the score is increased by 10
-27. If a clone of Hippo1 touches Lightning the clone is deleted
-28. If Spaceship touches Hippo1 or Orange the costume changes to 'hit' for 1 second
-29. If Spaceship touches Hippo1 or Orange the lives are decreased by 1
-30. If space is pressed a new clone of Lightning is created
-31. If left arrow is pressed the spaceships x coordinate is decreased by 4
-32. If right arrow is pressed the spaceships x coordinate is increased by 4
-33. When lives reaches 0 Game Over becomes visible
-34. When lives reaches 0 the game ends
-35. A clone of Lightning starts at the current position of Spaceship
-36. A clone of Lightning is visible
-37. Clones of Lightning continue to increase their y coordinate by 10
-38. When a clone of Lightning touches the edge of the stage it get deleted
+3. At the start Lightning is invisible, the size of Lightning is 25 and Lightning has direction -90
+4. At the start Hippo1 is invisible
+5. At the start Bat has a size of 50
+6. At the start Orange is invisible
+7. At the start Game Over is invisible
+8. At the start Spaceship has costume 'normal'
+9. In random intervals between 2 and 4 seconds a new clone of Hippo1 is created
+10. Bat continues to move along the x axis and Bat changes direction if it hits the edge of the Stage
+11. Bat changes costumes every time it moves
+12. In random intervals between 5 and 10 seconds a new clone of Orange is created
+13. A clone of Orange starts at the current position of Bat
+14. The clones of Orange are visible
+15. The clones of Orange y coordinate decreases

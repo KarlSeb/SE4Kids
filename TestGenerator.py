@@ -2,6 +2,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import time
 import argparse
+from pathlib import Path
 
 def __init__():
     load_dotenv()
@@ -26,9 +27,18 @@ def query_gpt(prompt: str, gpt_temperature = 0, gpt_model = 'gpt-4o-2024-05-13')
 
 def get_prompt(program_name: str):
     prompt = ''
-    with open(f'./data/Prompts/{program_name}_Prompt.txt', 'r') as f:
-        prompt = f.read()
-    return prompt
+    second_prompt = None
+    path = Path(f'./data/Prompts/{program_name}_Prompt.txt')
+    path2 = Path(f'./data/Prompts/{program_name}_Prompt2.txt')
+    if path.exists():
+        with open(path, 'r') as f:
+            prompt = f.read()
+    else:
+        raise Exception(f'No prompt file for program name {program_name}')
+    if path2.exists():
+        with open(path2, 'r') as f:
+            second_prompt = f.read()
+    return prompt, second_prompt
 
 def get_names():
     names = []
@@ -39,9 +49,23 @@ def get_names():
     return names
 
 def write_JSON(program_name: str, generated: str):
-    with open(f'./data/JSON/{program_name}_Tests.json', 'w') as f:
+    generated = generated.replace('  ]\n}{\n  "tests": [', ',')
+    generated = generated.replace('  ]\n}\n{\n  "tests": [', ',')
+    with open(f'./data/Tests/JSON/{program_name}_Tests.json', 'w') as f:
         for line in generated:
             f.write(line)
+
+def generate_tests(names):
+    for program_name in names:
+        print(f'Generating tests for {program_name}')
+        prompt, second_prompt = get_prompt(program_name)
+        response = query_gpt(prompt)
+        if second_prompt != None:
+            response = response + query_gpt(second_prompt)
+        print('Writing response to files')
+        write_JSON(program_name, response)
+        print('Waiting for 10 seconds...')
+        time.sleep(10)
 
 def main():
     parser = argparse.ArgumentParser(description='Querys the large language model for the programs specified')
@@ -49,14 +73,7 @@ def main():
     names = parser.parse_args().names
     if names is None:
         names = get_names()
-    for program_name in names:
-        print(f'Generating tests for {program_name}')
-        prompt = get_prompt(program_name)
-        response = query_gpt(prompt)
-        print('Writing response to files')
-        write_JSON(program_name, response)
-        print('Waiting for 10 seconds...')
-        time.sleep(10)
+    generate_tests(names)
 
 
 if __name__ == '__main__':

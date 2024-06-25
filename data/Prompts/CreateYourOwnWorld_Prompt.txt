@@ -3,44 +3,14 @@
 3. At the start the global variable room is 1
 4. At the start the player is at coordinates (-200, 0)
 5. At the start the stage has costume 'room1'
-6. If an arrow key is pressed the player moves in the respective direction unless they touch the edge of the stage or the color [178, 178, 178]
-7. If the player is at the center of the right edge of the stage in 'room1' and touches the color [240, 152, 65] the costume of the stage changes to 'room2'
-8. If the player is at the center of the right edge of the stage in 'room2' and touches the color [240, 152, 65] the costume of the stage changes to 'room3'
-9. If the player is at the center of the left edge of the stage in 'room2' and touches the color [254, 248, 85] the costume of the stage changes to 'room1'
-10. If the player is at the center of the left edge of the stage in 'room3' and touches the color [254, 248, 85] the costume of the stage changes to 'room2'
-11. If the player touches the color [240, 152, 65] room increases by 1
-12. If the player touches the color [254, 248, 85] room decreases by 1
-13. welcome sign is only visible if room is 1
-14. If the player is touching welcome sign, welcome sign says 'Welcome! Can you get to the treasure?', other wise it says ''
-15. coin is only visible if room is 1
-16. If player touches coin coins is increased by 1
-17. After player touches the coin it becomes invisible
-18. person is only visible if room is 1
-19. person starts at coordinates (0, -160)
-20. If player touches the person it says 'Did you know that you can go through orange and yellow doors?'
-21. Otherwise the person says '' and moves along the x axis
-22. If person touches the edge it changes direction
-23. enemy sign is only visible if room is 2
-24. If player touches enemy sign the sign says 'Avoid the patrolling enemies!', otherwise it says ''
-25. enemy is only visible if room is 2
-26. enemy starts at coordinates (-170, 0)
-27. enemy moves 130 steps left and then 130 steps right
-28. If enemy touches player, enemy says 'Gotcha!' for 1 second
-29. If enemy touches player the game ends
-30. coin2 is only visible if room is 2
-31. If player touches coin2 coins is increased by 1
-32. door sign is only visible if room is 3
-33. If the player touches door sign, the sign says 'You'll need a blue key to open this door!', otherwise it says ''
-34. enemy2 is only visible if room is 3
-35. enemy2 starts at coordinates (-5, -90)
-36. enemy2 moves 70 steps down and then 70 steps up
-37. If enemy2 touches player, enemy says 'Gotcha!' for 1 second
-38. If enemy2 touches player the game ends
-39. key-blue is only visible if room is 3
-40. If player touches key-blue coins is increased by 3
-41. If player touches key-blue 'blue key' is added to inventory
-42. door-blue is only visible if room is 3
-43. If 'blue key' is in inventory door-blue becomes invisible
-44. chest is only visible if room is 3
-45. If player touches chest, chest says 'Well done!' for 1 second
-46. After player touches chest the game ends
+6. When an arrow key is pressed the player moves in the respective direction unless they touch the edge of the stage or the color [178, 178, 178]
+7. When the player is at the center of the right edge of the stage in 'room1' and touches the color [240, 152, 65] the costume of the stage changes to 'room2'
+8. When the player is at the center of the right edge of the stage in 'room2' and touches the color [240, 152, 65] the costume of the stage changes to 'room3'
+9. When the player is at the center of the left edge of the stage in 'room2' and touches the color [254, 248, 85] the costume of the stage changes to 'room1'
+10. When the player is at the center of the left edge of the stage in 'room3' and touches the color [254, 248, 85] the costume of the stage changes to 'room2'
+11. When the player touches the color [240, 152, 65] room increases by 1
+12. When the player touches the color [254, 248, 85] room decreases by 1
+13. welcome sign is only visible if room is 1 and When the player is touching welcome sign, welcome sign says 'Welcome! Can you get to the treasure?', otherwise it says ''
+14. coin is only visible if room is 1, When player touches coin coins is increased by 1 and After player touches the coin it becomes invisible
+15. person is only visible if room is 1 and person starts at coordinates (0, -160)
+16. When player touches the person it says 'Did you know that you can go through orange and yellow doors?', Otherwise the person says '' and moves along the x axis
