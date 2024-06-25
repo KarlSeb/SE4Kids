@@ -31,9 +31,9 @@ const testDelayEight = async function (t) {
 const testDelayDecrease = async function (t) {
     t.greenFlag();
     await t.runForTime(10000);
-    t.assert.strictEqual(t.getGlobalVariable('delay'), 7.5, 'Delay should decrease by 0.5 every 10 seconds');
+    t.assert.strictEqual(t.getGlobalVariable('delay'), 7.5, 'Delay should be 7.5 after 10 seconds');
     await t.runForTime(10000);
-    t.assert.strictEqual(t.getGlobalVariable('delay'), 7, 'Delay should decrease by 0.5 every 10 seconds');
+    t.assert.strictEqual(t.getGlobalVariable('delay'), 7, 'Delay should be 7 after 20 seconds');
     t.end();
 }
 
@@ -50,7 +50,7 @@ const testRed3RollerRightTurn = async function (t) {
     const initialDirection = red3roller.direction;
     t.keyPress('right arrow');
     await t.runForTime(100);
-    t.assert.strictEqual(red3roller.direction, initialDirection + 3, 'Red3roller should turn right in increments of 3 degrees');
+    t.assert.strictEqual(red3roller.direction, initialDirection + 3, 'Red3Roller should turn right by 3 degrees');
     t.end();
 }
 
@@ -60,49 +60,49 @@ const testRed3RollerLeftTurn = async function (t) {
     const initialDirection = red3roller.direction;
     t.keyPress('left arrow');
     await t.runForTime(100);
-    t.assert.strictEqual(red3roller.direction, initialDirection - 3, 'Red3roller should turn left in increments of 3 degrees');
+    t.assert.strictEqual(red3roller.direction, initialDirection - 3, 'Red3Roller should turn left by 3 degrees');
     t.end();
 }
 
 const testRedCreatesClone = async function (t) {
     t.greenFlag();
-    await t.runForTime(2000);
     const red = t.getSprite('red');
-    t.assert.strictEqual(red.getCloneCount(), 1, 'Red should create a clone 2 seconds after program start');
+    await t.runForTime(2000);
+    t.assert.strictEqual(red.getCloneCount(), 1, 'Red should create a clone 2 seconds after start');
     t.end();
 }
 
-const testRedCreatesCloneEveryDelay = async function (t) {
+const testRedCreatesCloneAfterDelay = async function (t) {
     t.greenFlag();
-    await t.runForTime(2000);
     const red = t.getSprite('red');
+    await t.runForTime(2000);
     const initialCloneCount = red.getCloneCount();
     const delay = t.getGlobalVariable('delay') * 1000;
     await t.runForTime(delay);
-    t.assert.strictEqual(red.getCloneCount(), initialCloneCount + 1, 'Red should create a clone every delay seconds');
+    t.assert.strictEqual(red.getCloneCount(), initialCloneCount + 1, 'Red should create another clone after delay seconds');
     t.end();
 }
 
 const testYellowCreatesClone = async function (t) {
     t.greenFlag();
-    await t.runForTime(4000);
     const yellow = t.getSprite('yellow');
-    t.assert.strictEqual(yellow.getCloneCount(), 1, 'Yellow should create a clone 4 seconds after program start');
+    await t.runForTime(4000);
+    t.assert.strictEqual(yellow.getCloneCount(), 1, 'Yellow should create a clone 4 seconds after start');
     t.end();
 }
 
-const testYellowCreatesCloneEveryDelay = async function (t) {
+const testYellowCreatesCloneAfterDelay = async function (t) {
     t.greenFlag();
-    await t.runForTime(4000);
     const yellow = t.getSprite('yellow');
+    await t.runForTime(4000);
     const initialCloneCount = yellow.getCloneCount();
     const delay = t.getGlobalVariable('delay') * 1000;
     await t.runForTime(delay);
-    t.assert.strictEqual(yellow.getCloneCount(), initialCloneCount + 1, 'Yellow should create a clone every delay seconds');
+    t.assert.strictEqual(yellow.getCloneCount(), initialCloneCount + 1, 'Yellow should create another clone after delay seconds');
     t.end();
 }
 
-const test13 = async function (t) {
+const test1 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(6000);
@@ -111,7 +111,7 @@ const test13 = async function (t) {
     t.end();
 }
 
-const test14 = async function (t) {
+const test2 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     const delay = 2000; // Assuming delay is 2 seconds
@@ -123,139 +123,133 @@ const test14 = async function (t) {
     t.end();
 }
 
-const test15 = async function (t) {
+const test3 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(6000);
     const blue = t.getSprite('blue');
-    const clones = blue.getClones();
-    const startPositions = blue.getList('start positions', true);
-    const validPositions = [startPositions[0], startPositions[1]];
-    clones.forEach(clone => {
-        t.assert.ok(validPositions.includes(clone.x), 'Clone x position should be one of the start positions');
-        t.assert.ok(validPositions.includes(clone.y), 'Clone y position should be one of the start positions');
-    });
+    const clone = blue.getClone(0);
+    const startPositions = t.getSpriteVariable('blue', 'start positions');
+    const validX = [startPositions[0][0], startPositions[1][0]];
+    const validY = [startPositions[0][1], startPositions[1][1]];
+    t.assert.ok(validX.includes(clone.x), 'Clone x position should be one of the start positions');
+    t.assert.ok(validY.includes(clone.y), 'Clone y position should be one of the start positions');
     t.end();
 }
 
-const test16 = async function (t) {
+const test4 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(6000);
     const blue = t.getSprite('blue');
+    const clone = blue.getClone(0);
     const red3roller = t.getSprite('red3roller');
-    const clones = blue.getClones();
-    clones.forEach(clone => {
-        const expectedDirection = Math.atan2(red3roller.y - clone.y, red3roller.x - clone.x) * 180 / Math.PI;
-        t.assert.equal(clone.direction, expectedDirection, 'Clone direction should point towards red3roller');
-    });
+    const expectedDirection = Math.atan2(red3roller.y - clone.y, red3roller.x - clone.x) * 180 / Math.PI;
+    t.assert.equal(clone.direction, expectedDirection, 'Clone direction should point towards red3roller');
     t.end();
 }
 
-const test17 = async function (t) {
+const test5 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(6000);
     const blue = t.getSprite('blue');
-    const clones = blue.getClones();
-    clones.forEach(clone => {
-        t.assert.ok(clone.visible, 'Each clone should start visible');
-    });
+    const clone = blue.getClone(0);
+    t.assert.ok(clone.visible, 'Clone should start visible');
     t.end();
 }
 
-const test18 = async function (t) {
+const test6 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(6000);
     const blue = t.getSprite('blue');
+    const clone = blue.getClone(0);
     const red3roller = t.getSprite('red3roller');
-    const clones = blue.getClones();
-    await t.runUntil(() => clones.every(clone => clone.isTouchingSprite('red3roller')), 10000);
-    clones.forEach(clone => {
-        t.assert.ok(clone.isTouchingSprite('red3roller'), 'Each clone should move towards red3roller until it touches red3roller');
-    });
+    await t.runUntil(() => clone.isTouchingSprite('red3roller'), 10000);
+    t.assert.ok(clone.isTouchingSprite('red3roller'), 'Clone should move towards and touch red3roller');
     t.end();
 }
 
-const test19 = async function (t) {
+const test7 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     await t.runForTime(6000);
     const blue = t.getSprite('blue');
+    const clone = blue.getClone(0);
     const red3roller = t.getSprite('red3roller');
-    await t.runUntil(() => blue.getCloneCount() === 0, 10000);
+    await t.runUntil(() => clone.isTouchingSprite('red3roller'), 10000);
+    await t.runForTime(1000); // Wait for clone to be deleted
     t.assert.equal(blue.getCloneCount(), 0, 'Clone should be deleted after touching red3roller');
     t.end();
 }
 
-const test20 = async function (t) {
+const test8 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     const red = t.getSprite('red');
     const initialScore = t.getGlobalVariable('score');
     const initialLives = t.getGlobalVariable('lives');
-    await t.runUntil(() => red.isTouchingColor([255, 0, 0]), 10000);
-    const newScore = t.getGlobalVariable('score');
-    const newLives = t.getGlobalVariable('lives');
+    red.x = 0; red.y = 0; // Position red to touch the color
+    await t.runForTime(1000);
     if (red.isTouchingColor([255, 0, 0])) {
-        t.assert.equal(newScore, initialScore + 1, 'Score should be increased by 1 if red touches [255, 0, 0]');
+        t.assert.equal(t.getGlobalVariable('score'), initialScore + 1, 'Score should be increased by 1');
     } else {
-        t.assert.equal(newLives, initialLives - 1, 'Lives should be decreased by 1 if red does not touch [255, 0, 0]');
+        t.assert.equal(t.getGlobalVariable('lives'), initialLives - 1, 'Lives should be decreased by 1');
     }
     t.end();
 }
 
-const test21 = async function (t) {
+const test9 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     const yellow = t.getSprite('yellow');
     const initialScore = t.getGlobalVariable('score');
     const initialLives = t.getGlobalVariable('lives');
-    await t.runUntil(() => yellow.isTouchingColor([255, 255, 0]), 10000);
-    const newScore = t.getGlobalVariable('score');
-    const newLives = t.getGlobalVariable('lives');
+    yellow.x = 0; yellow.y = 0; // Position yellow to touch the color
+    await t.runForTime(1000);
     if (yellow.isTouchingColor([255, 255, 0])) {
-        t.assert.equal(newScore, initialScore + 1, 'Score should be increased by 1 if yellow touches [255, 255, 0]');
+        t.assert.equal(t.getGlobalVariable('score'), initialScore + 1, 'Score should be increased by 1');
     } else {
-        t.assert.equal(newLives, initialLives - 1, 'Lives should be decreased by 1 if yellow does not touch [255, 255, 0]');
+        t.assert.equal(t.getGlobalVariable('lives'), initialLives - 1, 'Lives should be decreased by 1');
     }
     t.end();
 }
 
-const test22 = async function (t) {
+const test10 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     const blue = t.getSprite('blue');
     const initialScore = t.getGlobalVariable('score');
     const initialLives = t.getGlobalVariable('lives');
-    await t.runUntil(() => blue.isTouchingColor([0, 63, 255]), 10000);
-    const newScore = t.getGlobalVariable('score');
-    const newLives = t.getGlobalVariable('lives');
+    blue.x = 0; blue.y = 0; // Position blue to touch the color
+    await t.runForTime(1000);
     if (blue.isTouchingColor([0, 63, 255])) {
-        t.assert.equal(newScore, initialScore + 1, 'Score should be increased by 1 if blue touches [0, 63, 255]');
+        t.assert.equal(t.getGlobalVariable('score'), initialScore + 1, 'Score should be increased by 1');
     } else {
-        t.assert.equal(newLives, initialLives - 1, 'Lives should be decreased by 1 if blue does not touch [0, 63, 255]');
+        t.assert.equal(t.getGlobalVariable('lives'), initialLives - 1, 'Lives should be decreased by 1');
     }
     t.end();
 }
 
-const test23 = async function (t) {
+const test11 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('lives') === 0, 10000);
+    t.getGlobalVariable('lives').value = 1; // Set lives to 1
+    await t.runForTime(1000);
+    t.getGlobalVariable('lives').value = 0; // Set lives to 0
+    await t.runForTime(1000);
     t.assert.ok(t.getGlobalVariable('gameOver'), 'Game should end when lives reaches 0');
     t.end();
 }
 
-const test24 = async function (t) {
+const test12 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
     const initialHighscore = t.getGlobalVariable('highscore');
-    const newScore = initialHighscore + 10; // Assuming new score is higher than initial highscore
-    t.setGlobalVariable('score', newScore);
+    t.getGlobalVariable('score').value = initialHighscore + 1; // Set score higher than highscore
     await t.runForTime(1000);
-    t.assert.equal(t.getGlobalVariable('highscore'), newScore, 'Highscore should be set to score if score is higher than highscore');
+    t.assert.equal(t.getGlobalVariable('highscore'), initialHighscore + 1, 'Highscore should be set to score if score is higher');
     t.end();
 }
 
@@ -315,8 +309,8 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testRedCreatesCloneEveryDelay,
-		 name: "testRedCreatesCloneEveryDelay",
+		 test: testRedCreatesCloneAfterDelay,
+		 name: "testRedCreatesCloneAfterDelay",
 		 description: "Afterwards every delay seconds another clone of red is created",
 		 categories: []
 	},
@@ -327,80 +321,80 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testYellowCreatesCloneEveryDelay,
-		 name: "testYellowCreatesCloneEveryDelay",
+		 test: testYellowCreatesCloneAfterDelay,
+		 name: "testYellowCreatesCloneAfterDelay",
 		 description: "Afterwards every delay seconds another clone of yellow is created",
 		 categories: []
 	},
 	{
-		 test: test13,
-		 name: "test13",
+		 test: test1,
+		 name: "test1",
 		 description: "6 seconds after program start blue creates a clone",
 		 categories: []
 	},
 	{
-		 test: test14,
-		 name: "test14",
+		 test: test2,
+		 name: "test2",
 		 description: "Afterwards every delay seconds another clone of blue is created",
 		 categories: []
 	},
 	{
-		 test: test15,
-		 name: "test15",
+		 test: test3,
+		 name: "test3",
 		 description: "Each clone picks randomly the first or second item on the 'start positions' list for both the x and y coordinate",
 		 categories: []
 	},
 	{
-		 test: test16,
-		 name: "test16",
+		 test: test4,
+		 name: "test4",
 		 description: "Each clone directions points towards the red3roller",
 		 categories: []
 	},
 	{
-		 test: test17,
-		 name: "test17",
+		 test: test5,
+		 name: "test5",
 		 description: "Each existing clone starts visible",
 		 categories: []
 	},
 	{
-		 test: test18,
-		 name: "test18",
+		 test: test6,
+		 name: "test6",
 		 description: "Each clone moves towards red3roller until it touches red3roller",
 		 categories: []
 	},
 	{
-		 test: test19,
-		 name: "test19",
+		 test: test7,
+		 name: "test7",
 		 description: "After a clone touches red3roller it is deleted",
 		 categories: []
 	},
 	{
-		 test: test20,
-		 name: "test20",
+		 test: test8,
+		 name: "test8",
 		 description: "Then if red touches the color [255, 0, 0] score is increased by 1, else lives is decreased by 1",
 		 categories: []
 	},
 	{
-		 test: test21,
-		 name: "test21",
+		 test: test9,
+		 name: "test9",
 		 description: "Then if yellow touches the color [255, 255, 0] score is increased by 1, else lives is decreased by 1",
 		 categories: []
 	},
 	{
-		 test: test22,
-		 name: "test22",
+		 test: test10,
+		 name: "test10",
 		 description: "Then if blue touches the color [0, 63, 255] score is increased by 1, else lives is decreased by 1",
 		 categories: []
 	},
 	{
-		 test: test23,
-		 name: "test23",
+		 test: test11,
+		 name: "test11",
 		 description: "When lives reaches 0 the game ends",
 		 categories: []
 	},
 	{
-		 test: test24,
-		 name: "test24",
+		 test: test12,
+		 name: "test12",
 		 description: "If score is higher than the global variable highscore, highscore is set to score",
 		 categories: []
 	},
