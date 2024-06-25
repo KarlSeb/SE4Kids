@@ -1,17 +1,17 @@
 16. When player touches the person it says 'Did you know that you can go through orange and yellow doors?', Otherwise the person says '' and moves along the x axis
 17. When person touches the edge it changes direction
-18. enemy sign is only visible if room is 2 and When player touches enemy sign the sign says 'Avoid the patrolling enemies!', otherwise it says ''
-19. enemy is only visible if room is 2 and enemy starts at coordinates (-170, 0)
+18. enemy sign is only visible if room is '2' and When player touches enemy sign the sign says 'Avoid the patrolling enemies!', otherwise it says ''
+19. enemy is only visible if room is '2' and enemy starts at coordinates (-170, 0)
 20. enemy moves 130 steps left and then 130 steps right
 21. When enemy touches player, enemy says 'Gotcha!' for 1 second and the game ends
-22. coin2 is only visible if room is 2 and When player touches coin2 coins is increased by 1
-23. door sign is only visible if room is 3 and When the player touches door sign, the sign says 'You'll need a blue key to open this door!', otherwise it says ''
-24. enemy2 is only visible if room is 3 and enemy2 starts at coordinates (-5, -90)
+22. coin2 is only visible if room is '2' and When player touches coin2 coins is increased by 1
+23. door sign is only visible if room is '3' and When the player touches door sign, the sign says 'You'll need a blue key to open this door!', otherwise it says ''
+24. enemy2 is only visible if room is '3' and enemy2 starts at coordinates (-5, -90)
 25. enemy2 moves 70 steps down and then 70 steps up
 26. When enemy2 touches player, enemy says 'Gotcha!' for 1 second and the game ends
-27. key-blue is only visible if room is 3
+27. key-blue is only visible if room is '3'
 28. When player touches key-blue coins is increased by 3 and 'blue key' is added to inventory
-29. door-blue is only visible if room is 3
+29. door-blue is only visible if room is '3'
 30. When 'blue key' is in inventory door-blue becomes invisible
-31. chest is only visible if room is 3
+31. chest is only visible if room is '3'
 32. When player touches chest, chest says 'Well done!' for 1 second the game ends

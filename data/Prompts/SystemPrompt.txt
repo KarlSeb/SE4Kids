@@ -73,11 +73,11 @@ s.isOriginal
 s.isStage
 s.name
 s.id
-s.effects: returns a map of possible effects and the current value
+s.effects: returns a map of possible effects and the current value. In order to access a specific effect s.effects['effectname'] is used.
 s.x: returns the current x coordinate of the sprite. The field is getter-only
 s.y: returns the current y coordinate of the sprite. The field is getter-only
 s.bounds
-s.direction: returns the direction s is pointing towards. Is represented as a number in the interval [-180, 180]. Increases by turning right. 0 represents straight up, 180 straight down.
+s.direction: returns the direction s is pointing towards. direction represents degrees on a circle in the interval [-180, 180]. 0 represents straight up, 180 straight down. Increases by turning right.
 s.visible: returns a boolean value whether s is visible or not
 s.size
 s.currentCostume: return the index the current costume has in the array provided by s.getCostumes()
@@ -86,8 +86,8 @@ s.sayText
 A sprite s has the following functions:
 s.getVariables(condition)
 s.getVariable(variableName)
-s.getLists()
-s.getList(listName)
+s.getLists(skipStage): Returns all lists of the sprite. If skipStage is false also returns global lists
+s.getList(listName, skipStage): If skipStage is false global lists can be accessed.
 s.getInstances()
 s.getOriginal()
 s.getClones(): returns an array of clones.

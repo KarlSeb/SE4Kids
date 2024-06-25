@@ -13,12 +13,12 @@
 13. After Play was clicked the timer decreases by 1 every second
 14. After Play was clicked the global variable number1 is set to a random number between 2 and 12
 15. After Play was clicked the global variable number2 is set to a random number between 2 and 12
-16. Giga then asks '[number1]x[number2]'
-17. If the right answer is input Giga changes the costume to 'giga-c'
-18. If the right answer is input the score increases by 1
-19. If the wrong answer is input Giga changes the costume to 'giga-d'
-20. If the right answer is input Result changes the costume to 'tick'
-21. If the wrong answer is input Result changes the costume to 'cross'
+16. Giga then asks '[number1] x [number2]'
+17. If the right answer is given Giga changes the costume to 'giga-c'
+18. If the right answer is given the score increases by 1
+19. If the wrong answer is given Giga changes the costume to 'giga-d'
+20. If the right answer is given Result changes the costume to 'tick'
+21. If the wrong answer is given Result changes the costume to 'cross'
 22. After an answer was given Result plays an animation consisting of the following steps:
     - The ghost effect is set to 100
     - Result becomes visible

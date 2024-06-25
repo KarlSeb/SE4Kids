@@ -13,7 +13,7 @@ def generate_paths(program_name:str):
     paths = {}
     paths['scratch_path'] = solution_path + '/' + program_name + '.sb3'
     paths['tests_path'] = tests_path + '/' + program_name + '_Tests.js'
-    paths['csv_path'] = results_path + '/' + program_name + '/csv/_Results.csv'
+    paths['csv_path'] = results_path + '/csv/' + program_name + '_Results.csv'
     return paths
 
 def process_output(output:str):
@@ -55,6 +55,7 @@ def run_all_tests():
     testable_programs = get_tests()
     output = {}
     for program_name in testable_programs:
+        print(f'Running tests for {program_name}')
         cmd = build_command(program_name)
         output[program_name] = execute_command(cmd, whisker_path)
     return output
@@ -84,6 +85,7 @@ def main():
         output = run_all_tests()
     else:
         for name in names:
+            print(f'Running tests for {name}')
             output[name] = run_test(name, True)
     write_output(output)
 

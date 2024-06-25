@@ -1,6 +1,6 @@
 1. At the start the global variable coins is 0
-2. At the start the list inventory is empty
-3. At the start the global variable room is 1
+2. At the start the global list 'inventory' is empty
+3. At the start the global variable room is '1'
 4. At the start the player is at coordinates (-200, 0)
 5. At the start the stage has costume 'room1'
 6. When an arrow key is pressed the player moves in the respective direction unless they touch the edge of the stage or the color [178, 178, 178]
@@ -11,6 +11,6 @@
 11. When the player touches the color [240, 152, 65] room increases by 1
 12. When the player touches the color [254, 248, 85] room decreases by 1
 13. welcome sign is only visible if room is 1 and When the player is touching welcome sign, welcome sign says 'Welcome! Can you get to the treasure?', otherwise it says ''
-14. coin is only visible if room is 1, When player touches coin coins is increased by 1 and After player touches the coin it becomes invisible
-15. person is only visible if room is 1 and person starts at coordinates (0, -160)
+14. coin is only visible if room is '1', When player touches coin coins is increased by 1 and After player touches the coin it becomes invisible
+15. person is only visible if room is '1' and person starts at coordinates (0, -160)
 16. When player touches the person it says 'Did you know that you can go through orange and yellow doors?', Otherwise the person says '' and moves along the x axis
