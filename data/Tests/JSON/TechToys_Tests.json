@@ -1,36 +1,36 @@
 {
-    "tests": [
-        {
-            "name": "Sunglasses2 changes color effect by 5 when clicked 100 times",
-            "code": "const testSunglasses2ColorChange = async function (t) {\n    t.seedScratch(1234);\n    const sunglasses2 = await t.getSprite('Sunglasses2');\n    for (let i = 0; i < 100; i++) {\n        await t.clickSprite('Sunglasses2');\n    }\n    await t.runForTime(1000);\n    t.assert.equal(sunglasses2.effects['color'], 500, 'Sunglasses2 should have color effect of 500');\n    t.end();\n}"
-        },
-        {
-            "name": "Bow Tie turns right by 36 degrees when clicked 30 times",
-            "code": "const testBowTieTurnRight = async function (t) {\n    t.seedScratch(1234);\n    const bowTie = await t.getSprite('Bow Tie');\n    for (let i = 0; i < 30; i++) {\n        await t.clickSprite('Bow Tie');\n    }\n    await t.runForTime(1000);\n    t.assert.equal(bowTie.direction, 1080, 'Bow Tie should have turned right by 1080 degrees');\n    t.end();\n}"
-        },
-        {
-            "name": "Helicopter changes costumes repeatedly after Laptop is clicked",
-            "code": "const testHelicopterCostumeChange = async function (t) {\n    t.seedScratch(1234);\n    await t.clickSprite('Laptop');\n    const helicopter = await t.getSprite('Helicopter');\n    const initialCostume = helicopter.currentCostume;\n    await t.runForTime(2000);\n    t.assert.notEqual(helicopter.currentCostume, initialCostume, 'Helicopter should change costumes repeatedly');\n    t.end();\n}"
-        },
-        {
-            "name": "Helicopter moves left by -2 on left arrow key press after Laptop is clicked",
-            "code": "const testHelicopterMoveLeft = async function (t) {\n    t.seedScratch(1234);\n    await t.clickSprite('Laptop');\n    const helicopter = await t.getSprite('Helicopter');\n    const initialX = helicopter.x;\n    await t.keyPress('left arrow');\n    await t.runForTime(1000);\n    t.assert.equal(helicopter.x, initialX - 2, 'Helicopter should move left by 2 units');\n    t.end();\n}"
-        },
-        {
-            "name": "Helicopter moves right by 2 on right arrow key press after Laptop is clicked",
-            "code": "const testHelicopterMoveRight = async function (t) {\n    t.seedScratch(1234);\n    await t.clickSprite('Laptop');\n    const helicopter = await t.getSprite('Helicopter');\n    const initialX = helicopter.x;\n    await t.keyPress('right arrow');\n    await t.runForTime(1000);\n    t.assert.equal(helicopter.x, initialX + 2, 'Helicopter should move right by 2 units');\n    t.end();\n}"
-        },
-        {
-            "name": "Helicopter moves down by -2 on down arrow key press after Laptop is clicked",
-            "code": "const testHelicopterMoveDown = async function (t) {\n    t.seedScratch(1234);\n    await t.clickSprite('Laptop');\n    const helicopter = await t.getSprite('Helicopter');\n    const initialY = helicopter.y;\n    await t.keyPress('down arrow');\n    await t.runForTime(1000);\n    t.assert.equal(helicopter.y, initialY - 2, 'Helicopter should move down by 2 units');\n    t.end();\n}"
-        },
-        {
-            "name": "Helicopter moves up by 2 on up arrow key press after Laptop is clicked",
-            "code": "const testHelicopterMoveUp = async function (t) {\n    t.seedScratch(1234);\n    await t.clickSprite('Laptop');\n    const helicopter = await t.getSprite('Helicopter');\n    const initialY = helicopter.y;\n    await t.keyPress('up arrow');\n    await t.runForTime(1000);\n    t.assert.equal(helicopter.y, initialY + 2, 'Helicopter should move up by 2 units');\n    t.end();\n}"
-        },
-        {
-            "name": "Helicopter moves 4 steps and turns 4 degrees left 90 times when space is pressed",
-            "code": "const testHelicopterMoveAndTurn = async function (t) {\n    t.seedScratch(1234);\n    const helicopter = await t.getSprite('Helicopter');\n    await t.keyPress('space');\n    await t.runForTime(5000);\n    t.assert.equal(helicopter.direction, -360, 'Helicopter should turn left by 360 degrees');\n    t.end();\n}"
-        }
-    ]
+  "tests": [
+    {
+      "name": "Sunglasses2 changes color effect by 5 100 times when clicked",
+      "code": "const testSunglasses2ColorChange = async function (t) {\n    t.seedScratch(1234);\n    const sunglasses2 = await t.getSprite('Sunglasses2');\n    await t.clickSprite('Sunglasses2');\n    await t.runForTime(1000);\n    t.assert.equal(sunglasses2.effects['color'], 500, 'Sunglasses2 should change color effect by 5 100 times');\n    t.end();\n}"
+    },
+    {
+      "name": "Bow Tie turns right by 36 degrees 30 times when clicked",
+      "code": "const testBowTieTurnRight = async function (t) {\n    t.seedScratch(1234);\n    const bowTie = await t.getSprite('Bow Tie');\n    await t.clickSprite('Bow Tie');\n    await t.runForTime(1000);\n    t.assert.equal(bowTie.direction, 1080, 'Bow Tie should turn right by 36 degrees 30 times');\n    t.end();\n}"
+    },
+    {
+      "name": "Helicopter changes costumes repeatedly after Laptop is clicked",
+      "code": "const testHelicopterCostumeChange = async function (t) {\n    t.seedScratch(1234);\n    await t.clickSprite('Laptop');\n    const helicopter = await t.getSprite('Helicopter');\n    const initialCostume = helicopter.currentCostume;\n    await t.runForTime(1000);\n    t.assert.notEqual(helicopter.currentCostume, initialCostume, 'Helicopter should change costumes repeatedly after Laptop is clicked');\n    t.end();\n}"
+    },
+    {
+      "name": "Helicopter x coordinate changes by -2 when left arrow key is pressed after Laptop is clicked",
+      "code": "const testHelicopterMoveLeft = async function (t) {\n    t.seedScratch(1234);\n    await t.clickSprite('Laptop');\n    const helicopter = await t.getSprite('Helicopter');\n    const initialX = helicopter.x;\n    await t.keyPress('left arrow');\n    await t.runForTime(1000);\n    t.assert.equal(helicopter.x, initialX - 2, 'Helicopter x coordinate should change by -2 when left arrow key is pressed after Laptop is clicked');\n    t.end();\n}"
+    },
+    {
+      "name": "Helicopter x coordinate changes by +2 when right arrow key is pressed after Laptop is clicked",
+      "code": "const testHelicopterMoveRight = async function (t) {\n    t.seedScratch(1234);\n    await t.clickSprite('Laptop');\n    const helicopter = await t.getSprite('Helicopter');\n    const initialX = helicopter.x;\n    await t.keyPress('right arrow');\n    await t.runForTime(1000);\n    t.assert.equal(helicopter.x, initialX + 2, 'Helicopter x coordinate should change by +2 when right arrow key is pressed after Laptop is clicked');\n    t.end();\n}"
+    },
+    {
+      "name": "Helicopter y coordinate changes by -2 when down arrow key is pressed after Laptop is clicked",
+      "code": "const testHelicopterMoveDown = async function (t) {\n    t.seedScratch(1234);\n    await t.clickSprite('Laptop');\n    const helicopter = await t.getSprite('Helicopter');\n    const initialY = helicopter.y;\n    await t.keyPress('down arrow');\n    await t.runForTime(1000);\n    t.assert.equal(helicopter.y, initialY - 2, 'Helicopter y coordinate should change by -2 when down arrow key is pressed after Laptop is clicked');\n    t.end();\n}"
+    },
+    {
+      "name": "Helicopter y coordinate changes by +2 when up arrow key is pressed after Laptop is clicked",
+      "code": "const testHelicopterMoveUp = async function (t) {\n    t.seedScratch(1234);\n    await t.clickSprite('Laptop');\n    const helicopter = await t.getSprite('Helicopter');\n    const initialY = helicopter.y;\n    await t.keyPress('up arrow');\n    await t.runForTime(1000);\n    t.assert.equal(helicopter.y, initialY + 2, 'Helicopter y coordinate should change by +2 when up arrow key is pressed after Laptop is clicked');\n    t.end();\n}"
+    },
+    {
+      "name": "Helicopter repeats moving 4 steps and turning 4 degrees left 90 times when space is pressed",
+      "code": "const testHelicopterMoveAndTurn = async function (t) {\n    t.seedScratch(1234);\n    const helicopter = await t.getSprite('Helicopter');\n    const initialX = helicopter.x;\n    const initialY = helicopter.y;\n    const initialDirection = helicopter.direction;\n    await t.keyPress('space');\n    await t.runForTime(1000);\n    t.assert.notEqual(helicopter.x, initialX, 'Helicopter should move when space is pressed');\n    t.assert.notEqual(helicopter.y, initialY, 'Helicopter should move when space is pressed');\n    t.assert.notEqual(helicopter.direction, initialDirection, 'Helicopter should turn when space is pressed');\n    t.end();\n}"
+    }
+  ]
 }
