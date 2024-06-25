@@ -1,7 +1,3 @@
 1. At the start Nano has costume 'nano-a'
 2. When Nano is clicked the costume changes to 'nano-b'
 3. When Nano is clicked the stage costume is set to 'space'
-4. After Nano is clicked Nano asks 'What's your name?'
-5. After the question 'What's your name?' is answered the answer is stored in the global variable 'name'
-6. After the question 'What's your name?' is answered Nano says 'Hi [name]' for 2 seconds
-7. Then Nano asks 'Are you OK [name]'

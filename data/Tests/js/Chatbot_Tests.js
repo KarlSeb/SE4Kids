@@ -1,78 +1,69 @@
 const testNanoStartCostume = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Nano').currentCostume.name === 'nano-a', 5000);
+    await t.runUntil(() => t.getSprite('Nano').currentCostume === t.getSprite('Nano').getCostumeByName('nano-a').index, 5000);
     const nano = t.getSprite('Nano');
-    t.assert.strictEqual(nano.currentCostume.name, 'nano-a', 'Nano should start with costume nano-a');
+    t.assert.strictEqual(nano.getCostumeByIndex(nano.currentCostume).name, 'nano-a', 'Nano should start with costume nano-a');
     t.end();
 }
 
 const testNanoClickCostumeChange = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Nano').currentCostume.name === 'nano-a', 5000);
+    await t.runUntil(() => t.getSprite('Nano').currentCostume === t.getSprite('Nano').getCostumeByName('nano-a').index, 5000);
     t.clickSprite('Nano');
-    await t.runUntil(() => t.getSprite('Nano').currentCostume.name === 'nano-b', 5000);
+    await t.runUntil(() => t.getSprite('Nano').currentCostume === t.getSprite('Nano').getCostumeByName('nano-b').index, 5000);
     const nano = t.getSprite('Nano');
-    t.assert.strictEqual(nano.currentCostume.name, 'nano-b', 'Nano should change to costume nano-b when clicked');
+    t.assert.strictEqual(nano.getCostumeByIndex(nano.currentCostume).name, 'nano-b', 'Nano should change to costume nano-b when clicked');
     t.end();
 }
 
 const testStageCostumeChangeOnNanoClick = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Nano').currentCostume.name === 'nano-a', 5000);
+    await t.runUntil(() => t.getSprite('Nano').currentCostume === t.getSprite('Nano').getCostumeByName('nano-a').index, 5000);
     t.clickSprite('Nano');
-    await t.runUntil(() => t.getStage().currentCostume.name === 'space', 5000);
+    await t.runUntil(() => t.getStage().currentCostume === t.getStage().getCostumeByName('space').index, 5000);
     const stage = t.getStage();
-    t.assert.strictEqual(stage.currentCostume.name, 'space', 'Stage costume should change to space when Nano is clicked');
+    t.assert.strictEqual(stage.getCostumeByIndex(stage.currentCostume).name, 'space', 'Stage costume should change to space when Nano is clicked');
     t.end();
 }
 
-const testNanoAsksNameOnClick = async function (t) {
-    t.seedScratch(1234);
+const testNanoAsksName = async function (t) {
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Nano').currentCostume.name === 'nano-a', 5000);
+    await t.runForTime(1000);
     t.clickSprite('Nano');
     await t.runUntil(() => t.getSprite('Nano').sayText === "What's your name?", 5000);
-    const nano = t.getSprite('Nano');
-    t.assert.strictEqual(nano.sayText, "What's your name?", "Nano should ask 'What's your name?' when clicked");
+    t.assert.equal(t.getSprite('Nano').sayText, "What's your name?", "Nano should ask 'What's your name?' after being clicked");
     t.end();
 }
 
-const testAnswerStoredInGlobalVariable = async function (t) {
-    t.seedScratch(1234);
+const testStoreNameInGlobalVariable = async function (t) {
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Nano').currentCostume.name === 'nano-a', 5000);
+    await t.runForTime(1000);
     t.clickSprite('Nano');
     await t.runUntil(() => t.getSprite('Nano').sayText === "What's your name?", 5000);
     t.typeText('Alice');
     await t.runForTime(1000);
-    const nameVar = t.getGlobalVariable('name');
-    t.assert.strictEqual(nameVar.value, 'Alice', "The answer to 'What's your name?' should be stored in the global variable 'name'");
+    t.assert.equal(t.getGlobalVariable('name').value, 'Alice', "The answer to 'What's your name?' should be stored in the global variable 'name'");
     t.end();
 }
 
-const testNanoSaysHiAfterNameAnswer = async function (t) {
-    t.seedScratch(1234);
+const testNanoSaysHi = async function (t) {
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Nano').currentCostume.name === 'nano-a', 5000);
+    await t.runForTime(1000);
     t.clickSprite('Nano');
     await t.runUntil(() => t.getSprite('Nano').sayText === "What's your name?", 5000);
     t.typeText('Alice');
     await t.runForTime(1000);
     await t.runUntil(() => t.getSprite('Nano').sayText === 'Hi Alice', 5000);
-    const nano = t.getSprite('Nano');
-    t.assert.strictEqual(nano.sayText, 'Hi Alice', "Nano should say 'Hi Alice' after answering 'What's your name?'");
-    await t.runForTime(2000);
-    t.assert.strictEqual(nano.sayText, '', "Nano should stop saying 'Hi Alice' after 2 seconds");
+    t.assert.equal(t.getSprite('Nano').sayText, 'Hi Alice', "Nano should say 'Hi [name]' for 2 seconds after 'What's your name?' is answered");
     t.end();
 }
 
-const testNanoAsksAreYouOkAfterHi = async function (t) {
-    t.seedScratch(1234);
+const testNanoAsksAreYouOK = async function (t) {
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Nano').currentCostume.name === 'nano-a', 5000);
+    await t.runForTime(1000);
     t.clickSprite('Nano');
     await t.runUntil(() => t.getSprite('Nano').sayText === "What's your name?", 5000);
     t.typeText('Alice');
@@ -80,86 +71,157 @@ const testNanoAsksAreYouOkAfterHi = async function (t) {
     await t.runUntil(() => t.getSprite('Nano').sayText === 'Hi Alice', 5000);
     await t.runForTime(2000);
     await t.runUntil(() => t.getSprite('Nano').sayText === 'Are you OK Alice', 5000);
-    const nano = t.getSprite('Nano');
-    t.assert.strictEqual(nano.sayText, 'Are you OK Alice', "Nano should ask 'Are you OK Alice' after saying 'Hi Alice'");
+    t.assert.equal(t.getSprite('Nano').sayText, 'Are you OK Alice', "Nano should ask 'Are you OK [name]' after saying 'Hi [name]'");
     t.end();
 }
 
-const test8 = async function (t) {
+const testNanoCostumeChangeYes = async function (t) {
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Nano').sayText.includes('Are you OK'));
-    t.typeText('yes');
     await t.runForTime(1000);
-    const nano = t.getSprite('Nano');
-    t.assert.equal(nano.getCostumeByIndex(nano.currentCostume).name, 'nano-c', 'Nano should change to costume nano-c');
-    t.end();
-}
-
-const test9 = async function (t) {
-    t.greenFlag();
-    await t.runUntil(() => t.getSprite('Nano').sayText.includes('Are you OK'));
-    t.typeText('yes');
+    t.clickSprite('Nano');
+    await t.runUntil(() => t.getSprite('Nano').sayText === "What's your name?", 5000);
+    t.typeText('Alice');
     await t.runForTime(1000);
-    const nano = t.getSprite('Nano');
-    t.assert.equal(nano.sayText, "That's great to hear!", "Nano should say 'That's great to hear!'");
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Hi Alice', 5000);
     await t.runForTime(2000);
-    t.assert.equal(nano.sayText, '', "Nano should stop saying 'That's great to hear!' after 2 seconds");
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Are you OK Alice', 5000);
+    t.typeText('yes');
+    await t.runForTime(1000);
+    t.assert.equal(t.getSprite('Nano').currentCostume.name, 'nano-c', "Nano's costume should change to 'nano-c' if the answer to 'Are you OK [name]' is 'yes'");
     t.end();
 }
 
-const test10 = async function (t) {
+const testNanoSaysGreatToHear = async function (t) {
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Nano').sayText.includes('Are you OK'));
+    await t.runForTime(1000);
+    t.clickSprite('Nano');
+    await t.runUntil(() => t.getSprite('Nano').sayText === "What's your name?", 5000);
+    t.typeText('Alice');
+    await t.runForTime(1000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Hi Alice', 5000);
+    await t.runForTime(2000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Are you OK Alice', 5000);
+    t.typeText('yes');
+    await t.runForTime(1000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === "That's great to hear!", 5000);
+    t.assert.equal(t.getSprite('Nano').sayText, "That's great to hear!", "Nano should say 'That's great to hear!' for 2 seconds if the answer to 'Are you OK [name]' is 'yes'");
+    t.end();
+}
+
+const testNanoCostumeChangeNo = async function (t) {
+    t.greenFlag();
+    await t.runForTime(1000);
+    t.clickSprite('Nano');
+    await t.runUntil(() => t.getSprite('Nano').sayText === "What's your name?", 5000);
+    t.typeText('Alice');
+    await t.runForTime(1000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Hi Alice', 5000);
+    await t.runForTime(2000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Are you OK Alice', 5000);
     t.typeText('no');
     await t.runForTime(1000);
-    const nano = t.getSprite('Nano');
-    t.assert.equal(nano.getCostumeByIndex(nano.currentCostume).name, 'nano-d', 'Nano should change to costume nano-d');
+    t.assert.equal(t.getSprite('Nano').currentCostume.name, 'nano-d', "Nano's costume should change to 'nano-d' if the answer to 'Are you OK [name]' is not 'yes'");
     t.end();
 }
 
-const test11 = async function (t) {
+const testNanoSaysOhNo = async function (t) {
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Nano').sayText.includes('Are you OK'));
+    await t.runForTime(1000);
+    t.clickSprite('Nano');
+    await t.runUntil(() => t.getSprite('Nano').sayText === "What's your name?", 5000);
+    t.typeText('Alice');
+    await t.runForTime(1000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Hi Alice', 5000);
+    await t.runForTime(2000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Are you OK Alice', 5000);
     t.typeText('no');
     await t.runForTime(1000);
-    const nano = t.getSprite('Nano');
-    t.assert.equal(nano.sayText, 'Oh no!', "Nano should say 'Oh no!'");
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Oh no!', 5000);
+    t.assert.equal(t.getSprite('Nano').sayText, 'Oh no!', "Nano should say 'Oh no!' for 2 seconds if the answer to 'Are you OK [name]' is not 'yes'");
+    t.end();
+}
+
+const testNanoCostumeChangeAfterOhNo = async function (t) {
+    t.greenFlag();
+    await t.runForTime(1000);
+    t.clickSprite('Nano');
+    await t.runUntil(() => t.getSprite('Nano').sayText === "What's your name?", 5000);
+    t.typeText('Alice');
+    await t.runForTime(1000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Hi Alice', 5000);
     await t.runForTime(2000);
-    t.assert.equal(nano.sayText, '', "Nano should stop saying 'Oh no!' after 2 seconds");
-    t.assert.equal(nano.getCostumeByIndex(nano.currentCostume).name, 'nano-b', 'Nano should change to costume nano-b');
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Are you OK Alice', 5000);
+    t.typeText('no');
+    await t.runForTime(1000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Oh no!', 5000);
+    await t.runForTime(2000);
+    t.assert.equal(t.getSprite('Nano').currentCostume.name, 'nano-b', "Nano's costume should change to 'nano-b' after saying 'Oh no!' for 2 seconds");
     t.end();
 }
 
-const test12 = async function (t) {
+const testNanoAsksGoToMoon = async function (t) {
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Nano').sayText.includes('Do you want to go to the moon?'));
-    const nano = t.getSprite('Nano');
-    t.assert.equal(nano.sayText, 'Do you want to go to the moon?', "Nano should ask 'Do you want to go to the moon?'");
-    t.end();
-}
-
-const test13 = async function (t) {
-    t.greenFlag();
-    await t.runUntil(() => t.getSprite('Nano').sayText.includes('Do you want to go to the moon?'));
+    await t.runForTime(1000);
+    t.clickSprite('Nano');
+    await t.runUntil(() => t.getSprite('Nano').sayText === "What's your name?", 5000);
+    t.typeText('Alice');
+    await t.runForTime(1000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Hi Alice', 5000);
+    await t.runForTime(2000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Are you OK Alice', 5000);
     t.typeText('yes');
     await t.runForTime(1000);
-    const stage = t.getStage();
-    t.assert.equal(stage.getCostumeByIndex(stage.currentCostume).name, 'moon', 'Stage should change to costume moon');
+    await t.runUntil(() => t.getSprite('Nano').sayText === "That's great to hear!", 5000);
+    await t.runForTime(2000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Do you want to go to the moon?', 5000);
+    t.assert.equal(t.getSprite('Nano').sayText, 'Do you want to go to the moon?', "Nano should ask 'Do you want to go to the moon?' after responding to 'Are you OK [name]'");
     t.end();
 }
 
-const test14 = async function (t) {
+const testStageCostumeChangeMoon = async function (t) {
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Nano').sayText.includes('Do you want to go to the moon?'));
+    await t.runForTime(1000);
+    t.clickSprite('Nano');
+    await t.runUntil(() => t.getSprite('Nano').sayText === "What's your name?", 5000);
+    t.typeText('Alice');
+    await t.runForTime(1000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Hi Alice', 5000);
+    await t.runForTime(2000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Are you OK Alice', 5000);
     t.typeText('yes');
     await t.runForTime(1000);
-    const nano = t.getSprite('Nano');
-    const initialY = nano.y;
+    await t.runUntil(() => t.getSprite('Nano').sayText === "That's great to hear!", 5000);
+    await t.runForTime(2000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Do you want to go to the moon?', 5000);
+    t.typeText('yes');
+    await t.runForTime(1000);
+    t.assert.equal(t.getStage().currentCostume.name, 'moon', "Stage costume should change to 'moon' if the answer to 'Do you want to go to the moon?' is 'yes'");
+    t.end();
+}
+
+const testNanoMovesUpDown = async function (t) {
+    t.greenFlag();
+    await t.runForTime(1000);
+    t.clickSprite('Nano');
+    await t.runUntil(() => t.getSprite('Nano').sayText === "What's your name?", 5000);
+    t.typeText('Alice');
+    await t.runForTime(1000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Hi Alice', 5000);
+    await t.runForTime(2000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Are you OK Alice', 5000);
+    t.typeText('yes');
+    await t.runForTime(1000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === "That's great to hear!", 5000);
+    await t.runForTime(2000);
+    await t.runUntil(() => t.getSprite('Nano').sayText === 'Do you want to go to the moon?', 5000);
+    t.typeText('yes');
+    await t.runForTime(1000);
+    const initialY = t.getSprite('Nano').y;
     for (let i = 0; i < 4; i++) {
         await t.runForTime(100);
-        t.assert.notEqual(nano.y, initialY, 'Nano should move up');
+        t.assert.notEqual(t.getSprite('Nano').y, initialY, "Nano should move up and down");
         await t.runForTime(100);
-        t.assert.equal(nano.y, initialY, 'Nano should move down');
+        t.assert.equal(t.getSprite('Nano').y, initialY, "Nano should move up and down");
     }
     t.end();
 }
@@ -184,69 +246,75 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testNanoAsksNameOnClick,
-		 name: "testNanoAsksNameOnClick",
-		 description: "Nano asks 'What's your name?' when clicked",
+		 test: testNanoAsksName,
+		 name: "testNanoAsksName",
+		 description: "Nano asks 'What's your name?' after being clicked",
 		 categories: []
 	},
 	{
-		 test: testAnswerStoredInGlobalVariable,
-		 name: "testAnswerStoredInGlobalVariable",
+		 test: testStoreNameInGlobalVariable,
+		 name: "testStoreNameInGlobalVariable",
 		 description: "Answer to 'What's your name?' is stored in global variable 'name'",
 		 categories: []
 	},
 	{
-		 test: testNanoSaysHiAfterNameAnswer,
-		 name: "testNanoSaysHiAfterNameAnswer",
-		 description: "Nano says 'Hi [name]' for 2 seconds after answering 'What's your name?'",
+		 test: testNanoSaysHi,
+		 name: "testNanoSaysHi",
+		 description: "Nano says 'Hi [name]' for 2 seconds after 'What's your name?' is answered",
 		 categories: []
 	},
 	{
-		 test: testNanoAsksAreYouOkAfterHi,
-		 name: "testNanoAsksAreYouOkAfterHi",
+		 test: testNanoAsksAreYouOK,
+		 name: "testNanoAsksAreYouOK",
 		 description: "Nano asks 'Are you OK [name]' after saying 'Hi [name]'",
 		 categories: []
 	},
 	{
-		 test: test8,
-		 name: "test8",
-		 description: "Test 8: If the answer to 'Are you OK [name]' is 'yes' Nanos costume changes to 'nano-c'",
+		 test: testNanoCostumeChangeYes,
+		 name: "testNanoCostumeChangeYes",
+		 description: "Nano changes costume to 'nano-c' if answer to 'Are you OK [name]' is 'yes'",
 		 categories: []
 	},
 	{
-		 test: test9,
-		 name: "test9",
-		 description: "Test 9: If the answer to 'Are you OK [name]' is 'yes' Nano says 'That's great to hear!' for 2 seconds",
+		 test: testNanoSaysGreatToHear,
+		 name: "testNanoSaysGreatToHear",
+		 description: "Nano says 'That's great to hear!' for 2 seconds if answer to 'Are you OK [name]' is 'yes'",
 		 categories: []
 	},
 	{
-		 test: test10,
-		 name: "test10",
-		 description: "Test 10: If the answer to 'Are you OK [name]' is not 'yes' Nanos costume changes to 'nano-d'",
+		 test: testNanoCostumeChangeNo,
+		 name: "testNanoCostumeChangeNo",
+		 description: "Nano changes costume to 'nano-d' if answer to 'Are you OK [name]' is not 'yes'",
 		 categories: []
 	},
 	{
-		 test: test11,
-		 name: "test11",
-		 description: "Test 11: If the answer to 'Are you OK [name]' is not 'yes' Nano says 'Oh no!' for 2 seconds, then Nanos costume changes to 'nano-b'",
+		 test: testNanoSaysOhNo,
+		 name: "testNanoSaysOhNo",
+		 description: "Nano says 'Oh no!' for 2 seconds if answer to 'Are you OK [name]' is not 'yes'",
 		 categories: []
 	},
 	{
-		 test: test12,
-		 name: "test12",
-		 description: "Test 12: Nano then asks 'Do you want to go to the moon?'",
+		 test: testNanoCostumeChangeAfterOhNo,
+		 name: "testNanoCostumeChangeAfterOhNo",
+		 description: "Nano changes costume to 'nano-b' after saying 'Oh no!' for 2 seconds",
 		 categories: []
 	},
 	{
-		 test: test13,
-		 name: "test13",
-		 description: "Test 13: If the answer to 'Do you want to go to the moon?' is 'yes' the stage costume changes to 'moon'",
+		 test: testNanoAsksGoToMoon,
+		 name: "testNanoAsksGoToMoon",
+		 description: "Nano asks 'Do you want to go to the moon?' after responding to 'Are you OK [name]'",
 		 categories: []
 	},
 	{
-		 test: test14,
-		 name: "test14",
-		 description: "Test 14: If the answer to 'Do you want to go to the moon?' is 'yes' Nano moves up, waits 0.1 seconds, moves down and waits 0.1 seconds for 4 times",
+		 test: testStageCostumeChangeMoon,
+		 name: "testStageCostumeChangeMoon",
+		 description: "Stage costume changes to 'moon' if answer to 'Do you want to go to the moon?' is 'yes'",
+		 categories: []
+	},
+	{
+		 test: testNanoMovesUpDown,
+		 name: "testNanoMovesUpDown",
+		 description: "Nano moves up and down 4 times if answer to 'Do you want to go to the moon?' is 'yes'",
 		 categories: []
 	},
 ]
