@@ -1,76 +1,76 @@
 {
   "tests": [
     {
-      "name": "At the start Finish Line has costume 'normal'",
-      "code": "const testFinishLineCostume = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Finish Line').currentCostume === t.getSprite('Finish Line').getCostumeByName('normal').index, 5000);\n    t.assert.equal(t.getSprite('Finish Line').currentCostume, t.getSprite('Finish Line').getCostumeByName('normal').index, 'Finish Line should have costume normal at the start');\n    t.end();\n}"
+      "name": "Finish Line has costume 'normal' at the start",
+      "code": "const testFinishLineCostume = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Finish Line').currentCostume === 0, 5000);\n    const finishLine = t.getSprite('Finish Line');\n    t.assert.equal(finishLine.getCostumeByIndex(finishLine.currentCostume).name, 'normal', 'Finish Line should have costume normal at the start');\n    t.end();\n}"
     },
     {
-      "name": "At the start the global variable distance is 0",
+      "name": "Global variable distance is 0 at the start",
       "code": "const testGlobalVariableDistance = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 0, 5000);\n    t.assert.equal(t.getGlobalVariable('distance'), 0, 'Global variable distance should be 0 at the start');\n    t.end();\n}"
     },
     {
-      "name": "At the start the global variable time is 0",
+      "name": "Global variable time is 0 at the start",
       "code": "const testGlobalVariableTime = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('time') === 0, 5000);\n    t.assert.equal(t.getGlobalVariable('time'), 0, 'Global variable time should be 0 at the start');\n    t.end();\n}"
     },
     {
-      "name": "At the start Finish Line has coordinates (0, 30)",
-      "code": "const testFinishLineCoordinates = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Finish Line').x === 0 && t.getSprite('Finish Line').y === 30, 5000);\n    t.assert.equal(t.getSprite('Finish Line').x, 0, 'Finish Line should have x coordinate 0 at the start');\n    t.assert.equal(t.getSprite('Finish Line').y, 30, 'Finish Line should have y coordinate 30 at the start');\n    t.end();\n}"
+      "name": "Finish Line has coordinates (0, 30) at the start",
+      "code": "const testFinishLineCoordinates = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Finish Line').x === 0 && t.getSprite('Finish Line').y === 30, 5000);\n    const finishLine = t.getSprite('Finish Line');\n    t.assert.equal(finishLine.x, 0, 'Finish Line should have x coordinate 0 at the start');\n    t.assert.equal(finishLine.y, 30, 'Finish Line should have y coordinate 30 at the start');\n    t.end();\n}"
     },
     {
-      "name": "At the start Finish Line has size 1",
+      "name": "Finish Line has size 1 at the start",
       "code": "const testFinishLineSize = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Finish Line').size === 1, 5000);\n    t.assert.equal(t.getSprite('Finish Line').size, 1, 'Finish Line should have size 1 at the start');\n    t.end();\n}"
     },
     {
-      "name": "At the start Finish Line says a countdown from 3 to 1, with every number showing for 1 second",
-      "code": "const testFinishLineCountdown = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Finish Line').sayText === '3', 5000);\n    t.assert.equal(t.getSprite('Finish Line').sayText, '3', 'Finish Line should say 3 at the start');\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Finish Line').sayText, '2', 'Finish Line should say 2 after 1 second');\n    await t.runForTime(1000);\n    t.assert.equal(t.getSprite('Finish Line').sayText, '1', 'Finish Line should say 1 after 2 seconds');\n    await t.runForTime(1000);\n    t.end();\n}"
+      "name": "Finish Line says a countdown from 3 to 1, with every number showing for 1 second",
+      "code": "const testFinishLineCountdown = async function (t) {\n    t.greenFlag();\n    const finishLine = t.getSprite('Finish Line');\n    await t.runUntil(() => finishLine.sayText === '3', 5000);\n    t.assert.equal(finishLine.sayText, '3', 'Finish Line should say 3');\n    await t.runForTime(1000);\n    t.assert.equal(finishLine.sayText, '2', 'Finish Line should say 2');\n    await t.runForTime(1000);\n    t.assert.equal(finishLine.sayText, '1', 'Finish Line should say 1');\n    await t.runForTime(1000);\n    t.end();\n}"
     },
     {
       "name": "After the countdown is finished the timer increases by 0.1 every 0.1 seconds",
-      "code": "const testTimerIncrease = async function (t) {\n    t.greenFlag();\n    await t.runForTime(3000); // Wait for countdown to finish\n    const initialTime = t.getGlobalVariable('time');\n    await t.runForTime(100);\n    t.assert.equal(t.getGlobalVariable('time'), initialTime + 0.1, 'Timer should increase by 0.1 every 0.1 seconds');\n    t.end();\n}"
+      "code": "const testTimerIncreases = async function (t) {\n    t.greenFlag();\n    await t.runForTime(3000); // Wait for countdown to finish\n    const initialTime = t.getGlobalVariable('time');\n    await t.runForTime(1000);\n    const finalTime = t.getGlobalVariable('time');\n    t.assert.greaterOrEqual(finalTime, initialTime + 1, 'Timer should increase by 0.1 every 0.1 seconds');\n    t.end();\n}"
     },
     {
-      "name": "At the start Tree1 is visible",
-      "code": "const testTree1Visibility = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Tree1').visible === true, 5000);\n    t.assert.equal(t.getSprite('Tree1').visible, true, 'Tree1 should be visible at the start');\n    t.end();\n}"
+      "name": "Tree1 is visible at the start",
+      "code": "const testTree1Visible = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Tree1').visible, 5000);\n    t.assert.ok(t.getSprite('Tree1').visible, 'Tree1 should be visible at the start');\n    t.end();\n}"
     },
     {
-      "name": "At the start Tree1 has coordinates (-50, 20)",
-      "code": "const testTree1Coordinates = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Tree1').x === -50 && t.getSprite('Tree1').y === 20, 5000);\n    t.assert.equal(t.getSprite('Tree1').x, -50, 'Tree1 should have x coordinate -50 at the start');\n    t.assert.equal(t.getSprite('Tree1').y, 20, 'Tree1 should have y coordinate 20 at the start');\n    t.end();\n}"
+      "name": "Tree1 has coordinates (-50, 20) at the start",
+      "code": "const testTree1Coordinates = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Tree1').x === -50 && t.getSprite('Tree1').y === 20, 5000);\n    const tree1 = t.getSprite('Tree1');\n    t.assert.equal(tree1.x, -50, 'Tree1 should have x coordinate -50 at the start');\n    t.assert.equal(tree1.y, 20, 'Tree1 should have y coordinate 20 at the start');\n    t.end();\n}"
     },
     {
-      "name": "At the start Tree1 has size 1",
+      "name": "Tree1 has size 1 at the start",
       "code": "const testTree1Size = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getSprite('Tree1').size === 1, 5000);\n    t.assert.equal(t.getSprite('Tree1').size, 1, 'Tree1 should have size 1 at the start');\n    t.end();\n}"
     },
     {
       "name": "Until distance is 100 the left arrow key and the right arrow key have to be pressed and released in an alternating manner to increase distance for every button press",
-      "code": "const testDistanceIncreaseWithKeys = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 0, 5000);\n    for (let i = 0; i < 50; i++) {\n        t.keyPress('left arrow');\n        await t.runForTime(100);\n        t.keyRelease('left arrow');\n        await t.runForTime(100);\n        t.keyPress('right arrow');\n        await t.runForTime(100);\n        t.keyRelease('right arrow');\n        await t.runForTime(100);\n    }\n    t.assert.equal(t.getGlobalVariable('distance'), 100, 'Distance should be 100 after alternating key presses');\n    t.end();\n}"
+      "code": "const testDistanceIncreaseWithKeys = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 0, 5000);\n    for (let i = 0; i < 50; i++) {\n        t.keyPress('left arrow');\n        t.keyRelease('left arrow');\n        await t.runForTime(100);\n        t.keyPress('right arrow');\n        t.keyRelease('right arrow');\n        await t.runForTime(100);\n    }\n    t.assert.equal(t.getGlobalVariable('distance'), 100, 'Distance should be 100 after alternating key presses');\n    t.end();\n}"
     },
     {
       "name": "Every time distance increases the size of Finish Line increases by 1",
-      "code": "const testFinishLineSizeIncrease = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 0, 5000);\n    const initialSize = t.getSprite('Finish Line').size;\n    t.keyPress('left arrow');\n    await t.runForTime(100);\n    t.keyRelease('left arrow');\n    await t.runForTime(100);\n    t.keyPress('right arrow');\n    await t.runForTime(100);\n    t.keyRelease('right arrow');\n    await t.runForTime(100);\n    t.assert.equal(t.getSprite('Finish Line').size, initialSize + 1, 'Finish Line size should increase by 1 every time distance increases');\n    t.end();\n}"
+      "code": "const testFinishLineSizeIncrease = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 0, 5000);\n    const initialSize = t.getSprite('Finish Line').size;\n    for (let i = 0; i < 10; i++) {\n        t.keyPress('left arrow');\n        t.keyRelease('left arrow');\n        await t.runForTime(100);\n        t.keyPress('right arrow');\n        t.keyRelease('right arrow');\n        await t.runForTime(100);\n    }\n    t.assert.equal(t.getSprite('Finish Line').size, initialSize + 10, 'Finish Line size should increase by 1 for every distance increase');\n    t.end();\n}"
     },
     {
       "name": "Every time distance increases the size of Tree1 increases by 1",
-      "code": "const testTree1SizeIncrease = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 0, 5000);\n    const initialSize = t.getSprite('Tree1').size;\n    t.keyPress('left arrow');\n    await t.runForTime(100);\n    t.keyRelease('left arrow');\n    await t.runForTime(100);\n    t.keyPress('right arrow');\n    await t.runForTime(100);\n    t.keyRelease('right arrow');\n    await t.runForTime(100);\n    t.assert.equal(t.getSprite('Tree1').size, initialSize + 1, 'Tree1 size should increase by 1 every time distance increases');\n    t.end();\n}"
+      "code": "const testTree1SizeIncrease = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 0, 5000);\n    const initialSize = t.getSprite('Tree1').size;\n    for (let i = 0; i < 10; i++) {\n        t.keyPress('left arrow');\n        t.keyRelease('left arrow');\n        await t.runForTime(100);\n        t.keyPress('right arrow');\n        t.keyRelease('right arrow');\n        await t.runForTime(100);\n    }\n    t.assert.equal(t.getSprite('Tree1').size, initialSize + 10, 'Tree1 size should increase by 1 for every distance increase');\n    t.end();\n}"
     },
     {
       "name": "Every time distance increases the y coordinate of Finish Line decreases by 1.5",
-      "code": "const testFinishLineYCoordinateDecrease = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 0, 5000);\n    const initialY = t.getSprite('Finish Line').y;\n    t.keyPress('left arrow');\n    await t.runForTime(100);\n    t.keyRelease('left arrow');\n    await t.runForTime(100);\n    t.keyPress('right arrow');\n    await t.runForTime(100);\n    t.keyRelease('right arrow');\n    await t.runForTime(100);\n    t.assert.equal(t.getSprite('Finish Line').y, initialY - 1.5, 'Finish Line y coordinate should decrease by 1.5 every time distance increases');\n    t.end();\n}"
+      "code": "const testFinishLineYCoordinateDecrease = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 0, 5000);\n    const initialY = t.getSprite('Finish Line').y;\n    for (let i = 0; i < 10; i++) {\n        t.keyPress('left arrow');\n        t.keyRelease('left arrow');\n        await t.runForTime(100);\n        t.keyPress('right arrow');\n        t.keyRelease('right arrow');\n        await t.runForTime(100);\n    }\n    t.assert.equal(t.getSprite('Finish Line').y, initialY - 15, 'Finish Line y coordinate should decrease by 1.5 for every distance increase');\n    t.end();\n}"
     },
     {
       "name": "Every time distance increases the y coordinate of Tree1 decreases by 1.5",
-      "code": "const testTree1YCoordinateDecrease = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 0, 5000);\n    const initialY = t.getSprite('Tree1').y;\n    t.keyPress('left arrow');\n    await t.runForTime(100);\n    t.keyRelease('left arrow');\n    await t.runForTime(100);\n    t.keyPress('right arrow');\n    await t.runForTime(100);\n    t.keyRelease('right arrow');\n    await t.runForTime(100);\n    t.assert.equal(t.getSprite('Tree1').y, initialY - 1.5, 'Tree1 y coordinate should decrease by 1.5 every time distance increases');\n    t.end();\n}"
+      "code": "const testTree1YCoordinateDecrease = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 0, 5000);\n    const initialY = t.getSprite('Tree1').y;\n    for (let i = 0; i < 10; i++) {\n        t.keyPress('left arrow');\n        t.keyRelease('left arrow');\n        await t.runForTime(100);\n        t.keyPress('right arrow');\n        t.keyRelease('right arrow');\n        await t.runForTime(100);\n    }\n    t.assert.equal(t.getSprite('Tree1').y, initialY - 15, 'Tree1 y coordinate should decrease by 1.5 for every distance increase');\n    t.end();\n}"
     },
     {
       "name": "Every time distance increases the x coordinate of Tree1 decreases by 2",
-      "code": "const testTree1XCoordinateDecrease = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 0, 5000);\n    const initialX = t.getSprite('Tree1').x;\n    t.keyPress('left arrow');\n    await t.runForTime(100);\n    t.keyRelease('left arrow');\n    await t.runForTime(100);\n    t.keyPress('right arrow');\n    await t.runForTime(100);\n    t.keyRelease('right arrow');\n    await t.runForTime(100);\n    t.assert.equal(t.getSprite('Tree1').x, initialX - 2, 'Tree1 x coordinate should decrease by 2 every time distance increases');\n    t.end();\n}"
+      "code": "const testTree1XCoordinateDecrease = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 0, 5000);\n    const initialX = t.getSprite('Tree1').x;\n    for (let i = 0; i < 10; i++) {\n        t.keyPress('left arrow');\n        t.keyRelease('left arrow');\n        await t.runForTime(100);\n        t.keyPress('right arrow');\n        t.keyRelease('right arrow');\n        await t.runForTime(100);\n    }\n    t.assert.equal(t.getSprite('Tree1').x, initialX - 20, 'Tree1 x coordinate should decrease by 2 for every distance increase');\n    t.end();\n}"
     },
     {
       "name": "After distance reaches 100 Finish Line changes costume to 'broken'",
-      "code": "const testFinishLineCostumeChange = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 100, 10000);\n    await t.runForTime(1000); // Wait for costume change\n    t.assert.equal(t.getSprite('Finish Line').currentCostume, t.getSprite('Finish Line').getCostumeByName('broken').index, 'Finish Line should change costume to broken after distance reaches 100');\n    t.end();\n}"
+      "code": "const testFinishLineCostumeChange = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 100, 10000);\n    const finishLine = t.getSprite('Finish Line');\n    t.assert.equal(finishLine.getCostumeByIndex(finishLine.currentCostume).name, 'broken', 'Finish Line should change costume to broken after distance reaches 100');\n    t.end();\n}"
     },
     {
       "name": "After distance reaches 100 the game ends",
-      "code": "const testGameEnd = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 100, 10000);\n    await t.runForTime(1000); // Wait for game end\n    t.assert.ok(t.getGlobalVariable('gameOver'), 'Game should end after distance reaches 100');\n    t.end();\n}"
+      "code": "const testGameEnds = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('distance') === 100, 10000);\n    await t.runForTime(1000);\n    t.assert.fail('Game should end after distance reaches 100');\n    t.end();\n}"
     }
   ]
 }

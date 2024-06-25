@@ -1,5 +1,5 @@
-const testUsernameGeneration = async function (t) {
-    t.seedScratch(1234);
+const test1 = async function (t) {
+    t.seedScratch(12345);
     const abby = await t.getSprite('Abby');
     const adjectives = await abby.getList('adjectives', true);
     const nouns = await abby.getList('nouns', true);
@@ -12,8 +12,8 @@ const testUsernameGeneration = async function (t) {
     t.end();
 }
 
-const testUsernameSaid = async function (t) {
-    t.seedScratch(1234);
+const test2 = async function (t) {
+    t.seedScratch(12345);
     const abby = await t.getSprite('Abby');
     await t.clickSprite('Abby');
     await t.runForTime(1000);
@@ -22,8 +22,8 @@ const testUsernameSaid = async function (t) {
     t.end();
 }
 
-const testAddUsernameToList = async function (t) {
-    t.seedScratch(1234);
+const test3 = async function (t) {
+    t.seedScratch(12345);
     const abby = await t.getSprite('Abby');
     const button4 = await t.getSprite('Button4');
     await t.clickSprite('Abby');
@@ -38,21 +38,21 @@ const testAddUsernameToList = async function (t) {
 
 module.exports = [
 	{
-		 test: testUsernameGeneration,
-		 name: "testUsernameGeneration",
-		 description: "When Abby is clicked the global variable username is set to a randomly picked item from the 'adjectives' list and an item from the 'nouns' list at a random index between 1 and length of the adjective list",
+		 test: test1,
+		 name: "test1",
+		 description: "Test 1: When Abby is clicked the global variable username is set to a randomly picked item from the 'adjectives' list and an item from the 'nouns' list at a random index between 1 and length of the adjective list",
 		 categories: []
 	},
 	{
-		 test: testUsernameSaid,
-		 name: "testUsernameSaid",
-		 description: "When Abby is clicked the generated username is said",
+		 test: test2,
+		 name: "test2",
+		 description: "Test 2: When Abby is clicked the generated username is said",
 		 categories: []
 	},
 	{
-		 test: testAddUsernameToList,
-		 name: "testAddUsernameToList",
-		 description: "When Button4 is clicked the current value of username is added to the 'names i like' list",
+		 test: test3,
+		 name: "test3",
+		 description: "Test 3: When Button4 is clicked the current value of username is added to the 'names i like' list",
 		 categories: []
 	},
 ]

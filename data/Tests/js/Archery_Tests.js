@@ -45,7 +45,7 @@ const testArrowSizeDecreasesOnSpace = async function (t) {
     t.end();
 }
 
-const testArrowStaysInBounds = async function (t) {
+const testArrowStaysWithinBounds = async function (t) {
     t.greenFlag();
     t.addConstraint(() => {
         const arrow = t.getSprite('Arrow');
@@ -63,12 +63,10 @@ const testArrowHitsYellow = async function (t) {
     t.keyPress('space');
     await t.runForTime(1000);
     const arrow = t.getSprite('Arrow');
-    arrow.x = 0; // Assuming the color is at (0, 0)
-    arrow.y = 0;
-    await t.runForTime(1000);
-    if (arrow.isTouchingColor([255, 242, 0])) {
-        t.assert.equal(arrow.sayText, '200 points', 'Arrow should say "200 points" when hitting yellow color');
-    }
+    await t.runUntil(() => arrow.isTouchingColor([255, 242, 0]), 10000);
+    t.assert.equal(arrow.sayText, '200 points', 'Arrow should say "200 points" when hitting yellow color');
+    await t.runForTime(2000);
+    t.assert.equal(arrow.sayText, '', 'Arrow should stop saying "200 points" after 2 seconds');
     t.end();
 }
 
@@ -77,12 +75,10 @@ const testArrowHitsRed = async function (t) {
     t.keyPress('space');
     await t.runForTime(1000);
     const arrow = t.getSprite('Arrow');
-    arrow.x = 0; // Assuming the color is at (0, 0)
-    arrow.y = 0;
-    await t.runForTime(1000);
-    if (arrow.isTouchingColor([238, 28, 36])) {
-        t.assert.equal(arrow.sayText, '150 points', 'Arrow should say "150 points" when hitting red color');
-    }
+    await t.runUntil(() => arrow.isTouchingColor([238, 28, 36]), 10000);
+    t.assert.equal(arrow.sayText, '150 points', 'Arrow should say "150 points" when hitting red color');
+    await t.runForTime(2000);
+    t.assert.equal(arrow.sayText, '', 'Arrow should stop saying "150 points" after 2 seconds');
     t.end();
 }
 
@@ -91,12 +87,10 @@ const testArrowHitsBlue = async function (t) {
     t.keyPress('space');
     await t.runForTime(1000);
     const arrow = t.getSprite('Arrow');
-    arrow.x = 0; // Assuming the color is at (0, 0)
-    arrow.y = 0;
-    await t.runForTime(1000);
-    if (arrow.isTouchingColor([0, 114, 188])) {
-        t.assert.equal(arrow.sayText, '100 points', 'Arrow should say "100 points" when hitting blue color');
-    }
+    await t.runUntil(() => arrow.isTouchingColor([0, 114, 188]), 10000);
+    t.assert.equal(arrow.sayText, '100 points', 'Arrow should say "100 points" when hitting blue color');
+    await t.runForTime(2000);
+    t.assert.equal(arrow.sayText, '', 'Arrow should stop saying "100 points" after 2 seconds');
     t.end();
 }
 
@@ -105,12 +99,10 @@ const testArrowHitsBlack = async function (t) {
     t.keyPress('space');
     await t.runForTime(1000);
     const arrow = t.getSprite('Arrow');
-    arrow.x = 0; // Assuming the color is at (0, 0)
-    arrow.y = 0;
-    await t.runForTime(1000);
-    if (arrow.isTouchingColor([0, 0, 0])) {
-        t.assert.equal(arrow.sayText, '50 points', 'Arrow should say "50 points" when hitting black color');
-    }
+    await t.runUntil(() => arrow.isTouchingColor([0, 0, 0]), 10000);
+    t.assert.equal(arrow.sayText, '50 points', 'Arrow should say "50 points" when hitting black color');
+    await t.runForTime(2000);
+    t.assert.equal(arrow.sayText, '', 'Arrow should stop saying "50 points" after 2 seconds');
     t.end();
 }
 
@@ -140,8 +132,8 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testArrowStaysInBounds,
-		 name: "testArrowStaysInBounds",
+		 test: testArrowStaysWithinBounds,
+		 name: "testArrowStaysWithinBounds",
 		 description: "Arrow always stays in between the coordinates -150 and 150 for both the x and y coordinates",
 		 categories: []
 	},

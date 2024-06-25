@@ -1,79 +1,72 @@
 const testDrumStartCostume = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Drum').getCostumeByName('drum-a') !== undefined, 5000);
+    await t.runUntil(() => t.getSprite('Drum').getCostumeByName('drum-a'), 5000);
     const drum = t.getSprite('Drum');
-    t.assert.strictEqual(drum.currentCostume, drum.getCostumeByName('drum-a').index, 'Drum should start with costume drum-a');
+    t.assert.strictEqual(drum.currentCostume.name, 'drum-a', 'Drum should start with costume drum-a');
     t.end();
 }
 
 const testDrumSpacePress = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Drum').getCostumeByName('drum-a') !== undefined, 5000);
+    await t.runUntil(() => t.getSprite('Drum').getCostumeByName('drum-a'), 5000);
     t.keyPress('space');
-    await t.runForTime(1000);
+    await t.runUntil(() => t.getSprite('Drum').getCostumeByName('drum-b'), 5000);
     const drum = t.getSprite('Drum');
-    t.assert.strictEqual(drum.currentCostume, drum.getCostumeByName('drum-b').index, 'Drum should switch to costume drum-b when space is pressed');
-    await t.runForTime(1000);
-    t.assert.strictEqual(drum.currentCostume, drum.getCostumeByName('drum-a').index, 'Drum should switch back to costume drum-a after space is pressed');
+    t.assert.strictEqual(drum.currentCostume.name, 'drum-b', 'Drum should switch to costume drum-b when space is pressed');
+    await t.runUntil(() => t.getSprite('Drum').getCostumeByName('drum-a'), 5000);
+    t.assert.strictEqual(drum.currentCostume.name, 'drum-a', 'Drum should switch back to costume drum-a');
     t.end();
 }
 
 const testDrumClick = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Drum').getCostumeByName('drum-a') !== undefined, 5000);
+    await t.runUntil(() => t.getSprite('Drum').getCostumeByName('drum-a'), 5000);
     t.clickSprite('Drum');
-    await t.runForTime(1000);
+    await t.runUntil(() => t.getSprite('Drum').getCostumeByName('drum-b'), 5000);
     const drum = t.getSprite('Drum');
-    t.assert.strictEqual(drum.currentCostume, drum.getCostumeByName('drum-b').index, 'Drum should switch to costume drum-b when clicked');
-    await t.runForTime(1000);
-    t.assert.strictEqual(drum.currentCostume, drum.getCostumeByName('drum-a').index, 'Drum should switch back to costume drum-a after being clicked');
+    t.assert.strictEqual(drum.currentCostume.name, 'drum-b', 'Drum should switch to costume drum-b when clicked');
+    await t.runUntil(() => t.getSprite('Drum').getCostumeByName('drum-a'), 5000);
+    t.assert.strictEqual(drum.currentCostume.name, 'drum-a', 'Drum should switch back to costume drum-a');
     t.end();
 }
 
 const testSinger1StartCostume = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Singer1').getCostumeByName('not singing') !== undefined, 5000);
+    await t.runUntil(() => t.getSprite('Singer1').getCostumeByName('not singing'), 5000);
     const singer1 = t.getSprite('Singer1');
-    t.assert.strictEqual(singer1.currentCostume, singer1.getCostumeByName('not singing').index, 'Singer1 should start with costume not singing');
+    t.assert.strictEqual(singer1.currentCostume.name, 'not singing', 'Singer1 should start with costume not singing');
     t.end();
 }
 
 const testSinger1Click = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Singer1').getCostumeByName('not singing') !== undefined, 5000);
+    await t.runUntil(() => t.getSprite('Singer1').getCostumeByName('not singing'), 5000);
     t.clickSprite('Singer1');
-    await t.runForTime(1000);
+    await t.runUntil(() => t.getSprite('Singer1').getCostumeByName('singing'), 5000);
     const singer1 = t.getSprite('Singer1');
-    t.assert.strictEqual(singer1.currentCostume, singer1.getCostumeByName('singing').index, 'Singer1 should switch to costume singing when clicked');
-    await t.runForTime(1000);
-    t.assert.strictEqual(singer1.currentCostume, singer1.getCostumeByName('not singing').index, 'Singer1 should switch back to costume not singing after being clicked');
+    t.assert.strictEqual(singer1.currentCostume.name, 'singing', 'Singer1 should switch to costume singing when clicked');
+    await t.runUntil(() => t.getSprite('Singer1').getCostumeByName('not singing'), 5000);
+    t.assert.strictEqual(singer1.currentCostume.name, 'not singing', 'Singer1 should switch back to costume not singing');
     t.end();
 }
 
 const testDrumCymbalStartCostume = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Drum-cymbal').getCostumeByName('drum-cymbal-a') !== undefined, 5000);
+    await t.runUntil(() => t.getSprite('Drum-cymbal').getCostumeByName('drum-cymbal-a'), 5000);
     const drumCymbal = t.getSprite('Drum-cymbal');
-    t.assert.strictEqual(drumCymbal.currentCostume, drumCymbal.getCostumeByName('drum-cymbal-a').index, 'Drum-cymbal should start with costume drum-cymbal-a');
+    t.assert.strictEqual(drumCymbal.currentCostume.name, 'drum-cymbal-a', 'Drum-cymbal should start with costume drum-cymbal-a');
     t.end();
 }
 
 const testDrumCymbalClick = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Drum-cymbal').getCostumeByName('drum-cymbal-a') !== undefined, 5000);
+    await t.runUntil(() => t.getSprite('Drum-cymbal').getCostumeByName('drum-cymbal-a'), 5000);
     t.clickSprite('Drum-cymbal');
-    await t.runForTime(1000);
+    await t.runUntil(() => t.getSprite('Drum-cymbal').getCostumeByName('drum-cymbal-b'), 5000);
     const drumCymbal = t.getSprite('Drum-cymbal');
-    t.assert.strictEqual(drumCymbal.currentCostume, drumCymbal.getCostumeByName('drum-cymbal-b').index, 'Drum-cymbal should switch to costume drum-cymbal-b when clicked');
-    await t.runForTime(1000);
-    t.assert.strictEqual(drumCymbal.currentCostume, drumCymbal.getCostumeByName('drum-cymbal-a').index, 'Drum-cymbal should switch back to costume drum-cymbal-a after being clicked');
+    t.assert.strictEqual(drumCymbal.currentCostume.name, 'drum-cymbal-b', 'Drum-cymbal should switch to costume drum-cymbal-b when clicked');
+    await t.runUntil(() => t.getSprite('Drum-cymbal').getCostumeByName('drum-cymbal-a'), 5000);
+    t.assert.strictEqual(drumCymbal.currentCostume.name, 'drum-cymbal-a', 'Drum-cymbal should switch back to costume drum-cymbal-a');
     t.end();
 }
 

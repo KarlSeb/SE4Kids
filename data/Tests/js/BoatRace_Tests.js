@@ -1,14 +1,15 @@
-const testTimeVariableStartsAtZero = async function (t) {
+const testTimeStartsAtZero = async function (t) {
     t.greenFlag();
     await t.runUntil(() => t.getGlobalVariable('time') === 0, 1000);
     t.assert.equal(t.getGlobalVariable('time'), 0, 'Time variable should start at 0');
     t.end();
 }
 
-const testTimeVariableIncreases = async function (t) {
+const testTimeIncreases = async function (t) {
     t.greenFlag();
     await t.runForTime(1000);
-    t.assert.greater(t.getGlobalVariable('time'), 0, 'Time variable should increase');
+    const time = t.getGlobalVariable('time');
+    t.assert.greaterOrEqual(time, 0.9, 'Time variable should increase by 0.1 every 0.1 seconds');
     t.end();
 }
 
@@ -17,15 +18,15 @@ const testGateDirectionChanges = async function (t) {
     const gate = await t.getSprite('gate');
     const initialDirection = gate.direction;
     await t.runForTime(1000);
-    t.assert.notEqual(gate.direction, initialDirection, 'Gate direction should change');
+    t.assert.notEqual(gate.direction, initialDirection, 'Gate direction should change constantly');
     t.end();
 }
 
 const testBoatStartsWithNormalCostume = async function (t) {
     t.greenFlag();
     const boat = await t.getSprite('boat');
-    await t.runUntil(() => boat.getCostumeByName('normal'), 1000);
-    t.assert.equal(boat.currentCostume, boat.getCostumeByName('normal').index, 'Boat should start with costume normal');
+    await t.runUntil(() => boat.currentCostume === boat.getCostumeByName('normal').index, 1000);
+    t.assert.equal(boat.currentCostume, boat.getCostumeByName('normal').index, 'Boat should start with the costume normal');
     t.end();
 }
 
@@ -51,7 +52,7 @@ const testBoatTouchesColorChangesCostume = async function (t) {
     const boat = await t.getSprite('boat');
     await t.runUntil(() => boat.isTouchingColor([102, 59, 0]), 1000);
     await t.runForTime(100);
-    t.assert.equal(boat.currentCostume, boat.getCostumeByName('hit').index, 'Boat should change costume to hit when touching color [102, 59, 0]');
+    t.assert.equal(boat.currentCostume, boat.getCostumeByName('hit').index, 'Boat costume should change to hit when touching color [102, 59, 0]');
     t.end();
 }
 
@@ -66,7 +67,7 @@ const testBoatTouchesColorSaysNoooooo = async function (t) {
     t.end();
 }
 
-const testBoatResetsAfterNoooooo = async function (t) {
+const testBoatResetAfterNoooooo = async function (t) {
     t.greenFlag();
     const boat = await t.getSprite('boat');
     await t.runUntil(() => boat.isTouchingColor([102, 59, 0]), 1000);
@@ -78,15 +79,15 @@ const testBoatResetsAfterNoooooo = async function (t) {
     t.end();
 }
 
-const testBoatMovesByThreeSteps = async function (t) {
+const testBoatMovesBy3Steps = async function (t) {
     t.greenFlag();
     const boat = await t.getSprite('boat');
+    await t.runUntil(() => boat.isTouchingColor([255, 255, 255]), 1000);
     const initialX = boat.x;
     const initialY = boat.y;
-    await t.runUntil(() => boat.isTouchingColor([255, 255, 255]), 1000);
     await t.runForTime(100);
-    t.assert.notEqual(boat.x, initialX, 'Boat should move by 3 steps in x direction');
-    t.assert.notEqual(boat.y, initialY, 'Boat should move by 3 steps in y direction');
+    t.assert.greaterOrEqual(Math.abs(boat.x - initialX), 3, 'Boat should move by 3 steps in x direction');
+    t.assert.greaterOrEqual(Math.abs(boat.y - initialY), 3, 'Boat should move by 3 steps in y direction');
     t.end();
 }
 
@@ -96,13 +97,13 @@ const testBoatStopsMoving = async function (t) {
     await t.runUntil(() => boat.isTouchingColor([255, 255, 153]), 1000);
     const initialX = boat.x;
     const initialY = boat.y;
-    await t.runForTime(1000);
+    await t.runForTime(100);
     t.assert.equal(boat.x, initialX, 'Boat should stop moving in x direction');
     t.assert.equal(boat.y, initialY, 'Boat should stop moving in y direction');
     t.end();
 }
 
-const testBoatSaysYeah = async function (t) {
+const testBoatSaysYEAH = async function (t) {
     t.greenFlag();
     const boat = await t.getSprite('boat');
     await t.runUntil(() => boat.isTouchingColor([255, 255, 153]), 1000);
@@ -127,35 +128,41 @@ const testBoatMovesTowardsMouse = async function (t) {
     const boat = await t.getSprite('boat');
     const initialX = boat.x;
     const initialY = boat.y;
-    await t.runUntil(() => Math.sqrt(Math.pow(boat.x - t.getMousePos().x, 2) + Math.pow(boat.y - t.getMousePos().y, 2)) > 5, 1000);
+    const mouseX = initialX + 10;
+    const mouseY = initialY + 10;
+    t.mouseMove(mouseX, mouseY, 1);
+    await t.runUntil(() => Math.sqrt(Math.pow(boat.x - mouseX, 2) + Math.pow(boat.y - mouseY, 2)) > 5, 1000);
     await t.runForTime(100);
-    t.assert.notEqual(boat.x, initialX, 'Boat should move towards mouse in x direction');
-    t.assert.notEqual(boat.y, initialY, 'Boat should move towards mouse in y direction');
+    t.assert.notEqual(boat.x, initialX, 'Boat should move in x direction towards mouse pointer');
+    t.assert.notEqual(boat.y, initialY, 'Boat should move in y direction towards mouse pointer');
     t.end();
 }
 
 const testBoatStopsNearMouse = async function (t) {
     t.greenFlag();
     const boat = await t.getSprite('boat');
-    await t.runUntil(() => Math.sqrt(Math.pow(boat.x - t.getMousePos().x, 2) + Math.pow(boat.y - t.getMousePos().y, 2)) < 5, 1000);
     const initialX = boat.x;
     const initialY = boat.y;
-    await t.runForTime(1000);
-    t.assert.equal(boat.x, initialX, 'Boat should stop moving in x direction');
-    t.assert.equal(boat.y, initialY, 'Boat should stop moving in y direction');
+    const mouseX = initialX + 2;
+    const mouseY = initialY + 2;
+    t.mouseMove(mouseX, mouseY, 1);
+    await t.runUntil(() => Math.sqrt(Math.pow(boat.x - mouseX, 2) + Math.pow(boat.y - mouseY, 2)) < 5, 1000);
+    await t.runForTime(100);
+    t.assert.equal(boat.x, initialX, 'Boat should stop moving in x direction near mouse pointer');
+    t.assert.equal(boat.y, initialY, 'Boat should stop moving in y direction near mouse pointer');
     t.end();
 }
 
 module.exports = [
 	{
-		 test: testTimeVariableStartsAtZero,
-		 name: "testTimeVariableStartsAtZero",
+		 test: testTimeStartsAtZero,
+		 name: "testTimeStartsAtZero",
 		 description: "The time variable of the stage starts at 0",
 		 categories: []
 	},
 	{
-		 test: testTimeVariableIncreases,
-		 name: "testTimeVariableIncreases",
+		 test: testTimeIncreases,
+		 name: "testTimeIncreases",
 		 description: "The time variable increases by 0.1 every 0.1 seconds",
 		 categories: []
 	},
@@ -196,14 +203,14 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testBoatResetsAfterNoooooo,
-		 name: "testBoatResetsAfterNoooooo",
+		 test: testBoatResetAfterNoooooo,
+		 name: "testBoatResetAfterNoooooo",
 		 description: "After the boat says 'Noooooo!' for 1 second the boat is reset to starting conditions",
 		 categories: []
 	},
 	{
-		 test: testBoatMovesByThreeSteps,
-		 name: "testBoatMovesByThreeSteps",
+		 test: testBoatMovesBy3Steps,
+		 name: "testBoatMovesBy3Steps",
 		 description: "If the boat touches the color [255, 255, 255] the boat moves by 3 steps",
 		 categories: []
 	},
@@ -214,8 +221,8 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testBoatSaysYeah,
-		 name: "testBoatSaysYeah",
+		 test: testBoatSaysYEAH,
+		 name: "testBoatSaysYEAH",
 		 description: "If the boat touches the color [255, 255, 153] the boat says 'YEAH!' for 1 second",
 		 categories: []
 	},

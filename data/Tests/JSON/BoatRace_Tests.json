@@ -2,19 +2,19 @@
   "tests": [
     {
       "name": "The time variable of the stage starts at 0",
-      "code": "const testTimeVariableStartsAtZero = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('time') === 0, 1000);\n    t.assert.equal(t.getGlobalVariable('time'), 0, 'Time variable should start at 0');\n    t.end();\n}"
+      "code": "const testTimeStartsAtZero = async function (t) {\n    t.greenFlag();\n    await t.runUntil(() => t.getGlobalVariable('time') === 0, 1000);\n    t.assert.equal(t.getGlobalVariable('time'), 0, 'Time variable should start at 0');\n    t.end();\n}"
     },
     {
       "name": "The time variable increases by 0.1 every 0.1 seconds",
-      "code": "const testTimeVariableIncreases = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    t.assert.greater(t.getGlobalVariable('time'), 0, 'Time variable should increase');\n    t.end();\n}"
+      "code": "const testTimeIncreases = async function (t) {\n    t.greenFlag();\n    await t.runForTime(1000);\n    const time = t.getGlobalVariable('time');\n    t.assert.greaterOrEqual(time, 0.9, 'Time variable should increase by 0.1 every 0.1 seconds');\n    t.end();\n}"
     },
     {
       "name": "The gate direction changes constantly",
-      "code": "const testGateDirectionChanges = async function (t) {\n    t.greenFlag();\n    const gate = await t.getSprite('gate');\n    const initialDirection = gate.direction;\n    await t.runForTime(1000);\n    t.assert.notEqual(gate.direction, initialDirection, 'Gate direction should change');\n    t.end();\n}"
+      "code": "const testGateDirectionChanges = async function (t) {\n    t.greenFlag();\n    const gate = await t.getSprite('gate');\n    const initialDirection = gate.direction;\n    await t.runForTime(1000);\n    t.assert.notEqual(gate.direction, initialDirection, 'Gate direction should change constantly');\n    t.end();\n}"
     },
     {
       "name": "The boat starts with the costume 'normal'",
-      "code": "const testBoatStartsWithNormalCostume = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    await t.runUntil(() => boat.getCostumeByName('normal'), 1000);\n    t.assert.equal(boat.currentCostume, boat.getCostumeByName('normal').index, 'Boat should start with costume normal');\n    t.end();\n}"
+      "code": "const testBoatStartsWithNormalCostume = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    await t.runUntil(() => boat.currentCostume === boat.getCostumeByName('normal').index, 1000);\n    t.assert.equal(boat.currentCostume, boat.getCostumeByName('normal').index, 'Boat should start with the costume normal');\n    t.end();\n}"
     },
     {
       "name": "The boat starts with the direction 0",
@@ -26,7 +26,7 @@
     },
     {
       "name": "If the boat touches the color [102, 59, 0] the costume changes to 'hit'",
-      "code": "const testBoatTouchesColorChangesCostume = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    await t.runUntil(() => boat.isTouchingColor([102, 59, 0]), 1000);\n    await t.runForTime(100);\n    t.assert.equal(boat.currentCostume, boat.getCostumeByName('hit').index, 'Boat should change costume to hit when touching color [102, 59, 0]');\n    t.end();\n}"
+      "code": "const testBoatTouchesColorChangesCostume = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    await t.runUntil(() => boat.isTouchingColor([102, 59, 0]), 1000);\n    await t.runForTime(100);\n    t.assert.equal(boat.currentCostume, boat.getCostumeByName('hit').index, 'Boat costume should change to hit when touching color [102, 59, 0]');\n    t.end();\n}"
     },
     {
       "name": "If the boat touches the color [102, 59, 0] the boat says 'Noooooo!' for 1 second",
@@ -34,19 +34,19 @@
     },
     {
       "name": "After the boat says 'Noooooo!' for 1 second the boat is reset to starting conditions",
-      "code": "const testBoatResetsAfterNoooooo = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    await t.runUntil(() => boat.isTouchingColor([102, 59, 0]), 1000);\n    await t.runForTime(1100);\n    t.assert.equal(boat.currentCostume, boat.getCostumeByName('normal').index, 'Boat should reset to normal costume');\n    t.assert.equal(boat.direction, 0, 'Boat should reset to direction 0');\n    t.assert.equal(boat.x, -190, 'Boat should reset to x coordinate -190');\n    t.assert.equal(boat.y, -150, 'Boat should reset to y coordinate -150');\n    t.end();\n}"
+      "code": "const testBoatResetAfterNoooooo = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    await t.runUntil(() => boat.isTouchingColor([102, 59, 0]), 1000);\n    await t.runForTime(1100);\n    t.assert.equal(boat.currentCostume, boat.getCostumeByName('normal').index, 'Boat should reset to normal costume');\n    t.assert.equal(boat.direction, 0, 'Boat should reset to direction 0');\n    t.assert.equal(boat.x, -190, 'Boat should reset to x coordinate -190');\n    t.assert.equal(boat.y, -150, 'Boat should reset to y coordinate -150');\n    t.end();\n}"
     },
     {
       "name": "If the boat touches the color [255, 255, 255] the boat moves by 3 steps",
-      "code": "const testBoatMovesByThreeSteps = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    const initialX = boat.x;\n    const initialY = boat.y;\n    await t.runUntil(() => boat.isTouchingColor([255, 255, 255]), 1000);\n    await t.runForTime(100);\n    t.assert.notEqual(boat.x, initialX, 'Boat should move by 3 steps in x direction');\n    t.assert.notEqual(boat.y, initialY, 'Boat should move by 3 steps in y direction');\n    t.end();\n}"
+      "code": "const testBoatMovesBy3Steps = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    await t.runUntil(() => boat.isTouchingColor([255, 255, 255]), 1000);\n    const initialX = boat.x;\n    const initialY = boat.y;\n    await t.runForTime(100);\n    t.assert.greaterOrEqual(Math.abs(boat.x - initialX), 3, 'Boat should move by 3 steps in x direction');\n    t.assert.greaterOrEqual(Math.abs(boat.y - initialY), 3, 'Boat should move by 3 steps in y direction');\n    t.end();\n}"
     },
     {
       "name": "If the boat touches the color [255, 255, 153] the boat stops moving",
-      "code": "const testBoatStopsMoving = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    await t.runUntil(() => boat.isTouchingColor([255, 255, 153]), 1000);\n    const initialX = boat.x;\n    const initialY = boat.y;\n    await t.runForTime(1000);\n    t.assert.equal(boat.x, initialX, 'Boat should stop moving in x direction');\n    t.assert.equal(boat.y, initialY, 'Boat should stop moving in y direction');\n    t.end();\n}"
+      "code": "const testBoatStopsMoving = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    await t.runUntil(() => boat.isTouchingColor([255, 255, 153]), 1000);\n    const initialX = boat.x;\n    const initialY = boat.y;\n    await t.runForTime(100);\n    t.assert.equal(boat.x, initialX, 'Boat should stop moving in x direction');\n    t.assert.equal(boat.y, initialY, 'Boat should stop moving in y direction');\n    t.end();\n}"
     },
     {
       "name": "If the boat touches the color [255, 255, 153] the boat says 'YEAH!' for 1 second",
-      "code": "const testBoatSaysYeah = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    await t.runUntil(() => boat.isTouchingColor([255, 255, 153]), 1000);\n    await t.runForTime(100);\n    t.assert.equal(boat.sayText, 'YEAH!', 'Boat should say YEAH! when touching color [255, 255, 153]');\n    await t.runForTime(1000);\n    t.assert.equal(boat.sayText, '', 'Boat should stop saying YEAH! after 1 second');\n    t.end();\n}"
+      "code": "const testBoatSaysYEAH = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    await t.runUntil(() => boat.isTouchingColor([255, 255, 153]), 1000);\n    await t.runForTime(100);\n    t.assert.equal(boat.sayText, 'YEAH!', 'Boat should say YEAH! when touching color [255, 255, 153]');\n    await t.runForTime(1000);\n    t.assert.equal(boat.sayText, '', 'Boat should stop saying YEAH! after 1 second');\n    t.end();\n}"
     },
     {
       "name": "If the boat touches the color [255, 255, 153] the program ends",
@@ -54,11 +54,11 @@
     },
     {
       "name": "If the boat's distance to the mouse pointer is greater than 5 the boat makes 1 step in the direction of the mouse pointer",
-      "code": "const testBoatMovesTowardsMouse = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    const initialX = boat.x;\n    const initialY = boat.y;\n    await t.runUntil(() => Math.sqrt(Math.pow(boat.x - t.getMousePos().x, 2) + Math.pow(boat.y - t.getMousePos().y, 2)) > 5, 1000);\n    await t.runForTime(100);\n    t.assert.notEqual(boat.x, initialX, 'Boat should move towards mouse in x direction');\n    t.assert.notEqual(boat.y, initialY, 'Boat should move towards mouse in y direction');\n    t.end();\n}"
+      "code": "const testBoatMovesTowardsMouse = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    const initialX = boat.x;\n    const initialY = boat.y;\n    const mouseX = initialX + 10;\n    const mouseY = initialY + 10;\n    t.mouseMove(mouseX, mouseY, 1);\n    await t.runUntil(() => Math.sqrt(Math.pow(boat.x - mouseX, 2) + Math.pow(boat.y - mouseY, 2)) > 5, 1000);\n    await t.runForTime(100);\n    t.assert.notEqual(boat.x, initialX, 'Boat should move in x direction towards mouse pointer');\n    t.assert.notEqual(boat.y, initialY, 'Boat should move in y direction towards mouse pointer');\n    t.end();\n}"
     },
     {
       "name": "If the boat's distance to the mouse pointer is less than 5 the boat stops moving",
-      "code": "const testBoatStopsNearMouse = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    await t.runUntil(() => Math.sqrt(Math.pow(boat.x - t.getMousePos().x, 2) + Math.pow(boat.y - t.getMousePos().y, 2)) < 5, 1000);\n    const initialX = boat.x;\n    const initialY = boat.y;\n    await t.runForTime(1000);\n    t.assert.equal(boat.x, initialX, 'Boat should stop moving in x direction');\n    t.assert.equal(boat.y, initialY, 'Boat should stop moving in y direction');\n    t.end();\n}"
+      "code": "const testBoatStopsNearMouse = async function (t) {\n    t.greenFlag();\n    const boat = await t.getSprite('boat');\n    const initialX = boat.x;\n    const initialY = boat.y;\n    const mouseX = initialX + 2;\n    const mouseY = initialY + 2;\n    t.mouseMove(mouseX, mouseY, 1);\n    await t.runUntil(() => Math.sqrt(Math.pow(boat.x - mouseX, 2) + Math.pow(boat.y - mouseY, 2)) < 5, 1000);\n    await t.runForTime(100);\n    t.assert.equal(boat.x, initialX, 'Boat should stop moving in x direction near mouse pointer');\n    t.assert.equal(boat.y, initialY, 'Boat should stop moving in y direction near mouse pointer');\n    t.end();\n}"
     }
   ]
 }

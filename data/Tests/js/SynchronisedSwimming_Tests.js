@@ -1,138 +1,148 @@
 const testCat1FlyingStartCoordinates = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Cat1 Flying').x === 0 && t.getSprite('Cat1 Flying').y === 0, 5000);
+    await t.runUntil(() => {
+        const sprite = t.getSprite('Cat1 Flying');
+        return sprite.x === 0 && sprite.y === 0;
+    }, 1000);
     const sprite = t.getSprite('Cat1 Flying');
     t.assert.strictEqual(sprite.x, 0, 'Cat1 Flying should start at x = 0');
     t.assert.strictEqual(sprite.y, 0, 'Cat1 Flying should start at y = 0');
     t.end();
-};
+}
 
 const testCat1FlyingStartDirection = async function (t) {
-    t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('Cat1 Flying').direction === 90, 5000);
+    await t.runUntil(() => {
+        const sprite = t.getSprite('Cat1 Flying');
+        return sprite.direction === 90;
+    }, 1000);
     const sprite = t.getSprite('Cat1 Flying');
     t.assert.strictEqual(sprite.direction, 90, 'Cat1 Flying should start with direction 90');
     t.end();
-};
+}
 
-const testCat1FlyingTurnAndClone = async function (t) {
-    t.seedScratch(1234);
+const testCat1FlyingCloneCreation = async function (t) {
     t.greenFlag();
     await t.runForTime(1000);
     const sprite = t.getSprite('Cat1 Flying');
     t.assert.strictEqual(sprite.getCloneCount(), 6, 'Cat1 Flying should create 6 clones');
-    t.assert.strictEqual(sprite.direction, 90 + 60 * 6, 'Cat1 Flying should turn right 60 degrees 6 times');
     t.end();
-};
+}
 
-const testUpArrowKeyPress = async function (t) {
-    t.seedScratch(1234);
+const testUpArrowMovesSpriteAndClones = async function (t) {
     t.greenFlag();
     await t.runForTime(1000);
+    const sprite = t.getSprite('Cat1 Flying');
+    const initialX = sprite.x;
+    const initialY = sprite.y;
     t.keyPress('up');
     await t.runForTime(100);
-    const sprite = t.getSprite('Cat1 Flying');
+    t.assert.strictEqual(sprite.x, initialX + 10, 'Cat1 Flying should move 10 steps to the right');
+    t.assert.strictEqual(sprite.y, initialY, 'Cat1 Flying should not move vertically');
     const clones = sprite.getClones();
-    t.assert.strictEqual(sprite.x, 10, 'Cat1 Flying should move 10 steps');
     clones.forEach((clone, index) => {
-        t.assert.strictEqual(clone.x, 10, `Clone ${index + 1} should move 10 steps`);
+        t.assert.strictEqual(clone.x, initialX + 10, `Clone ${index} should move 10 steps to the right`);
+        t.assert.strictEqual(clone.y, initialY, `Clone ${index} should not move vertically`);
     });
     t.end();
-};
+}
 
-const testDownArrowKeyPress = async function (t) {
-    t.seedScratch(1234);
+const testDownArrowMovesSpriteAndClones = async function (t) {
     t.greenFlag();
     await t.runForTime(1000);
+    const sprite = t.getSprite('Cat1 Flying');
+    const initialX = sprite.x;
+    const initialY = sprite.y;
     t.keyPress('down');
     await t.runForTime(100);
-    const sprite = t.getSprite('Cat1 Flying');
+    t.assert.strictEqual(sprite.x, initialX - 10, 'Cat1 Flying should move -10 steps to the left');
+    t.assert.strictEqual(sprite.y, initialY, 'Cat1 Flying should not move vertically');
     const clones = sprite.getClones();
-    t.assert.strictEqual(sprite.x, -10, 'Cat1 Flying should move -10 steps');
     clones.forEach((clone, index) => {
-        t.assert.strictEqual(clone.x, -10, `Clone ${index + 1} should move -10 steps`);
+        t.assert.strictEqual(clone.x, initialX - 10, `Clone ${index} should move -10 steps to the left`);
+        t.assert.strictEqual(clone.y, initialY, `Clone ${index} should not move vertically`);
     });
     t.end();
-};
+}
 
-const testLeftArrowKeyPressTurn = async function (t) {
-    t.seedScratch(1234);
+const testLeftArrowTurnsSpriteAndClones = async function (t) {
+    t.greenFlag();
+    await t.runForTime(1000);
+    const sprite = t.getSprite('Cat1 Flying');
+    const initialDirection = sprite.direction;
+    t.keyPress('left');
+    await t.runForTime(100);
+    t.assert.strictEqual(sprite.direction, initialDirection - 15, 'Cat1 Flying should turn 15 degrees to the left');
+    const clones = sprite.getClones();
+    clones.forEach((clone, index) => {
+        t.assert.strictEqual(clone.direction, initialDirection - 15, `Clone ${index} should turn 15 degrees to the left`);
+    });
+    t.end();
+}
+
+const testLeftArrowSwitchesCostume = async function (t) {
     t.greenFlag();
     await t.runForTime(1000);
     t.keyPress('left');
     await t.runForTime(100);
     const sprite = t.getSprite('Cat1 Flying');
-    const clones = sprite.getClones();
-    t.assert.strictEqual(sprite.direction, 75, 'Cat1 Flying should turn 15 degrees to the left');
-    clones.forEach((clone, index) => {
-        t.assert.strictEqual(clone.direction, 75, `Clone ${index + 1} should turn 15 degrees to the left`);
-    });
-    t.end();
-};
-
-const testLeftArrowKeyPressCostume = async function (t) {
-    t.seedScratch(1234);
-    t.greenFlag();
-    await t.runForTime(1000);
-    t.keyPress('left');
-    await t.runForTime(100);
-    const sprite = t.getSprite('Cat1 Flying');
-    const clones = sprite.getClones();
     t.assert.strictEqual(sprite.getCostumeByName('left').name, 'left', 'Cat1 Flying should switch costume to left');
+    const clones = sprite.getClones();
     clones.forEach((clone, index) => {
-        t.assert.strictEqual(clone.getCostumeByName('left').name, 'left', `Clone ${index + 1} should switch costume to left`);
+        t.assert.strictEqual(clone.getCostumeByName('left').name, 'left', `Clone ${index} should switch costume to left`);
     });
     t.end();
-};
+}
 
-const testRightArrowKeyPressTurn = async function (t) {
-    t.seedScratch(1234);
+const testRightArrowTurnsSpriteAndClones = async function (t) {
+    t.greenFlag();
+    await t.runForTime(1000);
+    const sprite = t.getSprite('Cat1 Flying');
+    const initialDirection = sprite.direction;
+    t.keyPress('right');
+    await t.runForTime(100);
+    t.assert.strictEqual(sprite.direction, initialDirection + 15, 'Cat1 Flying should turn 15 degrees to the right');
+    const clones = sprite.getClones();
+    clones.forEach((clone, index) => {
+        t.assert.strictEqual(clone.direction, initialDirection + 15, `Clone ${index} should turn 15 degrees to the right`);
+    });
+    t.end();
+}
+
+const testRightArrowSwitchesCostume = async function (t) {
     t.greenFlag();
     await t.runForTime(1000);
     t.keyPress('right');
     await t.runForTime(100);
     const sprite = t.getSprite('Cat1 Flying');
-    const clones = sprite.getClones();
-    t.assert.strictEqual(sprite.direction, 105, 'Cat1 Flying should turn 15 degrees to the right');
-    clones.forEach((clone, index) => {
-        t.assert.strictEqual(clone.direction, 105, `Clone ${index + 1} should turn 15 degrees to the right`);
-    });
-    t.end();
-};
-
-const testRightArrowKeyPressCostume = async function (t) {
-    t.seedScratch(1234);
-    t.greenFlag();
-    await t.runForTime(1000);
-    t.keyPress('right');
-    await t.runForTime(100);
-    const sprite = t.getSprite('Cat1 Flying');
-    const clones = sprite.getClones();
     t.assert.strictEqual(sprite.getCostumeByName('right').name, 'right', 'Cat1 Flying should switch costume to right');
+    const clones = sprite.getClones();
     clones.forEach((clone, index) => {
-        t.assert.strictEqual(clone.getCostumeByName('right').name, 'right', `Clone ${index + 1} should switch costume to right`);
+        t.assert.strictEqual(clone.getCostumeByName('right').name, 'right', `Clone ${index} should switch costume to right`);
     });
     t.end();
-};
+}
 
-const testSpaceKeyPressSequence = async function (t) {
-    t.seedScratch(1234);
+const testSpaceKeySequence = async function (t) {
     t.greenFlag();
     await t.runForTime(1000);
+    const sprite = t.getSprite('Cat1 Flying');
+    const initialDirection = sprite.direction;
+    const initialX = sprite.x;
+    const initialY = sprite.y;
     t.keyPress('space');
     await t.runForTime(1000);
-    const sprite = t.getSprite('Cat1 Flying');
+    t.assert.strictEqual(sprite.direction, initialDirection + 360, 'Cat1 Flying should turn 360 degrees');
+    t.assert.strictEqual(sprite.x, initialX + 360, 'Cat1 Flying should move 360 steps to the right');
+    t.assert.strictEqual(sprite.y, initialY, 'Cat1 Flying should not move vertically');
     const clones = sprite.getClones();
-    t.assert.strictEqual(sprite.direction, 90 + 10 * 36, 'Cat1 Flying should turn 10 degrees to the right 36 times');
-    t.assert.strictEqual(sprite.x, 10 * 36, 'Cat1 Flying should move 10 steps 36 times');
     clones.forEach((clone, index) => {
-        t.assert.strictEqual(clone.direction, 90 + 10 * 36, `Clone ${index + 1} should turn 10 degrees to the right 36 times`);
-        t.assert.strictEqual(clone.x, 10 * 36, `Clone ${index + 1} should move 10 steps 36 times`);
+        t.assert.strictEqual(clone.direction, initialDirection + 360, `Clone ${index} should turn 360 degrees`);
+        t.assert.strictEqual(clone.x, initialX + 360, `Clone ${index} should move 360 steps to the right`);
+        t.assert.strictEqual(clone.y, initialY, `Clone ${index} should not move vertically`);
     });
     t.end();
-};
+}
 
 module.exports = [
 	{
@@ -148,51 +158,51 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testCat1FlyingTurnAndClone,
-		 name: "testCat1FlyingTurnAndClone",
+		 test: testCat1FlyingCloneCreation,
+		 name: "testCat1FlyingCloneCreation",
 		 description: "Cat1 Flying repeats turning right 60 degrees and creating a clone 6 times",
 		 categories: []
 	},
 	{
-		 test: testUpArrowKeyPress,
-		 name: "testUpArrowKeyPress",
-		 description: "When the up arrow key is pressed the sprite and the clones move 10 steps",
+		 test: testUpArrowMovesSpriteAndClones,
+		 name: "testUpArrowMovesSpriteAndClones",
+		 description: "Up arrow key moves sprite and clones 10 steps",
 		 categories: []
 	},
 	{
-		 test: testDownArrowKeyPress,
-		 name: "testDownArrowKeyPress",
-		 description: "When the down arrow key is pressed the sprite and the clones move -10 steps",
+		 test: testDownArrowMovesSpriteAndClones,
+		 name: "testDownArrowMovesSpriteAndClones",
+		 description: "Down arrow key moves sprite and clones -10 steps",
 		 categories: []
 	},
 	{
-		 test: testLeftArrowKeyPressTurn,
-		 name: "testLeftArrowKeyPressTurn",
-		 description: "When the left arrow key is pressed the sprite and the clones turn 15 degrees to the left",
+		 test: testLeftArrowTurnsSpriteAndClones,
+		 name: "testLeftArrowTurnsSpriteAndClones",
+		 description: "Left arrow key turns sprite and clones 15 degrees to the left",
 		 categories: []
 	},
 	{
-		 test: testLeftArrowKeyPressCostume,
-		 name: "testLeftArrowKeyPressCostume",
-		 description: "When the left arrow key is pressed the sprite and the clones switch costumes to 'left'",
+		 test: testLeftArrowSwitchesCostume,
+		 name: "testLeftArrowSwitchesCostume",
+		 description: "Left arrow key switches sprite and clones costumes to 'left'",
 		 categories: []
 	},
 	{
-		 test: testRightArrowKeyPressTurn,
-		 name: "testRightArrowKeyPressTurn",
-		 description: "When the right arrow key is pressed the sprite and the clones turn 15 degrees to the right",
+		 test: testRightArrowTurnsSpriteAndClones,
+		 name: "testRightArrowTurnsSpriteAndClones",
+		 description: "Right arrow key turns sprite and clones 15 degrees to the right",
 		 categories: []
 	},
 	{
-		 test: testRightArrowKeyPressCostume,
-		 name: "testRightArrowKeyPressCostume",
-		 description: "When the right arrow key is pressed the sprite and the clones switch costumes to 'right'",
+		 test: testRightArrowSwitchesCostume,
+		 name: "testRightArrowSwitchesCostume",
+		 description: "Right arrow key switches sprite and clones costumes to 'right'",
 		 categories: []
 	},
 	{
-		 test: testSpaceKeyPressSequence,
-		 name: "testSpaceKeyPressSequence",
-		 description: "When space is pressed the sprite and the clones repeat the following sequence 36 times: turn 10 degrees to the right, move 10 steps",
+		 test: testSpaceKeySequence,
+		 name: "testSpaceKeySequence",
+		 description: "Space key makes sprite and clones repeat sequence 36 times",
 		 categories: []
 	},
 ]

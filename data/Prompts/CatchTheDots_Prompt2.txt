@@ -1,0 +1,12 @@
+13. 6 seconds after program start blue creates a clone
+14. Afterwards every delay seconds another clone of blue is created
+15. Each clone picks randomly the first or second item on the 'start positions' list for both the x and y coordinate
+16. Each clone directions points towards the red3roller
+17. Each existing clone starts visible
+18. Each clone moves towards red3roller until it touches red3roller
+19. After a clone touches red3roller it is deleted
+20. Then if red touches the color [255, 0, 0] score is increased by 1, else lives is decreased by 1
+21. Then if yellow touches the color [255, 255, 0] score is increased by 1, else lives is decreased by 1
+22. Then if blue touches the color [0, 63, 255] score is increased by 1, else lives is decreased by 1
+23. When lives reaches 0 the game ends
+24. If score is higher than the global variable highscore, highscore is set to score

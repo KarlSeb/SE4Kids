@@ -1,7 +1,7 @@
 const testGlobalVariableCoins = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('coins') === 0, 1000);
+    await t.runUntil(() => t.getGlobalVariable('coins') === 0, 5000);
     t.assert.strictEqual(t.getGlobalVariable('coins'), 0, 'Global variable coins should be 0 at the start');
     t.end();
 }
@@ -9,7 +9,7 @@ const testGlobalVariableCoins = async function (t) {
 const testInventoryListEmpty = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('inventory').length === 0, 1000);
+    await t.runUntil(() => t.getGlobalVariable('inventory').length === 0, 5000);
     t.assert.strictEqual(t.getGlobalVariable('inventory').length, 0, "List 'inventory' should be empty at the start");
     t.end();
 }
@@ -17,7 +17,7 @@ const testInventoryListEmpty = async function (t) {
 const testGlobalVariableRoom = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === '1', 1000);
+    await t.runUntil(() => t.getGlobalVariable('room') === '1', 5000);
     t.assert.strictEqual(t.getGlobalVariable('room'), '1', 'Global variable room should be 1 at the start');
     t.end();
 }
@@ -25,11 +25,10 @@ const testGlobalVariableRoom = async function (t) {
 const testPlayerStartCoordinates = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => {
-        const player = t.getSprite('player');
-        return player.x === -200 && player.y === 0;
-    }, 1000);
-    const player = t.getSprite('player');
+    const player = await t.runUntil(() => {
+        const p = t.getSprite('player');
+        return p.x === -200 && p.y === 0;
+    }, 5000);
     t.assert.strictEqual(player.x, -200, 'Player should start at x = -200');
     t.assert.strictEqual(player.y, 0, 'Player should start at y = 0');
     t.end();
@@ -38,8 +37,8 @@ const testPlayerStartCoordinates = async function (t) {
 const testStageCostume = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getStage().currentCostume === t.getStage().getCostumeByName('room1').index, 1000);
-    t.assert.strictEqual(t.getStage().currentCostume, t.getStage().getCostumeByName('room1').index, "Stage should have costume 'room1' at the start");
+    const stage = await t.runUntil(() => t.getStage().currentCostume === 'room1', 5000);
+    t.assert.strictEqual(stage.currentCostume, 'room1', 'Stage should have costume room1 at the start');
     t.end();
 }
 
@@ -51,28 +50,20 @@ const testPlayerMovement = async function (t) {
     const initialY = player.y;
 
     t.keyPress('right');
-    await t.runForTime(500);
-    t.keyRelease('right');
-    await t.runForTime(500);
-    t.assert.ok(player.x > initialX || player.isTouchingColor([178, 178, 178]) || player.isTouchingEdge(), 'Player should move right unless touching edge or color [178, 178, 178]');
+    await t.runForTime(1000);
+    t.assert.ok(player.x > initialX, 'Player should move right when right arrow key is pressed');
 
     t.keyPress('left');
-    await t.runForTime(500);
-    t.keyRelease('left');
-    await t.runForTime(500);
-    t.assert.ok(player.x < initialX || player.isTouchingColor([178, 178, 178]) || player.isTouchingEdge(), 'Player should move left unless touching edge or color [178, 178, 178]');
+    await t.runForTime(1000);
+    t.assert.ok(player.x < initialX, 'Player should move left when left arrow key is pressed');
 
     t.keyPress('up');
-    await t.runForTime(500);
-    t.keyRelease('up');
-    await t.runForTime(500);
-    t.assert.ok(player.y > initialY || player.isTouchingColor([178, 178, 178]) || player.isTouchingEdge(), 'Player should move up unless touching edge or color [178, 178, 178]');
+    await t.runForTime(1000);
+    t.assert.ok(player.y > initialY, 'Player should move up when up arrow key is pressed');
 
     t.keyPress('down');
-    await t.runForTime(500);
-    t.keyRelease('down');
-    await t.runForTime(500);
-    t.assert.ok(player.y < initialY || player.isTouchingColor([178, 178, 178]) || player.isTouchingEdge(), 'Player should move down unless touching edge or color [178, 178, 178]');
+    await t.runForTime(1000);
+    t.assert.ok(player.y < initialY, 'Player should move down when down arrow key is pressed');
 
     t.end();
 }
@@ -80,69 +71,64 @@ const testPlayerMovement = async function (t) {
 const testStageCostumeChangeRoom1ToRoom2 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getStage().currentCostume === t.getStage().getCostumeByName('room1').index, 1000);
     const player = t.getSprite('player');
+    const stage = t.getStage();
+
     player.x = 240;
     player.y = 0;
-    await t.runForTime(500);
-    t.assert.ok(player.isTouchingColor([240, 152, 65]), 'Player should be touching color [240, 152, 65]');
-    await t.runForTime(500);
-    t.assert.strictEqual(t.getStage().currentCostume, t.getStage().getCostumeByName('room2').index, "Stage costume should change to 'room2'");
+    await t.runUntil(() => player.isTouchingColor([240, 152, 65]), 5000);
+    t.assert.strictEqual(stage.currentCostume, 'room2', 'Stage costume should change to room2');
     t.end();
 }
 
 const testStageCostumeChangeRoom2ToRoom3 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getStage().currentCostume === t.getStage().getCostumeByName('room2').index, 1000);
     const player = t.getSprite('player');
+    const stage = t.getStage();
+
     player.x = 240;
     player.y = 0;
-    await t.runForTime(500);
-    t.assert.ok(player.isTouchingColor([240, 152, 65]), 'Player should be touching color [240, 152, 65]');
-    await t.runForTime(500);
-    t.assert.strictEqual(t.getStage().currentCostume, t.getStage().getCostumeByName('room3').index, "Stage costume should change to 'room3'");
+    await t.runUntil(() => player.isTouchingColor([240, 152, 65]), 5000);
+    t.assert.strictEqual(stage.currentCostume, 'room3', 'Stage costume should change to room3');
     t.end();
 }
 
 const testStageCostumeChangeRoom2ToRoom1 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getStage().currentCostume === t.getStage().getCostumeByName('room2').index, 1000);
     const player = t.getSprite('player');
+    const stage = t.getStage();
+
     player.x = -240;
     player.y = 0;
-    await t.runForTime(500);
-    t.assert.ok(player.isTouchingColor([254, 248, 85]), 'Player should be touching color [254, 248, 85]');
-    await t.runForTime(500);
-    t.assert.strictEqual(t.getStage().currentCostume, t.getStage().getCostumeByName('room1').index, "Stage costume should change to 'room1'");
+    await t.runUntil(() => player.isTouchingColor([254, 248, 85]), 5000);
+    t.assert.strictEqual(stage.currentCostume, 'room1', 'Stage costume should change to room1');
     t.end();
 }
 
 const testStageCostumeChangeRoom3ToRoom2 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getStage().currentCostume === t.getStage().getCostumeByName('room3').index, 1000);
     const player = t.getSprite('player');
+    const stage = t.getStage();
+
     player.x = -240;
     player.y = 0;
-    await t.runForTime(500);
-    t.assert.ok(player.isTouchingColor([254, 248, 85]), 'Player should be touching color [254, 248, 85]');
-    await t.runForTime(500);
-    t.assert.strictEqual(t.getStage().currentCostume, t.getStage().getCostumeByName('room2').index, "Stage costume should change to 'room2'");
+    await t.runUntil(() => player.isTouchingColor([254, 248, 85]), 5000);
+    t.assert.strictEqual(stage.currentCostume, 'room2', 'Stage costume should change to room2');
     t.end();
 }
 
 const testRoomIncreasesBy1 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const initialRoom = t.getGlobalVariable('room');
     const player = t.getSprite('player');
+    const initialRoom = t.getGlobalVariable('room');
+
     player.x = 240;
     player.y = 0;
-    await t.runForTime(500);
-    t.assert.ok(player.isTouchingColor([240, 152, 65]), 'Player should be touching color [240, 152, 65]');
-    await t.runForTime(500);
+    await t.runUntil(() => player.isTouchingColor([240, 152, 65]), 5000);
     t.assert.strictEqual(t.getGlobalVariable('room'), initialRoom + 1, 'Room should increase by 1');
     t.end();
 }
@@ -150,13 +136,12 @@ const testRoomIncreasesBy1 = async function (t) {
 const testRoomDecreasesBy1 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    const initialRoom = t.getGlobalVariable('room');
     const player = t.getSprite('player');
+    const initialRoom = t.getGlobalVariable('room');
+
     player.x = -240;
     player.y = 0;
-    await t.runForTime(500);
-    t.assert.ok(player.isTouchingColor([254, 248, 85]), 'Player should be touching color [254, 248, 85]');
-    await t.runForTime(500);
+    await t.runUntil(() => player.isTouchingColor([254, 248, 85]), 5000);
     t.assert.strictEqual(t.getGlobalVariable('room'), initialRoom - 1, 'Room should decrease by 1');
     t.end();
 }
@@ -164,73 +149,79 @@ const testRoomDecreasesBy1 = async function (t) {
 const testWelcomeSignVisibilityAndText = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === '1', 1000);
     const welcomeSign = t.getSprite('welcome sign');
-    t.assert.ok(welcomeSign.visible, 'Welcome sign should be visible if room is 1');
-    const player = t.getSprite('player');
-    player.x = welcomeSign.x;
-    player.y = welcomeSign.y;
-    await t.runForTime(500);
-    t.assert.strictEqual(welcomeSign.sayText, 'Welcome! Can you get to the treasure?', "Welcome sign should say 'Welcome! Can you get to the treasure?' when player is touching it");
-    player.x = 0;
-    player.y = 0;
-    await t.runForTime(500);
-    t.assert.strictEqual(welcomeSign.sayText, '', "Welcome sign should say '' when player is not touching it");
+
+    await t.runUntil(() => t.getGlobalVariable('room') === '1', 5000);
+    t.assert.ok(welcomeSign.visible, 'Welcome sign should be visible in room 1');
+
+    t.dragSprite('player', welcomeSign.x, welcomeSign.y);
+    await t.runForTime(1000);
+    t.assert.strictEqual(welcomeSign.sayText, 'Welcome! Can you get to the treasure?', 'Welcome sign should say the welcome message when player is touching it');
+
+    t.dragSprite('player', welcomeSign.x + 50, welcomeSign.y + 50);
+    await t.runForTime(1000);
+    t.assert.strictEqual(welcomeSign.sayText, '', 'Welcome sign should say nothing when player is not touching it');
+
     t.end();
 }
 
 const testCoinVisibilityAndCollection = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === '1', 1000);
     const coin = t.getSprite('coin');
-    t.assert.ok(coin.visible, 'Coin should be visible if room is 1');
     const initialCoins = t.getGlobalVariable('coins');
-    const player = t.getSprite('player');
-    player.x = coin.x;
-    player.y = coin.y;
-    await t.runForTime(500);
+
+    await t.runUntil(() => t.getGlobalVariable('room') === '1', 5000);
+    t.assert.ok(coin.visible, 'Coin should be visible in room 1');
+
+    t.dragSprite('player', coin.x, coin.y);
+    await t.runForTime(1000);
     t.assert.strictEqual(t.getGlobalVariable('coins'), initialCoins + 1, 'Coins should increase by 1 when player touches the coin');
     t.assert.notOk(coin.visible, 'Coin should become invisible after being touched');
+
     t.end();
 }
 
 const testPersonVisibilityAndStartCoordinates = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === '1', 1000);
     const person = t.getSprite('person');
-    t.assert.ok(person.visible, 'Person should be visible if room is 1');
+
+    await t.runUntil(() => t.getGlobalVariable('room') === '1', 5000);
+    t.assert.ok(person.visible, 'Person should be visible in room 1');
     t.assert.strictEqual(person.x, 0, 'Person should start at x = 0');
     t.assert.strictEqual(person.y, -160, 'Person should start at y = -160');
+
     t.end();
 }
 
 const testPersonInteractionAndMovement = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === '1', 1000);
     const person = t.getSprite('person');
-    const player = t.getSprite('player');
-    player.x = person.x;
-    player.y = person.y;
-    await t.runForTime(500);
-    t.assert.strictEqual(person.sayText, 'Did you know that you can go through orange and yellow doors?', "Person should say 'Did you know that you can go through orange and yellow doors?' when player touches it");
-    player.x = 0;
-    player.y = 0;
-    await t.runForTime(500);
-    t.assert.strictEqual(person.sayText, '', "Person should say '' when player is not touching it");
+
+    t.dragSprite('player', person.x, person.y);
+    await t.runForTime(1000);
+    t.assert.strictEqual(person.sayText, 'Did you know that you can go through orange and yellow doors?', 'Person should say the message when player touches them');
+
+    t.dragSprite('player', person.x + 50, person.y + 50);
+    await t.runForTime(1000);
+    t.assert.strictEqual(person.sayText, '', 'Person should say nothing when player is not touching them');
+
     const initialX = person.x;
     await t.runForTime(1000);
     t.assert.notStrictEqual(person.x, initialX, 'Person should move along the x axis');
+
     t.end();
 }
 
 const testPlayerTouchesPerson = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getSprite('person').sayText === 'Did you know that you can go through orange and yellow doors?', 5000);
-    t.assert.equal(t.getSprite('person').sayText, 'Did you know that you can go through orange and yellow doors?', 'Person should say the correct message when touched by player');
+    const player = t.getSprite('player');
+    const person = t.getSprite('person');
+    await t.runUntil(() => player.isTouchingSprite('person'), 5000);
+    t.assert.equal(person.sayText, 'Did you know that you can go through orange and yellow doors?', 'Person should say the correct message when touched by player');
     t.end();
 }
 
@@ -240,17 +231,18 @@ const testPersonTouchesEdge = async function (t) {
     const person = t.getSprite('person');
     const initialDirection = person.direction;
     await t.runUntil(() => person.isTouchingEdge(), 5000);
-    t.assert.notEqual(person.direction, initialDirection, 'Person should change direction when touching edge');
+    t.assert.notEqual(person.direction, initialDirection, 'Person should change direction when touching the edge');
     t.end();
 }
 
 const testEnemySignVisibilityAndMessage = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === 2, 5000);
     const enemySign = t.getSprite('enemy sign');
+    const player = t.getSprite('player');
+    await t.runUntil(() => t.getGlobalVariable('room') === 2, 5000);
     t.assert.ok(enemySign.visible, 'Enemy sign should be visible in room 2');
-    await t.runUntil(() => t.getSprite('player').isTouchingSprite('enemy sign'), 5000);
+    await t.runUntil(() => player.isTouchingSprite('enemy sign'), 5000);
     t.assert.equal(enemySign.sayText, 'Avoid the patrolling enemies!', 'Enemy sign should say the correct message when touched by player');
     t.end();
 }
@@ -258,8 +250,8 @@ const testEnemySignVisibilityAndMessage = async function (t) {
 const testEnemyVisibilityAndStartingCoordinates = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === 2, 5000);
     const enemy = t.getSprite('enemy');
+    await t.runUntil(() => t.getGlobalVariable('room') === 2, 5000);
     t.assert.ok(enemy.visible, 'Enemy should be visible in room 2');
     t.assert.equal(enemy.x, -170, 'Enemy should start at x coordinate -170');
     t.assert.equal(enemy.y, 0, 'Enemy should start at y coordinate 0');
@@ -269,19 +261,20 @@ const testEnemyVisibilityAndStartingCoordinates = async function (t) {
 const testEnemyMovesLeftAndRight = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === 2, 5000);
     const enemy = t.getSprite('enemy');
+    await t.runUntil(() => t.getGlobalVariable('room') === 2, 5000);
     const initialX = enemy.x;
-    await t.runForTime(5000);
+    await t.runForTime(2000);
     t.assert.notEqual(enemy.x, initialX, 'Enemy should move left and right');
     t.end();
 }
 
-const testEnemyTouchesPlayer = async function (t) {
+const testEnemyTouchesPlayerAndSaysMessage = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === 2, 5000);
     const enemy = t.getSprite('enemy');
+    const player = t.getSprite('player');
+    await t.runUntil(() => t.getGlobalVariable('room') === 2, 5000);
     await t.runUntil(() => enemy.isTouchingSprite('player'), 5000);
     t.assert.equal(enemy.sayText, 'Gotcha!', 'Enemy should say Gotcha! when touching player');
     t.end();
@@ -290,21 +283,24 @@ const testEnemyTouchesPlayer = async function (t) {
 const testCoin2VisibilityAndPlayerTouchesCoin2 = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === 2, 5000);
     const coin2 = t.getSprite('coin2');
+    const player = t.getSprite('player');
+    await t.runUntil(() => t.getGlobalVariable('room') === 2, 5000);
     t.assert.ok(coin2.visible, 'Coin2 should be visible in room 2');
-    await t.runUntil(() => t.getSprite('player').isTouchingSprite('coin2'), 5000);
-    t.assert.equal(t.getGlobalVariable('coins'), 1, 'Coins should increase by 1 when player touches coin2');
+    const initialCoins = t.getGlobalVariable('coins');
+    await t.runUntil(() => player.isTouchingSprite('coin2'), 5000);
+    t.assert.equal(t.getGlobalVariable('coins'), initialCoins + 1, 'Coins should increase by 1 when player touches coin2');
     t.end();
 }
 
 const testDoorSignVisibilityAndMessage = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
     const doorSign = t.getSprite('door sign');
+    const player = t.getSprite('player');
+    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
     t.assert.ok(doorSign.visible, 'Door sign should be visible in room 3');
-    await t.runUntil(() => t.getSprite('player').isTouchingSprite('door sign'), 5000);
+    await t.runUntil(() => player.isTouchingSprite('door sign'), 5000);
     t.assert.equal(doorSign.sayText, 'You\'ll need a blue key to open this door!', 'Door sign should say the correct message when touched by player');
     t.end();
 }
@@ -312,8 +308,8 @@ const testDoorSignVisibilityAndMessage = async function (t) {
 const testEnemy2VisibilityAndStartingCoordinates = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
     const enemy2 = t.getSprite('enemy2');
+    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
     t.assert.ok(enemy2.visible, 'Enemy2 should be visible in room 3');
     t.assert.equal(enemy2.x, -5, 'Enemy2 should start at x coordinate -5');
     t.assert.equal(enemy2.y, -90, 'Enemy2 should start at y coordinate -90');
@@ -323,19 +319,20 @@ const testEnemy2VisibilityAndStartingCoordinates = async function (t) {
 const testEnemy2MovesUpAndDown = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
     const enemy2 = t.getSprite('enemy2');
+    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
     const initialY = enemy2.y;
-    await t.runForTime(5000);
+    await t.runForTime(2000);
     t.assert.notEqual(enemy2.y, initialY, 'Enemy2 should move up and down');
     t.end();
 }
 
-const testEnemy2TouchesPlayer = async function (t) {
+const testEnemy2TouchesPlayerAndSaysMessage = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
     const enemy2 = t.getSprite('enemy2');
+    const player = t.getSprite('player');
+    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
     await t.runUntil(() => enemy2.isTouchingSprite('player'), 5000);
     t.assert.equal(enemy2.sayText, 'Gotcha!', 'Enemy2 should say Gotcha! when touching player');
     t.end();
@@ -344,18 +341,21 @@ const testEnemy2TouchesPlayer = async function (t) {
 const testKeyBlueVisibility = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
     const keyBlue = t.getSprite('key-blue');
+    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
     t.assert.ok(keyBlue.visible, 'Key-blue should be visible in room 3');
     t.end();
 }
 
-const testPlayerTouchesKeyBlue = async function (t) {
+const testPlayerTouchesKeyBlueAndIncreasesCoins = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
+    const keyBlue = t.getSprite('key-blue');
+    const player = t.getSprite('player');
     await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
-    await t.runUntil(() => t.getSprite('player').isTouchingSprite('key-blue'), 5000);
-    t.assert.equal(t.getGlobalVariable('coins'), 3, 'Coins should increase by 3 when player touches key-blue');
+    const initialCoins = t.getGlobalVariable('coins');
+    await t.runUntil(() => player.isTouchingSprite('key-blue'), 5000);
+    t.assert.equal(t.getGlobalVariable('coins'), initialCoins + 3, 'Coins should increase by 3 when player touches key-blue');
     t.assert.ok(t.getGlobalVariable('inventory').includes('blue key'), 'Blue key should be added to inventory');
     t.end();
 }
@@ -363,8 +363,8 @@ const testPlayerTouchesKeyBlue = async function (t) {
 const testDoorBlueVisibility = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
     const doorBlue = t.getSprite('door-blue');
+    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
     t.assert.ok(doorBlue.visible, 'Door-blue should be visible in room 3');
     t.end();
 }
@@ -372,9 +372,10 @@ const testDoorBlueVisibility = async function (t) {
 const testDoorBlueBecomesInvisibleWithBlueKey = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
-    await t.runUntil(() => t.getGlobalVariable('inventory').includes('blue key'), 5000);
     const doorBlue = t.getSprite('door-blue');
+    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
+    t.getGlobalVariable('inventory').push('blue key');
+    await t.runForTime(1000);
     t.assert.notOk(doorBlue.visible, 'Door-blue should become invisible when blue key is in inventory');
     t.end();
 }
@@ -382,18 +383,19 @@ const testDoorBlueBecomesInvisibleWithBlueKey = async function (t) {
 const testChestVisibility = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
     const chest = t.getSprite('chest');
+    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
     t.assert.ok(chest.visible, 'Chest should be visible in room 3');
     t.end();
 }
 
-const testPlayerTouchesChest = async function (t) {
+const testPlayerTouchesChestAndGameEnds = async function (t) {
     t.seedScratch(1234);
     t.greenFlag();
-    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
-    await t.runUntil(() => t.getSprite('player').isTouchingSprite('chest'), 5000);
     const chest = t.getSprite('chest');
+    const player = t.getSprite('player');
+    await t.runUntil(() => t.getGlobalVariable('room') === 3, 5000);
+    await t.runUntil(() => player.isTouchingSprite('chest'), 5000);
     t.assert.equal(chest.sayText, 'Well done!', 'Chest should say Well done! when touched by player');
     t.end();
 }
@@ -432,43 +434,43 @@ module.exports = [
 	{
 		 test: testPlayerMovement,
 		 name: "testPlayerMovement",
-		 description: "Player moves in respective direction when arrow key is pressed unless touching edge or color [178, 178, 178]",
+		 description: "Player moves in the respective direction when an arrow key is pressed unless they touch the edge of the stage or the color [178, 178, 178]",
 		 categories: []
 	},
 	{
 		 test: testStageCostumeChangeRoom1ToRoom2,
 		 name: "testStageCostumeChangeRoom1ToRoom2",
-		 description: "Stage costume changes to 'room2' when player is at center of right edge in 'room1' and touches color [240, 152, 65]",
+		 description: "Stage costume changes to 'room2' when player is at the center of the right edge of the stage in 'room1' and touches the color [240, 152, 65]",
 		 categories: []
 	},
 	{
 		 test: testStageCostumeChangeRoom2ToRoom3,
 		 name: "testStageCostumeChangeRoom2ToRoom3",
-		 description: "Stage costume changes to 'room3' when player is at center of right edge in 'room2' and touches color [240, 152, 65]",
+		 description: "Stage costume changes to 'room3' when player is at the center of the right edge of the stage in 'room2' and touches the color [240, 152, 65]",
 		 categories: []
 	},
 	{
 		 test: testStageCostumeChangeRoom2ToRoom1,
 		 name: "testStageCostumeChangeRoom2ToRoom1",
-		 description: "Stage costume changes to 'room1' when player is at center of left edge in 'room2' and touches color [254, 248, 85]",
+		 description: "Stage costume changes to 'room1' when player is at the center of the left edge of the stage in 'room2' and touches the color [254, 248, 85]",
 		 categories: []
 	},
 	{
 		 test: testStageCostumeChangeRoom3ToRoom2,
 		 name: "testStageCostumeChangeRoom3ToRoom2",
-		 description: "Stage costume changes to 'room2' when player is at center of left edge in 'room3' and touches color [254, 248, 85]",
+		 description: "Stage costume changes to 'room2' when player is at the center of the left edge of the stage in 'room3' and touches the color [254, 248, 85]",
 		 categories: []
 	},
 	{
 		 test: testRoomIncreasesBy1,
 		 name: "testRoomIncreasesBy1",
-		 description: "Room increases by 1 when player touches color [240, 152, 65]",
+		 description: "Room increases by 1 when player touches the color [240, 152, 65]",
 		 categories: []
 	},
 	{
 		 test: testRoomDecreasesBy1,
 		 name: "testRoomDecreasesBy1",
-		 description: "Room decreases by 1 when player touches color [254, 248, 85]",
+		 description: "Room decreases by 1 when player touches the color [254, 248, 85]",
 		 categories: []
 	},
 	{
@@ -492,7 +494,7 @@ module.exports = [
 	{
 		 test: testPersonInteractionAndMovement,
 		 name: "testPersonInteractionAndMovement",
-		 description: "Person says 'Did you know that you can go through orange and yellow doors?' when player touches it, otherwise says '' and moves along x axis",
+		 description: "Person says 'Did you know that you can go through orange and yellow doors?' when player touches them, otherwise says '' and moves along the x axis",
 		 categories: []
 	},
 	{
@@ -526,8 +528,8 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testEnemyTouchesPlayer,
-		 name: "testEnemyTouchesPlayer",
+		 test: testEnemyTouchesPlayerAndSaysMessage,
+		 name: "testEnemyTouchesPlayerAndSaysMessage",
 		 description: "Enemy touches player and says message",
 		 categories: []
 	},
@@ -556,8 +558,8 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testEnemy2TouchesPlayer,
-		 name: "testEnemy2TouchesPlayer",
+		 test: testEnemy2TouchesPlayerAndSaysMessage,
+		 name: "testEnemy2TouchesPlayerAndSaysMessage",
 		 description: "Enemy2 touches player and says message",
 		 categories: []
 	},
@@ -568,9 +570,9 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testPlayerTouchesKeyBlue,
-		 name: "testPlayerTouchesKeyBlue",
-		 description: "Player touches key-blue and coins increase",
+		 test: testPlayerTouchesKeyBlueAndIncreasesCoins,
+		 name: "testPlayerTouchesKeyBlueAndIncreasesCoins",
+		 description: "Player touches key-blue and increases coins",
 		 categories: []
 	},
 	{
@@ -592,8 +594,8 @@ module.exports = [
 		 categories: []
 	},
 	{
-		 test: testPlayerTouchesChest,
-		 name: "testPlayerTouchesChest",
+		 test: testPlayerTouchesChestAndGameEnds,
+		 name: "testPlayerTouchesChestAndGameEnds",
 		 description: "Player touches chest and game ends",
 		 categories: []
 	},

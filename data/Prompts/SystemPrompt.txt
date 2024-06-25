@@ -66,8 +66,6 @@ t.isMouseDown()
 t.isKeyDown(key)
 t.getGlobalVariable(variableName)
 
-Due to delays it is necessary to use a Waiting function after using Events or accessing a sprite.
-
 A sprite s has the following attributes:
 s.isOriginal
 s.isStage
@@ -118,6 +116,8 @@ v.name
 v.value
 v.old
 v.sprite
+
+Use waiting functions after accessing a sprite.
 
 Only generate code and no explanation. Do not import any libraries. Only use functions and attributes mentioned above.
 You will be provided with a list of properties to check. Generate a separate test for each item of the properties list.
