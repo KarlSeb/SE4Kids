@@ -1,0 +1,2 @@
+projectName,seed,assertions,generationAlgorithm,testGlobalVariableScore,testGlobalVariableTime,testTimeReduction,testGhostInvisibilityOnClick,testScoreIncreaseOnGhostClick,testGhostRandomSize,testGhostStartsInvisible,testGhostVisibleAfter1Second,testGhostVisibleDuration,testBatAndGhost3Behavior,passed,failed,error,skip,totalBlocks,coveredBlocks,coverage,duration
+Ghostbusters.sb3,1234,24,None,pass,pass,pass,pass,pass,pass,pass,fail,fail,pass,8,2,0,0,44,35,0.8,2.198

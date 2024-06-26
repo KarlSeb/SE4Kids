@@ -1,0 +1,78 @@
+(b" INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/SnowballFight.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  ok 1 - testGlobalVariablePower
+ok 2 - testSnowballCoordinates
+not ok 3 - testSnowballDirection
+  ---
+  severity: fail
+  error:
+    message: Snowball should have direction 90 at the start of a round
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 56.97613244420335
+    expected: 90
+    operator: '=='
+  ...
+ok 4 - testSnowballCostume
+ok 5 - testSnowballVisibility
+ok 6 - testSnowballPointsTowardsMouse 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 13 - testSnowballInvisibilityAfterTouchingEdgeOrRocks
+  ---
+  severity: fail
+  error:
+    message: Snowball should get invisible after touching the edge of the stage or Rocks
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: true
+    expected: false
+    operator: not
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   SnowballFight.sb3:
+#     passed Tests (13):
+#       - testGlobalVariablePower
+#       - testSnowballCoordinates
+#       - testSnowballCostume
+#       - testSnowballVisibility
+#       - testSnowballPointsTowardsMouse
+#       - testSnowballDirectionWhileMouseDown
+#       - testPowerIncreaseWhileMouseDown
+#       - testSnowballCostumeAfterMouseRelease
+#       - testSnowballYCoordinateChange
+#       - testSnowballMovesPowerSteps
+#       - testPowerDecreaseAfterMoving
+#       - testNewRoundAfterTouchingEdgeOrRocks
+#       - testReindeerRandomXCoordinate
+#     failed Tests (3):
+#       - testSnowballDirection
+#       - testSnowballInvisibilityAfterTouchingEdgeOrRocks
+#       - testReindeerSaysYouGotMe
+#     error Tests (0): None
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 0.70 (21/30)
+#   individual:
+#     Stage: NaN (0/0)
+#     Snowball: 0.67 (16/24)
+#     Reindeer: 0.83 (5/6)
+#     Rocks: NaN (0/0)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 15.437 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/SnowballFight_Results.csv
+", None)

@@ -1,0 +1,83 @@
+(b' INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/Archery.sb3
+(node:885696) [DEP0147] DeprecationWarning: In future versions of Node.js, fs.rmdir(path, { recursive: true }) will be removed. Use fs.rm(path, { recursive: true }) instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+ WARNING: 
+ Page 0 | Coverage:  TAP version 13
+1..9
+ok 1 - testArrowStartCoordinates
+ok 2 - testArrowStartSize
+not ok 3 - testArrowStopsOnSpace
+  ---
+  severity: fail
+  error:
+    message: Arrow should stop moving on space press (x coordinate)
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: -139.2
+    expected: -132.4
+    operator: \'==\'
+  ...
+ok 4 - testArrowSizeDecreasesOnSpace 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 6 - testArrowHitsYellow
+  ---
+  severity: fail
+  error:
+    message: Arrow should say "200 points" when hitting yellow color
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: \'\'
+    expected: 200 points
+    operator: \'==\'
+  ...
+not ok 7 - testArrowHitsRed
+  ---
+  severity: fail
+  error:
+    message: Arrow should say "150 points" when hitting red color
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: \'\'
+    expected: 150 points
+    operator: \'==\'
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   Archery.sb3:
+#     passed Tests (4):
+#       - testArrowStartCoordinates
+#       - testArrowStartSize
+#       - testArrowSizeDecreasesOnSpace
+#       - testArrowStaysWithinBounds
+#     failed Tests (5):
+#       - testArrowStopsOnSpace
+#       - testArrowHitsYellow
+#       - testArrowHitsRed
+#       - testArrowHitsBlue
+#       - testArrowHitsBlack
+#     error Tests (0): None
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 0.81 (17/21)
+#   individual:
+#     Stage: NaN (0/0)
+#     Arrow: 0.81 (17/21)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 8.343 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/Archery_Results.csv
+', None)

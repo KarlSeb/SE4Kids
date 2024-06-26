@@ -1,0 +1,235 @@
+(b" INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/Sprint.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  TAP version 13
+1..18
+not ok 1 - testFinishLineCostume
+  ---
+  severity: fail
+  error:
+    message: Finish Line should have costume normal at the start
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: null
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 2 - testGlobalVariableDistance
+  ---
+  severity: fail
+  error:
+    message: Global variable distance should be 0 at the start
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: '0'
+    expected: 0
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 3 - testGlobalVariableTime
+  ---
+  severity: fail
+  error:
+    message: Global variable time should be 0 at the start
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 1.5000000000000002
+    expected: 0
+    operator: '==='
+  ...
+ok 4 - testFinishLineCoordinates
+not ok 5 - testFinishLineSize
+  ---
+  severity: fail
+  error:
+    message: Finish Line should have size 1 at the start
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 3
+    expected: 1
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 7 - testTimerIncrease
+  ---
+  severity: fail
+  error:
+    message: Timer should increase by 0.1 every 0.1 seconds
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0.7
+    expected: 1
+    operator: '==='
+  ...
+ok 8 - testTree1Visibility
+ok 9 - testTree1Coordinates 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 10 - testTree1Size
+  ---
+  severity: fail
+  error:
+    message: Tree1 should have size 1 at the start
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 2
+    expected: 1
+    operator: '==='
+  ...
+not ok 11 - testDistanceIncreaseWithKeyPress
+  ---
+  severity: fail
+  error:
+    message: Distance should increase with alternating key presses
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: 51
+    operator: '&gt;'
+  ...
+not ok 12 - testFinishLineSizeIncrease
+  ---
+  severity: fail
+  error:
+    message: Finish Line size should increase by 1 when distance increases
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 5
+    expected: 55
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 13 - testTree1SizeIncrease
+  ---
+  severity: fail
+  error:
+    message: Tree1 size should increase by 1 when distance increases
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 4
+    expected: 54
+    operator: '==='
+  ...
+not ok 14 - testFinishLineYCoordinateDecrease
+  ---
+  severity: fail
+  error:
+    message: Finish Line y coordinate should decrease by 1.5 when distance increases
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 27
+    expected: -48
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 15 - testTree1YCoordinateDecrease
+  ---
+  severity: fail
+  error:
+    message: Tree1 y coordinate should decrease by 1.5 when distance increases
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 17
+    expected: -58
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 16 - testTree1XCoordinateDecrease
+  ---
+  severity: fail
+  error:
+    message: Tree1 x coordinate should decrease by 2 when distance increases
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: -54
+    expected: -154
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 17 - testFinishLineCostumeChange
+  ---
+  severity: fail
+  error:
+    message: Finish Line should change costume to broken after distance reaches 100
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: null
+    operator: '==='
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   Sprint.sb3:
+#     passed Tests (4):
+#       - testFinishLineCoordinates
+#       - testFinishLineCountdown
+#       - testTree1Visibility
+#       - testTree1Coordinates
+#     failed Tests (14):
+#       - testFinishLineCostume
+#       - testGlobalVariableDistance
+#       - testGlobalVariableTime
+#       - testFinishLineSize
+#       - testTimerIncrease
+#       - testTree1Size
+#       - testDistanceIncreaseWithKeyPress
+#       - testFinishLineSizeIncrease
+#       - testTree1SizeIncrease
+#       - testFinishLineYCoordinateDecrease
+#       - testTree1YCoordinateDecrease
+#       - testTree1XCoordinateDecrease
+#       - testFinishLineCostumeChange
+#       - testGameEnd
+#     error Tests (0): None
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 0.91 (43/47)
+#   individual:
+#     Stage: NaN (0/0)
+#     Finish Line: 0.90 (27/30)
+#     Spectator1: NaN (0/0)
+#     Spectator2: NaN (0/0)
+#     Tree1: 0.94 (16/17)
+#     Tree2: NaN (0/0)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 15.433 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/Sprint_Results.csv
+", None)

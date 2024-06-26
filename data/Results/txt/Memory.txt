@@ -1,0 +1,51 @@
+(b" INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/Memory.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 2 - testRoutineRepeatsUntilGameOver
+  ---
+  severity: fail
+  error:
+    message: Sequence list should be empty
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 2
+    expected: 0
+    operator: '=='
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   Memory.sb3:
+#     passed Tests (5):
+#       - testGlobalVariableScore
+#       - testRedClick
+#       - testBlueClick
+#       - testGreenClick
+#       - testYellowClick
+#     failed Tests (2):
+#       - testRoutineRepeatsUntilGameOver
+#       - testGameOverRoutine
+#     error Tests (0): None
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 0.61 (33/54)
+#   individual:
+#     Stage: 0.00 (0/6)
+#     Ballerina: 0.63 (25/40)
+#     red: 1.00 (2/2)
+#     blue: 1.00 (2/2)
+#     green: 1.00 (2/2)
+#     yellow: 1.00 (2/2)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 12.483 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/Memory_Results.csv
+", None)

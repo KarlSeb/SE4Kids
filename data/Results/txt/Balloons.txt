@@ -1,0 +1,140 @@
+(b" INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/Balloons.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 1 - testGlobalTimeStartsAt10
+  ---
+  severity: fail
+  error:
+    message: Global time variable should start at 10
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 6
+    expected: 10
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 6 - testEachCloneStartsWithCostumeBalloon1A
+  ---
+  severity: fail
+  error:
+    message: Each clone should start with costume balloon1-a
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: null
+    operator: '=='
+  ...
+not ok 7 - testClonesStartAtRandomLocation
+  ---
+  severity: fail
+  error:
+    message: Clone x coordinate should be &gt;= -150
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: -150.32499879611498
+    expected: -150
+    operator: '&gt;='
+  ...
+not ok 8 - testClonesPointInRandomDirection
+  ---
+  severity: fail
+  error:
+    message: Clone direction should be &gt;= -90
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: -117
+    expected: -90
+    operator: '&gt;='
+  ...
+ok 9 - testClonesApplyRandomColorEffect 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 10 - testBalloonCostumeSwitchesToBurstOnClick
+  ---
+  severity: fail
+  error:
+    message: Balloon costume should switch to burst on click
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 1
+    expected: null
+    operator: '=='
+  ...
+ok 11 - testScoreIncreasesByOneOnClick 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 13 - testBalloonChangesDirectionOnEdgeTouch
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testBalloonChangesDirectionOnEdgeTouch [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:152:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ...
+not ok 14 - testTimeDecreasesByOneEverySecond
+  ---
+  severity: fail
+  error:
+    message: Time should decrease by 1 every second
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: '10'
+    expected: -1
+    operator: '=='
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   Balloons.sb3:
+#     passed Tests (7):
+#       - testGlobalScoreStartsAt0
+#       - testBalloon1SpriteIsHidden
+#       - test30ClonesOfBalloon1
+#       - testEveryCloneIsVisibleAtStart
+#       - testClonesApplyRandomColorEffect
+#       - testScoreIncreasesByOneOnClick
+#       - testBalloonIsDeletedOnClick
+#     failed Tests (7):
+#       - testGlobalTimeStartsAt10
+#       - testEachCloneStartsWithCostumeBalloon1A
+#       - testClonesStartAtRandomLocation
+#       - testClonesPointInRandomDirection
+#       - testBalloonCostumeSwitchesToBurstOnClick
+#       - testTimeDecreasesByOneEverySecond
+#       - testTimerStopsAtZero
+#     error Tests (1):
+#       - testBalloonChangesDirectionOnEdgeTouch
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 1.00 (25/25)
+#   individual:
+#     Stage: 1.00 (5/5)
+#     Balloon1: 1.00 (20/20)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 14.417 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/Balloons_Results.csv
+", None)

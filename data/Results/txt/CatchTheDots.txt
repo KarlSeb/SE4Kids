@@ -1,0 +1,292 @@
+(b" INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/CatchTheDots.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  TAP version 13
+1..24
+ok 1 - testRedYellowBlueInvisible
+not ok 2 - testScoreZero
+  ---
+  severity: fail
+  error:
+    message: Score should be 0 at start
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: '0'
+    expected: 0
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 3 - testLivesThree
+  ---
+  severity: fail
+  error:
+    message: Lives should be 3 at start
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: '3'
+    expected: 3
+    operator: '==='
+  ...
+not ok 4 - testDelayEight
+  ---
+  severity: fail
+  error:
+    message: Delay should be 8 at start
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: '8'
+    expected: 8
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 5 - testDelayDecrease
+  ---
+  severity: fail
+  error:
+    message: Delay should be 7.5 after 10 seconds
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: '8'
+    expected: 7.5
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  ok 6 - testDelayNotUnderTwo
+not ok 7 - testRed3RollerRightTurn
+  ---
+  severity: fail
+  error:
+    message: Red3Roller should turn right by 3 degrees
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 174
+    expected: 168
+    operator: '==='
+  ...
+not ok 8 - testRed3RollerLeftTurn
+  ---
+  severity: fail
+  error:
+    message: Red3Roller should turn left by 3 degrees
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 156
+    expected: 162
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 9 - testRedCreatesClone
+  ---
+  severity: fail
+  error:
+    message: Red should create a clone 2 seconds after start
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: 1
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 10 - testRedCreatesCloneAfterDelay
+  ---
+  severity: fail
+  error:
+    message: Red should create another clone after delay seconds
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: 1
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 11 - testYellowCreatesClone
+  ---
+  severity: fail
+  error:
+    message: Yellow should create a clone 4 seconds after start
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: 1
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 12 - testYellowCreatesCloneAfterDelay
+  ---
+  severity: fail
+  error:
+    message: Yellow should create another clone after delay seconds
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: 1
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 13 - test1
+  ---
+  severity: fail
+  error:
+    message: Blue should create a clone 6 seconds after program start
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: 0
+    operator: '&gt;'
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 14 - test2
+  ---
+  severity: fail
+  error:
+    message: Another clone of blue should be created after delay seconds
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 1
+    expected: 1
+    operator: '&gt;'
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 15 - test3
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot read properties of undefined (reading '0')
+          at Test.test3 [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:143:35)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: Cannot read properties of undefined (reading '0')
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 16 - test4
+  ---
+  severity: fail
+  error:
+    message: Clone direction should point towards red3roller
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 44.05532007665157
+    expected: 45.94467974879902
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 17 - test5
+  ---
+  severity: fail
+  error:
+    message: Clone should start visible
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 18 - test6
+  ---
+  severity: fail
+  error:
+    message: Clone should move towards and touch red3roller
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   CatchTheDots.sb3:
+#     passed Tests (3):
+#       - testRedYellowBlueInvisible
+#       - testDelayNotUnderTwo
+#       - test7
+#     failed Tests (15):
+#       - testScoreZero
+#       - testLivesThree
+#       - testDelayEight
+#       - testDelayDecrease
+#       - testRed3RollerRightTurn
+#       - testRed3RollerLeftTurn
+#       - testRedCreatesClone
+#       - testRedCreatesCloneAfterDelay
+#       - testYellowCreatesClone
+#       - testYellowCreatesCloneAfterDelay
+#       - test1
+#       - test2
+#       - test4
+#       - test5
+#       - test6
+#     error Tests (6):
+#       - test3
+#       - test8
+#       - test9
+#       - test10
+#       - test11
+#       - test12
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 0.99 (76/77)
+#   individual:
+#     Stage: 0.93 (13/14)
+#     red3roller: 1.00 (6/6)
+#     red: 1.00 (19/19)
+#     yellow: 1.00 (19/19)
+#     blue: 1.00 (19/19)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 53.912 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/CatchTheDots_Results.csv
+", None)

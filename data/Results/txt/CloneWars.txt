@@ -1,0 +1,313 @@
+(b' INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/CloneWars.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  ok 1 - testGlobalLives
+ok 2 - testGlobalScore
+ok 3 - testLightningStart
+ok 4 - testHippo1Invisible
+ok 5 - testBatSize
+ok 6 - testOrangeInvisible
+ok 7 - testGameOverInvisible
+ok 8 - testSpaceshipCostume
+not ok 9 - testHippo1CloneIntervals
+  ---
+  severity: fail
+  error:
+    message: &gt;-
+      A new clone of Hippo1 should be created in random intervals between 2 and 4
+      seconds
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: 0
+    operator: \'&gt;\'
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 10 - testBatMovement
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testBatMovement [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:100:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ...
+not ok 11 - testBatCostumeChange
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testBatCostumeChange [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:110:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 12 - testOrangeCloneIntervals
+  ---
+  severity: fail
+  error:
+    message: &gt;-
+      A new clone of Orange should be created in random intervals between 5 and 10
+      seconds
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: 0
+    operator: \'&gt;\'
+  ...
+not ok 13 - testOrangeClonePosition
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot read properties of undefined (reading \'x\')
+          at Test.testOrangeClonePosition [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:132:29)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: Cannot read properties of undefined (reading \'x\')
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 14 - testOrangeClonesVisible
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot read properties of undefined (reading \'visible\')
+          at Test.testOrangeClonesVisible [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:143:26)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: Cannot read properties of undefined (reading \'visible\')
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 15 - testOrangeClonesYDecreases
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot read properties of undefined (reading \'y\')
+          at Test.testOrangeClonesYDecreases [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:153:29)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: Cannot read properties of undefined (reading \'y\')
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 16 - testCloneDeletionOnEdge
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot read properties of undefined (reading \'isTouchingEdge\')
+          at eval (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:164:34)
+          at VMWrapper.run (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:213892:82)
+          at VMWrapper.runUntil (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:213942:27)
+          at Test.testCloneDeletionOnEdge [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:164:13)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: Cannot read properties of undefined (reading \'isTouchingEdge\')
+  ...
+not ok 17 - testCloneSpeedVariable
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Actual value "NaN" is not a number
+          at assert.greaterOrEqual (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:209007:15)
+          at Test.testCloneSpeedVariable [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:176:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: Actual value "NaN" is not a number
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 18 - testCloneStartPosition
+  ---
+  severity: fail
+  error:
+    message: Y coordinate should be 150
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 121.42787170410156
+    expected: 150
+    operator: \'==\'
+  ...
+ok 19 - testCloneVisibility
+not ok 20 - testCloneMovement
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Expected value "NaN" is not a number
+          at assert.greaterOrEqual (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:209013:15)
+          at Test.testCloneMovement [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:214:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: Expected value "NaN" is not a number
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 21 - testCloneChangeDirectionOnEdge
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testCloneChangeDirectionOnEdge [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:230:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 22 - testCloneTouchLightning
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot read properties of undefined (reading \'skin\')
+          at RenderWebGL._touchingBounds (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:109948:23)
+          at RenderWebGL._candidatesTouching (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:109974:29)
+          at RenderWebGL.isTouchingDrawables (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:109582:33)
+          at RenderedTarget.isTouchingSprite (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:164181:30)
+          at Sprite.isTouchingSprite (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:212642:29)
+          at eval (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:240:39)
+          at VMWrapper.run (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:213892:82)
+          at async VMWrapper.runUntil (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:213942:16)
+          at async Test.testCloneTouchLightning [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:240:5)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+    message: Cannot read properties of undefined (reading \'skin\')
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 23 - testSpaceshipTouch
+  ---
+  severity: fail
+  error:
+    message: Costume should change to hit
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: hit
+    operator: \'==\'
+  ...
+not ok 24 - testSpacePressCreatesLightningClone
+  ---
+  severity: fail
+  error:
+    message: A new clone of Lightning should be created
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 2
+    expected: 1
+    operator: \'==\'
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   CloneWars.sb3:
+#     passed Tests (9):
+#       - testGlobalLives
+#       - testGlobalScore
+#       - testLightningStart
+#       - testHippo1Invisible
+#       - testBatSize
+#       - testOrangeInvisible
+#       - testGameOverInvisible
+#       - testSpaceshipCostume
+#       - testCloneVisibility
+#     failed Tests (11):
+#       - testHippo1CloneIntervals
+#       - testOrangeCloneIntervals
+#       - testCloneStartPosition
+#       - testSpaceshipTouch
+#       - testSpacePressCreatesLightningClone
+#       - testLeftArrowPress
+#       - testRightArrowPress
+#       - testGameOverVisibility
+#       - testLightningCloneStartPosition
+#       - testLightningCloneMovement
+#       - testLightningCloneDeletionOnEdge
+#     error Tests (10):
+#       - testBatMovement
+#       - testBatCostumeChange
+#       - testOrangeClonePosition
+#       - testOrangeClonesVisible
+#       - testOrangeClonesYDecreases
+#       - testCloneDeletionOnEdge
+#       - testCloneSpeedVariable
+#       - testCloneMovement
+#       - testCloneChangeDirectionOnEdge
+#       - testCloneTouchLightning
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 0.91 (71/78)
+#   individual:
+#     Stage: 0.80 (8/10)
+#     Spaceship: 1.00 (19/19)
+#     Lightning: 1.00 (10/10)
+#     Hippo1: 0.86 (12/14)
+#     Bat: 1.00 (11/11)
+#     Orange: 0.90 (9/10)
+#     Game Over: 0.50 (2/4)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 16.439 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/CloneWars_Results.csv
+', None)

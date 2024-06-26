@@ -1,0 +1,2 @@
+projectName,seed,assertions,generationAlgorithm,testArrowStartCoordinates,testArrowStartSize,testArrowStopsOnSpace,testArrowSizeDecreasesOnSpace,testArrowStaysWithinBounds,testArrowHitsYellow,testArrowHitsRed,testArrowHitsBlue,testArrowHitsBlack,passed,failed,error,skip,totalBlocks,coveredBlocks,coverage,duration
+Archery.sb3,1719335275871,18,None,pass,pass,fail,pass,pass,fail,fail,fail,fail,4,5,0,0,21,17,0.81,4.609

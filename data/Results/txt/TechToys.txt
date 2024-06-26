@@ -1,0 +1,84 @@
+(b" INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/TechToys.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  # project: TechToys.sb3
+TAP version 13
+1..8
+not ok 1 - testSunglasses2ColorChange
+  ---
+  severity: fail
+  error:
+    message: Sunglasses2 should change color effect by 5 100 times
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 150
+    expected: 500
+    operator: '=='
+  ...
+not ok 2 - testBowTieTurnRight
+  ---
+  severity: fail
+  error:
+    message: Bow Tie should turn right by 36 degrees 30 times
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 90
+    expected: 1080
+    operator: '=='
+  ...
+not ok 3 - testHelicopterCostumeChange
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testHelicopterCostumeChange [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:35:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   TechToys.sb3:
+#     passed Tests (0): None
+#     failed Tests (6):
+#       - testSunglasses2ColorChange
+#       - testBowTieTurnRight
+#       - testHelicopterMoveLeft
+#       - testHelicopterMoveRight
+#       - testHelicopterMoveDown
+#       - testHelicopterMoveUp
+#     error Tests (2):
+#       - testHelicopterCostumeChange
+#       - testHelicopterMoveAndTurn
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 1.00 (25/25)
+#   individual:
+#     Stage: NaN (0/0)
+#     Alex: NaN (0/0)
+#     Devin: NaN (0/0)
+#     Helicopter: 1.00 (15/15)
+#     Antennae: NaN (0/0)
+#     Sunglasses2: 1.00 (3/3)
+#     Bow Tie: 1.00 (4/4)
+#     Laptop: 1.00 (3/3)
+#     Rocks: NaN (0/0)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 5.427 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/TechToys_Results.csv
+", None)

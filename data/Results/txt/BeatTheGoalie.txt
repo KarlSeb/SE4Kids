@@ -1,0 +1,128 @@
+(b" INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/BeatTheGoalie.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 1 - testTimerStartsAt30
+  ---
+  severity: fail
+  error:
+    message: Timer should start at 30
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 26
+    expected: 30
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 4 - testScoreStartsAtZero
+  ---
+  severity: fail
+  error:
+    message: Score should start at 0
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: null
+    expected: 0
+    operator: '=='
+  ...
+ok 5 - testBallStartsAtPosition
+not ok 6 - testBallMovesAlongXAxisUntilSpacePressed
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testBallMovesAlongXAxisUntilSpacePressed [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:57:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 7 - testBallChangesDirectionAtEdge
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testBallChangesDirectionAtEdge [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:69:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ...
+not ok 8 - testBallStopsMovingAlongXAxisWhenSpacePressed
+  ---
+  severity: fail
+  error:
+    message: Ball should stop moving along the x axis when space is pressed
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: -200
+    expected: 100
+    operator: '=='
+  ...
+not ok 9 - testBallStartsMovingAlongYAxisWhenSpacePressed
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testBallStartsMovingAlongYAxisWhenSpacePressed [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:91:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   BeatTheGoalie.sb3:
+#     passed Tests (5):
+#       - testTimerDecreasesByOneEverySecond
+#       - testProgramStopsAfterTimerReachesZero
+#       - testBallStartsAtPosition
+#       - testGoalieMovesLeftWhenLeftArrowPressed
+#       - testGoalieMovesRightWhenRightArrowPressed
+#     failed Tests (6):
+#       - testTimerStartsAt30
+#       - testScoreStartsAtZero
+#       - testBallStopsMovingAlongXAxisWhenSpacePressed
+#       - testGoalieSaysSaveWhenBallTouches
+#       - testScoreIncreasesWhenBallDoesNotTouchGoalie
+#       - testGoalieSaysGoalWhenBallDoesNotTouch
+#     error Tests (3):
+#       - testBallMovesAlongXAxisUntilSpacePressed
+#       - testBallChangesDirectionAtEdge
+#       - testBallStartsMovingAlongYAxisWhenSpacePressed
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 0.80 (24/30)
+#   individual:
+#     Stage: 0.86 (6/7)
+#     Soccer Ball: 0.80 (12/15)
+#     Goalie: 0.75 (6/8)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 18.668 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/BeatTheGoalie_Results.csv
+", None)

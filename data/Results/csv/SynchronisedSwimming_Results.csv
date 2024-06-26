@@ -1,0 +1,2 @@
+projectName,seed,assertions,generationAlgorithm,testCat1FlyingStartCoordinates,testCat1FlyingStartDirection,testCat1FlyingCloneCreation,testUpArrowMovesSpriteAndClones,testDownArrowMovesSpriteAndClones,testLeftArrowTurnsSpriteAndClones,testLeftArrowSwitchesCostume,testRightArrowTurnsSpriteAndClones,testRightArrowSwitchesCostume,testSpaceKeySequence,passed,failed,error,skip,totalBlocks,coveredBlocks,coverage,duration
+SynchronisedSwimming.sb3,1719335660972,26,None,pass,pass,pass,fail,fail,fail,pass,fail,pass,fail,5,5,0,0,23,13,0.57,1.966

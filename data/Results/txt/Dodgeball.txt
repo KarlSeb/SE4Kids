@@ -1,0 +1,236 @@
+(b" INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/Dodgeball.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 1 - testPicoStartCoordinates
+  ---
+  severity: fail
+  error:
+    message: Pico walking should start at y = -120
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: -152
+    expected: -120
+    operator: '==='
+  ...
+ok 2 - testPicoStartDirection 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 3 - testGravityStartValue
+  ---
+  severity: fail
+  error:
+    message: Global variable gravity should start at -4
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: '-4'
+    expected: -4
+    operator: '==='
+  ...
+ok 4 - testPicoGravityEffect
+not ok 5 - testSpacePressJumpHeight
+  ---
+  severity: fail
+  error:
+    message: &gt;-
+      Jump height should be set to 10 when space is pressed and Pico walking is
+      touching the color [0, 63, 255]
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: 10
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  ok 6 - testJumpHeightDecrease
+ok 7 - testPicoYChangeByJumpHeight
+not ok 8 - testPicoResetOnTouch
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot set property x of #&lt;Sprite&gt; which has only a getter
+          at Test.testPicoResetOnTouch [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:105:12)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: 'Cannot set property x of #&lt;Sprite&gt; which has only a getter'
+  ...
+ok 9 - testPicoDirectionRightArrow 
+
+
+ WARNING: 
+ Page 0 | Coverage:  ok 10 - testPicoDirectionLeftArrow
+not ok 11 - testPicoMoveOnArrowPress
+  ---
+  severity: fail
+  error:
+    message: Pico walking should move 3 steps when an arrow key is pressed
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: -120
+    expected: -207
+    operator: '==='
+  ...
+not ok 12 - testPicoCostumeCycleOnArrowPress
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notStrictEqual is not a function
+          at Test.testPicoCostumeCycleOnArrowPress [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:158:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notStrictEqual is not a function
+  ...
+ok 13 - testPicoYIncreaseOnUpArrowPress
+not ok 14 - testPicoTouchColor
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot read properties of undefined (reading 'isTouchingColor')
+          at eval (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:179:33)
+          at VMWrapper.run (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:213892:82)
+          at VMWrapper.runUntil (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:213942:27)
+          at Test.testPicoTouchColor [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:179:13)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: Cannot read properties of undefined (reading 'isTouchingColor')
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  ok 15 - testLaserStartCostume
+not ok 16 - testLaserSwitchCostume
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testLaserSwitchCostume [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:202:18)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ...
+ok 17 - testTrapdoorStartCostume 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 18 - testTrapdoorSwitchCostume
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testTrapdoorSwitchCostume [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:224:18)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ...
+ok 19 - testBallStartInvisible 
+
+
+ WARNING: 
+ Page 0 | Coverage:  ok 22 - testCloneRandomCostume
+not ok 23 - testCloneStartCoordinates
+  ---
+  severity: fail
+  error:
+    message: Clone x coordinate should be 160
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 84
+    expected: 160
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 25 - testCloneMovementSequence
+  ---
+  severity: fail
+  error:
+    message: Clone should change y coordinate by -4 22 times
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 72
+    expected: -16
+    operator: '=='
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   Dodgeball.sb3:
+#     passed Tests (15):
+#       - testPicoStartDirection
+#       - testPicoGravityEffect
+#       - testJumpHeightDecrease
+#       - testPicoYChangeByJumpHeight
+#       - testPicoDirectionRightArrow
+#       - testPicoDirectionLeftArrow
+#       - testPicoYIncreaseOnUpArrowPress
+#       - testLaserStartCostume
+#       - testTrapdoorStartCostume
+#       - testBallStartInvisible
+#       - testBallCloneIntervals
+#       - testCloneRandomSize
+#       - testCloneRandomCostume
+#       - testCloneVisibility
+#       - testCloneDeletion
+#     failed Tests (6):
+#       - testPicoStartCoordinates
+#       - testGravityStartValue
+#       - testSpacePressJumpHeight
+#       - testPicoMoveOnArrowPress
+#       - testCloneStartCoordinates
+#       - testCloneMovementSequence
+#     error Tests (5):
+#       - testPicoResetOnTouch
+#       - testPicoCostumeCycleOnArrowPress
+#       - testPicoTouchColor
+#       - testLaserSwitchCostume
+#       - testTrapdoorSwitchCostume
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 0.81 (63/78)
+#   individual:
+#     Stage: NaN (0/0)
+#     Pico walking: 0.78 (25/32)
+#     Ball: 0.77 (23/30)
+#     Laser: 0.90 (9/10)
+#     Trapdoor: 1.00 (6/6)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 19.347 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/Dodgeball_Results.csv
+", None)

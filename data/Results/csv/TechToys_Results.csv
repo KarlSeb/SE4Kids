@@ -1,0 +1,2 @@
+projectName,seed,assertions,generationAlgorithm,testSunglasses2ColorChange,testBowTieTurnRight,testHelicopterCostumeChange,testHelicopterMoveLeft,testHelicopterMoveRight,testHelicopterMoveDown,testHelicopterMoveUp,testHelicopterMoveAndTurn,passed,failed,error,skip,totalBlocks,coveredBlocks,coverage,duration
+TechToys.sb3,1234,10,None,fail,fail,error,fail,fail,fail,fail,error,0,6,2,0,25,25,1,1.623

@@ -1,0 +1,2 @@
+projectName,seed,assertions,generationAlgorithm,testRocketshipSize,testRocketshipDirection,testRocketshipCoordinates,testRocketshipSay,testRocketshipDirectionToEarth,testRocketshipSequence,testMonkeyRotation,testStarSizeLoop,testRockDirectionToEarth,testRockContinuousMove,testRockChangeDirectionOnEdge,passed,failed,error,skip,totalBlocks,coveredBlocks,coverage,duration
+LostInSpace.sb3,1719339197141,16,None,pass,pass,pass,pass,fail,fail,fail,fail,error,error,error,4,4,3,0,24,24,1,1.331

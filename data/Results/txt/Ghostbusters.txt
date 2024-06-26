@@ -1,0 +1,67 @@
+(b' INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/Ghostbusters.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  ok 5 - testScoreIncreaseOnGhostClick
+ok 6 - testGhostRandomSize
+ok 7 - testGhostStartsInvisible
+not ok 8 - testGhostVisibleAfter1Second
+  ---
+  severity: fail
+  error:
+    message: Ghost should be visible after 1 second
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ...
+not ok 9 - testGhostVisibleDuration
+  ---
+  severity: fail
+  error:
+    message: Ghost should be visible after 1 second
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   Ghostbusters.sb3:
+#     passed Tests (8):
+#       - testGlobalVariableScore
+#       - testGlobalVariableTime
+#       - testTimeReduction
+#       - testGhostInvisibilityOnClick
+#       - testScoreIncreaseOnGhostClick
+#       - testGhostRandomSize
+#       - testGhostStartsInvisible
+#       - testBatAndGhost3Behavior
+#     failed Tests (2):
+#       - testGhostVisibleAfter1Second
+#       - testGhostVisibleDuration
+#     error Tests (0): None
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 0.80 (35/44)
+#   individual:
+#     Stage: 0.88 (7/8)
+#     Ghost: 1.00 (12/12)
+#     Bat: 0.67 (8/12)
+#     Ghost3: 0.67 (8/12)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 6.367 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/Ghostbusters_Results.csv
+', None)

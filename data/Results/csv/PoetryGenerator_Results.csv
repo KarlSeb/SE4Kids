@@ -1,0 +1,2 @@
+projectName,seed,assertions,generationAlgorithm,testAdaClickSayHi,testAdaAskName,testStoreName,testAdaSayHiName,testAdaSayClickComputer,testComputerClickSayPoem,testComputerTurnSequence,testComputerSayRandomVerb,testComputerSayRandomAdverb,testComputerSayRandomNoun,testComputerSayRandomAdjective,passed,failed,error,skip,totalBlocks,coveredBlocks,coverage,duration
+PoetryGenerator.sb3,1234,16,None,fail,fail,fail,fail,fail,fail,fail,error,error,error,error,0,7,4,0,18,14,0.78,25.872

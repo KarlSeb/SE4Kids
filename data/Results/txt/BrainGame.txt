@@ -1,0 +1,309 @@
+(b' INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/BrainGame.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 1 - testStageCostume
+  ---
+  severity: fail
+  error:
+    message: Stage should have costume sparkling at the start
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: null
+    expected: 0
+    operator: \'==\'
+  ...
+ok 2 - testGigaHidden
+ok 3 - testPlayVisible
+ok 4 - testResultHidden
+ok 5 - testScoreZero 
+
+
+ WARNING: 
+ Page 0 | Coverage:  ok 6 - testPlayFisheyeEffect
+not ok 7 - testPlayNoFisheyeEffect
+  ---
+  severity: fail
+  error:
+    message: Play should set fisheye effect to 0 when not touched by mouse-pointer
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 30
+    expected: 0
+    operator: \'==\'
+  ...
+ok 8 - testPlayInvisibleOnClick
+not ok 9 - testTimerSetTo30
+  ---
+  severity: fail
+  error:
+    message: Global variable timer should be set to 30 after Play is clicked
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: null
+    expected: 30
+    operator: \'==\'
+  ...
+not ok 10 - testStageCostumeChange
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot read properties of undefined (reading \'index\')
+          at eval (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:86:99)
+          at VMWrapper.run (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:213892:82)
+          at VMWrapper.runUntil (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:213942:27)
+          at Test.testStageCostumeChange [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:86:13)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: Cannot read properties of undefined (reading \'index\')
+  ...
+ok 11 - testGigaVisibleOnClick 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 12 - testGigaCostume
+  ---
+  severity: fail
+  error:
+    message: Giga should have costume giga-a after Play is clicked
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: null
+    expected: 0
+    operator: \'==\'
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 13 - testTimerDecreases
+  ---
+  severity: fail
+  error:
+    message: Timer should decrease by 1 every second after Play is clicked
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: null
+    expected: .nan
+    operator: \'==\'
+  ...
+not ok 14 - testNumber1Random
+  ---
+  severity: fail
+  error:
+    message: &gt;-
+      Global variable number1 should be set to a random number between 2 and 12
+      after Play is clicked
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ...
+not ok 15 - testNumber2Random
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Actual value "NaN" is not a number
+          at assert.greaterOrEqual (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:209007:15)
+          at Test.testNumber2Random [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:137:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: Actual value "NaN" is not a number
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 16 - testGigaAsks
+  ---
+  severity: fail
+  error:
+    message: Giga should ask the multiplication question
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ...
+not ok 17 - testGigaRightAnswerCostume
+  ---
+  severity: fail
+  error:
+    message: Giga should change to costume giga-c
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: null
+    operator: \'==\'
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 18 - testScoreIncrease
+  ---
+  severity: fail
+  error:
+    message: Score should increase by 1
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: 1
+    operator: \'==\'
+  ...
+not ok 19 - testGigaWrongAnswerCostume
+  ---
+  severity: fail
+  error:
+    message: Giga should change to costume giga-d
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: null
+    operator: \'==\'
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 20 - testResultRightAnswerCostume
+  ---
+  severity: fail
+  error:
+    message: Result should change to costume tick
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 1
+    expected: null
+    operator: \'==\'
+  ...
+not ok 21 - testResultWrongAnswerCostume
+  ---
+  severity: fail
+  error:
+    message: Result should change to costume cross
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 1
+    expected: null
+    operator: \'==\'
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 22 - testResultAnimation
+  ---
+  severity: fail
+  error:
+    message: Result ghost effect should be 0 after decreasing
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 100
+    expected: 0
+    operator: \'==\'
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 23 - testTimerNotBelowZero
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Actual value "NaN" is not a number
+          at assert.greaterOrEqual (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:209007:15)
+          at Test.testTimerNotBelowZero [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:268:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: Actual value "NaN" is not a number
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 27 - testStageCostumeAfterTimer
+  ---
+  severity: fail
+  error:
+    message: Stage should change to costume sparkling after timer reaches 0
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: null
+    operator: \'==\'
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   BrainGame.sb3:
+#     passed Tests (10):
+#       - testGigaHidden
+#       - testPlayVisible
+#       - testResultHidden
+#       - testScoreZero
+#       - testPlayFisheyeEffect
+#       - testPlayInvisibleOnClick
+#       - testGigaVisibleOnClick
+#       - testGigaHiddenAfterTimer
+#       - testResultInvisibleAfterTimer
+#       - testPlayVisibleAfterTimer
+#     failed Tests (15):
+#       - testStageCostume
+#       - testPlayNoFisheyeEffect
+#       - testTimerSetTo30
+#       - testGigaCostume
+#       - testTimerDecreases
+#       - testNumber1Random
+#       - testGigaAsks
+#       - testGigaRightAnswerCostume
+#       - testScoreIncrease
+#       - testGigaWrongAnswerCostume
+#       - testResultRightAnswerCostume
+#       - testResultWrongAnswerCostume
+#       - testResultAnimation
+#       - testStageCostumeAfterTimer
+#       - testProgramEndsAfterTimer
+#     error Tests (3):
+#       - testStageCostumeChange
+#       - testNumber2Random
+#       - testTimerNotBelowZero
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 0.88 (67/76)
+#   individual:
+#     Stage: 1.00 (19/19)
+#     Giga: 0.86 (18/21)
+#     Play: 0.91 (10/11)
+#     Result: 0.80 (20/25)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 84.392 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/BrainGame_Results.csv
+', None)

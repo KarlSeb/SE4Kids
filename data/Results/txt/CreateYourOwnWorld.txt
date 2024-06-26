@@ -1,0 +1,508 @@
+(b" INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/CreateYourOwnWorld.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 2 - testInventoryListEmpty
+  ---
+  severity: fail
+  error:
+    message: List 'inventory' should be empty at the start
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: null
+    expected: 0
+    operator: '==='
+  ...
+ok 3 - testGlobalVariableRoom 
+
+
+ WARNING: 
+ Page 0 | Coverage:  ok 4 - testPlayerStartCoordinates
+not ok 5 - testStageCostume
+  ---
+  severity: fail
+  error:
+    message: Stage should have costume 'room1' at the start
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: null
+    operator: '==='
+  ...
+not ok 6 - testPlayerMovement
+  ---
+  severity: fail
+  error:
+    message: Player should move down unless touching edge or color [178, 178, 178]
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ...
+not ok 7 - testStageCostumeChangeRoom1ToRoom2
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot set property x of #&lt;Sprite&gt; which has only a getter
+          at Test.testStageCostumeChangeRoom1ToRoom2 [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:91:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: 'Cannot set property x of #&lt;Sprite&gt; which has only a getter'
+  ...
+not ok 8 - testStageCostumeChangeRoom2ToRoom3
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot set property x of #&lt;Sprite&gt; which has only a getter
+          at Test.testStageCostumeChangeRoom2ToRoom3 [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:105:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: 'Cannot set property x of #&lt;Sprite&gt; which has only a getter'
+  ...
+not ok 9 - testStageCostumeChangeRoom2ToRoom1
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot set property x of #&lt;Sprite&gt; which has only a getter
+          at Test.testStageCostumeChangeRoom2ToRoom1 [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:119:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: 'Cannot set property x of #&lt;Sprite&gt; which has only a getter'
+  ...
+not ok 10 - testStageCostumeChangeRoom3ToRoom2
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot set property x of #&lt;Sprite&gt; which has only a getter
+          at Test.testStageCostumeChangeRoom3ToRoom2 [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:133:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: 'Cannot set property x of #&lt;Sprite&gt; which has only a getter'
+  ...
+not ok 11 - testRoomIncreasesBy1
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot set property x of #&lt;Sprite&gt; which has only a getter
+          at Test.testRoomIncreasesBy1 [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:147:14)
+          at TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:32)
+          at TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:41)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: 'Cannot set property x of #&lt;Sprite&gt; which has only a getter'
+  ...
+not ok 12 - testRoomDecreasesBy1
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot set property x of #&lt;Sprite&gt; which has only a getter
+          at Test.testRoomDecreasesBy1 [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:161:14)
+          at TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:32)
+          at TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:41)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: 'Cannot set property x of #&lt;Sprite&gt; which has only a getter'
+  ...
+not ok 13 - testWelcomeSignVisibilityAndText
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot set property x of #&lt;Sprite&gt; which has only a getter
+          at Test.testWelcomeSignVisibilityAndText [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:177:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: 'Cannot set property x of #&lt;Sprite&gt; which has only a getter'
+  ...
+not ok 14 - testCoinVisibilityAndCollection
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot set property x of #&lt;Sprite&gt; which has only a getter
+          at Test.testCoinVisibilityAndCollection [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:196:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: 'Cannot set property x of #&lt;Sprite&gt; which has only a getter'
+  ...
+not ok 15 - testPersonVisibilityAndStartCoordinates
+  ---
+  severity: fail
+  error:
+    message: Person should start at x = 0
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: -62
+    expected: 0
+    operator: '==='
+  ...
+not ok 16 - testPersonInteractionAndMovement
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot set property x of #&lt;Sprite&gt; which has only a getter
+          at Test.testPersonInteractionAndMovement [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:220:14)
+          at TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:32)
+          at TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:41)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: 'Cannot set property x of #&lt;Sprite&gt; which has only a getter'
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 17 - testPlayerTouchesPerson
+  ---
+  severity: fail
+  error:
+    message: Person should say the correct message when touched by player
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: ''
+    expected: Did you know that you can go through orange and yellow doors?
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 18 - testPersonMovesAlongXAxis
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testPersonMovesAlongXAxis [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:250:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ...
+not ok 19 - testPersonTouchesEdge
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testPersonTouchesEdge [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:262:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 20 - testEnemySignVisibilityAndMessage
+  ---
+  severity: fail
+  error:
+    message: Enemy sign should be visible in room 2
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 21 - testEnemyVisibilityAndStartingCoordinates
+  ---
+  severity: fail
+  error:
+    message: Enemy should be visible in room 2
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 22 - testEnemyMovesLeftAndRight
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testEnemyMovesLeftAndRight [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:296:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 23 - testEnemyTouchesPlayer
+  ---
+  severity: fail
+  error:
+    message: Enemy should say Gotcha! when touching player
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: ''
+    expected: Gotcha!
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 24 - testCoin2VisibilityAndPlayerTouches
+  ---
+  severity: fail
+  error:
+    message: Coin2 should be visible in room 2
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ...
+not ok 25 - testDoorSignVisibilityAndMessage
+  ---
+  severity: fail
+  error:
+    message: Door sign should be visible in room 3
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 26 - testEnemy2VisibilityAndStartingCoordinates
+  ---
+  severity: fail
+  error:
+    message: Enemy2 should be visible in room 3
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 27 - testEnemy2MovesUpAndDown
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testEnemy2MovesUpAndDown [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:355:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 28 - testEnemy2TouchesPlayer
+  ---
+  severity: fail
+  error:
+    message: Enemy2 should say Gotcha! when touching player
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: ''
+    expected: Gotcha!
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 29 - testKeyBlueVisibility
+  ---
+  severity: fail
+  error:
+    message: Key-blue should be visible in room 3
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 30 - testPlayerTouchesKeyBlue
+  ---
+  severity: fail
+  error:
+    message: Coins should increase by 3 when player touches key-blue
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: 3
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 31 - testDoorBlueVisibility
+  ---
+  severity: fail
+  error:
+    message: Door-blue should be visible in room 3
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ...
+not ok 32 - testDoorBlueBecomesInvisible
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notOk is not a function
+          at Test.testDoorBlueBecomesInvisible [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:410:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notOk is not a function
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 33 - testChestVisibility
+  ---
+  severity: fail
+  error:
+    message: Chest should be visible in room 3
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: false
+    expected: true
+    operator: ok
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   CreateYourOwnWorld.sb3:
+#     passed Tests (3):
+#       - testGlobalVariableCoins
+#       - testGlobalVariableRoom
+#       - testPlayerStartCoordinates
+#     failed Tests (17):
+#       - testInventoryListEmpty
+#       - testStageCostume
+#       - testPlayerMovement
+#       - testPersonVisibilityAndStartCoordinates
+#       - testPlayerTouchesPerson
+#       - testEnemySignVisibilityAndMessage
+#       - testEnemyVisibilityAndStartingCoordinates
+#       - testEnemyTouchesPlayer
+#       - testCoin2VisibilityAndPlayerTouches
+#       - testDoorSignVisibilityAndMessage
+#       - testEnemy2VisibilityAndStartingCoordinates
+#       - testEnemy2TouchesPlayer
+#       - testKeyBlueVisibility
+#       - testPlayerTouchesKeyBlue
+#       - testDoorBlueVisibility
+#       - testChestVisibility
+#       - testPlayerTouchesChest
+#     error Tests (14):
+#       - testStageCostumeChangeRoom1ToRoom2
+#       - testStageCostumeChangeRoom2ToRoom3
+#       - testStageCostumeChangeRoom2ToRoom1
+#       - testStageCostumeChangeRoom3ToRoom2
+#       - testRoomIncreasesBy1
+#       - testRoomDecreasesBy1
+#       - testWelcomeSignVisibilityAndText
+#       - testCoinVisibilityAndCollection
+#       - testPersonInteractionAndMovement
+#       - testPersonMovesAlongXAxis
+#       - testPersonTouchesEdge
+#       - testEnemyMovesLeftAndRight
+#       - testEnemy2MovesUpAndDown
+#       - testDoorBlueBecomesInvisible
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 0.72 (119/165)
+#   individual:
+#     Stage: 1.00 (3/3)
+#     player: 0.66 (19/29)
+#     welcome sign: 0.80 (8/10)
+#     chest: 0.60 (6/10)
+#     person: 0.85 (11/13)
+#     enemy: 0.78 (14/18)
+#     enemy2: 0.78 (14/18)
+#     coin: 0.55 (6/11)
+#     coin2: 0.55 (6/11)
+#     enemy sign: 0.80 (8/10)
+#     door-blue: 0.91 (10/11)
+#     key-blue: 0.55 (6/11)
+#     door sign: 0.80 (8/10)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 25.557 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/CreateYourOwnWorld_Results.csv
+", None)

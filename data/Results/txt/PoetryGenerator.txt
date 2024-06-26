@@ -1,0 +1,196 @@
+(b" INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/PoetryGenerator.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  TAP version 13
+1..11
+not ok 1 - testAdaClickSayHi
+  ---
+  severity: fail
+  error:
+    message: Ada should stop saying 'Hi, I'm Ada!' after 2 seconds
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: What's your name?
+    expected: ''
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 2 - testAdaAskName
+  ---
+  severity: fail
+  error:
+    message: Ada should ask 'What's your name?'
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: Hi, I'm Ada!
+    expected: What's your name?
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 3 - testStoreName
+  ---
+  severity: fail
+  error:
+    message: The global variable 'name' should store the answer
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: Martin
+    expected: John
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 4 - testAdaSayHiName
+  ---
+  severity: fail
+  error:
+    message: Ada should say 'Hi John'
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: What's your name?
+    expected: Hi John
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 5 - testAdaSayClickComputer
+  ---
+  severity: fail
+  error:
+    message: Ada should say 'Click the computer to generate a poem.'
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: What's your name?
+    expected: Click the computer to generate a poem.
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 6 - testComputerClickSayPoem
+  ---
+  severity: fail
+  error:
+    message: Computer should say 'Here is your poem John'
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: Here is your poem Martin
+    expected: Here is your poem John
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 7 - testComputerTurnSequence
+  ---
+  severity: fail
+  error:
+    message: Computer should turn 5 degrees to the left (iteration 4)
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 90
+    expected: 85
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 8 - testComputerSayRandomVerb
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot read properties of undefined (reading 'some')
+          at Test.testComputerSayRandomVerb [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:122:27)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: Cannot read properties of undefined (reading 'some')
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 9 - testComputerSayRandomAdverb
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot read properties of undefined (reading 'some')
+          at Test.testComputerSayRandomAdverb [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:141:31)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: Cannot read properties of undefined (reading 'some')
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 10 - testComputerSayRandomNoun
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: Cannot read properties of undefined (reading 'some')
+          at Test.testComputerSayRandomNoun [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:160:27)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: Cannot read properties of undefined (reading 'some')
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   PoetryGenerator.sb3:
+#     passed Tests (0): None
+#     failed Tests (7):
+#       - testAdaClickSayHi
+#       - testAdaAskName
+#       - testStoreName
+#       - testAdaSayHiName
+#       - testAdaSayClickComputer
+#       - testComputerClickSayPoem
+#       - testComputerTurnSequence
+#     error Tests (4):
+#       - testComputerSayRandomVerb
+#       - testComputerSayRandomAdverb
+#       - testComputerSayRandomNoun
+#       - testComputerSayRandomAdjective
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 0.78 (14/18)
+#   individual:
+#     Stage: NaN (0/0)
+#     Ada: 0.50 (3/6)
+#     Computer: 0.92 (11/12)
+#     Banner: NaN (0/0)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 29.794 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/PoetryGenerator_Results.csv
+", None)

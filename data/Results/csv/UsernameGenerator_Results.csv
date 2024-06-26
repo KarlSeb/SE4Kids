@@ -1,0 +1,2 @@
+projectName,seed,assertions,generationAlgorithm,test1,test2,test3,passed,failed,error,skip,totalBlocks,coveredBlocks,coverage,duration
+UsernameGenerator.sb3,12345,4,None,fail,pass,error,1,1,1,0,5,5,1,2.317

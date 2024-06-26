@@ -1,0 +1,96 @@
+(b" INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/SynchronisedSwimming.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  TAP version 13
+1..10
+ok 1 - testCat1FlyingStartCoordinates
+ok 2 - testCat1FlyingStartDirection
+ok 3 - testCat1FlyingCloneCreation
+not ok 4 - testUpArrowMovesSpriteAndClones
+  ---
+  severity: fail
+  error:
+    message: Cat1 Flying should move 10 steps to the right
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: 10
+    operator: '==='
+  ...
+not ok 5 - testDownArrowMovesSpriteAndClones
+  ---
+  severity: fail
+  error:
+    message: Cat1 Flying should move -10 steps to the left
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: -10
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 6 - testLeftArrowTurnsSpriteAndClones
+  ---
+  severity: fail
+  error:
+    message: Cat1 Flying should turn 15 degrees to the left
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 90
+    expected: 75
+    operator: '==='
+  ...
+ok 7 - testLeftArrowSwitchesCostume
+not ok 8 - testRightArrowTurnsSpriteAndClones
+  ---
+  severity: fail
+  error:
+    message: Cat1 Flying should turn 15 degrees to the right
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 90
+    expected: 105
+    operator: '==='
+  ...
+ok 9 - testRightArrowSwitchesCostume 
+
+ INFO:  
+Summary:
+ # summary:
+#   SynchronisedSwimming.sb3:
+#     passed Tests (5):
+#       - testCat1FlyingStartCoordinates
+#       - testCat1FlyingStartDirection
+#       - testCat1FlyingCloneCreation
+#       - testLeftArrowSwitchesCostume
+#       - testRightArrowSwitchesCostume
+#     failed Tests (5):
+#       - testUpArrowMovesSpriteAndClones
+#       - testDownArrowMovesSpriteAndClones
+#       - testLeftArrowTurnsSpriteAndClones
+#       - testRightArrowTurnsSpriteAndClones
+#       - testSpaceKeySequence
+#     error Tests (0): None
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 0.57 (13/23)
+#   individual:
+#     Stage: NaN (0/0)
+#     Cat1 Flying: 0.57 (13/23)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 6.393 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/SynchronisedSwimming_Results.csv
+", None)

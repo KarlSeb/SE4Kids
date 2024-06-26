@@ -1,0 +1,140 @@
+(b" INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/Chatbot.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 1 - testNanoStartCostume
+  ---
+  severity: fail
+  error:
+    message: Nano should start with costume nano-a
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: nano-b
+    expected: nano-a
+    operator: '==='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  ok 4 - testNanoAsksName
+not ok 5 - testStoreNameInGlobalVariable
+  ---
+  severity: fail
+  error:
+    message: &gt;-
+      The answer to 'What's your name?' should be stored in the global variable
+      'name'
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: null
+    expected: Alice
+    operator: '=='
+  ...
+ok 6 - testNanoSaysHi 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 8 - testNanoCostumeChangeYes
+  ---
+  severity: fail
+  error:
+    message: &gt;-
+      Nano's costume should change to 'nano-c' if the answer to 'Are you OK
+      [name]' is 'yes'
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: null
+    expected: nano-c
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 10 - testNanoCostumeChangeNo
+  ---
+  severity: fail
+  error:
+    message: &gt;-
+      Nano's costume should change to 'nano-d' if the answer to 'Are you OK
+      [name]' is not 'yes'
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: null
+    expected: nano-d
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 12 - testNanoCostumeChangeAfterOhNo
+  ---
+  severity: fail
+  error:
+    message: Nano's costume should change to 'nano-b' after saying 'Oh no!' for 2 seconds
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: null
+    expected: nano-b
+    operator: '=='
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 14 - testStageCostumeChangeMoon
+  ---
+  severity: fail
+  error:
+    message: &gt;-
+      Stage costume should change to 'moon' if the answer to 'Do you want to go to
+      the moon?' is 'yes'
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: null
+    expected: moon
+    operator: '=='
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   Chatbot.sb3:
+#     passed Tests (8):
+#       - testNanoClickCostumeChange
+#       - testStageCostumeChangeOnNanoClick
+#       - testNanoAsksName
+#       - testNanoSaysHi
+#       - testNanoAsksAreYouOK
+#       - testNanoSaysGreatToHear
+#       - testNanoSaysOhNo
+#       - testNanoAsksGoToMoon
+#     failed Tests (6):
+#       - testNanoStartCostume
+#       - testStoreNameInGlobalVariable
+#       - testNanoCostumeChangeYes
+#       - testNanoCostumeChangeNo
+#       - testNanoCostumeChangeAfterOhNo
+#       - testStageCostumeChangeMoon
+#     error Tests (1):
+#       - testNanoMovesUpDown
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 1.00 (21/21)
+#   individual:
+#     Stage: NaN (0/0)
+#     Nano: 1.00 (21/21)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 22.545 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/Chatbot_Results.csv
+", None)

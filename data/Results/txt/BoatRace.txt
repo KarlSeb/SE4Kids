@@ -1,0 +1,191 @@
+(b" INFO:  Testing project /home/karl/Dokumente/Seminar/SE4Kids/data/SampleSolutions/BoatRace.sb3
+
+ WARNING: 
+ Page 0 | Coverage:  TAP version 13
+1..15
+ok 1 - testTimeStartsAtZero
+not ok 2 - testTimeIncreases
+  ---
+  severity: fail
+  error:
+    message: Time variable should increase by 0.1 every 0.1 seconds
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0.7
+    expected: 0.9
+    operator: '&gt;='
+  ...
+not ok 3 - testGateDirectionChanges
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testGateDirectionChanges [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:31:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ... 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 4 - testBoatStartsWithNormalCostume
+  ---
+  severity: fail
+  error:
+    message: Boat should start with the costume normal
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 1
+    expected: null
+    operator: '=='
+  ...
+not ok 5 - testBoatStartsWithDirectionZero
+  ---
+  severity: fail
+  error:
+    message: Boat should start with direction 0
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 51.70983680775691
+    expected: 0
+    operator: '=='
+  ...
+not ok 6 - testBoatStartsAtCoordinates
+  ---
+  severity: fail
+  error:
+    message: Boat should start at x coordinate -190
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: -174.30234468933122
+    expected: -190
+    operator: '=='
+  ...
+not ok 7 - testBoatTouchesColorChangesCostume
+  ---
+  severity: fail
+  error:
+    message: Boat costume should change to hit when touching color [102, 59, 0]
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 1
+    expected: null
+    operator: '=='
+  ...
+ok 8 - testBoatTouchesColorSaysNoooooo 
+
+
+ WARNING: 
+ Page 0 | Coverage:  not ok 9 - testBoatResetAfterNoooooo
+  ---
+  severity: fail
+  error:
+    message: Boat should reset to normal costume
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: null
+    operator: '=='
+  ...
+not ok 10 - testBoatMovesBy3Steps
+  ---
+  severity: fail
+  error:
+    message: Boat should move by 3 steps in x direction
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: 0
+    expected: 3
+    operator: '&gt;='
+  ...
+ok 11 - testBoatStopsMoving
+not ok 12 - testBoatSaysYEAH
+  ---
+  severity: fail
+  error:
+    message: Boat should say YEAH! when touching color [255, 255, 153]
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: Noooooo!
+    expected: YEAH!
+    operator: '=='
+  ...
+not ok 13 - testProgramEnds
+  ---
+  severity: fail
+  error:
+    message: Program should end when boat touches color [255, 255, 153]
+    generatedMessage: false
+    name: AssertionError
+    code: ERR_ASSERTION
+    actual: null
+    expected: null
+    operator: fail
+  ...
+not ok 14 - testBoatMovesTowardsMouse
+  ---
+  severity: error
+  error:
+    name: TypeError
+    stack: |-
+      TypeError: t.assert.notEqual is not a function
+          at Test.testBoatMovesTowardsMouse [as test] (eval at loadTestsFromString (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10647:13), &lt;anonymous&gt;:146:14)
+          at async TestRunner._executeTest (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210425:21)
+          at async TestRunner.runTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:210152:30)
+          at async _runTestsWithCoverage (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10769:47)
+          at async HTMLButtonElement.runAllTests (file:///home/karl/Dokumente/Seminar/SE4Kids/whisker/whisker-web/dist/whisker-gui.js:10960:7)
+    message: t.assert.notEqual is not a function
+  ... 
+
+ INFO:  
+Summary:
+ # summary:
+#   BoatRace.sb3:
+#     passed Tests (3):
+#       - testTimeStartsAtZero
+#       - testBoatTouchesColorSaysNoooooo
+#       - testBoatStopsMoving
+#     failed Tests (10):
+#       - testTimeIncreases
+#       - testBoatStartsWithNormalCostume
+#       - testBoatStartsWithDirectionZero
+#       - testBoatStartsAtCoordinates
+#       - testBoatTouchesColorChangesCostume
+#       - testBoatResetAfterNoooooo
+#       - testBoatMovesBy3Steps
+#       - testBoatSaysYEAH
+#       - testProgramEnds
+#       - testBoatStopsNearMouse
+#     error Tests (2):
+#       - testGateDirectionChanges
+#       - testBoatMovesTowardsMouse
+#     skipped Tests (0): None
+ INFO:  
+Coverage:
+ # coverage:
+#   combined: 0.89 (24/27)
+#   individual:
+#     Stage: 1.00 (5/5)
+#     boat: 0.84 (16/19)
+#     gate: 1.00 (3/3)
+ INFO:  
+Model coverage:
+ # modelCoverage:
+#   combined: NaN (0/0)
+#   individual: {}
+ DEBUG:  Duration: 11.21 Seconds 
+
+Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Results/csv/BoatRace_Results.csv
+", None)
