@@ -103,7 +103,7 @@ s.isColorTouchingColor(targetRgb, maskRgb)
 
 Lists:
 s.getLists(true): Returns all lists of the sprite.
-s.getList(listName, true): returns the list 'listName'
+s.getList(listName, true).value: returns an array of all values in the list 'listName'
 List can be accessed if s is the stage.
 
 A costume c has the following attributes:

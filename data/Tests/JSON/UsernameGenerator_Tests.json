@@ -2,15 +2,15 @@
   "tests": [
     {
       "name": "Test 1: Abby click sets global variable username",
-      "code": "const test1 = async function (t) {\n    t.seedScratch(12345);\n    await t.runForTime(1000);\n    const abby = await t.getSprite('Abby');\n    const adjectives = await t.getSpriteVariable('Stage', 'adjectives');\n    const nouns = await t.getSpriteVariable('Stage', 'nouns');\n    await t.clickSprite('Abby');\n    await t.runForTime(1000);\n    const username = await t.getGlobalVariable('username');\n    const adjective = username.slice(0, adjectives[0].length);\n    const noun = username.slice(adjectives[0].length);\n    t.assert.ok(adjectives.includes(adjective), 'Adjective is from the adjectives list');\n    t.assert.ok(nouns.includes(noun), 'Noun is from the nouns list');\n    t.end();\n}"
+      "code": "const test1 = async function (t) {\n    t.seedScratch(12345);\n    await t.runForTime(1000);\n    const abby = t.getSprite('Abby');\n    const adjectives = abby.getList('adjectives', true).value;\n    const nouns = abby.getList('nouns', true).value;\n    t.clickSprite('Abby');\n    await t.runForTime(1000);\n    const username = t.getGlobalVariable('username');\n    const adjective = username.slice(0, adjectives[0].length);\n    const noun = username.slice(adjectives[0].length);\n    t.assert.ok(adjectives.includes(adjective), 'Adjective is from the list');\n    t.assert.ok(nouns.includes(noun), 'Noun is from the list');\n    t.end();\n}"
     },
     {
       "name": "Test 2: Abby click makes Abby say the generated username",
-      "code": "const test2 = async function (t) {\n    t.seedScratch(12345);\n    await t.runForTime(1000);\n    const abby = await t.getSprite('Abby');\n    await t.clickSprite('Abby');\n    await t.runForTime(1000);\n    const username = await t.getGlobalVariable('username');\n    t.assert.equal(abby.sayText, username, 'Abby says the generated username');\n    t.end();\n}"
+      "code": "const test2 = async function (t) {\n    t.seedScratch(12345);\n    await t.runForTime(1000);\n    const abby = t.getSprite('Abby');\n    t.clickSprite('Abby');\n    await t.runForTime(1000);\n    const username = t.getGlobalVariable('username');\n    t.assert.equal(abby.sayText, username, 'Abby says the generated username');\n    t.end();\n}"
     },
     {
       "name": "Test 3: Button4 click adds username to 'names i like' list",
-      "code": "const test3 = async function (t) {\n    t.seedScratch(12345);\n    await t.runForTime(1000);\n    const abby = await t.getSprite('Abby');\n    const button4 = await t.getSprite('Button4');\n    await t.clickSprite('Abby');\n    await t.runForTime(1000);\n    const username = await t.getGlobalVariable('username');\n    await t.clickSprite('Button4');\n    await t.runForTime(1000);\n    const namesILike = await t.getSpriteVariable('Stage', 'names i like');\n    t.assert.ok(namesILike.includes(username), 'Username is added to the names i like list');\n    t.end();\n}"
+      "code": "const test3 = async function (t) {\n    t.seedScratch(12345);\n    await t.runForTime(1000);\n    const abby = t.getSprite('Abby');\n    const button4 = t.getSprite('Button4');\n    t.clickSprite('Abby');\n    await t.runForTime(1000);\n    const username = t.getGlobalVariable('username');\n    t.clickSprite('Button4');\n    await t.runForTime(1000);\n    const namesILike = abby.getList('names i like', true).value;\n    t.assert.ok(namesILike.includes(username), 'Username is added to the names i like list');\n    t.end();\n}"
     }
   ]
 }
