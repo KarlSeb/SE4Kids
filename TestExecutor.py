@@ -13,7 +13,9 @@ def generate_paths(program_name:str, baseline:bool):
     paths = {}
     sep = '/baseline/' if baseline else '/'
     paths['scratch_path'] = solution_path + '/' + program_name + '.sb3'
-    paths['tests_path'] = tests_path + sep + program_name + '_Tests.js'
+    paths['tests_path'] = tests_path + sep
+    if not baseline:
+        paths['tests_path'] += program_name + '_Tests.js'
     paths['csv_path'] = results_path + 'csv' + sep + program_name + '_Results.csv'
     return paths
 
