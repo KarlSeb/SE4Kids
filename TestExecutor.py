@@ -5,7 +5,7 @@ import argparse
 whisker_path = os.path.abspath('./whisker')
 solution_path = os.path.abspath('./data/SampleSolutions')
 tests_path = os.path.abspath('./data/Tests/js')
-results_path = os.path.abspath('./data/Results/csv')
+results_path = os.path.abspath('./data/Results/')
 
 def generate_paths(program_name:str, baseline:bool):
     if program_name is None or len(program_name) == 0:
@@ -14,7 +14,7 @@ def generate_paths(program_name:str, baseline:bool):
     sep = '/baseline/' if baseline else '/'
     paths['scratch_path'] = solution_path + '/' + program_name + '.sb3'
     paths['tests_path'] = tests_path + sep + program_name + '_Tests.js'
-    paths['csv_path'] = results_path + sep + program_name + '_Results.csv'
+    paths['csv_path'] = results_path + 'csv' + sep + program_name + '_Results.csv'
     return paths
 
 def process_output(output:str):
