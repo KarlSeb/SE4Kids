@@ -66,7 +66,7 @@ def run_all_tests(baseline:bool = False):
     output = {}
     for program_name in testable_programs:
         print(f'Running tests for {program_name}')
-        cmd = build_command(program_name, baseline)
+        cmd = build_command(program_name, baseline=baseline)
         output[program_name] = execute_command(cmd, whisker_path)
         if baseline:
             rename_testfile(program_name)
@@ -96,7 +96,6 @@ def main():
     parser.set_defaults(baseline=False)
     names = parser.parse_args().names
     baseline = parser.parse_args().baseline
-    print(baseline, type(baseline))
     output = {}
     if names is None:
         pass
