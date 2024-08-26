@@ -82,7 +82,7 @@ def run_test(program_name:str, generate_csv:bool = False, baseline:bool=False):
     return execute_command(cmd, whisker_path)
 
 def write_output(output, baseline:bool = False):
-    sep = '/txt/whisker/' if baseline else '/txt/'
+    sep = '/txt/baseline/' if baseline else '/txt/'
     for name in output.keys():
         lines = output[name].split('\\n')
         with open(f'{results_path}{sep}{name}.txt', 'w') as f:
