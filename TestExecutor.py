@@ -56,6 +56,11 @@ def get_tests():
         names[i] = names[i].strip()
     return names
 
+def rename_testfile(program_name:str):
+    old_name = tests_path + '/baseline/tests.js'
+    new_name = tests_path + f'/baseline/{program_name}_Tests.js'
+    os.rename(old_name, new_name)
+
 def run_all_tests(baseline:bool = False):
     testable_programs = get_tests()
     output = {}
@@ -63,6 +68,8 @@ def run_all_tests(baseline:bool = False):
         print(f'Running tests for {program_name}')
         cmd = build_command(program_name, baseline)
         output[program_name] = execute_command(cmd, whisker_path)
+        if baseline:
+            rename_testfile(program_name)
     return output
 
 def run_test(program_name:str, generate_csv:bool = False, baseline:bool=False):
@@ -98,6 +105,8 @@ def main():
         for name in names:
             print(f'Running tests for {name}')
             output[name] = run_test(name, True, baseline)
+            if baseline:
+                rename_testfile(name)
     write_output(output, baseline)
 
 if __name__ == '__main__':
