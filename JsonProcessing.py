@@ -28,7 +28,7 @@ def write_testfile(program_name: str, generated_json: str) -> None:
     """
     data = json.loads(generated_json)
     export = {}
-    with open(f'./data/Tests/js/{program_name}_Tests.js', 'w') as f:
+    with open(f'./data/Tests/js/gpt/{program_name}_Tests.js', 'w') as f:
         for item in data['tests']:
             test = item['code']
             name = extract_name(test)
