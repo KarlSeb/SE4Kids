@@ -12,7 +12,7 @@ tests_path = os.path.abspath('./data/Tests/js')
 #Path where the results of the excution is stored
 results_path = os.path.abspath('./data/Results')
 
-def generate_paths(program_name:str, baseline:bool), Dict[str, str]:
+def generate_paths(program_name:str, baseline:bool) -> Dict[str, str]:
     """
     Generates all the paths needed to execute the tests and store the results
     for a specified program_name. Returns the paths in a dictionary.
