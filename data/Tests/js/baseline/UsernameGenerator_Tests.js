@@ -8,7 +8,7 @@ const test1 = async function (t) {
   await t.runForSteps(1);
   t.clickSprite('Abby', 1);
   await t.runForSteps(1);
-  t.assert.equal(t.getSprite("Abby").sayText, "MagentaOryx", "Expected Sprite Abby to say MagentaOryx");
+  t.assert.equal(t.getSprite("Abby").sayText, "Moon", "Expected Sprite Abby to say Moon");
   t.end();
 }
 
@@ -19,7 +19,7 @@ module.exports = [
       description: '',
       categories: [],
       generationAlgorithm: 'mio',
-      seed: '1724675359272',
+      seed: '1724935714586',
       type: 'standard',
   },
   {
@@ -28,7 +28,7 @@ module.exports = [
       description: '',
       categories: [],
       generationAlgorithm: 'mio',
-      seed: '1724675359272',
+      seed: '1724935714586',
       type: 'standard',
   }
 ]

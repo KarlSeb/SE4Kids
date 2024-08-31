@@ -3,7 +3,7 @@
 
  DEBUG:  Downloading tests to /home/karl/Dokumente/Seminar/SE4Kids/data/Tests/js/baseline/ 
 
- DEBUG:  Duration: 43.262 Seconds 
+ DEBUG:  Duration: 118.952 Seconds 
 
 Creating CSV summary in /home/karl/Dokumente/Seminar/SE4Kids/data/Tests/js/baseline/
 ', None)

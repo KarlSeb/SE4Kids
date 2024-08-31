@@ -1,72 +1,67 @@
 const test0 = async function (t) {
+  t.clickSprite('Bow Tie', 1);
+  await t.runForSteps(1);
   t.clickSprite('Laptop', 1);
   await t.runForSteps(1);
+  t.assert.equal(t.getSprite("Helicopter").currentCostume, 1, "Expected Sprite Helicopter to have costume 1");
+  t.assert.equal(t.getSprite("Bow Tie").direction, 162, 1, "Expected Sprite Bow Tie to face in direction 162 +-1");
   t.keyPress('up arrow', 1);
   await t.runForSteps(1);
   await t.runForSteps(1);
+  t.assert.equal(t.getSprite("Bow Tie").direction, -126, 1, "Expected Sprite Bow Tie to face in direction -126 +-1");
   t.assert.withinRange(t.getSprite("Helicopter").x, 157, 5, "Expected Sprite Helicopter to have x-position 157 +-5");
   t.assert.withinRange(t.getSprite("Helicopter").y, -124, 5, "Expected Sprite Helicopter to have y-position -124 +-5");
   t.end();
 }
 const test1 = async function (t) {
+  t.keyPress('space', 3);
+  await t.runForSteps(3);
+  await t.runForSteps(1);
   t.clickSprite('Laptop', 1);
   await t.runForSteps(1);
-  t.keyPress('down arrow', 4);
-  await t.runForSteps(4);
+  t.assert.equal(t.getSprite("Helicopter").currentCostume, 1, "Expected Sprite Helicopter to have costume 1");
+  t.assert.equal(t.getSprite("Helicopter").direction, 70, 1, "Expected Sprite Helicopter to face in direction 70 +-1");
+  t.assert.withinRange(t.getSprite("Helicopter").x, 176.70896566269408, 5, "Expected Sprite Helicopter to have x-position 176.70896566269408 +-5");
+  t.assert.withinRange(t.getSprite("Helicopter").y, -123.2300855146442, 5, "Expected Sprite Helicopter to have y-position -123.2300855146442 +-5");
+  t.keyPress('down arrow', 1);
   await t.runForSteps(1);
-  t.assert.equal(t.getSprite("Helicopter").currentCostume, 0, "Expected Sprite Helicopter to have costume 0");
-  t.assert.withinRange(t.getSprite("Helicopter").x, 157, 5, "Expected Sprite Helicopter to have x-position 157 +-5");
-  t.assert.withinRange(t.getSprite("Helicopter").y, -134, 5, "Expected Sprite Helicopter to have y-position -134 +-5");
+  await t.runForSteps(1);
+  t.assert.equal(t.getSprite("Helicopter").direction, 62, 1, "Expected Sprite Helicopter to face in direction 62 +-1");
+  t.assert.withinRange(t.getSprite("Helicopter").x, 184.1219179764081, 5, "Expected Sprite Helicopter to have x-position 184.1219179764081 +-5");
+  t.assert.withinRange(t.getSprite("Helicopter").y, -122.23505836903833, 5, "Expected Sprite Helicopter to have y-position -122.23505836903833 +-5");
   t.end();
 }
 const test2 = async function (t) {
+  t.keyPress('space', 3);
+  await t.runForSteps(3);
+  await t.runForSteps(1);
   t.clickSprite('Laptop', 1);
   await t.runForSteps(1);
-  t.keyPress('left arrow', 4);
-  await t.runForSteps(4);
+  t.assert.equal(t.getSprite("Helicopter").currentCostume, 1, "Expected Sprite Helicopter to have costume 1");
+  t.assert.equal(t.getSprite("Helicopter").direction, 70, 1, "Expected Sprite Helicopter to face in direction 70 +-1");
+  t.assert.withinRange(t.getSprite("Helicopter").x, 176.70896566269408, 5, "Expected Sprite Helicopter to have x-position 176.70896566269408 +-5");
+  t.assert.withinRange(t.getSprite("Helicopter").y, -123.2300855146442, 5, "Expected Sprite Helicopter to have y-position -123.2300855146442 +-5");
+  t.keyPress('left arrow', 1);
   await t.runForSteps(1);
-  t.assert.equal(t.getSprite("Helicopter").currentCostume, 0, "Expected Sprite Helicopter to have costume 0");
-  t.assert.withinRange(t.getSprite("Helicopter").x, 149, 5, "Expected Sprite Helicopter to have x-position 149 +-5");
-  t.assert.withinRange(t.getSprite("Helicopter").y, -126, 5, "Expected Sprite Helicopter to have y-position -126 +-5");
+  await t.runForSteps(1);
+  t.assert.equal(t.getSprite("Helicopter").direction, 62, 1, "Expected Sprite Helicopter to face in direction 62 +-1");
+  t.assert.withinRange(t.getSprite("Helicopter").x, 182.1219179764081, 5, "Expected Sprite Helicopter to have x-position 182.1219179764081 +-5");
+  t.assert.withinRange(t.getSprite("Helicopter").y, -120.23505836903833, 5, "Expected Sprite Helicopter to have y-position -120.23505836903833 +-5");
   t.end();
 }
 const test3 = async function (t) {
+  t.clickSprite('Sunglasses2', 1);
+  await t.runForSteps(1);
   t.clickSprite('Laptop', 1);
   await t.runForSteps(1);
+  t.assert.equal(t.getSprite("Helicopter").currentCostume, 1, "Expected Sprite Helicopter to have costume 1");
+  t.assert.equal(t.getSprite("Sunglasses2").effects.color, 10, "Expected effect color of Sprite Sunglasses2 to be 10");
   t.keyPress('right arrow', 1);
   await t.runForSteps(1);
   await t.runForSteps(1);
+  t.assert.equal(t.getSprite("Sunglasses2").effects.color, 20, "Expected effect color of Sprite Sunglasses2 to be 20");
   t.assert.withinRange(t.getSprite("Helicopter").x, 159, 5, "Expected Sprite Helicopter to have x-position 159 +-5");
   t.assert.withinRange(t.getSprite("Helicopter").y, -126, 5, "Expected Sprite Helicopter to have y-position -126 +-5");
-  t.end();
-}
-const test4 = async function (t) {
-  t.clickSprite('Laptop', 1);
-  await t.runForSteps(1);
-  t.keyPress('space', 1);
-  await t.runForSteps(1);
-  await t.runForSteps(1);
-  t.assert.equal(t.getSprite("Helicopter").direction, 82, 1, "Expected Sprite Helicopter to face in direction 82 +-1");
-  t.assert.withinRange(t.getSprite("Helicopter").x, 164.9902562010393, 5, "Expected Sprite Helicopter to have x-position 164.9902562010393 +-5");
-  t.assert.withinRange(t.getSprite("Helicopter").y, -125.7209741050235, 5, "Expected Sprite Helicopter to have y-position -125.7209741050235 +-5");
-  t.end();
-}
-const test5 = async function (t) {
-  t.clickSprite('Laptop', 1);
-  await t.runForSteps(1);
-  t.clickSprite('Sunglasses2', 1);
-  await t.runForSteps(1);
-  t.assert.equal(t.getSprite("Helicopter").currentCostume, 0, "Expected Sprite Helicopter to have costume 0");
-  t.assert.equal(t.getSprite("Sunglasses2").effects.color, 5, "Expected effect color of Sprite Sunglasses2 to be 5");
-  t.end();
-}
-const test6 = async function (t) {
-  t.clickSprite('Laptop', 1);
-  await t.runForSteps(1);
-  t.clickSprite('Bow Tie', 1);
-  await t.runForSteps(1);
-  t.assert.equal(t.getSprite("Helicopter").currentCostume, 0, "Expected Sprite Helicopter to have costume 0");
-  t.assert.equal(t.getSprite("Bow Tie").direction, 126, 1, "Expected Sprite Bow Tie to face in direction 126 +-1");
   t.end();
 }
 
@@ -77,7 +72,7 @@ module.exports = [
       description: '',
       categories: [],
       generationAlgorithm: 'mio',
-      seed: '1724675326838',
+      seed: '1724935681646',
       type: 'standard',
   },
   {
@@ -86,7 +81,7 @@ module.exports = [
       description: '',
       categories: [],
       generationAlgorithm: 'mio',
-      seed: '1724675326838',
+      seed: '1724935681646',
       type: 'standard',
   },
   {
@@ -95,7 +90,7 @@ module.exports = [
       description: '',
       categories: [],
       generationAlgorithm: 'mio',
-      seed: '1724675326838',
+      seed: '1724935681646',
       type: 'standard',
   },
   {
@@ -104,34 +99,7 @@ module.exports = [
       description: '',
       categories: [],
       generationAlgorithm: 'mio',
-      seed: '1724675326838',
-      type: 'standard',
-  },
-  {
-      test: test4,
-      name: 'Generated Test',
-      description: '',
-      categories: [],
-      generationAlgorithm: 'mio',
-      seed: '1724675326838',
-      type: 'standard',
-  },
-  {
-      test: test5,
-      name: 'Generated Test',
-      description: '',
-      categories: [],
-      generationAlgorithm: 'mio',
-      seed: '1724675326838',
-      type: 'standard',
-  },
-  {
-      test: test6,
-      name: 'Generated Test',
-      description: '',
-      categories: [],
-      generationAlgorithm: 'mio',
-      seed: '1724675326838',
+      seed: '1724935681646',
       type: 'standard',
   }
 ]

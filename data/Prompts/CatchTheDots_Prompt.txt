@@ -1,9 +1,9 @@
 1. At start red, yellow and blue are invisible
-2. At start the global variable score is set to 0
-3. At start the global variable lives is set to 3
-4. At start the global variable delay is set to 8
+2. At start the global variable score is set to '0'
+3. At start the global variable lives is set to '3'
+4. At start the global variable delay is set to '8'
 5. Every 10 seconds delay is decreased by 0.5
-6. delay does not go under 2
+6. delay does not go under '2'
 7. If right arrow is pressed red3roller turns right in increments 3 degrees
 8. If left arrow is pressed red3roller turns left in increments of 3 degrees
 9. 2 seconds after program start red creates a clone
